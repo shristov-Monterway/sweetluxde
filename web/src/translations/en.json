@@ -1,0 +1,27 @@
+{
+  "pages": {
+    "/components": {
+      "title": "Components"
+    }
+  },
+  "form": {
+    "auth": {
+      "email": {
+        "label": "Email address",
+        "help": "Insert your email address."
+      },
+      "password": {
+        "label": "Password",
+        "help": "Insert strong password."
+      }
+    },
+    "submit": {
+      "auth": "Authenticate",
+      "resetPassword": "Send email"
+    }
+  },
+  "errors": {
+    "auth/invalid-email": "Invalid email",
+    "auth/wrong-password": "Wrong password"
+  }
+}
