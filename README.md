@@ -1,4 +1,4 @@
-# NextJS skeleton
+# IGS Commerce
 
 ## Requirements
 1. Node 20
