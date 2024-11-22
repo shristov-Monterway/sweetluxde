@@ -59,7 +59,10 @@ const AuthForm = (props: AuthFormProps): React.JSX.Element => {
   };
 
   return (
-    <form onSubmit={onSubmit}>
+    <form
+      className={`${props.className ? props.className : ''}`}
+      onSubmit={onSubmit}
+    >
       <div className="mb-3">
         <FormField
           form="auth"

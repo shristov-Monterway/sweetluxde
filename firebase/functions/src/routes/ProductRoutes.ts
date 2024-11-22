@@ -19,10 +19,16 @@ ProductRoutes.all('/products/all', async (req, res) => {
 
   const exchangedProducts = products.map((product) => ({
     ...product,
-    variations: Object.keys(product.variations).map((uid) => ({
-      ...product.variations[uid],
-      price: Math.ceil(rate * product.variations[uid].price),
-    })),
+    variations: Object.keys(product.variations).reduce(
+      (productVariations, uid) => ({
+        ...productVariations,
+        [uid]: {
+          ...product.variations[uid],
+          price: Math.ceil(rate * product.variations[uid].price),
+        },
+      }),
+      {}
+    ),
   })) as unknown as ProductType[];
 
   const response: ResponseType<ProductsAllResponseType> = {

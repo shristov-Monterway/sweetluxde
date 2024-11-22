@@ -2,6 +2,9 @@
   "pages": {
     "/components": {
       "title": "Components"
+    },
+    "/product/[uid]": {
+      "title": "Product %{name}"
     }
   },
   "form": {
@@ -18,6 +21,11 @@
     "submit": {
       "auth": "Authenticate",
       "resetPassword": "Send email"
+    }
+  },
+  "components": {
+    "productInfo": {
+      "addToCart": "Add to cart"
     }
   },
   "errors": {

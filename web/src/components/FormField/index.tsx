@@ -26,7 +26,7 @@ const FormField = (props: FormFieldProps): React.JSX.Element | null => {
     }));
 
   return (
-    <>
+    <div className={`${props.className ? props.className : ''}`}>
       <label htmlFor={`${props.form}-${props.field}`} className="form-label">
         {app.translator.t(`form.${props.form}.${props.field}.label`)}
       </label>
@@ -46,7 +46,7 @@ const FormField = (props: FormFieldProps): React.JSX.Element | null => {
       {formErrors.length > 0 ? (
         <FormFieldErrors formErrors={formErrors} />
       ) : null}
-    </>
+    </div>
   );
 };
 

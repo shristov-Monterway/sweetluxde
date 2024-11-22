@@ -1,0 +1,53 @@
+.product-info {
+  &__slides {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  &__main-slide-image {
+    width: 100%;
+    object-fit: cover;
+    pointer-events: none;
+
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+
+    /*
+      Introduced in IE 10.
+      See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+    */
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  &__nav-slider {
+    display: flex;
+    gap: 10px;
+    overflow-x: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  &__nav-slide-image {
+    width: 100px;
+    object-fit: cover;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__product-variations {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+}
