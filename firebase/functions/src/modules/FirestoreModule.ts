@@ -34,7 +34,10 @@ const FirestoreModule = <T>(): FirestoreModuleType<T> => {
       if (response.exists) {
         const data = response.data();
         if (data) {
-          return data;
+          return {
+            ...data,
+            uid: response.id,
+          };
         } else {
           return null;
         }
@@ -47,7 +50,10 @@ const FirestoreModule = <T>(): FirestoreModuleType<T> => {
         .firestore()
         .collection(entity) as FirebaseFirestore.CollectionReference<T>;
       const response = await ref.get();
-      return response.docs.map((doc) => doc.data());
+      return response.docs.map((doc) => ({
+        ...doc.data(),
+        uid: doc.id,
+      }));
     },
     writeDoc: async (entity: string, uid: string, data: T) => {
       const ref = admin
