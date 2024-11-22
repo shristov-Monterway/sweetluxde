@@ -27,7 +27,10 @@ const AuthenticationHandler: AuthenticationHandlerType = {
     if (idToken !== null) {
       const user = await admin.auth().verifyIdToken(idToken);
       if (user.uid) {
-        const userDoc = await FirestoreModule<UserType>().getDoc('users', user.uid);
+        const userDoc = await FirestoreModule<UserType>().getDoc(
+          'users',
+          user.uid
+        );
         if (userDoc) {
           req.user = userDoc;
         } else {

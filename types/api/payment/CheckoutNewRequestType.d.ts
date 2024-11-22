@@ -1,8 +1,8 @@
 export interface CheckoutNewRequestType {
     lineItems: {
         uid: string;
+        variation: string;
         quantity: number;
     }[];
-    currency: string;
     successUrl: string;
 }

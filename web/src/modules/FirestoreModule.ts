@@ -4,6 +4,7 @@ import {
   doc,
   collection,
   getDoc,
+  getDocs,
   Unsubscribe,
   onSnapshot,
   setDoc,
@@ -14,6 +15,7 @@ export interface FirestoreModuleType<T> {
   getDocRef: (entity: string, uid: string) => DocumentReference<T>;
   getCollectionRef: (entity: string) => CollectionReference<T>;
   getDoc: (entity: string, uid: string) => Promise<T | null>;
+  getCollection: (entity: string) => Promise<T[]>;
   writeDoc: (entity: string, uid: string, data: T) => Promise<void>;
   onSnapshot: (
     entity: string,
@@ -36,13 +38,24 @@ const FirestoreModule = <T>(): FirestoreModuleType<T> => {
       if (response.exists()) {
         const data = response.data();
         if (data) {
-          return data;
+          return {
+            ...data,
+            uid: response.id,
+          };
         } else {
           return null;
         }
       } else {
         return null;
       }
+    },
+    getCollection: async (entity) => {
+      const ref = collection(Firestore, `${entity}`) as CollectionReference<T>;
+      const response = await getDocs(ref);
+      return response.docs.map((response) => ({
+        ...response.data(),
+        uid: response.id,
+      }));
     },
     writeDoc: async (entity: string, uid: string, data: T) => {
       const ref = doc(Firestore, `${entity}/${uid}`) as DocumentReference<T>;
@@ -52,9 +65,12 @@ const FirestoreModule = <T>(): FirestoreModuleType<T> => {
     },
     onSnapshot: (entity, uid, onChange) => {
       const ref = doc(Firestore, `${entity}/${uid}`) as DocumentReference<T>;
-      return onSnapshot(ref, (doc) => {
-        if (doc.exists()) {
-          onChange(doc.data());
+      return onSnapshot(ref, (response) => {
+        if (response.exists()) {
+          onChange({
+            ...response.data(),
+            uid: response.id,
+          });
         } else {
           onChange(null);
         }

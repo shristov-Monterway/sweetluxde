@@ -43,15 +43,15 @@ PaymentRoutes.all(
       notEmpty: true,
       isString: true,
     },
+    'lineItems.*.variation': {
+      in: 'body',
+      notEmpty: true,
+      isString: true,
+    },
     'lineItems.*.quantity': {
       in: 'body',
       isInt: true,
       toInt: true,
-    },
-    currency: {
-      in: 'body',
-      notEmpty: true,
-      isString: true,
     },
   }),
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -68,7 +68,7 @@ PaymentRoutes.all(
 
     const rate = await ExchangeModule().exchange(
       Config.defaultCurrency,
-      request.currency
+      req.currency
     );
 
     const lineItems: CheckoutPreviewResponseLineItemType[] = [];
@@ -83,10 +83,17 @@ PaymentRoutes.all(
         continue;
       }
 
-      const price = Math.ceil(rate * product.price);
+      const variation = product.variations[lineItem.variation];
+
+      if (!variation) {
+        continue;
+      }
+
+      const price = Math.ceil(rate * variation.price);
 
       lineItems.push({
         uid: lineItem.uid,
+        variation: lineItem.variation,
         quantity: lineItem.quantity,
         price,
       });
@@ -99,7 +106,7 @@ PaymentRoutes.all(
     const response: ResponseType<CheckoutPreviewResponseType> = {
       data: {
         lineItems,
-        currency: request.currency,
+        currency: req.currency,
         totalPrice,
       },
     };
@@ -117,15 +124,15 @@ PaymentRoutes.all(
       notEmpty: true,
       isString: true,
     },
+    'lineItems.*.variation': {
+      in: 'body',
+      notEmpty: true,
+      isString: true,
+    },
     'lineItems.*.quantity': {
       in: 'body',
       isInt: true,
       toInt: true,
-    },
-    currency: {
-      in: 'body',
-      notEmpty: true,
-      isString: true,
     },
     successUrl: {
       in: 'body',
@@ -154,7 +161,7 @@ PaymentRoutes.all(
 
     const rate = await ExchangeModule().exchange(
       Config.defaultCurrency,
-      request.currency
+      req.currency
     );
 
     const lineItems: CheckoutLineItemType[] = [];
@@ -169,14 +176,24 @@ PaymentRoutes.all(
         continue;
       }
 
-      const price = Math.ceil(rate * product.price);
+      const variation = product.variations[lineItem.variation];
+
+      if (!variation) {
+        continue;
+      }
+
+      const price = Math.ceil(rate * variation.price);
 
       lineItems.push({
         price_data: {
-          currency: request.currency,
+          currency: req.currency,
           product_data: {
-            name: product.name,
-            description: product.description,
+            name: product.name[req.locale]
+              ? product.name[req.locale]
+              : product.name[Object.keys(product.name)[0]],
+            description: product.description[req.locale]
+              ? product.description[req.locale]
+              : product.description[Object.keys(product.description)[0]],
           },
           tax_behavior: product.taxBehavior,
           unit_amount: price,
@@ -195,7 +212,7 @@ PaymentRoutes.all(
       success_url: process.env.FUNCTIONS_EMULATOR
         ? `http://127.0.0.1:5001/era-bets/europe-west3/app/payment/checkout-session/complete?sessionId={CHECKOUT_SESSION_ID}&userId=${user.uid}`
         : `https://europe-west3-${process.env.GCLOUD_PROJECT}.cloudfunctions.net/app/payment/checkout-session/complete?sessionId={CHECKOUT_SESSION_ID}&userId=${user.uid}`,
-      currency: request.currency,
+      currency: req.currency,
       locale: req.locale,
       payment_method_types: ['card'],
     });

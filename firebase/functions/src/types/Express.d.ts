@@ -5,7 +5,7 @@ declare global {
     export interface Request {
       user: UserType | null;
       locale: string;
-      defaultCurrency: string;
+      currency: string;
     }
   }
 }

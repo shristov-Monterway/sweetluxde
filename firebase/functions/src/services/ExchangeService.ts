@@ -60,7 +60,7 @@ const ExchangeService = (): ExchangeService => {
 
       currencies.forEach((currency) => {
         if (data[currencyCode.toLowerCase()][currency.toLowerCase()]) {
-          rates[currency.toLowerCase()] =
+          rates[currency.toUpperCase()] =
             data[currencyCode.toLowerCase()][currency.toLowerCase()];
         }
       });

@@ -9,6 +9,7 @@ import useInitTheme from '../src/hooks/useInitTheme';
 import useInitUser from '../src/hooks/useInitUser';
 import useInitCurrency from '../src/hooks/useInitCurrency';
 import useInitFormErrors from '../src/hooks/useInitFormErrors';
+import useInitProducts from '../src/hooks/useInitProducts';
 import useInitBootstrapJs from '../src/hooks/useInitBootstrapJs';
 import useSyncUserTranslator from '../src/hooks/useSyncUserTranslator';
 import useSyncUserTheme from '../src/hooks/useSyncUserTheme';
@@ -22,6 +23,10 @@ const App = (props: AppProps): React.JSX.Element => {
   const user = useInitUser();
   const currency = useInitCurrency();
   const formErrors = useInitFormErrors();
+  const products = useInitProducts({
+    locale: translator.locale,
+    currency: currency.get,
+  });
   useInitBootstrapJs();
 
   useSyncUserTranslator({
@@ -49,6 +54,7 @@ const App = (props: AppProps): React.JSX.Element => {
           user,
           currency,
           formErrors,
+          products,
         }}
       >
         <Component />

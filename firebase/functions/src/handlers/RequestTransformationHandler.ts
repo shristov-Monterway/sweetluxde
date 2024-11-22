@@ -17,6 +17,9 @@ const RequestTransformationHandler: RequestTransformationHandlerType = {
       if (typeof req.body.data.locale !== 'undefined') {
         req.locale = req.body.data.locale;
       }
+      if (typeof req.body.data.currency !== 'undefined') {
+        req.currency = req.body.data.currency;
+      }
       if (typeof req.body.data.data !== 'undefined') {
         req.body = req.body.data.data;
       }

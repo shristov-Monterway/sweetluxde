@@ -1,7 +1,14 @@
+import { ProductVariationType } from "./ProductVariationType";
+import { TranslationType } from "./TranslationType";
+
 export interface ProductType {
-    name: string;
-    description: string;
+    uid: string;
+    name: TranslationType;
+    description: TranslationType;
     taxBehavior: 'inclusive' | 'exclusive' | 'unspecified';
-    price: number;
-    currency: string;
+    variations: {
+        [uid: string]: ProductVariationType;
+    };
+    image: string | null;
+    tags: TranslationType[];
 }

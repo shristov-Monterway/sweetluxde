@@ -2,6 +2,7 @@ import React from 'react';
 import { I18n } from 'i18n-js';
 import { UserType } from '../../../types/internal/UserType';
 import { FormError } from '../types/FormError';
+import { ProductType } from '../../../types/internal/ProductType';
 
 export interface ThemeContextType {
   get: string;
@@ -26,6 +27,7 @@ export interface AppContextType {
   user: UserType | null;
   currency: CurrencyContextType;
   formErrors: FormErrorsContextType;
+  products: ProductType[];
 }
 
 const AppContext = React.createContext<AppContextType | undefined>(undefined);
