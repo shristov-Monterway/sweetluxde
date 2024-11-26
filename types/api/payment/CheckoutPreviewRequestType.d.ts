@@ -1,6 +1,6 @@
 export interface CheckoutPreviewRequestType {
     lineItems: {
-        uid: string;
+        product: string;
         variation: string;
         quantity: number;
     }[];

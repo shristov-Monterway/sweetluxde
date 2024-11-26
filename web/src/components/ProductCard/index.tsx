@@ -56,7 +56,7 @@ const ProductCard = (props: ProductCardProps): React.JSX.Element | null => {
 
   return (
     <div
-      className={`card lift lift-lg ${props.className ? props.className : ''}`}
+      className={`card ${props.className ? props.className : ''}`}
       onClick={() => router.push(`/product/${props.product.uid}`)}
     >
       {props.product.image ? (

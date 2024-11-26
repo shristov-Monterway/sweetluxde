@@ -23,7 +23,7 @@ export interface FirebaseAuthModuleType {
     password: string,
     initData: Omit<
       UserType,
-      'uid' | 'email' | 'stripeId' | 'stripeLink' | 'lastLogin'
+      'uid' | 'email' | 'stripeId' | 'stripeLink' | 'lastLogin' | 'cart'
     >,
     onSuccess?: (uid: string) => void,
     onFailure?: (error: Error) => void
@@ -32,7 +32,7 @@ export interface FirebaseAuthModuleType {
     provider: FirebaseAuthModuleSignInProvider,
     initData: Omit<
       UserType,
-      'uid' | 'email' | 'stripeId' | 'stripeLink' | 'lastLogin'
+      'uid' | 'email' | 'stripeId' | 'stripeLink' | 'lastLogin' | 'cart'
     >,
     onSuccess?: (uid: string) => void,
     onFailure?: (error: Error) => void
@@ -114,6 +114,9 @@ const FirebaseAuthModule = (): FirebaseAuthModuleType => {
                     ...initData,
                     lastLogin: new Date().getTime(),
                     uid: result.user.uid,
+                    cart: {
+                      lineItems: [],
+                    },
                   })
                   .then(() => {
                     if (onSuccess) {
@@ -158,6 +161,7 @@ const FirebaseAuthModule = (): FirebaseAuthModuleType => {
                 | 'theme'
                 | 'currency'
                 | 'invitedBy'
+                | 'cart'
               >
           >()
             .writeDoc(
@@ -168,6 +172,9 @@ const FirebaseAuthModule = (): FirebaseAuthModuleType => {
                     ...initData,
                     lastLogin: new Date().getTime(),
                     uid: result.user.uid,
+                    cart: {
+                      lineItems: [],
+                    },
                   }
                 : {
                     lastLogin: new Date().getTime(),

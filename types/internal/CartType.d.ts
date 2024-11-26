@@ -1,8 +1,7 @@
-export interface CheckoutNewRequestType {
+export interface CartType {
     lineItems: {
         product: string;
         variation: string;
         quantity: number;
     }[];
-    successUrl: string;
 }

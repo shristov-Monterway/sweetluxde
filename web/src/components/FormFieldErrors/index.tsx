@@ -1,9 +1,9 @@
 import React from 'react';
 import { AbstractComponentType } from '../../types/AbstractComponentType';
-import { FormError } from '../../types/FormError';
+import { FormErrorType } from '../../types/FormErrorType';
 
 export interface FormFieldErrorsProps extends AbstractComponentType {
-  formErrors: FormError[];
+  formErrors: FormErrorType[];
 }
 
 const FormFieldErrors = (

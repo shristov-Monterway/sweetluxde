@@ -18,6 +18,7 @@ import {
   CheckoutType,
 } from '../../../../types/internal/CheckoutType';
 import { CheckoutNewResponseType } from '../../../../types/api/payment/CheckoutNewResponseType';
+import {UserType} from "../../../../types/internal/UserType";
 
 const PaymentRoutes = express.Router();
 
@@ -38,7 +39,7 @@ PaymentRoutes.all('/currencies/all', async (req, res) => {
 PaymentRoutes.all(
   '/checkout/preview',
   checkSchema({
-    'lineItems.*.uid': {
+    'lineItems.*.product': {
       in: 'body',
       notEmpty: true,
       isString: true,
@@ -76,7 +77,7 @@ PaymentRoutes.all(
     for (const lineItem of request.lineItems) {
       const product = await FirestoreModule<ProductType>().getDoc(
         'products',
-        lineItem.uid
+        lineItem.product
       );
 
       if (!product) {
@@ -92,7 +93,7 @@ PaymentRoutes.all(
       const price = Math.ceil(rate * variation.price);
 
       lineItems.push({
-        uid: lineItem.uid,
+        product: lineItem.product,
         variation: lineItem.variation,
         quantity: lineItem.quantity,
         price,
@@ -119,7 +120,7 @@ PaymentRoutes.all(
 PaymentRoutes.all(
   '/checkout/new',
   checkSchema({
-    'lineItems.*.uid': {
+    'lineItems.*.product': {
       in: 'body',
       notEmpty: true,
       isString: true,
@@ -150,7 +151,7 @@ PaymentRoutes.all(
       return;
     }
 
-    const user = req.user;
+    const user = req.user as UserType | null;
 
     if (!user) {
       res.status(401).send();
@@ -169,7 +170,7 @@ PaymentRoutes.all(
     for (const lineItem of request.lineItems) {
       const product = await FirestoreModule<ProductType>().getDoc(
         'products',
-        lineItem.uid
+        lineItem.product
       );
 
       if (!product) {

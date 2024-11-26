@@ -5,6 +5,9 @@ import { ProductType } from '../../../../types/internal/ProductType';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import Price from '../Price';
+import FirebaseFunctionsModule from '../../modules/FirebaseFunctionsModule';
+import { CartUpdateRequestType } from '../../../../types/api/cart/CartUpdateRequestType';
+import { CartUpdateResponseType } from '../../../../types/api/cart/CartUpdateResponseType';
 
 export interface ProductInfoProps extends AbstractComponentType {
   product: ProductType;
@@ -112,6 +115,22 @@ const ProductInfo = (props: ProductInfoProps): React.JSX.Element => {
     );
   };
 
+  const addToCart = async () => {
+    await FirebaseFunctionsModule<
+      CartUpdateRequestType,
+      CartUpdateResponseType
+    >().call(
+      '/cart/cart/update',
+      {
+        product: props.product.uid,
+        variation: selectedProductVariationUid,
+        quantity: 1,
+      },
+      app.translator.locale,
+      app.currency.get
+    );
+  };
+
   return (
     <div className={`row g-5 ${props.className ? props.className : ''}`}>
       <div className="col-md-6 product-info__slides">
@@ -183,7 +202,10 @@ const ProductInfo = (props: ProductInfoProps): React.JSX.Element => {
           ]}
           className="h2 p-0 m-0"
         />
-        <button className="btn btn-primary d-flex align-items-center justify-content-center gap-2">
+        <button
+          className="btn btn-primary d-flex align-items-center justify-content-center gap-2"
+          onClick={addToCart}
+        >
           {app.translator.t('components.productInfo.addToCart')}{' '}
           <span className="fe fe-shopping-cart"></span>
         </button>

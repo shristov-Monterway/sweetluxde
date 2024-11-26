@@ -1,0 +1,80 @@
+import React from 'react';
+import { AbstractComponentType } from '../../types/AbstractComponentType';
+import AuthForm from '../AuthForm';
+import useApp from '../../hooks/useApp';
+import CartProductCard from '../CartProductCard';
+import { ProductType } from '../../../../types/internal/ProductType';
+
+export type CartProductsListProps = AbstractComponentType;
+
+const CartProductsList = (props: CartProductsListProps): React.JSX.Element => {
+  const app = useApp();
+  const [lineItems, setLineItems] = React.useState<
+    {
+      product: ProductType;
+      variationUid: string;
+      quantity: number;
+    }[]
+  >([]);
+
+  React.useEffect(() => {
+    if (app.user) {
+      setLineItems(
+        app.user.cart.lineItems
+          .filter((lineItem) => {
+            const product = app.products.find(
+              (product) => lineItem.product === product.uid
+            );
+            return product && product.variations[lineItem.variation];
+          })
+          .map((lineItem) => {
+            const product = app.products.find(
+              (product) => lineItem.product === product.uid
+            );
+
+            if (!product) {
+              throw new Error('Product from cart is not found!');
+            }
+
+            const variation = product.variations[lineItem.variation];
+
+            if (!variation) {
+              throw new Error('Product variation from cart is not found!');
+            }
+
+            return {
+              product,
+              variationUid: lineItem.variation,
+              quantity: lineItem.quantity,
+            };
+          })
+      );
+    }
+  }, [app.user, app.products]);
+
+  return (
+    <div className={`${props.className ? props.className : ''}`}>
+      {app.user ? (
+        lineItems.length > 0 ? (
+          <div className="row">
+            {lineItems.map((lineItem, index) => (
+              <div key={index} className="col-md-12">
+                <CartProductCard
+                  product={lineItem.product}
+                  variationUid={lineItem.variationUid}
+                  quantity={lineItem.quantity}
+                />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <h1>No products in cart</h1>
+        )
+      ) : (
+        <AuthForm />
+      )}
+    </div>
+  );
+};
+
+export default CartProductsList;

@@ -28,7 +28,7 @@ const Components = (): React.JSX.Element => {
       <hr />
       <div className="row">
         {app.products.map((product, index) => (
-          <div key={index} className="col-lg-4">
+          <div key={index} className="col-md-4">
             <ProductCard product={product} />
           </div>
         ))}

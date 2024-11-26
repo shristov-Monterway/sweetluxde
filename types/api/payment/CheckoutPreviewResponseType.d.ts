@@ -1,5 +1,5 @@
 export interface CheckoutPreviewResponseLineItemType {
-    uid: string;
+    product: string;
     variation: string;
     quantity: number;
     price: number;

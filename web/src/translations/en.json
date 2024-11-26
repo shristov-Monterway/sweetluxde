@@ -1,10 +1,13 @@
 {
   "pages": {
-    "/components": {
-      "title": "Components"
-    },
     "/product/[uid]": {
       "title": "Product %{name}"
+    },
+    "/cart": {
+      "title": "My cart"
+    },
+    "/components": {
+      "title": "Components"
     }
   },
   "form": {
@@ -26,6 +29,10 @@
   "components": {
     "productInfo": {
       "addToCart": "Add to cart"
+    },
+    "cartOverview": {
+      "totalPrice": "Total price:",
+      "placeOrder": "Place order"
     }
   },
   "errors": {

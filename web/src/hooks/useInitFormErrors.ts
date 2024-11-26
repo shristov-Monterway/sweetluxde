@@ -1,9 +1,9 @@
 import React from 'react';
 import { FormErrorsContextType } from '../contexts/AppContext';
-import { FormError } from '../types/FormError';
+import { FormErrorType } from '../types/FormErrorType';
 
 const useInitFormErrors = (): FormErrorsContextType => {
-  const [formErrors, setFormErrors] = React.useState<FormError[]>([]);
+  const [formErrors, setFormErrors] = React.useState<FormErrorType[]>([]);
 
   return {
     get: formErrors,
