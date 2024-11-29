@@ -22,4 +22,5 @@ export interface CheckoutType {
         message: string;
     };
     url?: string;
+    sessionId?: string;
 }

@@ -18,7 +18,8 @@ import {
   CheckoutType,
 } from '../../../../types/internal/CheckoutType';
 import { CheckoutNewResponseType } from '../../../../types/api/payment/CheckoutNewResponseType';
-import {UserType} from "../../../../types/internal/UserType";
+import { UserType } from '../../../../types/internal/UserType';
+import { CheckoutCompleteRequestType } from '../../../../types/api/payment/CheckoutCompleteRequestType';
 
 const PaymentRoutes = express.Router();
 
@@ -211,7 +212,7 @@ PaymentRoutes.all(
       line_items: lineItems,
       mode: 'payment',
       success_url: process.env.FUNCTIONS_EMULATOR
-        ? `http://127.0.0.1:5001/era-bets/europe-west3/app/payment/checkout-session/complete?sessionId={CHECKOUT_SESSION_ID}&userId=${user.uid}`
+        ? `http://127.0.0.1:5001/era-bets/europe-west3/app/payment/checkout/complete?sessionId={CHECKOUT_SESSION_ID}&userId=${user.uid}`
         : `https://europe-west3-${process.env.GCLOUD_PROJECT}.cloudfunctions.net/app/payment/checkout-session/complete?sessionId={CHECKOUT_SESSION_ID}&userId=${user.uid}`,
       currency: req.currency,
       locale: req.locale,
@@ -248,6 +249,66 @@ PaymentRoutes.all(
       res.send(response);
       return;
     }, 5000);
+  }
+);
+
+PaymentRoutes.get(
+  '/checkout/complete',
+  checkSchema({
+    sessionId: {
+      in: 'query',
+      notEmpty: true,
+      isString: true,
+    },
+    userId: {
+      in: 'query',
+      notEmpty: true,
+      isString: true,
+    },
+  }),
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  async (req, res) => {
+    const validation = validationResult(req);
+
+    if (!validation.isEmpty()) {
+      res.status(400).send(validation.array());
+      return;
+    }
+
+    const request = req.query as CheckoutCompleteRequestType;
+
+    const user = await FirestoreModule<UserType>().getDoc(
+      'users',
+      request.userId
+    );
+
+    if (!user) {
+      res.status(401).send();
+      return;
+    }
+
+    const checkouts = await FirestoreModule<CheckoutType>().getCollection(
+      `users/${request.userId}/checkout_sessions`
+    );
+
+    const checkout = checkouts.find(
+      (checkout) => checkout.sessionId === request.sessionId
+    );
+
+    if (!checkout) {
+      res.status(401).send();
+      return;
+    }
+
+    const sessionId = checkout.sessionId;
+
+    if (!sessionId) {
+      res.status(401).send();
+      return;
+    }
+
+    res.redirect(checkout.success_url);
   }
 );
 

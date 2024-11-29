@@ -1,4 +1,4 @@
-import {ProductType} from "../../internal/ProductType";
+import { ProductType } from "../../internal/ProductType";
 
 export interface ProductsAllResponseType {
     products: ProductType[];

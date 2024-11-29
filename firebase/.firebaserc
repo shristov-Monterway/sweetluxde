@@ -1,13 +1,5 @@
 {
   "projects": {
     "default": "era-bets"
-  },
-  "targets": {},
-  "etags": {
-    "era-bets": {
-      "extensionInstances": {
-        "firestore-stripe-payments": "bef7d58bcbdee37b6cba082fbda81529c9c18988d2c7c7f9970e85e01c86853e"
-      }
-    }
   }
 }
