@@ -10,7 +10,7 @@
     "format": "prettier --write 'src/**/*.{ts,js,json,md}'",
     "shell": "firebase functions:shell",
     "stripe:auth": "stripe login",
-    "stripe:webhook": "stripe listen --forward-to http://127.0.0.1:5001/era-bets/europe-west3/ext-firestore-stripe-payments-handleWebhookEvents"
+    "stripe:webhook": "stripe listen --forward-to http://127.0.0.1:5001/era-bets/europe-west3/app/payment/stripe/webhook"
   },
   "engines": {
     "node": "20"

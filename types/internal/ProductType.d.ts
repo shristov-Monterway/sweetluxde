@@ -5,7 +5,6 @@ export interface ProductType {
     uid: string;
     name: TranslationType;
     description: TranslationType;
-    taxBehavior: 'inclusive' | 'exclusive' | 'unspecified';
     variations: {
         [uid: string]: ProductVariationType;
     };

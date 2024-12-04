@@ -2,12 +2,12 @@ import { CurrencyType } from '../../../../types/internal/CurrencyType';
 import { CurrencyRatesType } from '../../../../types/internal/CurrencyRatesType';
 import Config from '../Config';
 
-export interface ExchangeService {
+export interface ExchangeServiceType {
   getCurrencies: () => Promise<CurrencyType[]>;
   getCurrencyRates: (currencyCode: string) => Promise<CurrencyRatesType>;
 }
 
-const ExchangeService = (): ExchangeService => {
+const ExchangeService = (): ExchangeServiceType => {
   return {
     getCurrencies: async () => {
       const response = await fetch(

@@ -5,6 +5,12 @@
 2. Firebase CLI: 13.6.0
 3. Stripe CLI: 1.21.8
 
+## Firebase installation
+1. Authenticate into Firebase CLI: `firebase login`
+
+## Stripe installation
+1. Authenticate into Stripe CLI: `stripe login`
+
 ## Web installation
 1. Open `web`: `cd web`
 2. Install dependencies: `npm i`
@@ -21,9 +27,7 @@
    - Run scheduled function: `firebase > schedule_paymentCurrenciesSync()`
 
 ## Customizations:
-1. Change following properties inside `web/package.json`
-    - `name`
-2. Change following properties inside `web/src/services/firebase/config.json`
+1. Change following properties inside `web/src/services/Firebase/config.json`
    - `apiKey`
    - `authDomain`
    - `projectId`
@@ -31,8 +35,10 @@
    - `messagingSenderId`
    - `appId`
    - `measurementId`
-3. Change following properties inside `firebase/.firebaserc`
+2. Change following properties inside `firebase/.firebaserc`
    - `projects.default`
+3. Change the project name in URL of command `stripe:webhook` inside `firebase/functions/package.json`
+4. Change the project configuration inside `firebase/functions/src/Config.ts`
 
 ## Project setup
 1. Go to `https://console.firebase.google.com/`

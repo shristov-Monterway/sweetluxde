@@ -19,7 +19,7 @@ import {
 } from '../../../../types/internal/CheckoutType';
 import { CheckoutNewResponseType } from '../../../../types/api/payment/CheckoutNewResponseType';
 import { UserType } from '../../../../types/internal/UserType';
-import { CheckoutCompleteRequestType } from '../../../../types/api/payment/CheckoutCompleteRequestType';
+import StripeService from '../services/StripeService';
 
 const PaymentRoutes = express.Router();
 
@@ -187,81 +187,53 @@ PaymentRoutes.all(
       const price = Math.ceil(rate * variation.price);
 
       lineItems.push({
-        price_data: {
+        product: {
+          name: product.name[req.locale]
+            ? product.name[req.locale]
+            : product.name[Object.keys(product.name)[0]],
+          description: product.description[req.locale]
+            ? product.description[req.locale]
+            : product.description[Object.keys(product.description)[0]],
+          price,
           currency: req.currency,
-          product_data: {
-            name: product.name[req.locale]
-              ? product.name[req.locale]
-              : product.name[Object.keys(product.name)[0]],
-            description: product.description[req.locale]
-              ? product.description[req.locale]
-              : product.description[Object.keys(product.description)[0]],
-          },
-          tax_behavior: product.taxBehavior,
-          unit_amount: price,
         },
         quantity: lineItem.quantity,
       });
     }
 
-    const checkoutsRef = FirestoreModule<CheckoutType>().getCollectionRef(
-      `users/${req.user.uid}/checkout_sessions`
-    );
-
-    const checkoutRef = await checkoutsRef.add({
-      line_items: lineItems,
-      mode: 'payment',
-      success_url: process.env.FUNCTIONS_EMULATOR
-        ? `http://127.0.0.1:5001/era-bets/europe-west3/app/payment/checkout/complete?sessionId={CHECKOUT_SESSION_ID}&userId=${user.uid}`
-        : `https://europe-west3-${process.env.GCLOUD_PROJECT}.cloudfunctions.net/app/payment/checkout-session/complete?sessionId={CHECKOUT_SESSION_ID}&userId=${user.uid}`,
+    const newCheckout: Omit<CheckoutType, 'uid' | 'status' | 'url'> = {
+      userUid: user.uid,
+      userEmail: user.email,
+      lineItems,
       currency: req.currency,
       locale: req.locale,
-      payment_method_types: ['card'],
-    });
+      successUrl: request.successUrl,
+    };
 
-    setTimeout(async () => {
-      const checkout = (await checkoutRef.get()).data();
+    const checkout = await StripeService().createCheckoutSession(newCheckout);
 
-      if (!checkout) {
-        throw new Error("Checkout session couldn't be created!");
-      }
+    await FirestoreModule<CheckoutType>().writeDoc(
+      'checkouts',
+      checkout.uid,
+      checkout
+    );
 
-      if (checkout.error) {
-        res.status(500).send(checkout.error.message);
-        return;
-      }
+    const response: ResponseType<CheckoutNewResponseType> = {
+      data: {
+        url: checkout.url,
+      },
+    };
 
-      await checkoutRef.set({
-        ...checkout,
-        success_url: request.successUrl,
-      });
-
-      if (!checkout.url) {
-        throw new Error("Checkout session URL couldn't be created!");
-      }
-
-      const response: ResponseType<CheckoutNewResponseType> = {
-        data: {
-          url: checkout.url,
-        },
-      };
-
-      res.send(response);
-      return;
-    }, 5000);
+    res.send(response);
+    return;
   }
 );
 
-PaymentRoutes.get(
-  '/checkout/complete',
+PaymentRoutes.all(
+  '/stripe/webhook',
   checkSchema({
-    sessionId: {
-      in: 'query',
-      notEmpty: true,
-      isString: true,
-    },
-    userId: {
-      in: 'query',
+    'stripe-signature': {
+      in: 'headers',
       notEmpty: true,
       isString: true,
     },
@@ -269,46 +241,32 @@ PaymentRoutes.get(
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   async (req, res) => {
-    const validation = validationResult(req);
+    const signature = req.headers['stripe-signature'] as string;
 
-    if (!validation.isEmpty()) {
-      res.status(400).send(validation.array());
-      return;
+    const event = StripeService().getEvent(req.rawBody, signature);
+
+    if (event.type === 'checkout.session.completed') {
+      const checkout = await FirestoreModule<CheckoutType>().getDoc(
+        'checkouts',
+        event.data.object.id
+      );
+
+      if (!checkout) {
+        throw new Error('Checkout does not exist!');
+      }
+
+      await FirestoreModule<CheckoutType>().writeDoc(
+        'checkouts',
+        checkout.uid,
+        {
+          ...checkout,
+          status: 'done',
+        }
+      );
     }
 
-    const request = req.query as CheckoutCompleteRequestType;
-
-    const user = await FirestoreModule<UserType>().getDoc(
-      'users',
-      request.userId
-    );
-
-    if (!user) {
-      res.status(401).send();
-      return;
-    }
-
-    const checkouts = await FirestoreModule<CheckoutType>().getCollection(
-      `users/${request.userId}/checkout_sessions`
-    );
-
-    const checkout = checkouts.find(
-      (checkout) => checkout.sessionId === request.sessionId
-    );
-
-    if (!checkout) {
-      res.status(401).send();
-      return;
-    }
-
-    const sessionId = checkout.sessionId;
-
-    if (!sessionId) {
-      res.status(401).send();
-      return;
-    }
-
-    res.redirect(checkout.success_url);
+    res.status(200).send();
+    return;
   }
 );
 

@@ -1,26 +1,21 @@
 export interface CheckoutLineItemType {
-    price_data: {
+    product: {
+        name: string;
+        description: string;
+        price: number;
         currency: string;
-        product_data: {
-            name: string;
-            description: string;
-        };
-        tax_behavior: string;
-        unit_amount: number;
     };
     quantity: number;
 }
 
 export interface CheckoutType {
-    line_items: CheckoutLineItemType[];
-    mode: 'payment';
-    success_url: string;
+    uid: string;
+    userUid: string;
+    userEmail: string;
+    lineItems: CheckoutLineItemType[];
     currency: string;
     locale: string;
-    payment_method_types: string[];
-    error?: {
-        message: string;
-    };
-    url?: string;
-    sessionId?: string;
+    successUrl: string;
+    status: 'waiting' | 'done';
+    url: string;
 }

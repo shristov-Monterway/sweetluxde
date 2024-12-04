@@ -21,19 +21,13 @@ export interface FirebaseAuthModuleType {
   signInWithEmailAndPassword: (
     email: string,
     password: string,
-    initData: Omit<
-      UserType,
-      'uid' | 'email' | 'stripeId' | 'stripeLink' | 'lastLogin' | 'cart'
-    >,
+    initData: Omit<UserType, 'uid' | 'email' | 'lastLogin' | 'cart'>,
     onSuccess?: (uid: string) => void,
     onFailure?: (error: Error) => void
   ) => void;
   signInWithPopup: (
     provider: FirebaseAuthModuleSignInProvider,
-    initData: Omit<
-      UserType,
-      'uid' | 'email' | 'stripeId' | 'stripeLink' | 'lastLogin' | 'cart'
-    >,
+    initData: Omit<UserType, 'uid' | 'email' | 'lastLogin' | 'cart'>,
     onSuccess?: (uid: string) => void,
     onFailure?: (error: Error) => void
   ) => void;
@@ -107,9 +101,7 @@ const FirebaseAuthModule = (): FirebaseAuthModuleType => {
           if (error.code === 'auth/user-not-found') {
             createUserWithEmailAndPassword(FirebaseAuth, email, password)
               .then((result) => {
-                FirestoreModule<
-                  Omit<UserType, 'email' | 'stripeId' | 'stripeLink'>
-                >()
+                FirestoreModule<UserType>()
                   .writeDoc('users', result.user.uid, {
                     ...initData,
                     lastLogin: new Date().getTime(),
@@ -117,6 +109,7 @@ const FirebaseAuthModule = (): FirebaseAuthModuleType => {
                     cart: {
                       lineItems: [],
                     },
+                    email,
                   })
                   .then(() => {
                     if (onSuccess) {
@@ -149,14 +142,22 @@ const FirebaseAuthModule = (): FirebaseAuthModuleType => {
       defaultSignInWithPopup(FirebaseAuth, authProvider)
         .then((result) => {
           const additionalUserInfo = getAdditionalUserInfo(result);
+          const isNewUser = !!additionalUserInfo?.isNewUser;
+          const email =
+            additionalUserInfo?.profile && additionalUserInfo.profile.email
+              ? (additionalUserInfo.profile.email as string)
+              : null;
+
+          if (!email) {
+            throw new Error('User has issue with the data!');
+          }
+
           FirestoreModule<
-            | Omit<UserType, 'email' | 'stripeId' | 'stripeLink'>
+            | UserType
             | Omit<
                 UserType,
                 | 'uid'
                 | 'email'
-                | 'stripeId'
-                | 'stripeLink'
                 | 'locale'
                 | 'theme'
                 | 'currency'
@@ -167,7 +168,7 @@ const FirebaseAuthModule = (): FirebaseAuthModuleType => {
             .writeDoc(
               'users',
               result.user.uid,
-              additionalUserInfo?.isNewUser
+              isNewUser
                 ? {
                     ...initData,
                     lastLogin: new Date().getTime(),
@@ -175,6 +176,7 @@ const FirebaseAuthModule = (): FirebaseAuthModuleType => {
                     cart: {
                       lineItems: [],
                     },
+                    email,
                   }
                 : {
                     lastLogin: new Date().getTime(),
