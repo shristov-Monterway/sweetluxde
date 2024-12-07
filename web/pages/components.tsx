@@ -5,11 +5,12 @@ import AuthForm from '../src/components/AuthForm';
 import GoogleSignInButton from '../src/components/GoogleSignInButton';
 import SignOutButton from '../src/components/SignOutButton';
 import ProductCard from '../src/components/ProductCard';
+import Header from '../src/components/Header';
 
 const Components = (): React.JSX.Element => {
   const app = useApp();
   return (
-    <Page isFluid={false}>
+    <Page isFluid={false} header={<Header />}>
       <h1>{app.user ? app.user.uid : 'Not logged in'}</h1>
       <hr />
       <AuthForm onSuccess={() => alert('Welcome!')} />
@@ -28,7 +29,7 @@ const Components = (): React.JSX.Element => {
       <hr />
       <div className="row">
         {app.products.map((product, index) => (
-          <div key={index} className="col-md-4">
+          <div key={index} className="col-lg-4">
             <ProductCard product={product} />
           </div>
         ))}

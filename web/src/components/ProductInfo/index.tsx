@@ -97,10 +97,6 @@ const ProductInfo = (props: ProductInfoProps): React.JSX.Element => {
     [uid: string]: number;
   } = {};
 
-  if (props.product.image) {
-    images.push(props.product.image);
-  }
-
   Object.keys(props.product.variations).forEach((uid) => {
     productVariationImageIndexes[uid] = images.length;
     props.product.variations[uid].images.forEach((image) => {
@@ -171,7 +167,7 @@ const ProductInfo = (props: ProductInfoProps): React.JSX.Element => {
         {tags.length > 0 ? (
           <h3 className="d-flex gap-3 flex-wrap p-0 m-0">
             {tags.map((tag, index) => (
-              <span key={index} className="badge bg-primary">
+              <span key={index} className="badge border border-primary">
                 {tag}
               </span>
             ))}

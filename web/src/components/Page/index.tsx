@@ -4,13 +4,17 @@ import { AbstractComponentType } from '../../types/AbstractComponentType';
 export interface PageProps extends AbstractComponentType {
   children: React.JSX.Element | React.JSX.Element[];
   isFluid?: boolean;
+  header?: React.JSX.Element;
 }
 
 const Page = (props: PageProps): React.JSX.Element => {
   return (
-    <div className={`main-content ${props.className ? props.className : ''}`}>
-      <div className={props.isFluid ? 'container-fluid' : 'container'}>
-        <div className="py-1">{props.children}</div>
+    <div className={`page ${props.className ? props.className : ''}`}>
+      {props.header ? <div className="page__header">{props.header}</div> : null}
+      <div className="page__body">
+        <div className={props.isFluid ? 'container-fluid' : 'container'}>
+          {props.children}
+        </div>
       </div>
     </div>
   );

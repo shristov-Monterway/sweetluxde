@@ -8,6 +8,9 @@ export interface ProductType {
     variations: {
         [uid: string]: ProductVariationType;
     };
-    image: string | null;
     tags: TranslationType[];
+    badge?: {
+        type: 'success' | 'danger' | 'info' | 'warning';
+        text: TranslationType;
+    };
 }

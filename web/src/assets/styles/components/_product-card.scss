@@ -1,6 +1,24 @@
 .product-card {
-  &__image {
+  &__badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    border-radius: 50px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9rem;
+    overflow: hidden;
+    z-index: 2;
+  }
+
+  &__main-slide-image {
+    width: 100%;
+    object-fit: cover;
     pointer-events: none;
+    max-height: 300px;
 
     -moz-user-select: -moz-none;
     -khtml-user-select: none;
@@ -12,5 +30,32 @@
     */
     -ms-user-select: none;
     user-select: none;
+  }
+
+  &__body {
+    position: relative;
+  }
+
+  &__actions {
+    position: absolute;
+    top: var(--bs-card-spacer-y);
+    right: var(--bs-card-spacer-x);
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__footer-actions {
+    display: flex;
+    gap: 10px;
+  }
+
+  &__product-variations {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
   }
 }

@@ -2,6 +2,8 @@
   display: none;
 }
 
+@import "./components/banner";
 @import "./components/cart-product-card";
+@import "./components/page";
 @import "./components/product-card";
 @import "./components/product-info";

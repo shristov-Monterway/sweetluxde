@@ -21,13 +21,19 @@ export interface FirebaseAuthModuleType {
   signInWithEmailAndPassword: (
     email: string,
     password: string,
-    initData: Omit<UserType, 'uid' | 'email' | 'lastLogin' | 'cart'>,
+    initData: Omit<
+      UserType,
+      'uid' | 'email' | 'lastLogin' | 'cart' | 'wishlist'
+    >,
     onSuccess?: (uid: string) => void,
     onFailure?: (error: Error) => void
   ) => void;
   signInWithPopup: (
     provider: FirebaseAuthModuleSignInProvider,
-    initData: Omit<UserType, 'uid' | 'email' | 'lastLogin' | 'cart'>,
+    initData: Omit<
+      UserType,
+      'uid' | 'email' | 'lastLogin' | 'cart' | 'wishlist'
+    >,
     onSuccess?: (uid: string) => void,
     onFailure?: (error: Error) => void
   ) => void;
@@ -109,6 +115,9 @@ const FirebaseAuthModule = (): FirebaseAuthModuleType => {
                     cart: {
                       lineItems: [],
                     },
+                    wishlist: {
+                      lineItems: [],
+                    },
                     email,
                   })
                   .then(() => {
@@ -163,6 +172,7 @@ const FirebaseAuthModule = (): FirebaseAuthModuleType => {
                 | 'currency'
                 | 'invitedBy'
                 | 'cart'
+                | 'wishlist'
               >
           >()
             .writeDoc(
@@ -174,6 +184,9 @@ const FirebaseAuthModule = (): FirebaseAuthModuleType => {
                     lastLogin: new Date().getTime(),
                     uid: result.user.uid,
                     cart: {
+                      lineItems: [],
+                    },
+                    wishlist: {
                       lineItems: [],
                     },
                     email,

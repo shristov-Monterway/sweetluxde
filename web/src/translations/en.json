@@ -27,6 +27,9 @@
     }
   },
   "components": {
+    "productCard": {
+      "open": "Open"
+    },
     "productInfo": {
       "addToCart": "Add to cart"
     },

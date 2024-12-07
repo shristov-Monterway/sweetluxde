@@ -1,4 +1,5 @@
 import { CartType } from "./CartType";
+import { WishListType } from "./WishListType";
 
 export interface UserType {
     uid: string;
@@ -9,4 +10,5 @@ export interface UserType {
     invitedBy: string | null;
     lastLogin: number;
     cart: CartType;
+    wishlist: WishListType;
 }

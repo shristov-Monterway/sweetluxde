@@ -8,14 +8,17 @@ import RequestTransformationHandler from './handlers/RequestTransformationHandle
 import CartRoutes from './routes/CartRoutes';
 import PaymentRoutes from './routes/PaymentRoutes';
 import ProductRoutes from './routes/ProductRoutes';
+import WishlistRoutes from './routes/WishlistRoutes';
 import { CloudFunctionTriggers } from './types/CloudFunctionTriggers';
 import CartTriggers from './triggers/CartTriggers';
 import PaymentTriggers from './triggers/PaymentTriggers';
 import ProductTriggers from './triggers/ProductTriggers';
+import WishlistTriggers from './triggers/WishlistTriggers';
 import { CloudFunctionSchedules } from './types/CloudFunctionSchedules';
 import CartSchedules from './schedules/CartSchedules';
 import PaymentSchedules from './schedules/PaymentSchedules';
 import ProductSchedules from './schedules/ProductSchedules';
+import WishlistSchedules from './schedules/WishlistSchedules';
 
 admin.initializeApp();
 
@@ -32,6 +35,7 @@ app.use(RequestTransformationHandler.transformRequestBody);
 app.use('/cart', CartRoutes);
 app.use('/payment', PaymentRoutes);
 app.use('/product', ProductRoutes);
+app.use('/wishlist', WishlistRoutes);
 
 exports.app = functions.https.onRequest(
   {
@@ -44,6 +48,7 @@ const triggers: CloudFunctionTriggers = {
   ...CartTriggers,
   ...PaymentTriggers,
   ...ProductTriggers,
+  ...WishlistTriggers,
 };
 
 Object.keys(triggers).forEach((name) => {
@@ -54,6 +59,7 @@ const schedules: CloudFunctionSchedules = {
   ...CartSchedules,
   ...PaymentSchedules,
   ...ProductSchedules,
+  ...WishlistSchedules,
 };
 
 Object.keys(schedules).forEach((name) => {
