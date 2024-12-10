@@ -2,8 +2,23 @@
   display: none;
 }
 
+li.nav-item {
+  display: flex;
+  align-items: center;
+}
+
+.react-multiple-carousel__arrow--left {
+  left: calc(1% + 1px) !important;
+}
+
+.react-multiple-carousel__arrow--right {
+  right: calc(1% + 1px) !important;
+}
+
 @import "./components/banner";
 @import "./components/cart-product-card";
+@import "./components/modal";
 @import "./components/page";
 @import "./components/product-card";
 @import "./components/product-info";
+@import "./components/wishlist-product-card";

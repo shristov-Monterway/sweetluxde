@@ -4,16 +4,18 @@ import { ProductType } from '../../../../types/internal/ProductType';
 import useApp from '../../hooks/useApp';
 import Price from '../Price';
 import FirebaseFunctionsModule from '../../modules/FirebaseFunctionsModule';
-import { CartUpdateRequestType } from '../../../../types/api/cart/CartUpdateRequestType';
-import { CartUpdateResponseType } from '../../../../types/api/cart/CartUpdateResponseType';
+import { WishlistUpdateRequestType } from '../../../../types/api/wishlist/WishlistUpdateRequestType';
+import { WishlistUpdateResponseType } from '../../../../types/api/wishlist/WishlistUpdateResponseType';
 
-export interface CartProductCardProps extends AbstractComponentType {
+export interface WishlistProductCardProps extends AbstractComponentType {
   product: ProductType;
   variationUid: string;
   quantity: number;
 }
 
-const CartProductCard = (props: CartProductCardProps): React.JSX.Element => {
+const WishlistProductCard = (
+  props: WishlistProductCardProps
+): React.JSX.Element => {
   const app = useApp();
   const variation = props.product.variations[props.variationUid];
   const [productName, setProductName] = React.useState<string>('');
@@ -34,10 +36,10 @@ const CartProductCard = (props: CartProductCardProps): React.JSX.Element => {
 
   const setNewQuantity = async (quantity: -1 | 1) => {
     await FirebaseFunctionsModule<
-      CartUpdateRequestType,
-      CartUpdateResponseType
+      WishlistUpdateRequestType,
+      WishlistUpdateResponseType
     >().call(
-      '/cart/cart/update',
+      '/wishlist/wishlist/update',
       {
         product: props.product.uid,
         variation: props.variationUid,
@@ -50,20 +52,20 @@ const CartProductCard = (props: CartProductCardProps): React.JSX.Element => {
 
   return (
     <div className={`card ${props.className ? props.className : ''}`}>
-      <div className="card-body cart-product-card__body">
+      <div className="card-body wishlist-product-card__body">
         {variation.images.length > 0 ? (
           <img
-            className="cart-product-card__image"
+            className="wishlist-product-card__image"
             src={variation.images[0]}
             alt=""
           />
         ) : null}
-        <div className="d-flex flex-column gap-3 cart-product-card__info">
+        <div className="d-flex flex-column gap-3 wishlist-product-card__info">
           <h2 className="card-title p-0 m-0">{productName}</h2>
           <hr className="m-0 p-0" />
           <span className="h4">{variationName}</span>
           <div className="d-flex justify-content-start align-items-center gap-3 flex-wrap">
-            <div className="cart-product-card__quantity-container bg-primary-subtle border-primary">
+            <div className="wishlist-product-card__quantity-container bg-primary-subtle border-primary">
               <button
                 className="btn btn-sm btn-rounded-circle btn-white"
                 onClick={() => setNewQuantity(-1)}
@@ -105,4 +107,4 @@ const CartProductCard = (props: CartProductCardProps): React.JSX.Element => {
   );
 };
 
-export default CartProductCard;
+export default WishlistProductCard;

@@ -1,12 +1,26 @@
 import React from 'react';
+import { AbstractComponentType } from '../../types/AbstractComponentType';
+import ThemeToggle from '../ThemeToggle';
+import LocaleToggle from '../LocaleToggle';
+import useApp from '../../hooks/useApp';
+import AuthModal from '../AuthModal';
+import Link from 'next/link';
 
-const Header = (): React.JSX.Element => {
+export interface HeaderProps extends AbstractComponentType {
+  hasShadow?: boolean;
+}
+
+const Header = (props: HeaderProps): React.JSX.Element => {
+  const app = useApp();
+
   return (
-    <nav className="navbar navbar-expand-xl">
+    <nav
+      className={`navbar navbar-expand-xl ${props.hasShadow ? 'shadow-lg' : ''} ${props.className ? props.className : ''}`}
+    >
       <div className="container">
-        <a className="navbar-brand" href="#!">
-          Navbar
-        </a>
+        <Link href="/" passHref={true}>
+          <a className="navbar-brand">Navbar</a>
+        </Link>
 
         <button
           className="navbar-toggler"
@@ -36,6 +50,43 @@ const Header = (): React.JSX.Element => {
               <a className="nav-link disabled" href="#!">
                 Disabled
               </a>
+            </li>
+            <li className="nav-item">
+              <div className="nav-link d-flex gap-1">
+                <ThemeToggle />
+                <LocaleToggle />
+                {app.user ? (
+                  <>
+                    <Link href="/account" passHref={true}>
+                      <a className="btn btn-primary btn-sm">
+                        <i className="fe fe-user" />
+                      </a>
+                    </Link>
+                    <Link href="/cart" passHref={true}>
+                      <a className="btn btn-primary btn-sm position-relative">
+                        <i className="fe fe-shopping-cart" />
+                        <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger z-2">
+                          {app.user.cart.lineItems
+                            .map((lineItem) => lineItem.quantity)
+                            .reduce((sum, quantity) => sum + quantity, 0)}
+                        </span>
+                      </a>
+                    </Link>
+                    <Link href="/wishlist" passHref={true}>
+                      <a className="btn btn-primary btn-sm position-relative">
+                        <i className="fe fe-bookmark" />
+                        <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger z-2">
+                          {app.user.wishlist.lineItems
+                            .map((lineItem) => lineItem.quantity)
+                            .reduce((sum, quantity) => sum + quantity, 0)}
+                        </span>
+                      </a>
+                    </Link>
+                  </>
+                ) : (
+                  <AuthModal />
+                )}
+              </div>
             </li>
           </ul>
         </div>

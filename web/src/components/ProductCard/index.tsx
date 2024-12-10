@@ -3,7 +3,6 @@ import { AbstractComponentType } from '../../types/AbstractComponentType';
 import { ProductType } from '../../../../types/internal/ProductType';
 import useApp from '../../hooks/useApp';
 import Price from '../Price';
-import { useRouter } from 'next/router';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import FirebaseFunctionsModule from '../../modules/FirebaseFunctionsModule';
@@ -11,6 +10,7 @@ import { CartUpdateRequestType } from '../../../../types/api/cart/CartUpdateRequ
 import { CartUpdateResponseType } from '../../../../types/api/cart/CartUpdateResponseType';
 import { WishlistUpdateRequestType } from '../../../../types/api/wishlist/WishlistUpdateRequestType';
 import { WishlistUpdateResponseType } from '../../../../types/api/wishlist/WishlistUpdateResponseType';
+import Link from 'next/link';
 
 export interface ProductCardProps extends AbstractComponentType {
   product: ProductType;
@@ -33,7 +33,6 @@ const mainSliderConfig = {
 
 const ProductCard = (props: ProductCardProps): React.JSX.Element | null => {
   const app = useApp();
-  const router = useRouter();
   const mainSlider = React.useRef<Carousel | null>(null);
   const [selectedProductVariationUid, setSelectedProductVariationUid] =
     React.useState<string>(Object.keys(props.product.variations)[0]);
@@ -186,7 +185,10 @@ const ProductCard = (props: ProductCardProps): React.JSX.Element | null => {
         {tags.length > 0 ? (
           <h3 className="d-flex gap-3 flex-wrap p-0 m-0 mb-3">
             {tags.map((tag, index) => (
-              <span key={index} className="badge border border-primary">
+              <span
+                key={index}
+                className="badge border border-primary text-primary"
+              >
                 {tag}
               </span>
             ))}
@@ -219,12 +221,11 @@ const ProductCard = (props: ProductCardProps): React.JSX.Element | null => {
           <button className="btn btn-outline-success" onClick={addToCart}>
             <i className="fe fe-shopping-cart" />
           </button>
-          <button
-            className="btn btn-primary"
-            onClick={() => router.push(`/product/${props.product.uid}`)}
-          >
-            {app.translator.t('components.productCard.open')}
-          </button>
+          <Link href={`/product/${props.product.uid}`} passHref={true}>
+            <a className="btn btn-primary">
+              {app.translator.t('components.productCard.open')}
+            </a>
+          </Link>
         </div>
       </div>
     </div>

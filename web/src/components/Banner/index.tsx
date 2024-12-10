@@ -1,7 +1,7 @@
 import React from 'react';
 import { AbstractComponentType } from '../../types/AbstractComponentType';
-import { useRouter } from 'next/router';
 import useApp from '../../hooks/useApp';
+import Link from 'next/link';
 
 export interface BannerProps extends AbstractComponentType {
   backgroundImage: {
@@ -56,7 +56,6 @@ export interface BannerProps extends AbstractComponentType {
 
 const Banner = (props: BannerProps): React.JSX.Element => {
   const app = useApp();
-  const router = useRouter();
   const boxPosition = props.box.position ? props.box.position : 'center-center';
 
   return (
@@ -104,21 +103,14 @@ const Banner = (props: BannerProps): React.JSX.Element => {
             {props.box.links && props.box.links.length > 0 ? (
               <div className="banner__box-links">
                 {props.box.links.map((link, index) => (
-                  <button
-                    key={index}
-                    className={`btn btn-${link.type ? link.type : 'primary'} ${link.size ? `btn-${link.size}` : ''}`}
-                    onClick={() => {
-                      if (link.href.startsWith('/')) {
-                        router.push(link.href);
-                      } else {
-                        if (window) {
-                          window.open(link.href, '_blank');
-                        }
-                      }
-                    }}
-                  >
-                    {link.content}
-                  </button>
+                  <Link key={index} href={link.href} passHref={true}>
+                    <a
+                      className={`btn btn-${link.type ? link.type : 'primary'} ${link.size ? `btn-${link.size}` : ''}`}
+                      target={link.href.startsWith('/') ? '' : '_blank'}
+                    >
+                      {link.content}
+                    </a>
+                  </Link>
                 ))}
               </div>
             ) : null}

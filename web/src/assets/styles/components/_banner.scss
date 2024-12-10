@@ -14,11 +14,11 @@
     }
 
     &--lg {
-      height: 600px;
+      height: 550px;
     }
 
     &--xlg {
-      height: 600px;
+      height: 550px;
 
       @include media-breakpoint-up(lg) {
         height: 800px;
@@ -100,6 +100,7 @@
     height: 100%;
     top: 0;
     left: 0;
+    opacity: 0.6;
 
     &--rounded {
       border-bottom-left-radius: var(--bs-border-radius);
@@ -107,8 +108,6 @@
     }
 
     @include media-breakpoint-up(lg) {
-      opacity: 0.6;
-
       &--rounded {
         border-top-left-radius: var(--bs-border-radius);
         border-top-right-radius: var(--bs-border-radius);

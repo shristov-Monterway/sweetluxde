@@ -4,7 +4,7 @@ import useApp from '../../hooks/useApp';
 import FirebaseAuthModule from '../../modules/FirebaseAuthModule';
 
 export interface SignOutButtonProps extends AbstractComponentType {
-  children?: React.JSX.Element;
+  children?: React.JSX.Element | React.JSX.Element[];
   onSuccess?: () => void;
   onFailure?: (error: Error) => void;
 }
@@ -22,10 +22,14 @@ const SignOutButton = (props: SignOutButtonProps): React.JSX.Element => {
 
   return (
     <button
-      className={`${props.className ? props.className : ''}`}
+      className={`btn btn-primary ${props.className ? props.className : ''}`}
       onClick={onPress}
     >
-      {props.children ? props.children : <span>Sign out</span>}
+      {props.children ? (
+        props.children
+      ) : (
+        <span>{app.translator.t('components.signOutButton.signOut')}</span>
+      )}
     </button>
   );
 };

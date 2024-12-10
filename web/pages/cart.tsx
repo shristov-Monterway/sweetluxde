@@ -1,11 +1,12 @@
 import React from 'react';
 import Page from '../src/components/Page';
+import Header from '../src/components/Header';
 import CartProductsList from '../src/components/CartProductsList';
 import CartOverview from '../src/components/CartOverview';
 
 const Cart = (): React.JSX.Element => {
   return (
-    <Page isFluid={false}>
+    <Page isFluid={false} header={<Header hasShadow={true} />}>
       <CartProductsList />
       <hr />
       <CartOverview />

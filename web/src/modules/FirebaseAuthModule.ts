@@ -161,48 +161,62 @@ const FirebaseAuthModule = (): FirebaseAuthModuleType => {
             throw new Error('User has issue with the data!');
           }
 
-          FirestoreModule<
-            | UserType
-            | Omit<
-                UserType,
-                | 'uid'
-                | 'email'
-                | 'locale'
-                | 'theme'
-                | 'currency'
-                | 'invitedBy'
-                | 'cart'
-                | 'wishlist'
-              >
-          >()
-            .writeDoc(
-              'users',
-              result.user.uid,
-              isNewUser
-                ? {
-                    ...initData,
-                    lastLogin: new Date().getTime(),
-                    uid: result.user.uid,
-                    cart: {
-                      lineItems: [],
-                    },
-                    wishlist: {
-                      lineItems: [],
-                    },
-                    email,
-                  }
-                : {
-                    lastLogin: new Date().getTime(),
-                  }
-            )
-            .then(() => {
-              if (onSuccess) {
-                onSuccess(result.user.uid);
-              }
-            })
-            .catch((error) => {
-              handleOnFailure(error, onFailure);
-            });
+          if (isNewUser) {
+            FirestoreModule<UserType>()
+              .writeDoc('users', result.user.uid, {
+                ...initData,
+                lastLogin: new Date().getTime(),
+                uid: result.user.uid,
+                cart: {
+                  lineItems: [],
+                },
+                wishlist: {
+                  lineItems: [],
+                },
+                email,
+              })
+              .then(() => {
+                if (onSuccess) {
+                  onSuccess(result.user.uid);
+                }
+              })
+              .catch((error) => {
+                handleOnFailure(error, onFailure);
+              });
+          } else {
+            FirestoreModule<UserType>()
+              .getDoc('users', result.user.uid)
+              .then((user) => {
+                if (user) {
+                  FirestoreModule<UserType>()
+                    .writeDoc('users', result.user.uid, {
+                      ...user,
+                      lastLogin: new Date().getTime(),
+                    })
+                    .then(() => {
+                      if (onSuccess) {
+                        onSuccess(result.user.uid);
+                      }
+                    })
+                    .catch((error) => {
+                      handleOnFailure(error, onFailure);
+                    });
+                } else {
+                  signOut(FirebaseAuth)
+                    .then(() => {
+                      throw new Error(
+                        'User is blocked. Please contact the support center.'
+                      );
+                    })
+                    .catch((error) => {
+                      handleOnFailure(error, onFailure);
+                    });
+                }
+              })
+              .catch((error) => {
+                handleOnFailure(error, onFailure);
+              });
+          }
         })
         .catch((error) => {
           handleOnFailure(error, onFailure);

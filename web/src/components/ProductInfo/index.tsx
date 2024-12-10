@@ -167,7 +167,10 @@ const ProductInfo = (props: ProductInfoProps): React.JSX.Element => {
         {tags.length > 0 ? (
           <h3 className="d-flex gap-3 flex-wrap p-0 m-0">
             {tags.map((tag, index) => (
-              <span key={index} className="badge border border-primary">
+              <span
+                key={index}
+                className="badge border border-primary text-primary"
+              >
                 {tag}
               </span>
             ))}

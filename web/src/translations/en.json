@@ -3,11 +3,20 @@
     "/product/[uid]": {
       "title": "Product %{name}"
     },
+    "/account": {
+      "title": "Account"
+    },
     "/cart": {
-      "title": "My cart"
+      "title": "Cart"
     },
     "/components": {
       "title": "Components"
+    },
+    "/": {
+      "title": "Home"
+    },
+    "/wishlist": {
+      "title": "Wishlist"
     }
   },
   "form": {
@@ -27,15 +36,30 @@
     }
   },
   "components": {
+    "authModal": {
+      "loginWith": "Login with:"
+    },
+    "cartOverview": {
+      "totalPrice": "Total price:",
+      "placeOrder": "Place order"
+    },
+    "cartProductsList": {
+      "noProducts": "No products in cart."
+    },
+    "localeToggle": {
+      "search": "Search"
+    },
     "productCard": {
       "open": "Open"
     },
     "productInfo": {
       "addToCart": "Add to cart"
     },
-    "cartOverview": {
-      "totalPrice": "Total price:",
-      "placeOrder": "Place order"
+    "signOutButton": {
+      "signOut": "Log out"
+    },
+    "wishlistProductsList": {
+      "noProducts": "No products in wishlist."
     }
   },
   "errors": {

@@ -5,6 +5,7 @@ import Page from '../../src/components/Page';
 import { NextSeo } from 'next-seo';
 import NotFound from 'next/error';
 import ProductInfo from '../../src/components/ProductInfo';
+import Header from '../../src/components/Header';
 
 const Product = (): React.JSX.Element => {
   const app = useApp();
@@ -22,7 +23,7 @@ const Product = (): React.JSX.Element => {
     : product.name[Object.keys(product.name)[0]];
 
   return (
-    <Page isFluid={false}>
+    <Page isFluid={false} header={<Header hasShadow={true} />}>
       <NextSeo
         title={app.translator.t(`pages.${router.pathname}.title`, {
           name,

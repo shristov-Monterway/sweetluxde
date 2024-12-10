@@ -1,38 +1,16 @@
 import React from 'react';
+import useApp from '../src/hooks/useApp';
 import Page from '../src/components/Page';
 import Header from '../src/components/Header';
 import Slider from '../src/components/Slider';
 import Banner from '../src/components/Banner';
+import ProductCard from '../src/components/ProductCard';
 
 const Index = (): React.JSX.Element => {
+  const app = useApp();
+
   return (
-    <Page isFluid={true} header={<Header />}>
-      <Banner
-        backgroundImage={{
-          src: 'https://www.panelisimo-bg.com/_next/image?url=%2Fimages%2Fgallery%2Flivingroom1.jpg&w=3840&q=75',
-        }}
-        size="lg"
-        box={{
-          title: {
-            content: 'Welcome pepiii',
-          },
-          description: {
-            content: 'Test description',
-          },
-          links: [
-            {
-              content: 'Components',
-              href: '/components',
-            },
-            {
-              content: 'Cart',
-              href: '/cart',
-            },
-          ],
-          position: 'center-left',
-          isRounded: true,
-        }}
-      />
+    <Page isFluid={true} header={<Header hasShadow={true} />}>
       <Slider
         config={{
           desktop: {
@@ -80,9 +58,14 @@ const Index = (): React.JSX.Element => {
                 content: 'Cart',
                 href: '/cart',
               },
+              {
+                content: 'Panelisimo',
+                href: 'https://www.panelisimo-bg.com/',
+              },
             ],
             position: 'center-left',
           }}
+          size="lg"
         />
         <Banner
           backgroundImage={{
@@ -109,6 +92,7 @@ const Index = (): React.JSX.Element => {
             ],
             position: 'center-left',
           }}
+          size="lg"
         />
         <Banner
           backgroundImage={{
@@ -135,8 +119,19 @@ const Index = (): React.JSX.Element => {
             ],
             position: 'center-left',
           }}
+          size="lg"
         />
       </Slider>
+      <hr className="my-5" />
+      <div className="container">
+        <div className="row">
+          {app.products.map((product, index) => (
+            <div key={index} className="col-lg-4">
+              <ProductCard product={product} />
+            </div>
+          ))}
+        </div>
+      </div>
     </Page>
   );
 };

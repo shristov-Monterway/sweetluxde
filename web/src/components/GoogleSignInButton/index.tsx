@@ -5,7 +5,7 @@ import useApp from '../../hooks/useApp';
 import { useRouter } from 'next/router';
 
 export interface GoogleSignInButtonProps extends AbstractComponentType {
-  children?: React.JSX.Element;
+  children?: React.JSX.Element | React.JSX.Element[];
   onSuccess?: (uid: string) => void;
   onFailure?: (error: Error) => void;
 }
@@ -38,7 +38,7 @@ const GoogleSignInButton = (
 
   return (
     <button
-      className={`${props.className ? props.className : ''}`}
+      className={`btn btn-primary ${props.className ? props.className : ''}`}
       onClick={onPress}
     >
       {props.children ? props.children : <span>Google</span>}

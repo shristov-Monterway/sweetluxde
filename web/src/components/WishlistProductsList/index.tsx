@@ -2,12 +2,14 @@ import React from 'react';
 import { AbstractComponentType } from '../../types/AbstractComponentType';
 import AuthForm from '../AuthForm';
 import useApp from '../../hooks/useApp';
-import CartProductCard from '../CartProductCard';
+import WishlistProductCard from '../WishlistProductCard';
 import { ProductType } from '../../../../types/internal/ProductType';
 
-export type CartProductsListProps = AbstractComponentType;
+export type WishlistProductsListProps = AbstractComponentType;
 
-const CartProductsList = (props: CartProductsListProps): React.JSX.Element => {
+const WishlistProductsList = (
+  props: WishlistProductsListProps
+): React.JSX.Element => {
   const app = useApp();
   const [lineItems, setLineItems] = React.useState<
     {
@@ -20,7 +22,7 @@ const CartProductsList = (props: CartProductsListProps): React.JSX.Element => {
   React.useEffect(() => {
     if (app.user) {
       setLineItems(
-        app.user.cart.lineItems
+        app.user.wishlist.lineItems
           .filter((lineItem) => {
             const product = app.products.find(
               (product) => lineItem.product === product.uid
@@ -33,13 +35,13 @@ const CartProductsList = (props: CartProductsListProps): React.JSX.Element => {
             );
 
             if (!product) {
-              throw new Error('Product from cart is not found!');
+              throw new Error('Product from wishlist is not found!');
             }
 
             const variation = product.variations[lineItem.variation];
 
             if (!variation) {
-              throw new Error('Product variation from cart is not found!');
+              throw new Error('Product variation from wishlist is not found!');
             }
 
             return {
@@ -59,7 +61,7 @@ const CartProductsList = (props: CartProductsListProps): React.JSX.Element => {
           <div className="row">
             {lineItems.map((lineItem, index) => (
               <div key={index} className="col-md-12">
-                <CartProductCard
+                <WishlistProductCard
                   product={lineItem.product}
                   variationUid={lineItem.variationUid}
                   quantity={lineItem.quantity}
@@ -68,7 +70,9 @@ const CartProductsList = (props: CartProductsListProps): React.JSX.Element => {
             ))}
           </div>
         ) : (
-          <h1>{app.translator.t('components.cartProductsList.noProducts')}</h1>
+          <h1>
+            {app.translator.t('components.wishlistProductsList.noProducts')}
+          </h1>
         )
       ) : (
         <AuthForm />
@@ -77,4 +81,4 @@ const CartProductsList = (props: CartProductsListProps): React.JSX.Element => {
   );
 };
 
-export default CartProductsList;
+export default WishlistProductsList;
