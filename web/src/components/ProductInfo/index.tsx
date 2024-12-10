@@ -112,19 +112,23 @@ const ProductInfo = (props: ProductInfoProps): React.JSX.Element => {
   };
 
   const addToCart = async () => {
-    await FirebaseFunctionsModule<
-      CartUpdateRequestType,
-      CartUpdateResponseType
-    >().call(
-      '/cart/cart/update',
-      {
-        product: props.product.uid,
-        variation: selectedProductVariationUid,
-        quantity: 1,
-      },
-      app.translator.locale,
-      app.currency.get
-    );
+    if (!app.user) {
+      app.activeModal.set('authModal');
+    } else {
+      await FirebaseFunctionsModule<
+        CartUpdateRequestType,
+        CartUpdateResponseType
+      >().call(
+        '/cart/cart/update',
+        {
+          product: props.product.uid,
+          variation: selectedProductVariationUid,
+          quantity: 1,
+        },
+        app.translator.locale,
+        app.currency.get
+      );
+    }
   };
 
   return (

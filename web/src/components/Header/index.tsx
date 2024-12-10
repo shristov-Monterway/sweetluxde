@@ -3,7 +3,7 @@ import { AbstractComponentType } from '../../types/AbstractComponentType';
 import ThemeToggle from '../ThemeToggle';
 import LocaleToggle from '../LocaleToggle';
 import useApp from '../../hooks/useApp';
-import AuthModal from '../AuthModal';
+import AuthModalToggle from '../AuthModalToggle';
 import Link from 'next/link';
 
 export interface HeaderProps extends AbstractComponentType {
@@ -84,7 +84,7 @@ const Header = (props: HeaderProps): React.JSX.Element => {
                     </Link>
                   </>
                 ) : (
-                  <AuthModal />
+                  <AuthModalToggle />
                 )}
               </div>
             </li>

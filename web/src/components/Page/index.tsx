@@ -1,5 +1,7 @@
 import React from 'react';
 import { AbstractComponentType } from '../../types/AbstractComponentType';
+import useApp from '../../hooks/useApp';
+import AuthModal from '../AuthModal';
 
 export interface PageProps extends AbstractComponentType {
   children: React.JSX.Element | React.JSX.Element[];
@@ -8,6 +10,8 @@ export interface PageProps extends AbstractComponentType {
 }
 
 const Page = (props: PageProps): React.JSX.Element => {
+  const app = useApp();
+
   return (
     <div className={`page ${props.className ? props.className : ''}`}>
       {props.header ? (
@@ -18,6 +22,7 @@ const Page = (props: PageProps): React.JSX.Element => {
           {props.children}
         </div>
       </div>
+      <AuthModal showModal={app.activeModal.get === 'authModal'} />
     </div>
   );
 };

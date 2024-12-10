@@ -1,6 +1,5 @@
 import React from 'react';
 import { AbstractComponentType } from '../../types/AbstractComponentType';
-import AuthForm from '../AuthForm';
 import useApp from '../../hooks/useApp';
 import WishlistProductCard from '../WishlistProductCard';
 import { ProductType } from '../../../../types/internal/ProductType';
@@ -56,26 +55,22 @@ const WishlistProductsList = (
 
   return (
     <div className={`${props.className ? props.className : ''}`}>
-      {app.user ? (
-        lineItems.length > 0 ? (
-          <div className="row">
-            {lineItems.map((lineItem, index) => (
-              <div key={index} className="col-md-12">
-                <WishlistProductCard
-                  product={lineItem.product}
-                  variationUid={lineItem.variationUid}
-                  quantity={lineItem.quantity}
-                />
-              </div>
-            ))}
-          </div>
-        ) : (
-          <h1>
-            {app.translator.t('components.wishlistProductsList.noProducts')}
-          </h1>
-        )
+      {lineItems.length > 0 ? (
+        <div className="row">
+          {lineItems.map((lineItem, index) => (
+            <div key={index} className="col-md-12">
+              <WishlistProductCard
+                product={lineItem.product}
+                variationUid={lineItem.variationUid}
+                quantity={lineItem.quantity}
+              />
+            </div>
+          ))}
+        </div>
       ) : (
-        <AuthForm />
+        <h1>
+          {app.translator.t('components.wishlistProductsList.noProducts')}
+        </h1>
       )}
     </div>
   );

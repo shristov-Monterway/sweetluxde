@@ -118,35 +118,43 @@ const ProductCard = (props: ProductCardProps): React.JSX.Element | null => {
   };
 
   const addToCart = async () => {
-    await FirebaseFunctionsModule<
-      CartUpdateRequestType,
-      CartUpdateResponseType
-    >().call(
-      '/cart/cart/update',
-      {
-        product: props.product.uid,
-        variation: selectedProductVariationUid,
-        quantity: 1,
-      },
-      app.translator.locale,
-      app.currency.get
-    );
+    if (!app.user) {
+      app.activeModal.set('authModal');
+    } else {
+      await FirebaseFunctionsModule<
+        CartUpdateRequestType,
+        CartUpdateResponseType
+      >().call(
+        '/cart/cart/update',
+        {
+          product: props.product.uid,
+          variation: selectedProductVariationUid,
+          quantity: 1,
+        },
+        app.translator.locale,
+        app.currency.get
+      );
+    }
   };
 
   const addOrRemoveFromWishlist = async () => {
-    await FirebaseFunctionsModule<
-      WishlistUpdateRequestType,
-      WishlistUpdateResponseType
-    >().call(
-      '/wishlist/wishlist/update',
-      {
-        product: props.product.uid,
-        variation: selectedProductVariationUid,
-        quantity: isProductVariationAddedToWishlist ? -1 : 1,
-      },
-      app.translator.locale,
-      app.currency.get
-    );
+    if (!app.user) {
+      app.activeModal.set('authModal');
+    } else {
+      await FirebaseFunctionsModule<
+        WishlistUpdateRequestType,
+        WishlistUpdateResponseType
+      >().call(
+        '/wishlist/wishlist/update',
+        {
+          product: props.product.uid,
+          variation: selectedProductVariationUid,
+          quantity: isProductVariationAddedToWishlist ? -1 : 1,
+        },
+        app.translator.locale,
+        app.currency.get
+      );
+    }
   };
 
   return (

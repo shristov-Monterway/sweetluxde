@@ -1,15 +1,17 @@
 import React from 'react';
 import { AbstractComponentType } from '../../types/AbstractComponentType';
+import useApp from '../../hooks/useApp';
 
 export interface ModalProps extends AbstractComponentType {
   showModal: boolean;
-  setShowModal: (newShow: boolean) => void;
   children: React.JSX.Element | React.JSX.Element[];
   header?: React.JSX.Element;
   closeButton?: React.JSX.Element;
 }
 
 const Modal = (props: ModalProps): React.JSX.Element => {
+  const app = useApp();
+
   return (
     <div className={`modal ${props.showModal ? 'modal--active' : ''}`}>
       <div className="modal__card">
@@ -17,7 +19,7 @@ const Modal = (props: ModalProps): React.JSX.Element => {
           {props.header ? props.header : null}
           <button
             className="btn btn-light ms-auto"
-            onClick={() => props.setShowModal(false)}
+            onClick={() => app.activeModal.set(null)}
           >
             {props.closeButton ? props.closeButton : <i className="fe fe-x" />}
           </button>

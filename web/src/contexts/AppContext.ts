@@ -23,6 +23,11 @@ export interface FormErrorsContextType {
   ) => void;
 }
 
+export interface ActiveModalContextType {
+  get: 'authModal' | null;
+  set: (newActiveModal: 'authModal' | null) => void;
+}
+
 export interface AppContextType {
   translator: I18n;
   theme: ThemeContextType;
@@ -30,6 +35,7 @@ export interface AppContextType {
   currency: CurrencyContextType;
   formErrors: FormErrorsContextType;
   products: ProductType[];
+  activeModal: ActiveModalContextType;
 }
 
 const AppContext = React.createContext<AppContextType | undefined>(undefined);
