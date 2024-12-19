@@ -15,10 +15,12 @@ li.nav-item {
   right: calc(1% + 1px) !important;
 }
 
+@import "./components/admin-products-list";
 @import "./components/banner";
 @import "./components/cart-product-card";
 @import "./components/modal";
 @import "./components/page";
 @import "./components/product-card";
+@import "./components/product-form";
 @import "./components/product-info";
 @import "./components/wishlist-product-card";

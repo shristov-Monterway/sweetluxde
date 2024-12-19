@@ -1,0 +1,17 @@
+.admin-products-list {
+  &__product-link {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__product-form {
+    height: 0;
+    overflow: hidden;
+    padding-left: 30px;
+
+    &--active {
+      height: auto;
+    }
+  }
+}

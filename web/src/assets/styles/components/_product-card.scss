@@ -42,6 +42,20 @@
     right: var(--bs-card-spacer-x);
   }
 
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &__content-title {
+    width: calc(100% - 50px);
+  }
+
+  &__content-tags {
+    width: calc(100% - 50px);
+  }
+
   &__footer {
     display: flex;
     justify-content: space-between;

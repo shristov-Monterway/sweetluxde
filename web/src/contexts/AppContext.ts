@@ -24,8 +24,8 @@ export interface FormErrorsContextType {
 }
 
 export interface ActiveModalContextType {
-  get: 'authModal' | null;
-  set: (newActiveModal: 'authModal' | null) => void;
+  get: 'authModal' | 'localeModal' | null;
+  set: (newActiveModal: 'authModal' | 'localeModal' | null) => void;
 }
 
 export interface AppContextType {

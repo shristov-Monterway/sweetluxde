@@ -1,7 +1,7 @@
 import React from 'react';
 import { AbstractComponentType } from '../../types/AbstractComponentType';
 import ThemeToggle from '../ThemeToggle';
-import LocaleToggle from '../LocaleToggle';
+import LocaleModalToggle from '../LocaleModalToggle';
 import useApp from '../../hooks/useApp';
 import AuthModalToggle from '../AuthModalToggle';
 import Link from 'next/link';
@@ -54,7 +54,7 @@ const Header = (props: HeaderProps): React.JSX.Element => {
             <li className="nav-item">
               <div className="nav-link d-flex gap-1">
                 <ThemeToggle />
-                <LocaleToggle />
+                <LocaleModalToggle />
                 {app.user ? (
                   <>
                     <Link href="/account" passHref={true}>

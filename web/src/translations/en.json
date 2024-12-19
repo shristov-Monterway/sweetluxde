@@ -46,7 +46,7 @@
     "cartProductsList": {
       "noProducts": "No products in cart."
     },
-    "localeToggle": {
+    "localeModal": {
       "search": "Search"
     },
     "productCard": {

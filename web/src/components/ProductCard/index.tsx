@@ -37,7 +37,6 @@ const ProductCard = (props: ProductCardProps): React.JSX.Element | null => {
   const [selectedProductVariationUid, setSelectedProductVariationUid] =
     React.useState<string>(Object.keys(props.product.variations)[0]);
   const [name, setName] = React.useState<string>('');
-  const [description, setDescription] = React.useState<string>('');
   const [productVariationNames, setProductVariationNames] = React.useState<{
     [uid: string]: string;
   }>({});
@@ -50,10 +49,6 @@ const ProductCard = (props: ProductCardProps): React.JSX.Element | null => {
     const name = props.product.name[app.translator.locale]
       ? props.product.name[app.translator.locale]
       : props.product.name[Object.keys(props.product.name)[0]];
-
-    const description = props.product.description[app.translator.locale]
-      ? props.product.description[app.translator.locale]
-      : props.product.description[Object.keys(props.product.description)[0]];
 
     const tags = props.product.tags.map((tag) =>
       tag[app.translator.locale]
@@ -81,7 +76,6 @@ const ProductCard = (props: ProductCardProps): React.JSX.Element | null => {
           : undefined;
 
     setName(name);
-    setDescription(description);
     setTags(tags);
     setProductVariationNames(productVariationNames);
     setBadgeText(badgeText);
@@ -188,30 +182,33 @@ const ProductCard = (props: ProductCardProps): React.JSX.Element | null => {
             <i className="fe fe-bookmark" />
           </button>
         </div>
-        <h2 className="card-title">{name}</h2>
-        <p className="small text-body-secondary mb-3">{description}</p>
-        {tags.length > 0 ? (
-          <h3 className="d-flex gap-3 flex-wrap p-0 m-0 mb-3">
-            {tags.map((tag, index) => (
-              <span
+        <div className="product-card__content">
+          <h2 className="product-card__content-title card-title m-0 p-0">
+            {name}
+          </h2>
+          {tags.length > 0 ? (
+            <h3 className="product-card__content-tags d-flex gap-3 flex-wrap p-0 m-0">
+              {tags.map((tag, index) => (
+                <span
+                  key={index}
+                  className="badge border border-primary text-primary"
+                >
+                  {tag}
+                </span>
+              ))}
+            </h3>
+          ) : null}
+          <div className="product-card__product-variations">
+            {Object.keys(props.product.variations).map((uid, index) => (
+              <button
                 key={index}
-                className="badge border border-primary text-primary"
+                className={`btn btn-sm btn-${selectedProductVariationUid === uid ? 'primary' : 'outline-primary'}`}
+                onClick={() => selectProductVariation(uid)}
               >
-                {tag}
-              </span>
+                {productVariationNames[uid]}
+              </button>
             ))}
-          </h3>
-        ) : null}
-        <div className="product-card__product-variations">
-          {Object.keys(props.product.variations).map((uid, index) => (
-            <button
-              key={index}
-              className={`btn btn-sm btn-${selectedProductVariationUid === uid ? 'primary' : 'outline-primary'}`}
-              onClick={() => selectProductVariation(uid)}
-            >
-              {productVariationNames[uid]}
-            </button>
-          ))}
+          </div>
         </div>
       </div>
       <div className="card-footer card-footer-boxed product-card__footer">
