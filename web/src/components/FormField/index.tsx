@@ -3,12 +3,34 @@ import { AbstractComponentType } from '../../types/AbstractComponentType';
 import useApp from '../../hooks/useApp';
 import FormFieldErrors from '../FormFieldErrors';
 
+export type FormFieldType =
+  | 'email'
+  | 'password'
+  | 'text'
+  | 'textarea'
+  | 'select'
+  | 'checkbox';
+
+export interface FormFieldOptionType {
+  label: string;
+  value: string;
+  help?: string;
+}
+
 export interface FormFieldProps extends AbstractComponentType {
   form: string;
   field: string;
-  type: 'email' | 'password' | 'text';
+  type: FormFieldType;
   value: string;
   setValue: (value: string) => void;
+  selectOptions?: FormFieldOptionType[];
+  labelTranslationParams?: {
+    [key: string]: string;
+  };
+  helpTranslationParams?: {
+    [key: string]: string;
+  };
+  inputAttributes?: { [key: string]: string };
 }
 
 const FormField = (props: FormFieldProps): React.JSX.Element | null => {
@@ -25,11 +47,92 @@ const FormField = (props: FormFieldProps): React.JSX.Element | null => {
       }),
     }));
 
-  return (
-    <div className={`${props.className ? props.className : ''}`}>
-      <label htmlFor={`${props.form}-${props.field}`} className="form-label">
-        {app.translator.t(`form.${props.form}.${props.field}.label`)}
-      </label>
+  React.useEffect(() => {
+    if (
+      props.type === 'select' &&
+      props.value === '' &&
+      props.selectOptions &&
+      props.selectOptions.length > 0
+    ) {
+      props.setValue(props.selectOptions[0].value);
+    }
+  }, [props.type, props.value]);
+
+  let inputElement: React.JSX.Element;
+
+  if (props.type === 'select') {
+    inputElement = (
+      <select
+        className="form-select"
+        id={`${props.form}-${props.field}`}
+        aria-label={app.translator.t(
+          `form.${props.form}.${props.field}.label`,
+          props.labelTranslationParams
+        )}
+        value={props.value}
+        onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+          props.setValue(e.target.value)
+        }
+        {...(props.inputAttributes ? props.inputAttributes : {})}
+      >
+        {props.selectOptions?.map((option, index) => (
+          <option key={index} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+    );
+  } else if (props.type === 'textarea') {
+    inputElement = (
+      <textarea
+        className={`form-control ${formErrors.length > 0 ? 'is-invalid' : ''}`}
+        id={`${props.form}-${props.field}`}
+        aria-describedby={`${props.form}-${props.field}-help`}
+        value={props.value}
+        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+          props.setValue(e.target.value)
+        }
+        {...(props.inputAttributes ? props.inputAttributes : {})}
+      />
+    );
+  } else if (props.type === 'checkbox') {
+    inputElement = (
+      <div>
+        {props.selectOptions?.map((option, index) => (
+          <div key={index} className="form-check">
+            <input
+              className={`form-check-input ${formErrors.length > 0 ? 'is-invalid' : ''}`}
+              type="checkbox"
+              id={`${props.form}-${props.field}-${option.value}`}
+              checked={option.value === props.value}
+              onChange={() => {
+                if (option.value === props.value) {
+                  props.setValue('');
+                } else {
+                  props.setValue(option.value);
+                }
+              }}
+            />
+            <label
+              className="form-check-label"
+              htmlFor={`${props.form}-${props.field}-${option.value}`}
+            >
+              {option.label}
+            </label>
+            {option.help ? (
+              <div
+                id={`${props.form}-${props.field}-${option.value}-help`}
+                className="form-text"
+              >
+                {option.help}
+              </div>
+            ) : null}
+          </div>
+        ))}
+      </div>
+    );
+  } else {
+    inputElement = (
       <input
         className={`form-control ${formErrors.length > 0 ? 'is-invalid' : ''}`}
         id={`${props.form}-${props.field}`}
@@ -39,10 +142,34 @@ const FormField = (props: FormFieldProps): React.JSX.Element | null => {
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           props.setValue(e.target.value)
         }
+        {...(props.inputAttributes ? props.inputAttributes : {})}
       />
-      <div id={`${props.form}-${props.field}-help`} className="form-text">
-        {app.translator.t(`form.${props.form}.${props.field}.help`)}
-      </div>
+    );
+  }
+
+  return (
+    <div className={`${props.className ? props.className : ''}`}>
+      {app.translator.t(`form.${props.form}.${props.field}.label`, {
+        defaultValue: '------',
+      }) !== '------' ? (
+        <label htmlFor={`${props.form}-${props.field}`} className="form-label">
+          {app.translator.t(
+            `form.${props.form}.${props.field}.label`,
+            props.labelTranslationParams
+          )}
+        </label>
+      ) : null}
+      {inputElement}
+      {app.translator.t(`form.${props.form}.${props.field}.help`, {
+        defaultValue: '------',
+      }) !== '------' ? (
+        <div id={`${props.form}-${props.field}-help`} className="form-text">
+          {app.translator.t(
+            `form.${props.form}.${props.field}.help`,
+            props.helpTranslationParams
+          )}
+        </div>
+      ) : null}
       {formErrors.length > 0 ? (
         <FormFieldErrors formErrors={formErrors} />
       ) : null}

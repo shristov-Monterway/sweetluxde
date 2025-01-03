@@ -1,5 +1,6 @@
 import { ProductType } from "../../internal/ProductType";
 
 export interface ProductCreateUpdateRequestType {
-    product: ProductType | Omit<ProductType, "uid">;
+    product: Omit<ProductType, "uid">;
+    uid?: string;
 }

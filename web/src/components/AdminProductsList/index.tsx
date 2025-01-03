@@ -1,7 +1,7 @@
 import React from 'react';
 import { AbstractComponentType } from '../../types/AbstractComponentType';
 import useApp from '../../hooks/useApp';
-import ProductForm from '../ProductForm';
+import Link from 'next/link';
 
 export type AdminProductsListProps = AbstractComponentType;
 
@@ -32,7 +32,11 @@ const AdminProductsList = (
           <div
             className={`admin-products-list__product-form ${selectedProductUid === product.uid ? 'admin-products-list__product-form--active' : ''}`}
           >
-            <ProductForm product={product} />
+            <Link href={`/admin/product/${product.uid}`} passHref={true}>
+              <a className="btn btn-outline-primary">
+                <i className="fe fe-settings" />
+              </a>
+            </Link>
           </div>
         </div>
       ))}

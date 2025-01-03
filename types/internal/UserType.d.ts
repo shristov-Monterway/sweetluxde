@@ -11,4 +11,5 @@ export interface UserType {
     lastLogin: number;
     cart: CartType;
     wishlist: WishListType;
+    isAdmin: boolean;
 }

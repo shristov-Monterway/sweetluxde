@@ -60,27 +60,23 @@ const AuthForm = (props: AuthFormProps): React.JSX.Element => {
 
   return (
     <form
-      className={`${props.className ? props.className : ''}`}
+      className={`form ${props.className ? props.className : ''}`}
       onSubmit={onSubmit}
     >
-      <div className="mb-3">
-        <FormField
-          form="auth"
-          field="email"
-          type="email"
-          value={email}
-          setValue={(newEmail) => setEmail(newEmail)}
-        />
-      </div>
-      <div className="mb-3">
-        <FormField
-          form="auth"
-          field="password"
-          type="password"
-          value={password}
-          setValue={(newPassword) => setPassword(newPassword)}
-        />
-      </div>
+      <FormField
+        form="auth"
+        field="email"
+        type="email"
+        value={email}
+        setValue={(newEmail) => setEmail(newEmail)}
+      />
+      <FormField
+        form="auth"
+        field="password"
+        type="password"
+        value={password}
+        setValue={(newPassword) => setPassword(newPassword)}
+      />
       <button type="submit" className="btn btn-primary w-100">
         {app.translator.t(`form.submit.${id}`)}
       </button>

@@ -23,7 +23,7 @@ export interface FirebaseAuthModuleType {
     password: string,
     initData: Omit<
       UserType,
-      'uid' | 'email' | 'lastLogin' | 'cart' | 'wishlist'
+      'uid' | 'email' | 'lastLogin' | 'cart' | 'wishlist' | 'isAdmin'
     >,
     onSuccess?: (uid: string) => void,
     onFailure?: (error: Error) => void
@@ -32,7 +32,7 @@ export interface FirebaseAuthModuleType {
     provider: FirebaseAuthModuleSignInProvider,
     initData: Omit<
       UserType,
-      'uid' | 'email' | 'lastLogin' | 'cart' | 'wishlist'
+      'uid' | 'email' | 'lastLogin' | 'cart' | 'wishlist' | 'isAdmin'
     >,
     onSuccess?: (uid: string) => void,
     onFailure?: (error: Error) => void
@@ -119,6 +119,7 @@ const FirebaseAuthModule = (): FirebaseAuthModuleType => {
                       lineItems: [],
                     },
                     email,
+                    isAdmin: false,
                   })
                   .then(() => {
                     if (onSuccess) {
@@ -174,6 +175,7 @@ const FirebaseAuthModule = (): FirebaseAuthModuleType => {
                   lineItems: [],
                 },
                 email,
+                isAdmin: false,
               })
               .then(() => {
                 if (onSuccess) {

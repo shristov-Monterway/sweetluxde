@@ -1,6 +1,13 @@
 import { ProductVariationType } from "./ProductVariationType";
 import { TranslationType } from "./TranslationType";
 
+export type ProductBadgeTypeType = 'success' | 'danger' | 'info' | 'warning';
+
+export interface ProductBadgeType {
+    type: ProductBadgeTypeType;
+    text: TranslationType;
+}
+
 export interface ProductType {
     uid: string;
     name: TranslationType;
@@ -9,8 +16,5 @@ export interface ProductType {
         [uid: string]: ProductVariationType;
     };
     tags: TranslationType[];
-    badge?: {
-        type: 'success' | 'danger' | 'info' | 'warning';
-        text: TranslationType;
-    };
+    badge?: ProductBadgeType;
 }

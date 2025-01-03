@@ -15,12 +15,28 @@ li.nav-item {
   right: calc(1% + 1px) !important;
 }
 
-@import "./components/admin-products-list";
+.form-text {
+  margin-bottom: 0 !important;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-select {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
 @import "./components/banner";
 @import "./components/cart-product-card";
+@import "./components/expandable";
+@import "./components/form-field";
 @import "./components/modal";
 @import "./components/page";
 @import "./components/product-card";
-@import "./components/product-form";
 @import "./components/product-info";
 @import "./components/wishlist-product-card";

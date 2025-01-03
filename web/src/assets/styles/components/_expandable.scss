@@ -1,14 +1,16 @@
-.admin-products-list {
-  &__product-link {
+.expandable {
+  &__label {
+    display: flex;
+    flex-direction: column;
+
     &:hover {
       cursor: pointer;
     }
   }
 
-  &__product-form {
+  &__item {
     height: 0;
     overflow: hidden;
-    padding-left: 30px;
 
     &--active {
       height: auto;
