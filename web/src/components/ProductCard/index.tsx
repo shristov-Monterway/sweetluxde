@@ -152,7 +152,9 @@ const ProductCard = (props: ProductCardProps): React.JSX.Element | null => {
   };
 
   return (
-    <div className={`card ${props.className ? props.className : ''}`}>
+    <div
+      className={`product-card card ${props.className ? props.className : ''}`}
+    >
       {props.product.badge ? (
         <span
           className={`product-card__badge badge bg-${props.product.badge.type}`}
@@ -167,7 +169,7 @@ const ProductCard = (props: ProductCardProps): React.JSX.Element | null => {
         {images.map((image, index) => (
           <img
             key={index}
-            className="card-img-top product-card__main-slide-image"
+            className="product-card__main-slide-image"
             src={image}
             alt=""
           />
