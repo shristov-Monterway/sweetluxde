@@ -2,7 +2,8 @@
 
 ## TODOS
 - Make the validation rules for `/product/createUpdate` in AdminRoutes more strict.
-- Add custom product attributes to product variation.
+- Add product attribute data in CartType and WishListType (and all endpoints or components using them).
+- Add product attributes data in ProductCard, ProductInfo (input for choosing attribute option).
 - Add information on Stripe checkout page for the product variation (not only product).
 - Add address property in user.
 - Add weight property to product variation.

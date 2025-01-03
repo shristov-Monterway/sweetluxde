@@ -85,6 +85,38 @@
         "label": "Text",
         "help": "Write translation for the text."
       },
+      "productAttributeName": {
+        "label": "Product attribute name in %{language}",
+        "help": "Insert product attribute name for %{language}."
+      },
+      "productAttributeName_locale": {
+        "label": "Language",
+        "help": "Choose language for the text."
+      },
+      "productAttributeName_value": {
+        "label": "Text",
+        "help": "Write translation for the text."
+      },
+      "productAttributeOptionName": {
+        "label": "Product attribute option name in %{language}",
+        "help": "Insert product attribute option name for %{language}."
+      },
+      "productAttributeOptionName_locale": {
+        "label": "Language",
+        "help": "Choose language for the text."
+      },
+      "productAttributeOptionName_value": {
+        "label": "Text",
+        "help": "Write translation for the text."
+      },
+      "productAttributeOptionId": {
+        "label": "ID of new attribute option",
+        "help": "Insert ID of new attribute option."
+      },
+      "productAttributeId": {
+        "label": "ID of new attribute",
+        "help": "Insert ID of new attribute."
+      },
       "badgeStatus": {
         "option": {
           "enabled": {

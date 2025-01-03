@@ -17,4 +17,14 @@ export interface ProductType {
     };
     tags: TranslationType[];
     badge?: ProductBadgeType;
+    attributes: {
+        [uid: string]: {
+            name: TranslationType;
+            options: {
+                [uid: string]: {
+                    name: TranslationType;
+                };
+            };
+        };
+    };
 }
