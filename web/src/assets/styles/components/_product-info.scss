@@ -1,15 +1,27 @@
 .product-info {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  @include media-breakpoint-up(lg) {
+    flex-direction: row;
+  }
+
   &__slides {
     display: flex;
     flex-direction: column;
     gap: 15px;
+
+    @include media-breakpoint-up(lg) {
+      width: 50%;
+    }
   }
 
   &__main-slide-image {
-    width: 100%;
     object-fit: cover;
     pointer-events: none;
-    max-height: 500px;
+    max-height: 400px;
 
     -moz-user-select: -moz-none;
     -khtml-user-select: none;
@@ -37,13 +49,22 @@
 
   &__nav-slide-image {
     width: 100px;
+    height: 100%;
     object-fit: cover;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   &__info {
     display: flex;
     flex-direction: column;
     gap: 20px;
+
+    @include media-breakpoint-up(lg) {
+      width: 50%;
+    }
   }
 
   &__product-variations {

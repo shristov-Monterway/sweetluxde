@@ -63,7 +63,7 @@ const WishlistProductCard = (
         <div className="d-flex flex-column gap-3 wishlist-product-card__info">
           <h2 className="card-title p-0 m-0">{productName}</h2>
           <hr className="m-0 p-0" />
-          <span className="h4">{variationName}</span>
+          <span className="h4 m-0 p-0">{variationName}</span>
           <div className="d-flex justify-content-start align-items-center gap-3 flex-wrap">
             <div className="wishlist-product-card__quantity-container bg-primary-subtle border-primary">
               <button

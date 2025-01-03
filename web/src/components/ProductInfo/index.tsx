@@ -132,8 +132,8 @@ const ProductInfo = (props: ProductInfoProps): React.JSX.Element => {
   };
 
   return (
-    <div className={`row g-5 ${props.className ? props.className : ''}`}>
-      <div className="col-md-6 product-info__slides">
+    <div className={`product-info ${props.className ? props.className : ''}`}>
+      <div className="product-info__slides">
         <Carousel
           responsive={mainSliderConfig}
           containerClass="rounded"
@@ -165,7 +165,7 @@ const ProductInfo = (props: ProductInfoProps): React.JSX.Element => {
           ))}
         </div>
       </div>
-      <div className="col-md-6 product-info__info">
+      <div className="product-info__info">
         <h1 className="p-0 m-0">{name}</h1>
         <p className="p-0 m-0">{description}</p>
         {tags.length > 0 ? (

@@ -56,7 +56,7 @@ const CartProductsList = (props: CartProductsListProps): React.JSX.Element => {
       {lineItems.length > 0 ? (
         <div className="row">
           {lineItems.map((lineItem, index) => (
-            <div key={index} className="col-md-12">
+            <div key={index} className="col-lg-12">
               <CartProductCard
                 product={lineItem.product}
                 variationUid={lineItem.variationUid}

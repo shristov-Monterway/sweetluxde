@@ -58,7 +58,7 @@ const WishlistProductsList = (
       {lineItems.length > 0 ? (
         <div className="row">
           {lineItems.map((lineItem, index) => (
-            <div key={index} className="col-md-12">
+            <div key={index} className="col-lg-12">
               <WishlistProductCard
                 product={lineItem.product}
                 variationUid={lineItem.variationUid}
