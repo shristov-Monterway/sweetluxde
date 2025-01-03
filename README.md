@@ -1,15 +1,14 @@
 # IGS Commerce
 
 ## TODOS
-1. Make the validation rules for `/product/createUpdate` in AdminRoutes more strict.
-2. Add badge in the ProductInfo component.
-3. Add custom product attributes to product variation.
-4. Add information on Stripe checkout page for the product variation (not only product).
-5. Add address property in user.
-6. Add weight property to product variation.
-7. Add "Add to cart" button on WishlistProductCard.
-8. Create AccountInfo component.
-9. Create import of products from CSV file. (extend the admin.tsx page)
+- Make the validation rules for `/product/createUpdate` in AdminRoutes more strict.
+- Add custom product attributes to product variation.
+- Add information on Stripe checkout page for the product variation (not only product).
+- Add address property in user.
+- Add weight property to product variation.
+- Add "Add to cart" button on WishlistProductCard.
+- Create AccountInfo component.
+- Create import of products from CSV file. (extend the admin.tsx page)
 
 ## Requirements
 1. Node 20

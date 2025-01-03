@@ -43,6 +43,9 @@ const ProductInfo = (props: ProductInfoProps): React.JSX.Element => {
       [uid: string]: string;
     }>({});
   const [tags, setTags] = React.useState<string[]>([]);
+  const [badgeText, setBadgeText] = React.useState<string | undefined>(
+    undefined
+  );
 
   React.useEffect(() => {
     const name = props.product.name[app.translator.locale]
@@ -85,11 +88,19 @@ const ProductInfo = (props: ProductInfoProps): React.JSX.Element => {
       {}
     );
 
+    const badgeText =
+      props.product.badge && props.product.badge.text[app.translator.locale]
+        ? props.product.badge.text[app.translator.locale]
+        : props.product.badge
+          ? props.product.badge.text[Object.keys(props.product.badge.text)[0]]
+          : undefined;
+
     setName(name);
     setDescription(description);
     setTags(tags);
     setProductVariationNames(productVariationNames);
     setProductVariationDescriptions(productVariationDescriptions);
+    setBadgeText(badgeText);
   }, [app.translator.locale]);
 
   const images: string[] = [];
@@ -134,6 +145,13 @@ const ProductInfo = (props: ProductInfoProps): React.JSX.Element => {
   return (
     <div className={`product-info ${props.className ? props.className : ''}`}>
       <div className="product-info__slides">
+        {props.product.badge ? (
+          <span
+            className={`product-info__badge badge bg-${props.product.badge.type}`}
+          >
+            {badgeText}
+          </span>
+        ) : null}
         <Carousel
           responsive={mainSliderConfig}
           containerClass="rounded"
