@@ -5,4 +5,14 @@ export interface ProductVariationType {
     description: TranslationType;
     price: number;
     images: string[];
+    attributes: {
+        [uid: string]: {
+            name: TranslationType;
+            options: {
+                [uid: string]: {
+                    name: TranslationType;
+                };
+            };
+        };
+    };
 }

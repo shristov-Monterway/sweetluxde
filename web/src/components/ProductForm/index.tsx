@@ -37,11 +37,11 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
             description: {},
             price: 10000,
             images: [],
+            attributes: {},
           },
         },
         tags: [],
         badge: undefined,
-        attributes: {},
       };
   const productBadgeTypes = ['success', 'danger', 'info', 'warning'];
   const [newProduct, setNewProduct] =
@@ -56,6 +56,10 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
   const [productFieldExpandableId, setProductFieldExpandableId] =
     React.useState<string | undefined>(undefined);
   const [newVariationId, setNewVariationId] = React.useState<string>('');
+  const [
+    productAttributeFieldExpandableId,
+    setProductAttributeFieldExpandableId,
+  ] = React.useState<string | undefined>(undefined);
   const [productVariationExpandableId, setProductVariationExpandableId] =
     React.useState<string | undefined>(undefined);
   const [newAttributeId, setNewAttributeId] = React.useState<string>('');
@@ -173,231 +177,6 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
             ),
           },
           {
-            id: 'attributes',
-            label: 'Attributes',
-            children: (
-              <div className="d-flex flex-column gap-5">
-                {Object.keys(newProduct.attributes).length > 0 ? (
-                  <Expandable
-                    value={productAttributesExpandableId}
-                    setValue={(value) => setProductAtributesExpandableId(value)}
-                    elements={Object.keys(newProduct.attributes).map(
-                      (attributeId) => ({
-                        id: attributeId,
-                        label: (
-                          <div className="d-flex justify-content-between align-items-center">
-                            <span>{attributeId}</span>
-                            <button
-                              className="btn btn-outline-danger btn-sm"
-                              type="button"
-                              onClick={() => {
-                                setNewProduct((newProduct) => {
-                                  const newAttributes = newProduct.attributes;
-                                  delete newAttributes[attributeId];
-                                  return {
-                                    ...newProduct,
-                                    attributes: newAttributes,
-                                  };
-                                });
-                              }}
-                            >
-                              <i className="fe fe-minus-circle" />
-                            </button>
-                          </div>
-                        ),
-                        children: (
-                          <div className="d-flex flex-column gap-3">
-                            <TranslationFormField
-                              form="product"
-                              field="productAttributeName"
-                              translations={
-                                newProduct.attributes[attributeId].name
-                              }
-                              setTranslations={(translations) => {
-                                setNewProduct((newProduct) => ({
-                                  ...newProduct,
-                                  attributes: {
-                                    ...newProduct.attributes,
-                                    [attributeId]: {
-                                      ...newProduct.attributes[attributeId],
-                                      name: translations,
-                                    },
-                                  },
-                                }));
-                              }}
-                            />
-                            <div className="d-flex flex-column gap-5">
-                              {Object.keys(
-                                newProduct.attributes[attributeId].options
-                              ).length > 0 ? (
-                                <Expandable
-                                  value={productAttributeOptionExpandableId}
-                                  setValue={(value) =>
-                                    setProductAttributeOptionExpandableId(value)
-                                  }
-                                  elements={Object.keys(
-                                    newProduct.attributes[attributeId].options
-                                  ).map((optionId) => ({
-                                    id: optionId,
-                                    label: (
-                                      <div className="d-flex justify-content-between align-items-center">
-                                        <span>{optionId}</span>
-                                        <button
-                                          className="btn btn-outline-danger btn-sm"
-                                          type="button"
-                                          onClick={() => {
-                                            setNewProduct((newProduct) => {
-                                              const newOptions =
-                                                newProduct.attributes[
-                                                  attributeId
-                                                ].options;
-                                              delete newOptions[optionId];
-                                              return {
-                                                ...newProduct,
-                                                attributes: {
-                                                  ...newProduct.attributes,
-                                                  [attributeId]: {
-                                                    ...newProduct.attributes[
-                                                      attributeId
-                                                    ],
-                                                    options: newOptions,
-                                                  },
-                                                },
-                                              };
-                                            });
-                                          }}
-                                        >
-                                          <i className="fe fe-minus-circle" />
-                                        </button>
-                                      </div>
-                                    ),
-                                    children: (
-                                      <div className="d-flex flex-column gap-3">
-                                        <TranslationFormField
-                                          form="product"
-                                          field="productAttributeOptionName"
-                                          translations={
-                                            newProduct.attributes[attributeId]
-                                              .options[optionId].name
-                                          }
-                                          setTranslations={(translations) => {
-                                            setNewProduct((newProduct) => ({
-                                              ...newProduct,
-                                              attributes: {
-                                                ...newProduct.attributes,
-                                                [attributeId]: {
-                                                  ...newProduct.attributes[
-                                                    attributeId
-                                                  ],
-                                                  options: {
-                                                    ...newProduct.attributes[
-                                                      attributeId
-                                                    ].options,
-                                                    [optionId]: {
-                                                      ...newProduct.attributes[
-                                                        attributeId
-                                                      ].options[optionId],
-                                                      name: translations,
-                                                    },
-                                                  },
-                                                },
-                                              },
-                                            }));
-                                          }}
-                                        />
-                                      </div>
-                                    ),
-                                  }))}
-                                  labelClassName="border-bottom p-3"
-                                  itemClassName="p-3"
-                                  className="d-flex flex-column gap-3"
-                                />
-                              ) : null}
-                              <div className="d-flex align-items-center gap-3">
-                                <FormField
-                                  form="product"
-                                  field="productAttributeOptionId"
-                                  type="text"
-                                  value={newAttributeOptionId}
-                                  setValue={(value) =>
-                                    setNewAttributeOptionId(value)
-                                  }
-                                  className="flex-grow-1"
-                                />
-                                <button
-                                  className="btn btn-primary"
-                                  type="button"
-                                  onClick={() => {
-                                    setNewProduct((newProduct) => ({
-                                      ...newProduct,
-                                      attributes: {
-                                        ...newProduct.attributes,
-                                        [attributeId]: {
-                                          ...newProduct.attributes[attributeId],
-                                          options: {
-                                            ...newProduct.attributes[
-                                              attributeId
-                                            ].options,
-                                            [newAttributeOptionId]: {
-                                              name: {},
-                                            },
-                                          },
-                                        },
-                                      },
-                                    }));
-                                    setProductAttributeOptionExpandableId(
-                                      newAttributeOptionId
-                                    );
-                                    setNewAttributeOptionId('');
-                                  }}
-                                >
-                                  <i className="fe fe-plus-circle" />
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        ),
-                      })
-                    )}
-                    labelClassName="border-bottom p-3"
-                    itemClassName="p-3"
-                    className="d-flex flex-column gap-3"
-                  />
-                ) : null}
-                <div className="d-flex align-items-center gap-3">
-                  <FormField
-                    form="product"
-                    field="productAttributeId"
-                    type="text"
-                    value={newAttributeId}
-                    setValue={(value) => setNewAttributeId(value)}
-                    className="flex-grow-1"
-                  />
-                  <button
-                    className="btn btn-primary"
-                    type="button"
-                    onClick={() => {
-                      setNewProduct((newProduct) => ({
-                        ...newProduct,
-                        attributes: {
-                          ...newProduct.attributes,
-                          [newAttributeId]: {
-                            name: {},
-                            options: {},
-                          },
-                        },
-                      }));
-                      setProductAtributesExpandableId(newAttributeId);
-                      setNewAttributeId('');
-                    }}
-                  >
-                    <i className="fe fe-plus-circle" />
-                  </button>
-                </div>
-              </div>
-            ),
-          },
-          {
             id: 'badge',
             label: 'Badge',
             children: (
@@ -458,7 +237,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
             id: 'variations',
             label: 'Variations',
             children: (
-              <div className="d-flex flex-column gap-5">
+              <div className="d-flex flex-column gap-3">
                 {Object.keys(newProduct.variations).length > 0 ? (
                   <Expandable
                     value={productVariationExpandableId}
@@ -490,100 +269,547 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
                           </div>
                         ),
                         children: (
-                          <div className="d-flex flex-column gap-3">
-                            <TranslationFormField
-                              form="product"
-                              field="productVariationName"
-                              translations={
-                                newProduct.variations[variationId].name
-                              }
-                              setTranslations={(translations) => {
-                                setNewProduct((newProduct) => ({
-                                  ...newProduct,
-                                  variations: {
-                                    ...newProduct.variations,
-                                    [variationId]: {
-                                      ...newProduct.variations[variationId],
-                                      name: translations,
-                                    },
-                                  },
-                                }));
-                              }}
-                            />
-                            <TranslationFormField
-                              form="product"
-                              field="productVariationDescription"
-                              translations={
-                                newProduct.variations[variationId].description
-                              }
-                              setTranslations={(translations) => {
-                                setNewProduct((newProduct) => ({
-                                  ...newProduct,
-                                  variations: {
-                                    ...newProduct.variations,
-                                    [variationId]: {
-                                      ...newProduct.variations[variationId],
-                                      description: translations,
-                                    },
-                                  },
-                                }));
-                              }}
-                              type="textarea"
-                              inputAttributes={{
-                                rows: '5',
-                              }}
-                            />
-                            <FormField
-                              form="product"
-                              field="productVariationPrice"
-                              type="text"
-                              value={newProduct.variations[
-                                variationId
-                              ].price.toString()}
-                              setValue={(value) => {
-                                const parsedValue = parseInt(value);
-                                if (
-                                  !isNaN(parsedValue) &&
-                                  value === '' + parsedValue
-                                ) {
-                                  setNewProduct((newProduct) => ({
-                                    ...newProduct,
-                                    variations: {
-                                      ...newProduct.variations,
-                                      [variationId]: {
-                                        ...newProduct.variations[variationId],
-                                        price: parsedValue,
-                                      },
-                                    },
-                                  }));
-                                }
-                              }}
-                            />
-                            <ListFormField
-                              form="product"
-                              field="productVariationImages"
-                              list={newProduct.variations[variationId].images}
-                              setList={(list) => {
-                                setNewProduct((newProduct) => ({
-                                  ...newProduct,
-                                  variations: {
-                                    ...newProduct.variations,
-                                    [variationId]: {
-                                      ...newProduct.variations[variationId],
-                                      images: list,
-                                    },
-                                  },
-                                }));
-                              }}
-                              newItem=""
-                              type="text"
-                            />
-                          </div>
+                          <Expandable
+                            value={productAttributeFieldExpandableId}
+                            setValue={(value) =>
+                              setProductAttributeFieldExpandableId(value)
+                            }
+                            elements={[
+                              {
+                                id: 'productVariationName',
+                                label: 'Name',
+                                children: (
+                                  <TranslationFormField
+                                    form="product"
+                                    field="productVariationName"
+                                    translations={
+                                      newProduct.variations[variationId].name
+                                    }
+                                    setTranslations={(translations) => {
+                                      setNewProduct((newProduct) => ({
+                                        ...newProduct,
+                                        variations: {
+                                          ...newProduct.variations,
+                                          [variationId]: {
+                                            ...newProduct.variations[
+                                              variationId
+                                            ],
+                                            name: translations,
+                                          },
+                                        },
+                                      }));
+                                    }}
+                                  />
+                                ),
+                              },
+                              {
+                                id: 'productVariationDescritpion',
+                                label: 'Description',
+                                children: (
+                                  <TranslationFormField
+                                    form="product"
+                                    field="productVariationDescription"
+                                    translations={
+                                      newProduct.variations[variationId]
+                                        .description
+                                    }
+                                    setTranslations={(translations) => {
+                                      setNewProduct((newProduct) => ({
+                                        ...newProduct,
+                                        variations: {
+                                          ...newProduct.variations,
+                                          [variationId]: {
+                                            ...newProduct.variations[
+                                              variationId
+                                            ],
+                                            description: translations,
+                                          },
+                                        },
+                                      }));
+                                    }}
+                                    type="textarea"
+                                    inputAttributes={{
+                                      rows: '5',
+                                    }}
+                                  />
+                                ),
+                              },
+                              {
+                                id: 'productVariationPrice',
+                                label: 'Price',
+                                children: (
+                                  <FormField
+                                    form="product"
+                                    field="productVariationPrice"
+                                    type="text"
+                                    value={newProduct.variations[
+                                      variationId
+                                    ].price.toString()}
+                                    setValue={(value) => {
+                                      const parsedValue = parseInt(value);
+                                      if (
+                                        !isNaN(parsedValue) &&
+                                        value === '' + parsedValue
+                                      ) {
+                                        setNewProduct((newProduct) => ({
+                                          ...newProduct,
+                                          variations: {
+                                            ...newProduct.variations,
+                                            [variationId]: {
+                                              ...newProduct.variations[
+                                                variationId
+                                              ],
+                                              price: parsedValue,
+                                            },
+                                          },
+                                        }));
+                                      }
+                                    }}
+                                  />
+                                ),
+                              },
+                              {
+                                id: 'productVariationImages',
+                                label: 'Images',
+                                children: (
+                                  <ListFormField
+                                    form="product"
+                                    field="productVariationImages"
+                                    list={
+                                      newProduct.variations[variationId].images
+                                    }
+                                    setList={(list) => {
+                                      setNewProduct((newProduct) => ({
+                                        ...newProduct,
+                                        variations: {
+                                          ...newProduct.variations,
+                                          [variationId]: {
+                                            ...newProduct.variations[
+                                              variationId
+                                            ],
+                                            images: list,
+                                          },
+                                        },
+                                      }));
+                                    }}
+                                    newItem=""
+                                    type="text"
+                                  />
+                                ),
+                              },
+                              {
+                                id: 'productVariationAttributes',
+                                label: 'Attributes',
+                                children: (
+                                  <div className="d-flex flex-column gap-3">
+                                    {Object.keys(
+                                      newProduct.variations[variationId]
+                                        .attributes
+                                    ).length > 0 ? (
+                                      <Expandable
+                                        value={productAttributesExpandableId}
+                                        setValue={(value) =>
+                                          setProductAtributesExpandableId(value)
+                                        }
+                                        elements={Object.keys(
+                                          newProduct.variations[variationId]
+                                            .attributes
+                                        ).map((attributeId) => ({
+                                          id: attributeId,
+                                          label: (
+                                            <div className="d-flex justify-content-between align-items-center">
+                                              <span>{attributeId}</span>
+                                              <button
+                                                className="btn btn-outline-danger btn-sm"
+                                                type="button"
+                                                onClick={() => {
+                                                  setNewProduct(
+                                                    (newProduct) => {
+                                                      const newAttributes =
+                                                        newProduct.variations[
+                                                          variationId
+                                                        ].attributes;
+                                                      delete newAttributes[
+                                                        attributeId
+                                                      ];
+                                                      return {
+                                                        ...newProduct,
+                                                        variations: {
+                                                          ...newProduct.variations,
+                                                          [variationId]: {
+                                                            ...newProduct
+                                                              .variations[
+                                                              variationId
+                                                            ],
+                                                            attributes:
+                                                              newAttributes,
+                                                          },
+                                                        },
+                                                      };
+                                                    }
+                                                  );
+                                                }}
+                                              >
+                                                <i className="fe fe-minus-circle" />
+                                              </button>
+                                            </div>
+                                          ),
+                                          children: (
+                                            <div className="d-flex flex-column gap-3">
+                                              <TranslationFormField
+                                                form="product"
+                                                field="productAttributeName"
+                                                translations={
+                                                  newProduct.variations[
+                                                    variationId
+                                                  ].attributes[attributeId].name
+                                                }
+                                                setTranslations={(
+                                                  translations
+                                                ) => {
+                                                  setNewProduct(
+                                                    (newProduct) => ({
+                                                      ...newProduct,
+                                                      variations: {
+                                                        ...newProduct.variations,
+                                                        [variationId]: {
+                                                          ...newProduct
+                                                            .variations[
+                                                            variationId
+                                                          ],
+                                                          attributes: {
+                                                            ...newProduct
+                                                              .variations[
+                                                              variationId
+                                                            ].attributes,
+                                                            [attributeId]: {
+                                                              ...newProduct
+                                                                .variations[
+                                                                variationId
+                                                              ].attributes[
+                                                                attributeId
+                                                              ],
+                                                              name: translations,
+                                                            },
+                                                          },
+                                                        },
+                                                      },
+                                                    })
+                                                  );
+                                                }}
+                                              />
+                                              <div className="d-flex flex-column gap-3">
+                                                {Object.keys(
+                                                  newProduct.variations[
+                                                    variationId
+                                                  ].attributes[attributeId]
+                                                    .options
+                                                ).length > 0 ? (
+                                                  <Expandable
+                                                    value={
+                                                      productAttributeOptionExpandableId
+                                                    }
+                                                    setValue={(value) =>
+                                                      setProductAttributeOptionExpandableId(
+                                                        value
+                                                      )
+                                                    }
+                                                    elements={Object.keys(
+                                                      newProduct.variations[
+                                                        variationId
+                                                      ].attributes[attributeId]
+                                                        .options
+                                                    ).map((optionId) => ({
+                                                      id: optionId,
+                                                      label: (
+                                                        <div className="d-flex justify-content-between align-items-center">
+                                                          <span>
+                                                            {optionId}
+                                                          </span>
+                                                          <button
+                                                            className="btn btn-outline-danger btn-sm"
+                                                            type="button"
+                                                            onClick={() => {
+                                                              setNewProduct(
+                                                                (
+                                                                  newProduct
+                                                                ) => {
+                                                                  const newOptions =
+                                                                    newProduct
+                                                                      .variations[
+                                                                      variationId
+                                                                    ]
+                                                                      .attributes[
+                                                                      attributeId
+                                                                    ].options;
+                                                                  delete newOptions[
+                                                                    optionId
+                                                                  ];
+                                                                  return {
+                                                                    ...newProduct,
+                                                                    variations:
+                                                                      {
+                                                                        ...newProduct.variations,
+                                                                        [variationId]:
+                                                                          {
+                                                                            ...newProduct
+                                                                              .variations[
+                                                                              variationId
+                                                                            ],
+                                                                            attributes:
+                                                                              {
+                                                                                ...newProduct
+                                                                                  .variations[
+                                                                                  variationId
+                                                                                ]
+                                                                                  .attributes,
+                                                                                [attributeId]:
+                                                                                  {
+                                                                                    ...newProduct
+                                                                                      .variations[
+                                                                                      variationId
+                                                                                    ]
+                                                                                      .attributes[
+                                                                                      attributeId
+                                                                                    ],
+                                                                                    options:
+                                                                                      newOptions,
+                                                                                  },
+                                                                              },
+                                                                          },
+                                                                      },
+                                                                  };
+                                                                }
+                                                              );
+                                                            }}
+                                                          >
+                                                            <i className="fe fe-minus-circle" />
+                                                          </button>
+                                                        </div>
+                                                      ),
+                                                      children: (
+                                                        <div className="d-flex flex-column gap-3">
+                                                          <TranslationFormField
+                                                            form="product"
+                                                            field="productAttributeOptionName"
+                                                            translations={
+                                                              newProduct
+                                                                .variations[
+                                                                variationId
+                                                              ].attributes[
+                                                                attributeId
+                                                              ].options[
+                                                                optionId
+                                                              ].name
+                                                            }
+                                                            setTranslations={(
+                                                              translations
+                                                            ) => {
+                                                              setNewProduct(
+                                                                (
+                                                                  newProduct
+                                                                ) => ({
+                                                                  ...newProduct,
+                                                                  variations: {
+                                                                    ...newProduct.variations,
+                                                                    [variationId]:
+                                                                      {
+                                                                        ...newProduct
+                                                                          .variations[
+                                                                          variationId
+                                                                        ],
+                                                                        attributes:
+                                                                          {
+                                                                            ...newProduct
+                                                                              .variations[
+                                                                              variationId
+                                                                            ]
+                                                                              .attributes,
+                                                                            [attributeId]:
+                                                                              {
+                                                                                ...newProduct
+                                                                                  .variations[
+                                                                                  variationId
+                                                                                ]
+                                                                                  .attributes[
+                                                                                  attributeId
+                                                                                ],
+                                                                                options:
+                                                                                  {
+                                                                                    ...newProduct
+                                                                                      .variations[
+                                                                                      variationId
+                                                                                    ]
+                                                                                      .attributes[
+                                                                                      attributeId
+                                                                                    ]
+                                                                                      .options,
+                                                                                    [optionId]:
+                                                                                      {
+                                                                                        ...newProduct
+                                                                                          .variations[
+                                                                                          variationId
+                                                                                        ]
+                                                                                          .attributes[
+                                                                                          attributeId
+                                                                                        ]
+                                                                                          .options[
+                                                                                          optionId
+                                                                                        ],
+                                                                                        name: translations,
+                                                                                      },
+                                                                                  },
+                                                                              },
+                                                                          },
+                                                                      },
+                                                                  },
+                                                                })
+                                                              );
+                                                            }}
+                                                          />
+                                                        </div>
+                                                      ),
+                                                    }))}
+                                                    labelClassName="border-bottom p-3"
+                                                    itemClassName="ps-5 py-5"
+                                                    className="d-flex flex-column gap-3"
+                                                  />
+                                                ) : null}
+                                                <div className="d-flex align-items-center gap-3">
+                                                  <FormField
+                                                    form="product"
+                                                    field="productAttributeOptionId"
+                                                    type="text"
+                                                    value={newAttributeOptionId}
+                                                    setValue={(value) =>
+                                                      setNewAttributeOptionId(
+                                                        value
+                                                      )
+                                                    }
+                                                    className="flex-grow-1"
+                                                  />
+                                                  <button
+                                                    className="btn btn-primary"
+                                                    type="button"
+                                                    onClick={() => {
+                                                      setNewProduct(
+                                                        (newProduct) => ({
+                                                          ...newProduct,
+                                                          variations: {
+                                                            ...newProduct.variations,
+                                                            [variationId]: {
+                                                              ...newProduct
+                                                                .variations[
+                                                                variationId
+                                                              ],
+                                                              attributes: {
+                                                                ...newProduct
+                                                                  .variations[
+                                                                  variationId
+                                                                ].attributes,
+                                                                [attributeId]: {
+                                                                  ...newProduct
+                                                                    .variations[
+                                                                    variationId
+                                                                  ].attributes[
+                                                                    attributeId
+                                                                  ],
+                                                                  options: {
+                                                                    ...newProduct
+                                                                      .variations[
+                                                                      variationId
+                                                                    ]
+                                                                      .attributes[
+                                                                      attributeId
+                                                                    ].options,
+                                                                    [newAttributeOptionId]:
+                                                                      {
+                                                                        name: {},
+                                                                      },
+                                                                  },
+                                                                },
+                                                              },
+                                                            },
+                                                          },
+                                                        })
+                                                      );
+                                                      setProductAttributeOptionExpandableId(
+                                                        newAttributeOptionId
+                                                      );
+                                                      setNewAttributeOptionId(
+                                                        ''
+                                                      );
+                                                    }}
+                                                  >
+                                                    <i className="fe fe-plus-circle" />
+                                                  </button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          ),
+                                        }))}
+                                        labelClassName="border-bottom p-3"
+                                        itemClassName="ps-5 py-5"
+                                        className="d-flex flex-column gap-3"
+                                      />
+                                    ) : null}
+                                    <div className="d-flex align-items-center gap-3">
+                                      <FormField
+                                        form="product"
+                                        field="productAttributeId"
+                                        type="text"
+                                        value={newAttributeId}
+                                        setValue={(value) =>
+                                          setNewAttributeId(value)
+                                        }
+                                        className="flex-grow-1"
+                                      />
+                                      <button
+                                        className="btn btn-primary"
+                                        type="button"
+                                        onClick={() => {
+                                          setNewProduct((newProduct) => ({
+                                            ...newProduct,
+                                            variations: {
+                                              ...newProduct.variations,
+                                              [variationId]: {
+                                                ...newProduct.variations[
+                                                  variationId
+                                                ],
+                                                attributes: {
+                                                  ...newProduct.variations[
+                                                    variationId
+                                                  ].attributes,
+                                                  [newAttributeId]: {
+                                                    name: {},
+                                                    options: {},
+                                                  },
+                                                },
+                                              },
+                                            },
+                                          }));
+                                          setProductAtributesExpandableId(
+                                            newAttributeId
+                                          );
+                                          setNewAttributeId('');
+                                        }}
+                                      >
+                                        <i className="fe fe-plus-circle" />
+                                      </button>
+                                    </div>
+                                  </div>
+                                ),
+                              },
+                            ]}
+                            labelClassName="border-bottom p-3"
+                            itemClassName="ps-5 py-5"
+                            className="d-flex flex-column gap-3"
+                          />
                         ),
                       })
                     )}
                     labelClassName="border-bottom p-3"
-                    itemClassName="p-3"
+                    itemClassName="ps-5 py-5"
                     className="d-flex flex-column gap-3"
                   />
                 ) : null}
@@ -609,6 +835,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
                             description: {},
                             price: 10000,
                             images: [],
+                            attributes: {},
                           },
                         },
                       }));
@@ -624,7 +851,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
           },
         ]}
         labelClassName="border-bottom p-3"
-        itemClassName="p-5"
+        itemClassName="ps-5 py-5"
         className="d-flex flex-column gap-3"
       />
       <button type="submit" className="btn btn-primary">
