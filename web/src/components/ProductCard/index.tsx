@@ -200,17 +200,19 @@ const ProductCard = (props: ProductCardProps): React.JSX.Element | null => {
               ))}
             </h3>
           ) : null}
-          <div className="product-card__product-variations">
-            {Object.keys(props.product.variations).map((uid, index) => (
-              <button
-                key={index}
-                className={`btn btn-sm btn-${selectedProductVariationUid === uid ? 'primary' : 'outline-primary'}`}
-                onClick={() => selectProductVariation(uid)}
-              >
-                {productVariationNames[uid]}
-              </button>
-            ))}
-          </div>
+          {Object.keys(props.product.variations).length > 1 ? (
+            <div className="product-card__product-variations">
+              {Object.keys(props.product.variations).map((uid, index) => (
+                <button
+                  key={index}
+                  className={`btn btn-sm btn-${selectedProductVariationUid === uid ? 'primary' : 'outline-primary'}`}
+                  onClick={() => selectProductVariation(uid)}
+                >
+                  {productVariationNames[uid]}
+                </button>
+              ))}
+            </div>
+          ) : null}
         </div>
       </div>
       <div className="card-footer card-footer-boxed product-card__footer">

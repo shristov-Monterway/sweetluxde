@@ -199,17 +199,19 @@ const ProductInfo = (props: ProductInfoProps): React.JSX.Element => {
           </h3>
         ) : null}
         <hr className="p-0 m-0" />
-        <div className="product-info__product-variations">
-          {Object.keys(props.product.variations).map((uid, index) => (
-            <button
-              key={index}
-              className={`btn btn-${selectedProductVariationUid === uid ? 'primary' : 'outline-primary'}`}
-              onClick={() => selectProductVariation(uid)}
-            >
-              {productVariationNames[uid]}
-            </button>
-          ))}
-        </div>
+        {Object.keys(props.product.variations).length > 1 ? (
+          <div className="product-info__product-variations">
+            {Object.keys(props.product.variations).map((uid, index) => (
+              <button
+                key={index}
+                className={`btn btn-${selectedProductVariationUid === uid ? 'primary' : 'outline-primary'}`}
+                onClick={() => selectProductVariation(uid)}
+              >
+                {productVariationNames[uid]}
+              </button>
+            ))}
+          </div>
+        ) : null}
         <p className="p-0 m-0">
           {productVariationDescriptions[selectedProductVariationUid]}
         </p>
