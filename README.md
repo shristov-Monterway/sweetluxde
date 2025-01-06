@@ -11,6 +11,7 @@
 - Add "Add to cart" button on WishlistProductCard.
 - Create AccountInfo component.
 - Create import of products from CSV file. (extend the admin.tsx page)
+- Remove products, product variations and product attributes, which are selected inside cart, but doesn't exist
 
 ## Requirements
 1. Node 20
