@@ -162,19 +162,27 @@ const ProductCard = (props: ProductCardProps): React.JSX.Element | null => {
           {badgeText}
         </span>
       ) : null}
-      <Carousel
-        responsive={mainSliderConfig}
-        ref={(slider) => (mainSlider.current = slider)}
-      >
-        {images.map((image, index) => (
-          <img
-            key={index}
-            className="product-card__main-slide-image"
-            src={image}
-            alt=""
-          />
-        ))}
-      </Carousel>
+      {images.length > 0 ? (
+        <Carousel
+          responsive={mainSliderConfig}
+          ref={(slider) => (mainSlider.current = slider)}
+        >
+          {images.map((image, index) => (
+            <img
+              key={index}
+              className="product-card__main-slide-image"
+              src={image}
+              alt=""
+            />
+          ))}
+        </Carousel>
+      ) : (
+        <img
+          className="product-card__main-slide-image"
+          src="/placeholder.webp"
+          alt=""
+        />
+      )}
       <div className="card-body product-card__body">
         <div className="product-card__actions">
           <button
@@ -189,7 +197,7 @@ const ProductCard = (props: ProductCardProps): React.JSX.Element | null => {
             {name}
           </h2>
           {tags.length > 0 ? (
-            <h3 className="product-card__content-tags d-flex gap-3 flex-wrap p-0 m-0">
+            <h3 className="product-card__content-tags p-0 m-0">
               {tags.map((tag, index) => (
                 <span
                   key={index}
@@ -205,7 +213,7 @@ const ProductCard = (props: ProductCardProps): React.JSX.Element | null => {
               {Object.keys(props.product.variations).map((uid, index) => (
                 <button
                   key={index}
-                  className={`btn btn-sm btn-${selectedProductVariationUid === uid ? 'primary' : 'outline-primary'}`}
+                  className={`product-card__product-variation btn btn-sm btn-${selectedProductVariationUid === uid ? 'primary' : 'outline-primary'}`}
                   onClick={() => selectProductVariation(uid)}
                 >
                   {productVariationNames[uid]}

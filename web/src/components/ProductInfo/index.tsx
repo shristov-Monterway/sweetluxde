@@ -152,20 +152,28 @@ const ProductInfo = (props: ProductInfoProps): React.JSX.Element => {
             {badgeText}
           </span>
         ) : null}
-        <Carousel
-          responsive={mainSliderConfig}
-          containerClass="rounded"
-          ref={(slider) => (mainSlider.current = slider)}
-        >
-          {images.map((image, index) => (
-            <img
-              key={index}
-              className="product-info__main-slide-image"
-              src={image}
-              alt=""
-            />
-          ))}
-        </Carousel>
+        {images.length > 0 ? (
+          <Carousel
+            responsive={mainSliderConfig}
+            containerClass="rounded"
+            ref={(slider) => (mainSlider.current = slider)}
+          >
+            {images.map((image, index) => (
+              <img
+                key={index}
+                className="product-info__main-slide-image"
+                src={image}
+                alt=""
+              />
+            ))}
+          </Carousel>
+        ) : (
+          <img
+            className="product-info__main-slide-image"
+            src="/placeholder.webp"
+            alt=""
+          />
+        )}
         <div className="product-info__nav-slider">
           {images.map((image, index) => (
             <div

@@ -37,7 +37,10 @@
    - Additional for Stripe webhook: `npm run stripe:webhook`
 5. Import currencies:
    - Open scheduled functions shell: `npm run shell`
-   - Run scheduled function: `firebase > schedule_paymentCurrenciesSync()`
+   - Run scheduled function to import supported currencies: `firebase > schedule_paymentCurrenciesSync()`
+6. Import products:
+    - Open scheduled functions shell: `npm run shell`
+    - Run scheduled function to generate one product: `firebase > schedule_productFixtureCreate()`
 
 ## Customizations:
 1. Change following properties inside `web/src/services/Firebase/config.json`

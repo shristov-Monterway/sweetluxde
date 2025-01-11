@@ -35,9 +35,11 @@
   }
 
   &__main-slide-image {
+    @extend .rounded;
+
+    width: 100%;
     object-fit: cover;
     pointer-events: none;
-    max-height: 400px;
 
     -moz-user-select: -moz-none;
     -khtml-user-select: none;
