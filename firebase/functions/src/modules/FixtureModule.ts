@@ -75,7 +75,7 @@ const FixtureModule = (): FixtureModuleType => {
                     'en',
                     'bg',
                   ]),
-                  options: [...Array(generateNumberFromTo(0, 7)).keys()].reduce(
+                  options: [...Array(generateNumberFromTo(1, 7)).keys()].reduce(
                     (options, optionId) => ({
                       ...options,
                       [optionId]: {
