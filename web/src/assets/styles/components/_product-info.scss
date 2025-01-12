@@ -38,6 +38,7 @@
     @extend .rounded;
 
     width: 100%;
+    max-height: 400px;
     object-fit: cover;
     pointer-events: none;
 
@@ -69,6 +70,7 @@
     width: 100px;
     height: 100%;
     object-fit: cover;
+    max-height: 60px;
 
     &:hover {
       cursor: pointer;
@@ -89,5 +91,11 @@
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
+  }
+
+  &__product-attributes {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
 }

@@ -48,13 +48,32 @@ WishlistRoutes.all(
 
     const lineItems = user.wishlist.lineItems;
     const indexOfLineItemToHandle = lineItems
-      .map((lineItem) => `${lineItem.product}_${lineItem.variation}`)
-      .indexOf(`${request.product}_${request.variation}`);
+      .map(
+        (lineItem) =>
+          `${lineItem.product}_${lineItem.variation}_${Object.keys(
+            lineItem.attributes
+          )
+            .map(
+              (attributeId) =>
+                `${attributeId}_${lineItem.attributes[attributeId]}`
+            )
+            .join('_')}`
+      )
+      .indexOf(
+        `${request.product}_${request.variation}_${Object.keys(
+          request.attributes
+        )
+          .map(
+            (attributeId) => `${attributeId}_${request.attributes[attributeId]}`
+          )
+          .join('_')}`
+      );
 
     if (indexOfLineItemToHandle === -1) {
       lineItems.push({
         product: request.product,
         variation: request.variation,
+        attributes: request.attributes,
         quantity: 1,
       });
     } else {

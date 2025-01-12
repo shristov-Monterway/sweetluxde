@@ -12,6 +12,9 @@ const CartProductsList = (props: CartProductsListProps): React.JSX.Element => {
     {
       product: ProductType;
       variationUid: string;
+      attributes: {
+        [uid: string]: string;
+      };
       quantity: number;
     }[]
   >([]);
@@ -44,6 +47,7 @@ const CartProductsList = (props: CartProductsListProps): React.JSX.Element => {
             return {
               product,
               variationUid: lineItem.variation,
+              attributes: lineItem.attributes,
               quantity: lineItem.quantity,
             };
           })
@@ -60,6 +64,7 @@ const CartProductsList = (props: CartProductsListProps): React.JSX.Element => {
               <CartProductCard
                 product={lineItem.product}
                 variationUid={lineItem.variationUid}
+                attributes={lineItem.attributes}
                 quantity={lineItem.quantity}
               />
             </div>

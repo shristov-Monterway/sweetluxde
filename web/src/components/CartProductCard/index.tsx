@@ -6,10 +6,14 @@ import Price from '../Price';
 import FirebaseFunctionsModule from '../../modules/FirebaseFunctionsModule';
 import { CartUpdateRequestType } from '../../../../types/api/cart/CartUpdateRequestType';
 import { CartUpdateResponseType } from '../../../../types/api/cart/CartUpdateResponseType';
+import Link from 'next/link';
 
 export interface CartProductCardProps extends AbstractComponentType {
   product: ProductType;
   variationUid: string;
+  attributes: {
+    [uid: string]: string;
+  };
   quantity: number;
 }
 
@@ -18,6 +22,67 @@ const CartProductCard = (props: CartProductCardProps): React.JSX.Element => {
   const variation = props.product.variations[props.variationUid];
   const [productName, setProductName] = React.useState<string>('');
   const [variationName, setVariationName] = React.useState<string>('');
+  const [productAttributeNames, setProductAttributeNames] = React.useState<{
+    [attributeId: string]: string;
+  }>(
+    Object.keys(props.product.variations[props.variationUid].attributes).reduce(
+      (productAttributeNames, uid) => ({
+        ...productAttributeNames,
+        [uid]: props.product.variations[props.variationUid].attributes[uid]
+          .name[app.translator.locale]
+          ? props.product.variations[props.variationUid].attributes[uid].name[
+              app.translator.locale
+            ]
+          : props.product.variations[props.variationUid].attributes[uid].name[
+              Object.keys(
+                props.product.variations[props.variationUid].attributes[uid]
+                  .name
+              )[0]
+            ],
+      }),
+      {}
+    )
+  );
+  const [productAttributesOptionNames, setProductAttributesOptionNames] =
+    React.useState<{
+      [attributeId: string]: {
+        [optionId: string]: string;
+      };
+    }>(
+      Object.keys(
+        props.product.variations[props.variationUid].attributes
+      ).reduce(
+        (productAttributesOptionNames, attributeId) => ({
+          ...productAttributesOptionNames,
+          [attributeId]: Object.keys(
+            props.product.variations[props.variationUid].attributes[attributeId]
+              .options
+          ).reduce(
+            (optionNames, optionId) => ({
+              ...optionNames,
+              [optionId]: props.product.variations[props.variationUid]
+                .attributes[attributeId].options[optionId].name[
+                app.translator.locale
+              ]
+                ? props.product.variations[props.variationUid].attributes[
+                    attributeId
+                  ].options[optionId].name[app.translator.locale]
+                : props.product.variations[props.variationUid].attributes[
+                    attributeId
+                  ].options[optionId].name[
+                    Object.keys(
+                      props.product.variations[props.variationUid].attributes[
+                        attributeId
+                      ].options[optionId].name
+                    )[0]
+                  ],
+            }),
+            {}
+          ),
+        }),
+        {}
+      )
+    );
 
   React.useEffect(() => {
     const productName = props.product.name[app.translator.locale]
@@ -30,6 +95,64 @@ const CartProductCard = (props: CartProductCardProps): React.JSX.Element => {
 
     setProductName(productName);
     setVariationName(variationName);
+
+    setProductAttributeNames(
+      Object.keys(
+        props.product.variations[props.variationUid].attributes
+      ).reduce(
+        (productAttributeNames, uid) => ({
+          ...productAttributeNames,
+          [uid]: props.product.variations[props.variationUid].attributes[uid]
+            .name[app.translator.locale]
+            ? props.product.variations[props.variationUid].attributes[uid].name[
+                app.translator.locale
+              ]
+            : props.product.variations[props.variationUid].attributes[uid].name[
+                Object.keys(
+                  props.product.variations[props.variationUid].attributes[uid]
+                    .name
+                )[0]
+              ],
+        }),
+        {}
+      )
+    );
+
+    setProductAttributesOptionNames(
+      Object.keys(
+        props.product.variations[props.variationUid].attributes
+      ).reduce(
+        (productAttributesOptionNames, attributeId) => ({
+          ...productAttributesOptionNames,
+          [attributeId]: Object.keys(
+            props.product.variations[props.variationUid].attributes[attributeId]
+              .options
+          ).reduce(
+            (optionNames, optionId) => ({
+              ...optionNames,
+              [optionId]: props.product.variations[props.variationUid]
+                .attributes[attributeId].options[optionId].name[
+                app.translator.locale
+              ]
+                ? props.product.variations[props.variationUid].attributes[
+                    attributeId
+                  ].options[optionId].name[app.translator.locale]
+                : props.product.variations[props.variationUid].attributes[
+                    attributeId
+                  ].options[optionId].name[
+                    Object.keys(
+                      props.product.variations[props.variationUid].attributes[
+                        attributeId
+                      ].options[optionId].name
+                    )[0]
+                  ],
+            }),
+            {}
+          ),
+        }),
+        {}
+      )
+    );
   }, [app.translator.locale]);
 
   const setNewQuantity = async (quantity: -1 | 1) => {
@@ -41,6 +164,7 @@ const CartProductCard = (props: CartProductCardProps): React.JSX.Element => {
       {
         product: props.product.uid,
         variation: props.variationUid,
+        attributes: props.attributes,
         quantity,
       },
       app.translator.locale,
@@ -51,17 +175,43 @@ const CartProductCard = (props: CartProductCardProps): React.JSX.Element => {
   return (
     <div className={`card ${props.className ? props.className : ''}`}>
       <div className="card-body cart-product-card__body">
-        {variation.images.length > 0 ? (
-          <img
-            className="cart-product-card__image"
-            src={variation.images[0]}
-            alt=""
-          />
-        ) : null}
+        <Link href={`/product/${props.product.uid}`} passHref={true}>
+          <a>
+            {variation.images.length > 0 ? (
+              <img
+                className="cart-product-card__image"
+                src={variation.images[0]}
+                alt=""
+              />
+            ) : (
+              <img
+                className="cart-product-card__image"
+                src="/placeholder.webp"
+                alt=""
+              />
+            )}
+          </a>
+        </Link>
         <div className="d-flex flex-column gap-3 cart-product-card__info">
-          <h2 className="card-title p-0 m-0">{productName}</h2>
+          <Link href={`/product/${props.product.uid}`} passHref={true}>
+            <a className="h2 card-title p-0 m-0">{productName}</a>
+          </Link>
           <hr className="m-0 p-0" />
           <span className="h4 m-0 p-0">{variationName}</span>
+          {Object.keys(props.attributes).length > 0 ? (
+            <div>
+              {Object.keys(props.attributes).map((attributeId, index) => (
+                <span key={index}>
+                  {productAttributeNames[attributeId]}:{' '}
+                  {
+                    productAttributesOptionNames[attributeId][
+                      props.attributes[attributeId]
+                    ]
+                  }
+                </span>
+              ))}
+            </div>
+          ) : null}
           <div className="d-flex justify-content-start align-items-center gap-3 flex-wrap">
             <div className="cart-product-card__quantity-container bg-primary-subtle border-primary">
               <button

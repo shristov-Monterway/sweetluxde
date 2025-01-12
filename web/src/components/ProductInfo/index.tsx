@@ -8,6 +8,9 @@ import Price from '../Price';
 import FirebaseFunctionsModule from '../../modules/FirebaseFunctionsModule';
 import { CartUpdateRequestType } from '../../../../types/api/cart/CartUpdateRequestType';
 import { CartUpdateResponseType } from '../../../../types/api/cart/CartUpdateResponseType';
+import FormField from '../FormField';
+import { WishlistUpdateRequestType } from '../../../../types/api/wishlist/WishlistUpdateRequestType';
+import { WishlistUpdateResponseType } from '../../../../types/api/wishlist/WishlistUpdateResponseType';
 
 export interface ProductInfoProps extends AbstractComponentType {
   product: ProductType;
@@ -46,6 +49,89 @@ const ProductInfo = (props: ProductInfoProps): React.JSX.Element => {
   const [badgeText, setBadgeText] = React.useState<string | undefined>(
     undefined
   );
+  const [selectedAttributes, setSelectedAttributes] = React.useState<{
+    [uid: string]: string;
+  }>(
+    Object.keys(
+      props.product.variations[selectedProductVariationUid].attributes
+    ).reduce(
+      (attributes, attributeId) => ({
+        ...attributes,
+        [attributeId]: Object.keys(
+          props.product.variations[selectedProductVariationUid].attributes[
+            attributeId
+          ].options
+        )[0],
+      }),
+      {}
+    )
+  );
+  const [productAttributeNames, setProductAttributeNames] = React.useState<{
+    [attributeId: string]: string;
+  }>(
+    Object.keys(
+      props.product.variations[selectedProductVariationUid].attributes
+    ).reduce(
+      (productAttributeNames, uid) => ({
+        ...productAttributeNames,
+        [uid]: props.product.variations[selectedProductVariationUid].attributes[
+          uid
+        ].name[app.translator.locale]
+          ? props.product.variations[selectedProductVariationUid].attributes[
+              uid
+            ].name[app.translator.locale]
+          : props.product.variations[selectedProductVariationUid].attributes[
+              uid
+            ].name[
+              Object.keys(
+                props.product.variations[selectedProductVariationUid]
+                  .attributes[uid].name
+              )[0]
+            ],
+      }),
+      {}
+    )
+  );
+  const [productAttributesOptionNames, setProductAttributesOptionNames] =
+    React.useState<{
+      [attributeId: string]: {
+        [optionId: string]: string;
+      };
+    }>(
+      Object.keys(
+        props.product.variations[selectedProductVariationUid].attributes
+      ).reduce(
+        (productAttributesOptionNames, attributeId) => ({
+          ...productAttributesOptionNames,
+          [attributeId]: Object.keys(
+            props.product.variations[selectedProductVariationUid].attributes[
+              attributeId
+            ].options
+          ).reduce(
+            (optionNames, optionId) => ({
+              ...optionNames,
+              [optionId]: props.product.variations[selectedProductVariationUid]
+                .attributes[attributeId].options[optionId].name[
+                app.translator.locale
+              ]
+                ? props.product.variations[selectedProductVariationUid]
+                    .attributes[attributeId].options[optionId].name[
+                    app.translator.locale
+                  ]
+                : props.product.variations[selectedProductVariationUid]
+                    .attributes[attributeId].options[optionId].name[
+                    Object.keys(
+                      props.product.variations[selectedProductVariationUid]
+                        .attributes[attributeId].options[optionId].name
+                    )[0]
+                  ],
+            }),
+            {}
+          ),
+        }),
+        {}
+      )
+    );
 
   React.useEffect(() => {
     const name = props.product.name[app.translator.locale]
@@ -103,23 +189,122 @@ const ProductInfo = (props: ProductInfoProps): React.JSX.Element => {
     setBadgeText(badgeText);
   }, [app.translator.locale]);
 
+  React.useEffect(() => {
+    setSelectedAttributes(
+      Object.keys(
+        props.product.variations[selectedProductVariationUid].attributes
+      ).reduce(
+        (attributes, attributeId) => ({
+          ...attributes,
+          [attributeId]: Object.keys(
+            props.product.variations[selectedProductVariationUid].attributes[
+              attributeId
+            ].options
+          )[0],
+        }),
+        {}
+      )
+    );
+  }, [selectedProductVariationUid]);
+
+  React.useEffect(() => {
+    setProductAttributeNames(
+      Object.keys(
+        props.product.variations[selectedProductVariationUid].attributes
+      ).reduce(
+        (productAttributeNames, uid) => ({
+          ...productAttributeNames,
+          [uid]: props.product.variations[selectedProductVariationUid]
+            .attributes[uid].name[app.translator.locale]
+            ? props.product.variations[selectedProductVariationUid].attributes[
+                uid
+              ].name[app.translator.locale]
+            : props.product.variations[selectedProductVariationUid].attributes[
+                uid
+              ].name[
+                Object.keys(
+                  props.product.variations[selectedProductVariationUid]
+                    .attributes[uid].name
+                )[0]
+              ],
+        }),
+        {}
+      )
+    );
+
+    setProductAttributesOptionNames(
+      Object.keys(
+        props.product.variations[selectedProductVariationUid].attributes
+      ).reduce(
+        (productAttributesOptionNames, attributeId) => ({
+          ...productAttributesOptionNames,
+          [attributeId]: Object.keys(
+            props.product.variations[selectedProductVariationUid].attributes[
+              attributeId
+            ].options
+          ).reduce(
+            (optionNames, optionId) => ({
+              ...optionNames,
+              [optionId]: props.product.variations[selectedProductVariationUid]
+                .attributes[attributeId].options[optionId].name[
+                app.translator.locale
+              ]
+                ? props.product.variations[selectedProductVariationUid]
+                    .attributes[attributeId].options[optionId].name[
+                    app.translator.locale
+                  ]
+                : props.product.variations[selectedProductVariationUid]
+                    .attributes[attributeId].options[optionId].name[
+                    Object.keys(
+                      props.product.variations[selectedProductVariationUid]
+                        .attributes[attributeId].options[optionId].name
+                    )[0]
+                  ],
+            }),
+            {}
+          ),
+        }),
+        {}
+      )
+    );
+  }, [selectedProductVariationUid, app.translator.locale]);
+
+  let isProductVariationAddedToWishlist = false;
+
+  if (app.user) {
+    const lineItemFromWishlist = app.user.wishlist.lineItems.find(
+      (lineItem) =>
+        lineItem.product === props.product.uid &&
+        lineItem.variation === selectedProductVariationUid &&
+        JSON.stringify(lineItem.attributes) ===
+          JSON.stringify(selectedAttributes)
+    );
+    isProductVariationAddedToWishlist = !!lineItemFromWishlist;
+  }
+
   const images: string[] = [];
   const productVariationImageIndexes: {
     [uid: string]: number;
   } = {};
 
   Object.keys(props.product.variations).forEach((uid) => {
-    productVariationImageIndexes[uid] = images.length;
-    props.product.variations[uid].images.forEach((image) => {
-      images.push(image);
-    });
+    if (props.product.variations[uid].images.length > 0) {
+      productVariationImageIndexes[uid] = images.length;
+      props.product.variations[uid].images.forEach((image) => {
+        images.push(image);
+      });
+    }
   });
 
   const selectProductVariation = (selectedProductVariationUid: string) => {
     setSelectedProductVariationUid(selectedProductVariationUid);
-    mainSlider.current?.goToSlide(
-      productVariationImageIndexes[selectedProductVariationUid]
-    );
+    if (
+      props.product.variations[selectedProductVariationUid].images.length > 0
+    ) {
+      mainSlider.current?.goToSlide(
+        productVariationImageIndexes[selectedProductVariationUid]
+      );
+    }
   };
 
   const addToCart = async () => {
@@ -134,7 +319,29 @@ const ProductInfo = (props: ProductInfoProps): React.JSX.Element => {
         {
           product: props.product.uid,
           variation: selectedProductVariationUid,
+          attributes: selectedAttributes,
           quantity: 1,
+        },
+        app.translator.locale,
+        app.currency.get
+      );
+    }
+  };
+
+  const addOrRemoveFromWishlist = async () => {
+    if (!app.user) {
+      app.activeModal.set('authModal');
+    } else {
+      await FirebaseFunctionsModule<
+        WishlistUpdateRequestType,
+        WishlistUpdateResponseType
+      >().call(
+        '/wishlist/wishlist/update',
+        {
+          product: props.product.uid,
+          variation: selectedProductVariationUid,
+          attributes: selectedAttributes,
+          quantity: isProductVariationAddedToWishlist ? -1 : 1,
         },
         app.translator.locale,
         app.currency.get
@@ -223,6 +430,32 @@ const ProductInfo = (props: ProductInfoProps): React.JSX.Element => {
         <p className="p-0 m-0">
           {productVariationDescriptions[selectedProductVariationUid]}
         </p>
+        {Object.keys(productAttributeNames).length > 0 ? (
+          <div className="product-info__product-attributes">
+            {Object.keys(productAttributeNames).map((attributeId, index) => (
+              <FormField
+                key={index}
+                form=""
+                field=""
+                type="select"
+                value={selectedAttributes[attributeId]}
+                setValue={(value) => {
+                  setSelectedAttributes((selectedAttributes) => ({
+                    ...selectedAttributes,
+                    [attributeId]: value,
+                  }));
+                }}
+                selectOptions={Object.keys(
+                  productAttributesOptionNames[attributeId]
+                ).map((optionId) => ({
+                  label: productAttributesOptionNames[attributeId][optionId],
+                  value: optionId,
+                }))}
+                label={productAttributeNames[attributeId]}
+              />
+            ))}
+          </div>
+        ) : null}
         <Price
           prices={[
             {
@@ -233,13 +466,21 @@ const ProductInfo = (props: ProductInfoProps): React.JSX.Element => {
           ]}
           className="h2 p-0 m-0"
         />
-        <button
-          className="btn btn-primary d-flex align-items-center justify-content-center gap-2"
-          onClick={addToCart}
-        >
-          {app.translator.t('components.productInfo.addToCart')}{' '}
-          <span className="fe fe-shopping-cart"></span>
-        </button>
+        <div className="d-flex gap-5 align-items-center justify-content-start">
+          <button
+            className="btn btn-primary d-flex align-items-center justify-content-center gap-2 flex-grow-1"
+            onClick={addToCart}
+          >
+            {app.translator.t('components.productInfo.addToCart')}{' '}
+            <span className="fe fe-shopping-cart"></span>
+          </button>
+          <button
+            className={`btn btn-${isProductVariationAddedToWishlist ? 'primary' : 'outline-primary'} btn-rounded-circle`}
+            onClick={addOrRemoveFromWishlist}
+          >
+            <i className="fe fe-bookmark" />
+          </button>
+        </div>
       </div>
     </div>
   );

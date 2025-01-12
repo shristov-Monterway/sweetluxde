@@ -77,6 +77,10 @@
     &::-webkit-scrollbar {
       display: none;
     }
+
+    &:hover {
+      cursor: default;
+    }
   }
 
   &__footer {

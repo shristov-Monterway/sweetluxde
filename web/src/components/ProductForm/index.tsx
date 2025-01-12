@@ -91,9 +91,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
   ): Promise<void> => {
     e.preventDefault();
 
-    console.log(newProduct);
-
-    const response = await FirebaseFunctionsModule<
+    await FirebaseFunctionsModule<
       ProductCreateUpdateRequestType,
       ProductCreateUpdateResponseType
     >().call(
@@ -105,8 +103,6 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
       app.translator.locale,
       app.currency.get
     );
-
-    console.log(response.product);
   };
 
   return (

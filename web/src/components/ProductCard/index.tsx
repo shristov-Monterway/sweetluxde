@@ -44,6 +44,23 @@ const ProductCard = (props: ProductCardProps): React.JSX.Element | null => {
   const [badgeText, setBadgeText] = React.useState<string | undefined>(
     undefined
   );
+  const [selectedAttributes, setSelectedAttributes] = React.useState<{
+    [uid: string]: string;
+  }>(
+    Object.keys(
+      props.product.variations[selectedProductVariationUid].attributes
+    ).reduce(
+      (attributes, attributeId) => ({
+        ...attributes,
+        [attributeId]: Object.keys(
+          props.product.variations[selectedProductVariationUid].attributes[
+            attributeId
+          ].options
+        )[0],
+      }),
+      {}
+    )
+  );
 
   React.useEffect(() => {
     const name = props.product.name[app.translator.locale]
@@ -81,17 +98,23 @@ const ProductCard = (props: ProductCardProps): React.JSX.Element | null => {
     setBadgeText(badgeText);
   }, [app.translator.locale]);
 
-  const images: string[] = [];
-  const productVariationImageIndexes: {
-    [uid: string]: number;
-  } = {};
-
-  Object.keys(props.product.variations).forEach((uid) => {
-    productVariationImageIndexes[uid] = images.length;
-    props.product.variations[uid].images.forEach((image) => {
-      images.push(image);
-    });
-  });
+  React.useEffect(() => {
+    setSelectedAttributes(
+      Object.keys(
+        props.product.variations[selectedProductVariationUid].attributes
+      ).reduce(
+        (attributes, attributeId) => ({
+          ...attributes,
+          [attributeId]: Object.keys(
+            props.product.variations[selectedProductVariationUid].attributes[
+              attributeId
+            ].options
+          )[0],
+        }),
+        {}
+      )
+    );
+  }, [selectedProductVariationUid]);
 
   let isProductVariationAddedToWishlist = false;
 
@@ -104,11 +127,29 @@ const ProductCard = (props: ProductCardProps): React.JSX.Element | null => {
     isProductVariationAddedToWishlist = !!lineItemFromWishlist;
   }
 
+  const images: string[] = [];
+  const productVariationImageIndexes: {
+    [uid: string]: number;
+  } = {};
+
+  Object.keys(props.product.variations).forEach((uid) => {
+    if (props.product.variations[uid].images.length > 0) {
+      productVariationImageIndexes[uid] = images.length;
+      props.product.variations[uid].images.forEach((image) => {
+        images.push(image);
+      });
+    }
+  });
+
   const selectProductVariation = (selectedProductVariationUid: string) => {
     setSelectedProductVariationUid(selectedProductVariationUid);
-    mainSlider.current?.goToSlide(
-      productVariationImageIndexes[selectedProductVariationUid]
-    );
+    if (
+      props.product.variations[selectedProductVariationUid].images.length > 0
+    ) {
+      mainSlider.current?.goToSlide(
+        productVariationImageIndexes[selectedProductVariationUid]
+      );
+    }
   };
 
   const addToCart = async () => {
@@ -123,6 +164,7 @@ const ProductCard = (props: ProductCardProps): React.JSX.Element | null => {
         {
           product: props.product.uid,
           variation: selectedProductVariationUid,
+          attributes: selectedAttributes,
           quantity: 1,
         },
         app.translator.locale,
@@ -143,6 +185,7 @@ const ProductCard = (props: ProductCardProps): React.JSX.Element | null => {
         {
           product: props.product.uid,
           variation: selectedProductVariationUid,
+          attributes: selectedAttributes,
           quantity: isProductVariationAddedToWishlist ? -1 : 1,
         },
         app.translator.locale,
@@ -168,20 +211,31 @@ const ProductCard = (props: ProductCardProps): React.JSX.Element | null => {
           ref={(slider) => (mainSlider.current = slider)}
         >
           {images.map((image, index) => (
-            <img
+            <Link
               key={index}
-              className="product-card__main-slide-image"
-              src={image}
-              alt=""
-            />
+              href={`/product/${props.product.uid}`}
+              passHref={true}
+            >
+              <a className="d-block">
+                <img
+                  className="product-card__main-slide-image"
+                  src={image}
+                  alt=""
+                />
+              </a>
+            </Link>
           ))}
         </Carousel>
       ) : (
-        <img
-          className="product-card__main-slide-image"
-          src="/placeholder.webp"
-          alt=""
-        />
+        <Link href={`/product/${props.product.uid}`} passHref={true}>
+          <a className="d-block">
+            <img
+              className="product-card__main-slide-image"
+              src="/placeholder.webp"
+              alt=""
+            />
+          </a>
+        </Link>
       )}
       <div className="card-body product-card__body">
         <div className="product-card__actions">
@@ -193,9 +247,11 @@ const ProductCard = (props: ProductCardProps): React.JSX.Element | null => {
           </button>
         </div>
         <div className="product-card__content">
-          <h2 className="product-card__content-title card-title m-0 p-0">
-            {name}
-          </h2>
+          <Link href={`/product/${props.product.uid}`} passHref={true}>
+            <a className="h2 product-card__content-title card-title m-0 p-0">
+              {name}
+            </a>
+          </Link>
           {tags.length > 0 ? (
             <h3 className="product-card__content-tags p-0 m-0">
               {tags.map((tag, index) => (
@@ -240,7 +296,7 @@ const ProductCard = (props: ProductCardProps): React.JSX.Element | null => {
           </button>
           <Link href={`/product/${props.product.uid}`} passHref={true}>
             <a className="btn btn-primary">
-              {app.translator.t('components.productCard.open')}
+              {app.translator.t('components.productCard.view')}
             </a>
           </Link>
         </div>

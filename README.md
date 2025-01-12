@@ -2,6 +2,7 @@
 
 ## TODOS
 - Make the validation rules for `/product/createUpdate` in AdminRoutes more strict.
+- Make the validation rules for `/cart/update` in CartRoutes more strict.
 - Add product attribute data in CartType and WishListType (and all endpoints or components using them).
 - Add product attributes data in ProductCard, ProductInfo (input for choosing attribute option).
 - Add functionality for registering only with invitation code.

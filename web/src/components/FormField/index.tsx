@@ -24,6 +24,8 @@ export interface FormFieldProps extends AbstractComponentType {
   value: string;
   setValue: (value: string) => void;
   selectOptions?: FormFieldOptionType[];
+  label?: string;
+  help?: string;
   labelTranslationParams?: {
     [key: string]: string;
   };
@@ -58,6 +60,38 @@ const FormField = (props: FormFieldProps): React.JSX.Element | null => {
     }
   }, [props.type, props.value]);
 
+  let label: string | null = null;
+  if (props.label) {
+    label = props.label;
+  } else {
+    if (
+      app.translator.t(`form.${props.form}.${props.field}.label`, {
+        defaultValue: '------',
+      }) !== '------'
+    ) {
+      label = app.translator.t(
+        `form.${props.form}.${props.field}.label`,
+        props.labelTranslationParams
+      );
+    }
+  }
+
+  let help: string | null = null;
+  if (props.help) {
+    help = props.help;
+  } else {
+    if (
+      app.translator.t(`form.${props.form}.${props.field}.help`, {
+        defaultValue: '------',
+      }) !== '------'
+    ) {
+      help = app.translator.t(
+        `form.${props.form}.${props.field}.help`,
+        props.labelTranslationParams
+      );
+    }
+  }
+
   let inputElement: React.JSX.Element;
 
   if (props.type === 'select') {
@@ -65,10 +99,7 @@ const FormField = (props: FormFieldProps): React.JSX.Element | null => {
       <select
         className="form-select"
         id={`${props.form}-${props.field}`}
-        aria-label={app.translator.t(
-          `form.${props.form}.${props.field}.label`,
-          props.labelTranslationParams
-        )}
+        aria-label={label ? label : `${props.form}_${props.field}`}
         value={props.value}
         onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
           props.setValue(e.target.value)
@@ -87,7 +118,7 @@ const FormField = (props: FormFieldProps): React.JSX.Element | null => {
       <textarea
         className={`form-control ${formErrors.length > 0 ? 'is-invalid' : ''}`}
         id={`${props.form}-${props.field}`}
-        aria-describedby={`${props.form}-${props.field}-help`}
+        aria-describedby={label ? label : undefined}
         value={props.value}
         onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
           props.setValue(e.target.value)
@@ -137,7 +168,7 @@ const FormField = (props: FormFieldProps): React.JSX.Element | null => {
         className={`form-control ${formErrors.length > 0 ? 'is-invalid' : ''}`}
         id={`${props.form}-${props.field}`}
         type={props.type}
-        aria-describedby={`${props.form}-${props.field}-help`}
+        aria-describedby={label ? label : undefined}
         value={props.value}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           props.setValue(e.target.value)
@@ -149,25 +180,15 @@ const FormField = (props: FormFieldProps): React.JSX.Element | null => {
 
   return (
     <div className={`${props.className ? props.className : ''}`}>
-      {app.translator.t(`form.${props.form}.${props.field}.label`, {
-        defaultValue: '------',
-      }) !== '------' ? (
+      {label ? (
         <label htmlFor={`${props.form}-${props.field}`} className="form-label">
-          {app.translator.t(
-            `form.${props.form}.${props.field}.label`,
-            props.labelTranslationParams
-          )}
+          {label}
         </label>
       ) : null}
       {inputElement}
-      {app.translator.t(`form.${props.form}.${props.field}.help`, {
-        defaultValue: '------',
-      }) !== '------' ? (
+      {help ? (
         <div id={`${props.form}-${props.field}-help`} className="form-text">
-          {app.translator.t(
-            `form.${props.form}.${props.field}.help`,
-            props.helpTranslationParams
-          )}
+          {help}
         </div>
       ) : null}
       {formErrors.length > 0 ? (

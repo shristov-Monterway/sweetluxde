@@ -14,6 +14,9 @@ const WishlistProductsList = (
     {
       product: ProductType;
       variationUid: string;
+      attributes: {
+        [uid: string]: string;
+      };
       quantity: number;
     }[]
   >([]);
@@ -46,6 +49,7 @@ const WishlistProductsList = (
             return {
               product,
               variationUid: lineItem.variation,
+              attributes: lineItem.attributes,
               quantity: lineItem.quantity,
             };
           })
@@ -62,6 +66,7 @@ const WishlistProductsList = (
               <WishlistProductCard
                 product={lineItem.product}
                 variationUid={lineItem.variationUid}
+                attributes={lineItem.attributes}
                 quantity={lineItem.quantity}
               />
             </div>
