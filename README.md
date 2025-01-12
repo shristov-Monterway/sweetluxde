@@ -2,11 +2,10 @@
 
 ## TODOS
 - Make the validation rules for `/product/createUpdate` in AdminRoutes more strict.
-- Make the validation rules for `/cart/update` in CartRoutes more strict.
-- Add product attribute data in CartType and WishListType (and all endpoints or components using them).
-- Add product attributes data in ProductCard, ProductInfo (input for choosing attribute option).
+- Make the validation rules for `/cart/cart/update` in CartRoutes more strict.
+- Make the validation rules for `/wishlist/wishlist/update` in CartRoutes more strict.
 - Add functionality for registering only with invitation code.
-- Add information on Stripe checkout page for the product variation (not only product).
+- Add information on Stripe checkout page for the product variation and attributes (not only product).
 - Add address property in user.
 - Add weight property to product variation.
 - Add "Add to cart" button on WishlistProductCard.

@@ -7,7 +7,7 @@
     flex-direction: column;
     padding: 0;
 
-    @include media-breakpoint-up(sm) {
+    @include media-breakpoint-up(md) {
       flex-direction: row;
     }
   }
@@ -24,7 +24,7 @@
     border-top-left-radius: var(--bs-card-border-radius);
     border-top-right-radius: var(--bs-card-border-radius);
 
-    @include media-breakpoint-up(sm) {
+    @include media-breakpoint-up(md) {
       width: 300px;
       height: 300px;
       border-top-right-radius: unset;
