@@ -1,4 +1,5 @@
 import {
+  ProductBadgeType,
   ProductBadgeTypeType,
   ProductType,
 } from '../../../../types/internal/ProductType';
@@ -34,6 +35,13 @@ const FixtureModule = (): FixtureModuleType => {
         'info',
         'warning',
       ];
+      const badge: ProductBadgeType | null =
+        generateNumberFromTo(2, 10) % 2 === 0
+          ? {
+              type: badgeTypes[Math.floor(Math.random() * badgeTypes.length)], // eslint-disable-line
+              text: FixtureModule().generateTranslation('S', ['en', 'bg']), // eslint-disable-line
+            } // eslint-disable-line
+          : null;
 
       const product: ProductType = {
         uid,
@@ -88,10 +96,7 @@ const FixtureModule = (): FixtureModuleType => {
         tags: [...Array(generateNumberFromTo(0, 7)).keys()].map(() =>
           FixtureModule().generateTranslation(faker.food.fruit(), ['en', 'bg'])
         ),
-        badge: {
-          type: badgeTypes[Math.floor(Math.random() * badgeTypes.length)],
-          text: FixtureModule().generateTranslation('S', ['en', 'bg']),
-        },
+        badge,
       };
 
       return product;

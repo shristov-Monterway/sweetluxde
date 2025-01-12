@@ -41,7 +41,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
           },
         },
         tags: [],
-        badge: undefined,
+        badge: null,
       };
   const productBadgeTypes = ['success', 'danger', 'info', 'warning'];
   const [newProduct, setNewProduct] =
@@ -81,7 +81,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
     } else {
       setNewProduct((newProduct) => ({
         ...newProduct,
-        badge: undefined,
+        badge: null,
       }));
     }
   }, [badgeStatus, badge]);

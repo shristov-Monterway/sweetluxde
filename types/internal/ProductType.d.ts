@@ -16,5 +16,5 @@ export interface ProductType {
         [uid: string]: ProductVariationType;
     };
     tags: TranslationType[];
-    badge?: ProductBadgeType;
+    badge: ProductBadgeType | null;
 }
