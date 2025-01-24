@@ -4,6 +4,7 @@ export interface ProductVariationType {
     name: TranslationType;
     description: TranslationType;
     price: number;
+    weight: number | null;
     images: string[];
     attributes: {
         [uid: string]: {

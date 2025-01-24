@@ -7,6 +7,7 @@ import FirebaseFunctionsModule from '../../modules/FirebaseFunctionsModule';
 import { CartUpdateRequestType } from '../../../../types/api/cart/CartUpdateRequestType';
 import { CartUpdateResponseType } from '../../../../types/api/cart/CartUpdateResponseType';
 import Link from 'next/link';
+import Weight from '../Weight';
 
 export interface CartProductCardProps extends AbstractComponentType {
   product: ProductType;
@@ -210,6 +211,12 @@ const CartProductCard = (props: CartProductCardProps): React.JSX.Element => {
                   }
                 </span>
               ))}
+            </div>
+          ) : null}
+          {variation.weight ? (
+            <div>
+              {app.translator.t('components.cartProductCard.weight')}{' '}
+              <Weight weight={variation.weight} unit="gr" className="p-0 m-0" />
             </div>
           ) : null}
           <div className="d-flex justify-content-start align-items-center gap-3 flex-wrap">

@@ -177,6 +177,18 @@
         "label": "New product variation image",
         "help": "Insert product variation image."
       },
+      "productVariationWeightStatus": {
+        "option": {
+          "enabled": {
+            "label": "Enable weight",
+            "help": "Add weight to the product."
+          }
+        }
+      },
+      "productVariationWeight": {
+        "label": "Weight",
+        "help": "Insert weight of the product."
+      },
       "productVariationId": {
         "label": "ID of new variation",
         "help": "Insert ID of new variation."
@@ -196,6 +208,9 @@
       "totalPrice": "Total price:",
       "placeOrder": "Place order"
     },
+    "cartProductCard": {
+      "weight": "Weight:"
+    },
     "cartProductsList": {
       "noProducts": "No products in cart."
     },
@@ -210,6 +225,15 @@
     },
     "signOutButton": {
       "signOut": "Log out"
+    },
+    "weight": {
+      "unit": {
+        "gr": "gr.",
+        "kg": "kg."
+      }
+    },
+    "wishlistProductCard": {
+      "weight": "Weight:"
     },
     "wishlistProductsList": {
       "noProducts": "No products in wishlist."

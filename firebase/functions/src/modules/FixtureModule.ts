@@ -69,6 +69,9 @@ const FixtureModule = (): FixtureModuleType => {
                 faker.image.url()
               ),
               price: generateNumberFromTo(100, 20000),
+              weight: [false, true][generateNumberFromTo(0, 2)]
+                ? generateNumberFromTo(10000, 50000)
+                : null,
               attributes: {
                 color: {
                   name: FixtureModule().generateTranslation('Color', [

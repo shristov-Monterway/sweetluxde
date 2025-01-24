@@ -44,6 +44,13 @@ AdminRoutes.all(
       isInt: true,
       toInt: true,
     },
+    'product.variations.*.weight': {
+      in: 'body',
+      isInt: {
+        options: { min: 0 },
+      },
+      toInt: true,
+    },
     'product.variations.*.images.*': {
       in: 'body',
       notEmpty: true,

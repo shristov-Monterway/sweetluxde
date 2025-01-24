@@ -7,6 +7,7 @@ import FirebaseFunctionsModule from '../../modules/FirebaseFunctionsModule';
 import { WishlistUpdateRequestType } from '../../../../types/api/wishlist/WishlistUpdateRequestType';
 import { WishlistUpdateResponseType } from '../../../../types/api/wishlist/WishlistUpdateResponseType';
 import Link from 'next/link';
+import Weight from '../Weight';
 
 export interface WishlistProductCardProps extends AbstractComponentType {
   product: ProductType;
@@ -212,6 +213,12 @@ const WishlistProductCard = (
                   }
                 </span>
               ))}
+            </div>
+          ) : null}
+          {variation.weight ? (
+            <div>
+              {app.translator.t('components.wishlistProductCard.weight')}{' '}
+              <Weight weight={variation.weight} unit="gr" className="p-0 m-0" />
             </div>
           ) : null}
           <div className="d-flex justify-content-start align-items-center gap-3 flex-wrap">

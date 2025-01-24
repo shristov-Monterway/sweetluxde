@@ -36,6 +36,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
             name: {},
             description: {},
             price: 10000,
+            weight: 1000000,
             images: [],
             attributes: {},
           },
@@ -796,6 +797,86 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
                                   </div>
                                 ),
                               },
+                              {
+                                id: 'productVariationWeight',
+                                label: 'Weight',
+                                children: (
+                                  <div className="d-flex flex-column gap-3">
+                                    <FormField
+                                      form="product"
+                                      field="productVariationWeightStatus"
+                                      type="checkbox"
+                                      value={
+                                        newProduct.variations[variationId]
+                                          .weight !== null
+                                          ? 'enabled'
+                                          : ''
+                                      }
+                                      setValue={(value) =>
+                                        setNewProduct((newProduct) => ({
+                                          ...newProduct,
+                                          variations: {
+                                            ...newProduct.variations,
+                                            [variationId]: {
+                                              ...newProduct.variations[
+                                                variationId
+                                              ],
+                                              weight:
+                                                value === 'enabled'
+                                                  ? 10000
+                                                  : null,
+                                            },
+                                          },
+                                        }))
+                                      }
+                                      selectOptions={[
+                                        {
+                                          label: app.translator.t(
+                                            'form.product.productVariationWeightStatus.option.enabled.label'
+                                          ),
+                                          value: 'enabled',
+                                          help: app.translator.t(
+                                            'form.product.productVariationWeightStatus.option.enabled.help'
+                                          ),
+                                        },
+                                      ]}
+                                    />
+                                    {newProduct.variations[variationId]
+                                      .weight !== null ? (
+                                      <>
+                                        <FormField
+                                          form="product"
+                                          field="productVariationWeight"
+                                          type="text"
+                                          value={newProduct.variations[
+                                            variationId
+                                          ].weight.toString()}
+                                          setValue={(value) =>
+                                            setNewProduct((newProduct) => ({
+                                              ...newProduct,
+                                              variations: {
+                                                ...newProduct.variations,
+                                                [variationId]: {
+                                                  ...newProduct.variations[
+                                                    variationId
+                                                  ],
+                                                  weight: !isNaN(
+                                                    parseInt(value, 10)
+                                                  )
+                                                    ? parseInt(value, 10)
+                                                    : newProduct.variations[
+                                                        variationId
+                                                      ].weight,
+                                                },
+                                              },
+                                            }))
+                                          }
+                                        />
+                                      </>
+                                    ) : null}
+                                  </div>
+                                ),
+                              },
                             ]}
                             labelClassName="border-bottom p-3"
                             itemClassName="ps-5 py-5"
@@ -830,6 +911,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
                             name: {},
                             description: {},
                             price: 10000,
+                            weight: 1000000,
                             images: [],
                             attributes: {},
                           },
