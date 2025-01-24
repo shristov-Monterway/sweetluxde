@@ -1,8 +1,7 @@
-export interface CartUpdateRequestType {
+export interface CartAddFromWishlistRequestType {
     product: string;
     variation: string;
     attributes: {
         [uid: string]: string;
     };
-    quantity: -1 | 1;
 }

@@ -5,6 +5,8 @@ import { UserType } from '../../../../types/internal/UserType';
 import FirestoreModule from '../modules/FirestoreModule';
 import { ResponseType } from '../../../../types/api/ResponseType';
 import { CartUpdateResponseType } from '../../../../types/api/cart/CartUpdateResponseType';
+import { CartAddFromWishlistRequestType } from '../../../../types/api/cart/CartAddFromWishlistRequestType';
+import { CartAddFromWishlistResponseType } from '../../../../types/api/cart/CartAddFromWishlistResponseType';
 
 const CartRoutes = express.Router();
 
@@ -94,6 +96,105 @@ CartRoutes.all(
     await FirestoreModule<UserType>().writeDoc('users', user.uid, user);
 
     const response: ResponseType<CartUpdateResponseType> = {
+      data: {
+        cart: user.cart,
+      },
+    };
+
+    res.send(response);
+    return;
+  }
+);
+
+CartRoutes.all(
+  '/cart/add-from-wishlist',
+  checkSchema({
+    product: {
+      in: 'body',
+      notEmpty: true,
+      isString: true,
+    },
+    variation: {
+      in: 'body',
+      notEmpty: true,
+      isString: true,
+    },
+  }),
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  async (req, res) => {
+    const validation = validationResult(req);
+
+    if (!validation.isEmpty()) {
+      res.status(400).send(validation.array());
+      return;
+    }
+
+    const user = req.user as UserType | null;
+
+    if (!user) {
+      res.status(401).send();
+      return;
+    }
+
+    const request: CartAddFromWishlistRequestType = req.body;
+
+    const wishlistItem = user.wishlist.lineItems.find(
+      (item) =>
+        item.product === request.product &&
+        item.variation === request.variation &&
+        JSON.stringify(item.attributes) === JSON.stringify(request.attributes)
+    );
+
+    if (!wishlistItem) {
+      res.status(400).send();
+      return;
+    }
+
+    const lineItems = user.cart.lineItems;
+    const indexOfLineItemToHandle = lineItems
+      .map(
+        (lineItem) =>
+          `${lineItem.product}_${lineItem.variation}_${Object.keys(
+            lineItem.attributes
+          )
+            .map(
+              (attributeId) =>
+                `${attributeId}_${lineItem.attributes[attributeId]}`
+            )
+            .join('_')}`
+      )
+      .indexOf(
+        `${request.product}_${request.variation}_${Object.keys(
+          request.attributes
+        )
+          .map(
+            (attributeId) => `${attributeId}_${request.attributes[attributeId]}`
+          )
+          .join('_')}`
+      );
+
+    if (indexOfLineItemToHandle === -1) {
+      lineItems.push({
+        product: request.product,
+        variation: request.variation,
+        attributes: request.attributes,
+        quantity: wishlistItem.quantity,
+      });
+    } else {
+      lineItems[indexOfLineItemToHandle].quantity += wishlistItem.quantity;
+    }
+
+    user.wishlist.lineItems = user.wishlist.lineItems.filter(
+      (item) =>
+        item.product !== request.product ||
+        item.variation !== request.variation ||
+        JSON.stringify(item.attributes) !== JSON.stringify(request.attributes)
+    );
+
+    await FirestoreModule<UserType>().writeDoc('users', user.uid, user);
+
+    const response: ResponseType<CartAddFromWishlistResponseType> = {
       data: {
         cart: user.cart,
       },

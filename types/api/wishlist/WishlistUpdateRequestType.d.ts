@@ -4,5 +4,5 @@ export interface WishlistUpdateRequestType {
     attributes: {
         [uid: string]: string;
     };
-    quantity: -1|1;
+    quantity: -1 | 1;
 }

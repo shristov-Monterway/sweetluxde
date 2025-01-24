@@ -7,6 +7,8 @@ import FirebaseFunctionsModule from '../../modules/FirebaseFunctionsModule';
 import { WishlistUpdateRequestType } from '../../../../types/api/wishlist/WishlistUpdateRequestType';
 import { WishlistUpdateResponseType } from '../../../../types/api/wishlist/WishlistUpdateResponseType';
 import Link from 'next/link';
+import { CartAddFromWishlistRequestType } from '../../../../types/api/cart/CartAddFromWishlistRequestType';
+import { CartAddFromWishlistResponseType } from '../../../../types/api/cart/CartAddFromWishlistResponseType';
 import Weight from '../Weight';
 
 export interface WishlistProductCardProps extends AbstractComponentType {
@@ -175,6 +177,26 @@ const WishlistProductCard = (
     );
   };
 
+  const addToCart = async () => {
+    if (!app.user) {
+      app.activeModal.set('authModal');
+    } else {
+      await FirebaseFunctionsModule<
+        CartAddFromWishlistRequestType,
+        CartAddFromWishlistResponseType
+      >().call(
+        '/cart/cart/add-from-wishlist',
+        {
+          product: props.product.uid,
+          variation: props.variationUid,
+          attributes: props.attributes,
+        },
+        app.translator.locale,
+        app.currency.get
+      );
+    }
+  };
+
   return (
     <div className={`card ${props.className ? props.className : ''}`}>
       <div className="card-body wishlist-product-card__body">
@@ -195,69 +217,84 @@ const WishlistProductCard = (
             )}
           </a>
         </Link>
-        <div className="d-flex flex-column gap-3 wishlist-product-card__info">
-          <Link href={`/product/${props.product.uid}`} passHref={true}>
-            <a className="h2 card-title p-0 m-0">{productName}</a>
-          </Link>
-          <hr className="m-0 p-0" />
-          <span className="h4 m-0 p-0">{variationName}</span>
-          {Object.keys(props.attributes).length > 0 ? (
-            <div>
-              {Object.keys(props.attributes).map((attributeId, index) => (
-                <span key={index}>
-                  {productAttributeNames[attributeId]}:{' '}
+        <div className="wishlist-product-card__info">
+          <div className="d-flex flex-column gap-3">
+            <Link href={`/product/${props.product.uid}`} passHref={true}>
+              <a className="h2 card-title p-0 m-0">{productName}</a>
+            </Link>
+            <hr className="m-0 p-0" />
+            <span className="h4 m-0 p-0">{variationName}</span>
+            {Object.keys(props.attributes).length > 0 ? (
+              <div>
+                {Object.keys(props.attributes).map((attributeId, index) => (
+                  <span key={index}>
+                    {productAttributeNames[attributeId]}:{' '}
+                    {
+                      productAttributesOptionNames[attributeId][
+                        props.attributes[attributeId]
+                      ]
+                    }
+                  </span>
+                ))}
+              </div>
+            ) : null}
+            {variation.weight ? (
+              <div>
+                {app.translator.t('components.wishlistProductCard.weight')}{' '}
+                <Weight
+                  weight={variation.weight}
+                  unit="gr"
+                  className="p-0 m-0"
+                />
+              </div>
+            ) : null}
+            <div className="d-flex justify-content-start align-items-center gap-3 flex-wrap">
+              <div className="wishlist-product-card__quantity-container bg-primary-subtle border-primary">
+                <button
+                  className="btn btn-sm btn-rounded-circle btn-white"
+                  onClick={() => setNewQuantity(-1)}
+                >
+                  -
+                </button>
+                <span className="h3 m-0 p-0">{props.quantity}</span>
+                <button
+                  className="btn btn-sm btn-rounded-circle btn-white"
+                  onClick={() => setNewQuantity(1)}
+                >
+                  +
+                </button>
+              </div>
+              <span className="h3 p-0 m-0">x</span>
+              <Price
+                prices={[
                   {
-                    productAttributesOptionNames[attributeId][
-                      props.attributes[attributeId]
-                    ]
-                  }
-                </span>
-              ))}
+                    currency: app.currency.get,
+                    value: variation.price,
+                  },
+                ]}
+                className="h3 p-0 m-0"
+              />
             </div>
-          ) : null}
-          {variation.weight ? (
-            <div>
-              {app.translator.t('components.wishlistProductCard.weight')}{' '}
-              <Weight weight={variation.weight} unit="gr" className="p-0 m-0" />
-            </div>
-          ) : null}
-          <div className="d-flex justify-content-start align-items-center gap-3 flex-wrap">
-            <div className="wishlist-product-card__quantity-container bg-primary-subtle border-primary">
-              <button
-                className="btn btn-sm btn-rounded-circle btn-white"
-                onClick={() => setNewQuantity(-1)}
-              >
-                -
-              </button>
-              <span className="h3 m-0 p-0">{props.quantity}</span>
-              <button
-                className="btn btn-sm btn-rounded-circle btn-white"
-                onClick={() => setNewQuantity(1)}
-              >
-                +
-              </button>
-            </div>
-            <span className="h3 p-0 m-0">x</span>
+            <hr className="m-0 p-0" />
             <Price
               prices={[
                 {
                   currency: app.currency.get,
-                  value: variation.price,
+                  value: variation.price * props.quantity,
                 },
               ]}
-              className="h3 p-0 m-0"
+              className="h2 p-0 m-0"
             />
           </div>
-          <hr className="m-0 p-0" />
-          <Price
-            prices={[
-              {
-                currency: app.currency.get,
-                value: variation.price * props.quantity,
-              },
-            ]}
-            className="h2 p-0 m-0"
-          />
+          <div className="d-flex">
+            <button
+              className="btn btn-primary d-flex align-items-center justify-content-center gap-2 flex-grow-1 flex-xl-grow-0"
+              onClick={addToCart}
+            >
+              {app.translator.t('components.productInfo.addToCart')}{' '}
+              <span className="fe fe-shopping-cart"></span>
+            </button>
+          </div>
         </div>
       </div>
     </div>

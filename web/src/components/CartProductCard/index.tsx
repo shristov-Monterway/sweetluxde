@@ -193,69 +193,75 @@ const CartProductCard = (props: CartProductCardProps): React.JSX.Element => {
             )}
           </a>
         </Link>
-        <div className="d-flex flex-column gap-3 cart-product-card__info">
-          <Link href={`/product/${props.product.uid}`} passHref={true}>
-            <a className="h2 card-title p-0 m-0">{productName}</a>
-          </Link>
-          <hr className="m-0 p-0" />
-          <span className="h4 m-0 p-0">{variationName}</span>
-          {Object.keys(props.attributes).length > 0 ? (
-            <div>
-              {Object.keys(props.attributes).map((attributeId, index) => (
-                <span key={index}>
-                  {productAttributeNames[attributeId]}:{' '}
+        <div className="cart-product-card__info">
+          <div className="d-flex flex-column gap-3">
+            <Link href={`/product/${props.product.uid}`} passHref={true}>
+              <a className="h2 card-title p-0 m-0">{productName}</a>
+            </Link>
+            <hr className="m-0 p-0" />
+            <span className="h4 m-0 p-0">{variationName}</span>
+            {Object.keys(props.attributes).length > 0 ? (
+              <div>
+                {Object.keys(props.attributes).map((attributeId, index) => (
+                  <span key={index}>
+                    {productAttributeNames[attributeId]}:{' '}
+                    {
+                      productAttributesOptionNames[attributeId][
+                        props.attributes[attributeId]
+                      ]
+                    }
+                  </span>
+                ))}
+              </div>
+            ) : null}
+            {variation.weight ? (
+              <div>
+                {app.translator.t('components.wishlistProductCard.weight')}{' '}
+                <Weight
+                  weight={variation.weight}
+                  unit="gr"
+                  className="p-0 m-0"
+                />
+              </div>
+            ) : null}
+            <div className="d-flex justify-content-start align-items-center gap-3 flex-wrap">
+              <div className="cart-product-card__quantity-container bg-primary-subtle border-primary">
+                <button
+                  className="btn btn-sm btn-rounded-circle btn-white"
+                  onClick={() => setNewQuantity(-1)}
+                >
+                  -
+                </button>
+                <span className="h3 m-0 p-0">{props.quantity}</span>
+                <button
+                  className="btn btn-sm btn-rounded-circle btn-white"
+                  onClick={() => setNewQuantity(1)}
+                >
+                  +
+                </button>
+              </div>
+              <span className="h3 p-0 m-0">x</span>
+              <Price
+                prices={[
                   {
-                    productAttributesOptionNames[attributeId][
-                      props.attributes[attributeId]
-                    ]
-                  }
-                </span>
-              ))}
+                    currency: app.currency.get,
+                    value: variation.price,
+                  },
+                ]}
+                className="h3 p-0 m-0"
+              />
             </div>
-          ) : null}
-          {variation.weight ? (
-            <div>
-              {app.translator.t('components.cartProductCard.weight')}{' '}
-              <Weight weight={variation.weight} unit="gr" className="p-0 m-0" />
-            </div>
-          ) : null}
-          <div className="d-flex justify-content-start align-items-center gap-3 flex-wrap">
-            <div className="cart-product-card__quantity-container bg-primary-subtle border-primary">
-              <button
-                className="btn btn-sm btn-rounded-circle btn-white"
-                onClick={() => setNewQuantity(-1)}
-              >
-                -
-              </button>
-              <span className="h3 m-0 p-0">{props.quantity}</span>
-              <button
-                className="btn btn-sm btn-rounded-circle btn-white"
-                onClick={() => setNewQuantity(1)}
-              >
-                +
-              </button>
-            </div>
-            <span className="h3 p-0 m-0">x</span>
+            <hr className="m-0 p-0" />
             <Price
               prices={[
                 {
                   currency: app.currency.get,
-                  value: variation.price,
+                  value: variation.price * props.quantity,
                 },
               ]}
-              className="h3 p-0 m-0"
+              className="h2 p-0 m-0"
             />
           </div>
-          <hr className="m-0 p-0" />
-          <Price
-            prices={[
-              {
-                currency: app.currency.get,
-                value: variation.price * props.quantity,
-              },
-            ]}
-            className="h2 p-0 m-0"
-          />
         </div>
       </div>
     </div>
