@@ -129,6 +129,7 @@
     - `Firebase Functions Admin`
     - `Cloud Datastore Index Admin`
     - `Firebase Hosting Admin`
+    - `Firebase Extensions API Service Agent`
 62. Click `SAVE`
 63. Go to `https://vercel.com/`
 64. Click `Add New`
