@@ -121,15 +121,22 @@
 59. Open `https://console.cloud.google.com/iam-admin/iam?project=###_PROJECT_ID_###`
 60. Click on the `pencil` icon on the line where `Name` is `App Engine default service account`
 61. Make sure following roles are assigned:
-    - `Service Account User`
+    - `Cloud Datastore Index Admin`
+    - `Cloud Functions Admin`
     - `Cloud Functions Developer`
     - `Cloud Scheduler Admin`
-    - `Secret Manager Viewer`
-    - `Firebase Rules Admin`
-    - `Firebase Functions Admin`
-    - `Cloud Datastore Index Admin`
-    - `Firebase Hosting Admin`
+    - `Firebase Admin SDK Administrator Service Agent`
+    - `Firebase Authentication Admin`
     - `Firebase Extensions API Service Agent`
+    - `Firebase Extensions Developer`
+    - `Firebase Extensions Publisher - Extensions Admin`
+    - `Firebase Extensions Viewer`
+    - `Firebase Hosting Admin`
+    - `Firebase Rules Admin`
+    - `Secret Manager Viewer`
+    - `Service Account Token Creator`
+    - `Service Account User`
+    - `Service Extensions Viewer`
 62. Click `SAVE`
 63. Go to `https://vercel.com/`
 64. Click `Add New`
