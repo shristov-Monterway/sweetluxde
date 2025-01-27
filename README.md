@@ -114,11 +114,13 @@
 52. Click `ENABLE`
 53. Go to `https://console.cloud.google.com/apis/library/iam.googleapis.com?project=###_PROJECT_ID_###`
 54. Click `ENABLE`
-55. Go to `https://console.developers.google.com/apis/api/cloudbilling.googleapis.com/overview?project=###_PROJECT_ID_###`
+55. Go to `https://console.cloud.google.com/apis/library/firebaseextensions.googleapis.com?project=###_PROJECT_ID_###`
 56. Click `ENABLE`
-57. Open `https://console.cloud.google.com/iam-admin/iam?project=###_PROJECT_ID_###`
-58. Click on the `pencil` icon on the line where `Name` is `App Engine default service account`
-59. Make sure following roles are assigned:
+57. Go to `https://console.developers.google.com/apis/api/cloudbilling.googleapis.com/overview?project=###_PROJECT_ID_###`
+58. Click `ENABLE`
+59. Open `https://console.cloud.google.com/iam-admin/iam?project=###_PROJECT_ID_###`
+60. Click on the `pencil` icon on the line where `Name` is `App Engine default service account`
+61. Make sure following roles are assigned:
     - `Service Account User`
     - `Cloud Functions Developer`
     - `Cloud Scheduler Admin`
@@ -127,23 +129,23 @@
     - `Firebase Functions Admin`
     - `Cloud Datastore Index Admin`
     - `Firebase Hosting Admin`
-60. Click `SAVE`
-61. Go to `https://vercel.com/`
-62. Click `Add New`
-63. Choose `Project`
-64. Click `Import` on the project repository
-65. Under `Root Directory` click `Edit`
-66. Click on the circle next to the `web` folder
-67. Click `Continue`
-68. Under `Framework Preset` choose `Next.js`
-69. Click `Deploy`
-70. Go to `https://vercel.com/`
-71. Click on the project
-72. Click `Settings`
-73. Click `Domains`
-74. Copy the domain
-75. Go to `https://console.firebase.google.com/project/###_PROJECT_ID_###/authentication/settings`
-76. Click `Authorized domains`
-77. Click `Add domain`
-78. Paste the copied domain from step 74
-79. Click `Add`
+62. Click `SAVE`
+63. Go to `https://vercel.com/`
+64. Click `Add New`
+65. Choose `Project`
+66. Click `Import` on the project repository
+67. Under `Root Directory` click `Edit`
+68. Click on the circle next to the `web` folder
+69. Click `Continue`
+70. Under `Framework Preset` choose `Next.js`
+71. Click `Deploy`
+72. Go to `https://vercel.com/`
+73. Click on the project
+74. Click `Settings`
+75. Click `Domains`
+76. Copy the domain
+77. Go to `https://console.firebase.google.com/project/###_PROJECT_ID_###/authentication/settings`
+78. Click `Authorized domains`
+79. Click `Add domain`
+80. Paste the copied domain from step 76
+81. Click `Add`
