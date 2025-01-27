@@ -69,7 +69,7 @@
 10. Under `Your apps` click on the `tag` icon
 11. Under `App nickname` write `Web`
 12. Click on `Register app`
-13. Copy the `firebaseConfig` object and place in the JSON file `firebase/config.json`
+13. Copy the `firebaseConfig` object and place in the JSON file `web/src/services/Firebase/config.json`
 14. Click on `Continue to console`
 15. From the sidebar choose `Build`
 16. Then `Authentication`
@@ -145,5 +145,5 @@
 75. Go to `https://console.firebase.google.com/project/###_PROJECT_ID_###/authentication/settings`
 76. Click `Authorized domains`
 77. Click `Add domain`
-78. Paste the copied domain from step 71
+78. Paste the copied domain from step 74
 79. Click `Add`
