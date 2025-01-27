@@ -5,8 +5,27 @@ import { ResponseType } from '../../../../types/api/ResponseType';
 import { ProductsAllResponseType } from '../../../../types/api/product/ProductsAllResponseType';
 import ExchangeModule from '../modules/ExchangModule';
 import Config from '../Config';
+import FixtureModule from '../modules/FixtureModule';
+import { ProductFixtureResponseType } from '../../../../types/api/product/ProductFixtureResponseType';
 
 const ProductRoutes = express.Router();
+
+ProductRoutes.all('/product/fixture', async (req, res) => {
+  const product = FixtureModule().generateProduct();
+
+  await FirestoreModule<ProductType>().writeDoc(
+    'products',
+    product.uid,
+    product
+  );
+
+  const response: ResponseType<ProductFixtureResponseType> = {
+    data: {},
+  };
+
+  res.send(response);
+  return;
+});
 
 ProductRoutes.all('/products/all', async (req, res) => {
   const products =
