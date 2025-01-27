@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@master
 
       - name: 'Authenticate with GCP service account'
-        uses: w9jds/firebase-action@v13.20.2
+        uses: w9jds/firebase-action@v13.29.2
         env:
           GCP_SA_KEY: '${{ secrets.GCP_SA_KEY }}'
 
@@ -38,7 +38,7 @@ jobs:
           PROJECT_PATH: './firebase'
 
       - name: 'Deploy firestore'
-        uses: w9jds/firebase-action@v13.20.2
+        uses: w9jds/firebase-action@v13.29.2
         with:
           args: 'deploy --only firestore --force'
         env:
