@@ -1,62 +1,12 @@
-# IGS Commerce
+# Installation
 
-## TODOS
-- Make the validation rules for `/product/createUpdate` in AdminRoutes more strict.
-- Make the validation rules for `/cart/cart/update` in CartRoutes more strict.
-- Make the validation rules for `/wishlist/wishlist/update` in CartRoutes more strict.
-- Add functionality for registering only with invitation code.
-- Add information on Stripe checkout page for the product variation and attributes (not only product).
-- Add address property in user.
-- Add weight property to product variation.
-- Add "Add to cart" button on WishlistProductCard.
-- Create AccountInfo component.
-- Create import of products from CSV file. (extend the admin.tsx page)
-- Remove products, product variations and product attributes, which are selected inside cart, but doesn't exist
+Requirements:
+- Node 20
+- Firebase CLI: 13.6.0
+- Stripe CLI: 1.21.8
 
-## Requirements
-1. Node 20
-2. Firebase CLI: 13.6.0
-3. Stripe CLI: 1.21.8
+### 1. Cloud project setup
 
-## Firebase installation
-1. Authenticate into Firebase CLI: `firebase login`
-
-## Stripe installation
-1. Authenticate into Stripe CLI: `stripe login`
-
-## Web installation
-1. Open `web`: `cd web`
-2. Install dependencies: `npm i`
-3. Run local server: `npm run dev`
-
-## Firebase installation
-1. Open `functions`: `cd firebase/functions`
-2. Install dependencies: `npm i`
-3. Build cloud functions: `npm run build:watch`
-4. Run emulators: `npm run dev`
-   - Additional for Stripe webhook: `npm run stripe:webhook`
-5. Import currencies:
-   - Open scheduled functions shell: `npm run shell`
-   - Run scheduled function to import supported currencies: `firebase > schedule_paymentCurrenciesSync()`
-6. Import products:
-    - Open scheduled functions shell: `npm run shell`
-    - Run scheduled function to generate one product: `firebase > schedule_productFixtureCreate()`
-
-## Customizations:
-1. Change following properties inside `web/src/services/Firebase/config.json`
-   - `apiKey`
-   - `authDomain`
-   - `projectId`
-   - `storageBucket`
-   - `messagingSenderId`
-   - `appId`
-   - `measurementId`
-2. Change following properties inside `firebase/.firebaserc`
-   - `projects.default`
-3. Change the project name in URL of command `stripe:webhook` inside `firebase/functions/package.json`
-4. Change the project configuration inside `firebase/functions/src/Config.ts`
-
-## Project setup
 1. Go to `https://console.firebase.google.com/`
 2. Create new project
 3. Check the `Enable Google Analytics for this project` checkbox
@@ -76,9 +26,9 @@
 17. Click `Get started`
 18. Choose the sign-in methods you want to enable
 19. `Google`
-     - Click on the `Enable` toggle
-     - Under `Support email for project` choose one of the emails, which will be used for support
-     - Click `Save`
+    - Click on the `Enable` toggle
+    - Under `Support email for project` choose one of the emails, which will be used for support
+    - Click `Save`
 20. From the sidebar choose `Build`
 21. Then `Firestore Database`
 22. Click `Create database`
@@ -157,3 +107,38 @@
 79. Click `Add domain`
 80. Paste the copied domain from step 76
 81. Click `Add`
+
+### 2. Local project setup
+
+1. Authenticate into Firebase CLI: `firebase login`
+2. Authenticate into Stripe CLI: `stripe login`
+
+#### Cloud configuration:
+1. Change following properties inside `web/src/services/Firebase/config.json`
+    - `apiKey`
+    - `authDomain`
+    - `projectId`
+    - `storageBucket`
+    - `messagingSenderId`
+    - `appId`
+    - `measurementId`
+2. Change following properties inside `firebase/.firebaserc`
+    - `projects.default`
+3. Change `###_PROJECT_ID_###` with the project name in URL of command `stripe:webhook` inside `firebase/functions/package.json`
+4. Change the project configuration inside `firebase/functions/src/Config.ts`
+5. Change the project locales inside `web/next.config.mjs`
+    - `nextConfig.i18n.locales`
+
+#### Web installation
+1. Open `web`: `cd web`
+2. Install dependencies: `npm i`
+3. Run local server: `npm run dev`
+
+#### Firebase installation
+1. Open `functions`: `cd firebase/functions`
+2. Install dependencies: `npm i`
+3. Build cloud functions: `npm run build:watch`
+4. Run emulators: `npm run dev`
+    - Additional for Stripe webhook: `npm run stripe:webhook`
+5. Open `http://127.0.0.1:5001/###_PROJECT_ID_###/europe-west3/app/payment/currencies/sync` to import currencies
+6. Open `http://127.0.0.1:5001/###_PROJECT_ID_###/europe-west3/app/product/product/fixture` to import sample product
