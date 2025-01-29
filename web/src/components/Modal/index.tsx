@@ -4,7 +4,7 @@ import useApp from '../../hooks/useApp';
 
 export interface ModalProps extends AbstractComponentType {
   showModal: boolean;
-  children: React.JSX.Element | React.JSX.Element[];
+  children: React.JSX.Element | null | (React.JSX.Element | null)[];
   header?: React.JSX.Element;
   closeButton?: React.JSX.Element;
 }

@@ -3,6 +3,7 @@ import { I18n } from 'i18n-js';
 import { UserType } from '../../../types/internal/UserType';
 import { FormErrorType } from '../types/FormErrorType';
 import { ProductType } from '../../../types/internal/ProductType';
+import { PublicConfigType } from '../../../types/internal/PublicConfigType';
 
 export interface ThemeContextType {
   get: string;
@@ -36,6 +37,7 @@ export interface AppContextType {
   formErrors: FormErrorsContextType;
   products: ProductType[];
   activeModal: ActiveModalContextType;
+  config: PublicConfigType;
 }
 
 const AppContext = React.createContext<AppContextType | undefined>(undefined);

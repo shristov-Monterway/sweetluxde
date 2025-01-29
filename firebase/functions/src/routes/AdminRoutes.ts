@@ -14,6 +14,8 @@ import Config from '../Config';
 import { CurrenciesSyncResponseType } from '../../../../types/api/admin/CurrenciesSyncResponseType';
 import FixtureModule from '../modules/FixtureModule';
 import { ProductFixtureResponseType } from '../../../../types/api/admin/ProductFixtureResponseType';
+import { PublicConfigReadResponseType } from '../../../../types/api/admin/PublicConfigReadResponseType';
+import { PublicConfigType } from '../../../../types/internal/PublicConfigType';
 
 const AdminRoutes = express.Router();
 
@@ -190,6 +192,23 @@ AdminRoutes.all('/product/fixture', async (req, res) => {
 
   const response: ResponseType<ProductFixtureResponseType> = {
     data: {},
+  };
+
+  res.send(response);
+  return;
+});
+
+AdminRoutes.all('/config/read', async (req, res) => {
+  const config: PublicConfigType = {
+    defaultCurrency: Config.defaultCurrency,
+    supportedCurrencies: Config.supportedCurrencies,
+    authenticationMethods: Config.authenticationMethods,
+  };
+
+  const response: ResponseType<PublicConfigReadResponseType> = {
+    data: {
+      config,
+    },
   };
 
   res.send(response);

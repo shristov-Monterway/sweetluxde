@@ -34,6 +34,14 @@
       "password": {
         "label": "Password",
         "help": "Insert strong password."
+      },
+      "phone": {
+        "label": "Phone number",
+        "help": "Insert phone number. (ex. '+359 881234567')"
+      },
+      "code": {
+        "label": "Received code",
+        "help": "You've received verification code on your phone."
       }
     },
     "product": {
@@ -201,11 +209,14 @@
     }
   },
   "components": {
+    "adminGenerateProductButton": {
+      "label": "Generate product"
+    },
     "adminSyncCurrenciesButton": {
       "label": "Sync currencies"
     },
-    "adminGenerateProductButton": {
-      "label": "Generate product"
+    "authForm": {
+      "requestCode": "Request code"
     },
     "authModal": {
       "loginWith": "Login with:"
@@ -247,6 +258,7 @@
   },
   "errors": {
     "auth/invalid-email": "Invalid email",
-    "auth/wrong-password": "Wrong password"
+    "auth/wrong-password": "Wrong password",
+    "auth/invalid-verification-code": "Invalid code"
   }
 }

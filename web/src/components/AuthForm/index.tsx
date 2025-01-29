@@ -12,10 +12,44 @@ export interface AuthFormProps extends AbstractComponentType {
 
 const AuthForm = (props: AuthFormProps): React.JSX.Element => {
   const id = 'auth';
-  const [email, setEmail] = React.useState<string>('');
-  const [password, setPassword] = React.useState<string>('');
+  const phoneSignInRecaptcha = 'phone-sign-in-recaptcha';
   const app = useApp();
   const router = useRouter();
+  const [authFormType, setAuthFormType] = React.useState<'email' | 'phone'>(
+    app.config.authenticationMethods.includes('email') ? 'email' : 'phone'
+  );
+  const [email, setEmail] = React.useState<string>('');
+  const [password, setPassword] = React.useState<string>('');
+  const [phone, setPhone] = React.useState<string>('');
+  const [code, setCode] = React.useState<string>('');
+  const [isPhoneAllowed, setIsPhoneAllowed] = React.useState<boolean>(false);
+  const [isCodeRequested, setIsCodeRequested] = React.useState<boolean>(false);
+  const [isCodeRequestLifetimeOpened, setIsCodeRequestLifetimeOpened] =
+    React.useState<boolean>(true);
+
+  React.useEffect(() => {
+    if (document.getElementById(phoneSignInRecaptcha)) {
+      FirebaseAuthModule().verifySignInWithPhoneIsAllowed(
+        phoneSignInRecaptcha,
+        () => {
+          setIsPhoneAllowed(true);
+        }
+      );
+    }
+  }, [authFormType]);
+
+  const onRequestCode = (): void => {
+    setIsCodeRequested(true);
+    setIsCodeRequestLifetimeOpened(false);
+
+    FirebaseAuthModule().signInWithPhone(phone, () => {
+      alert('Check you phone!');
+    });
+
+    setTimeout(() => {
+      setIsCodeRequestLifetimeOpened(true);
+    }, 60000);
+  };
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
@@ -26,60 +60,157 @@ const AuthForm = (props: AuthFormProps): React.JSX.Element => {
 
     app.formErrors.set([]);
 
-    FirebaseAuthModule().signInWithEmailAndPassword(
-      email,
-      password,
-      {
-        locale: app.translator.locale,
-        theme: app.theme.get,
-        currency: app.currency.get,
-        invitedBy: router.query.invitedBy
-          ? router.query.invitedBy.toString()
-          : null,
-      },
-      (uid) => {
-        if (props.onSuccess) {
-          props.onSuccess(uid);
+    if (authFormType === 'email') {
+      FirebaseAuthModule().signInWithEmailAndPassword(
+        email,
+        password,
+        {
+          locale: app.translator.locale,
+          theme: app.theme.get,
+          currency: app.currency.get,
+          invitedBy: router.query.invitedBy
+            ? router.query.invitedBy.toString()
+            : null,
+        },
+        (uid) => {
+          if (props.onSuccess) {
+            props.onSuccess(uid);
+          }
+        },
+        (error) => {
+          if (props.onFailure) {
+            props.onFailure(error);
+          }
+          app.formErrors.set((formErrors) => [
+            ...formErrors,
+            {
+              form: 'auth',
+              field: error.message.includes('password') ? 'password' : 'email',
+              error: error.message,
+            },
+          ]);
         }
-      },
-      (error) => {
-        if (props.onFailure) {
-          props.onFailure(error);
+      );
+    } else {
+      FirebaseAuthModule().verifySignInWithPhone(
+        code,
+        {
+          locale: app.translator.locale,
+          theme: app.theme.get,
+          currency: app.currency.get,
+          invitedBy: router.query.invitedBy
+            ? router.query.invitedBy.toString()
+            : null,
+        },
+        (uid) => {
+          if (props.onSuccess) {
+            props.onSuccess(uid);
+          }
+        },
+        (error) => {
+          if (props.onFailure) {
+            props.onFailure(error);
+          }
+          app.formErrors.set((formErrors) => [
+            ...formErrors,
+            {
+              form: 'auth',
+              field: 'code',
+              error: error.message,
+            },
+          ]);
         }
-        app.formErrors.set((formErrors) => [
-          ...formErrors,
-          {
-            form: 'auth',
-            field: error.message.includes('password') ? 'password' : 'email',
-            error: error.message,
-          },
-        ]);
-      }
-    );
+      );
+    }
   };
 
   return (
     <form
-      className={`form ${props.className ? props.className : ''}`}
+      className={`form d-flex flex-column gap-4 ${props.className ? props.className : ''}`}
       onSubmit={onSubmit}
     >
-      <FormField
-        form="auth"
-        field="email"
-        type="email"
-        value={email}
-        setValue={(newEmail) => setEmail(newEmail)}
-      />
-      <FormField
-        form="auth"
-        field="password"
-        type="password"
-        value={password}
-        setValue={(newPassword) => setPassword(newPassword)}
-      />
-      <button type="submit" className="btn btn-primary w-100">
-        {app.translator.t(`form.submit.${id}`)}
-      </button>
+      {app.config.authenticationMethods.includes('email') &&
+      app.config.authenticationMethods.includes('phone') ? (
+        <div className="d-flex gap-3">
+          {app.config.authenticationMethods.includes('email') ? (
+            <button
+              type="button"
+              className={`flex-grow-1 btn btn-outline-primary ${authFormType === 'email' ? 'active' : ''}`}
+              onClick={() => setAuthFormType('email')}
+            >
+              Email <i className="fe fe-inbox" />
+            </button>
+          ) : null}
+          {app.config.authenticationMethods.includes('phone') ? (
+            <button
+              type="button"
+              className={`flex-grow-1 btn btn-outline-primary ${authFormType === 'phone' ? 'active' : ''}`}
+              onClick={() => setAuthFormType('phone')}
+            >
+              Phone <i className="fe fe-phone" />
+            </button>
+          ) : null}
+        </div>
+      ) : null}
+      {app.config.authenticationMethods.includes('email') &&
+      authFormType === 'email' ? (
+        <div className="d-flex flex-column gap-3">
+          <FormField
+            form="auth"
+            field="email"
+            type="email"
+            value={email}
+            setValue={(newEmail) => setEmail(newEmail)}
+          />
+          <FormField
+            form="auth"
+            field="password"
+            type="password"
+            value={password}
+            setValue={(newPassword) => setPassword(newPassword)}
+          />
+        </div>
+      ) : null}
+      {app.config.authenticationMethods.includes('phone') &&
+      authFormType === 'phone' ? (
+        isPhoneAllowed ? (
+          <div className="d-flex flex-column gap-3">
+            <FormField
+              form="auth"
+              field="phone"
+              type="text"
+              value={phone}
+              setValue={(newPhone) => setPhone(newPhone)}
+              className="flex-grow-1"
+            />
+            {isCodeRequested ? (
+              <FormField
+                form="auth"
+                field="code"
+                type="text"
+                value={code}
+                setValue={(newCode) => setCode(newCode)}
+              />
+            ) : null}
+            {isCodeRequestLifetimeOpened ? (
+              <button
+                type="button"
+                onClick={onRequestCode}
+                className="btn btn-outline-success w-100"
+              >
+                {app.translator.t(`components.authForm.requestCode`)}
+              </button>
+            ) : null}
+          </div>
+        ) : (
+          <div id={phoneSignInRecaptcha} />
+        )
+      ) : null}
+      {authFormType === 'phone' && !isCodeRequested ? null : (
+        <button type="submit" className="btn btn-primary w-100">
+          {app.translator.t(`form.submit.${id}`)}
+        </button>
+      )}
     </form>
   );
 };

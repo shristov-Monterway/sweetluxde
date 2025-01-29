@@ -17,14 +17,25 @@ const AuthModal = (props: AuthModalProps): React.JSX.Element => {
       showModal={props.showModal}
       className={`${props.className ? props.className : ''}`}
     >
-      <div className="d-flex align-items-center justify-content-center gap-3">
-        <h3 className="m-0 p-0">
-          {app.translator.t('components.authModal.loginWith')}
-        </h3>
-        <GoogleSignInButton onSuccess={() => app.activeModal.set(null)} />
-      </div>
-      <hr className="m-5" />
-      <AuthForm onSuccess={() => app.activeModal.set(null)} />
+      {app.config.authenticationMethods.includes('google') ? (
+        <div className="d-flex align-items-center justify-content-center gap-3">
+          <h3 className="m-0 p-0">
+            {app.translator.t('components.authModal.loginWith')}
+          </h3>
+          {app.config.authenticationMethods.includes('google') ? (
+            <GoogleSignInButton onSuccess={() => app.activeModal.set(null)} />
+          ) : null}
+        </div>
+      ) : null}
+      {app.config.authenticationMethods.includes('google') &&
+      (app.config.authenticationMethods.includes('phone') ||
+        app.config.authenticationMethods.includes('email')) ? (
+        <hr className="m-4" />
+      ) : null}
+      {app.config.authenticationMethods.includes('phone') ||
+      app.config.authenticationMethods.includes('email') ? (
+        <AuthForm onSuccess={() => app.activeModal.set(null)} />
+      ) : null}
     </Modal>
   );
 };
