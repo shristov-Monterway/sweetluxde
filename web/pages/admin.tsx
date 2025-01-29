@@ -4,6 +4,8 @@ import NotFound from 'next/error';
 import Page from '../src/components/Page';
 import Header from '../src/components/Header';
 import AdminProductsList from '../src/components/AdminProductsList';
+import AdminSyncCurrenciesButton from '../src/components/AdminSyncCurrenciesButton';
+import AdminGenerateProductButton from '../src/components/AdminGenerateProductButton';
 
 const Admin = (): React.JSX.Element => {
   const app = useApp();
@@ -14,7 +16,11 @@ const Admin = (): React.JSX.Element => {
 
   return (
     <Page isFluid={false} header={<Header hasShadow={true} />}>
-      <AdminProductsList />
+      <div className="d-flex flex-column gap-3">
+        <AdminSyncCurrenciesButton />
+        <AdminGenerateProductButton />
+        <AdminProductsList />
+      </div>
     </Page>
   );
 };

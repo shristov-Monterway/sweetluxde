@@ -201,6 +201,12 @@
     }
   },
   "components": {
+    "adminSyncCurrenciesButton": {
+      "label": "Sync currencies"
+    },
+    "adminGenerateProductButton": {
+      "label": "Generate product"
+    },
     "authModal": {
       "loginWith": "Login with:"
     },

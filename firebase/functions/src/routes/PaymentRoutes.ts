@@ -20,9 +20,6 @@ import {
 import { CheckoutNewResponseType } from '../../../../types/api/payment/CheckoutNewResponseType';
 import { UserType } from '../../../../types/internal/UserType';
 import StripeService from '../services/StripeService';
-import { CurrencyRatesType } from '../../../../types/internal/CurrencyRatesType';
-import ExchangeService from '../services/ExchangeService';
-import { CurrenciesSyncResponseType } from '../../../../types/api/payment/CurrenciesSyncResponseType';
 
 const PaymentRoutes = express.Router();
 
@@ -38,48 +35,6 @@ PaymentRoutes.all('/currencies/all', async (req, res) => {
 
   res.send(response);
   return;
-});
-
-PaymentRoutes.all('/currencies/sync', async (req, res) => {
-  await FirestoreModule<CurrencyType>().deleteCollectionDocs('currencies');
-  await FirestoreModule<CurrencyRatesType>().deleteCollectionDocs(
-    'currencyRates'
-  );
-
-  const currencies = await ExchangeService().getCurrencies();
-  const supportedCurrencies = Config.supportedCurrencies;
-
-  for (const supportedCurrency of supportedCurrencies) {
-    const supportedCurrencyData = currencies.find(
-      (currency) => currency.code == supportedCurrency
-    );
-
-    if (!supportedCurrencyData) {
-      continue;
-    }
-
-    await FirestoreModule<CurrencyType>().writeDoc(
-      'currencies',
-      supportedCurrency,
-      supportedCurrencyData
-    );
-
-    const currencyRates =
-      await ExchangeService().getCurrencyRates(supportedCurrency);
-
-    await FirestoreModule<CurrencyRatesType>().writeDoc(
-      'currencyRates',
-      supportedCurrency,
-      currencyRates
-    );
-
-    const response: ResponseType<CurrenciesSyncResponseType> = {
-      data: {},
-    };
-
-    res.send(response);
-    return;
-  }
 });
 
 PaymentRoutes.all(

@@ -140,5 +140,5 @@ Requirements:
 3. Build cloud functions: `npm run build:watch`
 4. Run emulators: `npm run dev`
     - Additional for Stripe webhook: `npm run stripe:webhook`
-5. Open `http://127.0.0.1:5001/###_PROJECT_ID_###/europe-west3/app/payment/currencies/sync` to import currencies
-6. Open `http://127.0.0.1:5001/###_PROJECT_ID_###/europe-west3/app/product/product/fixture` to import sample product
+5. Open `http://127.0.0.1:5001/###_PROJECT_ID_###/europe-west3/app/admin/currencies/sync` to import currencies
+6. Open `http://127.0.0.1:5001/###_PROJECT_ID_###/europe-west3/app/admin/product/fixture` to import sample product

@@ -7,6 +7,13 @@ import { ResponseType } from '../../../../types/api/ResponseType';
 import { ProductCreateUpdateResponseType } from '../../../../types/api/admin/ProductCreateUpdateResponseType';
 import { v4 as uuidv4 } from 'uuid';
 import { UserType } from '../../../../types/internal/UserType';
+import { CurrencyType } from '../../../../types/internal/CurrencyType';
+import { CurrencyRatesType } from '../../../../types/internal/CurrencyRatesType';
+import ExchangeService from '../services/ExchangeService';
+import Config from '../Config';
+import { CurrenciesSyncResponseType } from '../../../../types/api/admin/CurrenciesSyncResponseType';
+import FixtureModule from '../modules/FixtureModule';
+import { ProductFixtureResponseType } from '../../../../types/api/admin/ProductFixtureResponseType';
 
 const AdminRoutes = express.Router();
 
@@ -129,5 +136,64 @@ AdminRoutes.all(
     return;
   }
 );
+
+AdminRoutes.all('/currencies/sync', async (req, res) => {
+  await FirestoreModule<CurrencyType>().deleteCollectionDocs('currencies');
+  await FirestoreModule<CurrencyRatesType>().deleteCollectionDocs(
+    'currencyRates'
+  );
+
+  const currencies = await ExchangeService().getCurrencies();
+  const supportedCurrencies = Config.supportedCurrencies;
+
+  for (const supportedCurrency of supportedCurrencies) {
+    const supportedCurrencyData = currencies.find(
+      (currency) => currency.code == supportedCurrency
+    );
+
+    if (!supportedCurrencyData) {
+      continue;
+    }
+
+    await FirestoreModule<CurrencyType>().writeDoc(
+      'currencies',
+      supportedCurrency,
+      supportedCurrencyData
+    );
+
+    const currencyRates =
+      await ExchangeService().getCurrencyRates(supportedCurrency);
+
+    await FirestoreModule<CurrencyRatesType>().writeDoc(
+      'currencyRates',
+      supportedCurrency,
+      currencyRates
+    );
+  }
+
+  const response: ResponseType<CurrenciesSyncResponseType> = {
+    data: {},
+  };
+
+  res.send(response);
+  return;
+});
+
+AdminRoutes.all('/product/fixture', async (req, res) => {
+  const product = FixtureModule().generateProduct();
+
+  await FirestoreModule<ProductType>().writeDoc(
+    'products',
+    product.uid,
+    product
+  );
+
+  const response: ResponseType<ProductFixtureResponseType> = {
+    data: {},
+  };
+
+  res.send(response);
+  return;
+});
 
 export default AdminRoutes;
