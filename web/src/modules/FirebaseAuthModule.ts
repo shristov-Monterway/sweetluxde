@@ -311,6 +311,10 @@ const FirebaseAuthModule = (): FirebaseAuthModuleType => {
         .then((result: UserCredential) => {
           const additionalUserInfo = getAdditionalUserInfo(result);
           const isNewUser = !!additionalUserInfo?.isNewUser;
+          console.log('-------');
+          console.log('isNewUser:', isNewUser ? 'TRUE' : 'FALSE');
+          console.log(additionalUserInfo);
+          console.log('-------');
           const phone =
             additionalUserInfo?.profile && additionalUserInfo.profile.phone
               ? (additionalUserInfo.profile.phone as string)
