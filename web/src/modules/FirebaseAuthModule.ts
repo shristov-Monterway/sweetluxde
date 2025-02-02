@@ -309,8 +309,73 @@ const FirebaseAuthModule = (): FirebaseAuthModuleType => {
       window.confirmationResult
         .confirm(code)
         .then((result: UserCredential) => {
-          if (onSuccess) {
-            onSuccess(result.user.uid);
+          const additionalUserInfo = getAdditionalUserInfo(result);
+          const isNewUser = !!additionalUserInfo?.isNewUser;
+          const phone =
+            additionalUserInfo?.profile && additionalUserInfo.profile.phone
+              ? (additionalUserInfo.profile.phone as string)
+              : null;
+
+          if (!phone) {
+            throw new Error('User has issue with the data!');
+          }
+
+          if (isNewUser) {
+            FirestoreModule<UserType>()
+              .writeDoc('users', result.user.uid, {
+                ...initData,
+                lastLogin: new Date().getTime(),
+                uid: result.user.uid,
+                cart: {
+                  lineItems: [],
+                },
+                wishlist: {
+                  lineItems: [],
+                },
+                email: phone,
+                isAdmin: false,
+              })
+              .then(() => {
+                if (onSuccess) {
+                  onSuccess(result.user.uid);
+                }
+              })
+              .catch((error) => {
+                handleOnFailure(error, onFailure);
+              });
+          } else {
+            FirestoreModule<UserType>()
+              .getDoc('users', result.user.uid)
+              .then((user) => {
+                if (user) {
+                  FirestoreModule<UserType>()
+                    .writeDoc('users', result.user.uid, {
+                      ...user,
+                      lastLogin: new Date().getTime(),
+                    })
+                    .then(() => {
+                      if (onSuccess) {
+                        onSuccess(result.user.uid);
+                      }
+                    })
+                    .catch((error) => {
+                      handleOnFailure(error, onFailure);
+                    });
+                } else {
+                  signOut(FirebaseAuth)
+                    .then(() => {
+                      throw new Error(
+                        'User is blocked. Please contact the support center.'
+                      );
+                    })
+                    .catch((error) => {
+                      handleOnFailure(error, onFailure);
+                    });
+                }
+              })
+              .catch((error) => {
+                handleOnFailure(error, onFailure);
+              });
           }
         })
         .catch((error: any) => {
