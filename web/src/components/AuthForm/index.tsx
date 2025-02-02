@@ -120,6 +120,7 @@ const AuthForm = (props: AuthFormProps): React.JSX.Element => {
       FirebaseAuthModule().signInWithPhoneNumber(
         code,
         {
+          email: phone,
           locale: app.translator.locale,
           theme: app.theme.get,
           currency: app.currency.get,

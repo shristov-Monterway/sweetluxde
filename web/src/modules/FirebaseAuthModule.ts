@@ -50,7 +50,7 @@ export interface FirebaseAuthModuleType {
     code: string,
     initData: Omit<
       UserType,
-      'uid' | 'email' | 'lastLogin' | 'cart' | 'wishlist' | 'isAdmin'
+      'uid' | 'lastLogin' | 'cart' | 'wishlist' | 'isAdmin'
     >,
     onSuccess?: (uid: string) => void,
     onFailure?: (error: Error) => void
@@ -311,18 +311,6 @@ const FirebaseAuthModule = (): FirebaseAuthModuleType => {
         .then((result: UserCredential) => {
           const additionalUserInfo = getAdditionalUserInfo(result);
           const isNewUser = !!additionalUserInfo?.isNewUser;
-          console.log('-------');
-          console.log('isNewUser:', isNewUser ? 'TRUE' : 'FALSE');
-          console.log(additionalUserInfo);
-          console.log('-------');
-          const phone =
-            additionalUserInfo?.profile && additionalUserInfo.profile.phone
-              ? (additionalUserInfo.profile.phone as string)
-              : null;
-
-          if (!phone) {
-            throw new Error('User has issue with the data!');
-          }
 
           if (isNewUser) {
             FirestoreModule<UserType>()
@@ -336,7 +324,7 @@ const FirebaseAuthModule = (): FirebaseAuthModuleType => {
                 wishlist: {
                   lineItems: [],
                 },
-                email: phone,
+                email: initData.email,
                 isAdmin: false,
               })
               .then(() => {
