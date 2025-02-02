@@ -262,6 +262,7 @@
     "auth/invalid-verification-code": "Invalid code",
     "auth/missing-password": "Invalid password",
     "auth/invalid-phone-number": "Invalid phone number",
-    "auth/missing-code": "Missing code"
+    "auth/missing-code": "Missing code",
+    "auth/operation-not-allowed": "Operation not allowed"
   }
 }
