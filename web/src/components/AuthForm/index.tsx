@@ -43,10 +43,6 @@ const AuthForm = (props: AuthFormProps): React.JSX.Element => {
   }, [authFormType]);
 
   const onRequestCode = (): void => {
-    if (!isCodeRequestLifetimeOpened) {
-      return;
-    }
-
     app.formErrors.set([]);
 
     setCode('');
@@ -206,17 +202,14 @@ const AuthForm = (props: AuthFormProps): React.JSX.Element => {
         {app.config.authenticationMethods.includes('phone') &&
         authFormType === 'phone' ? (
           <div className="d-flex flex-column gap-3">
-            <div>
-              <FormField
-                form="auth"
-                field="phone"
-                type="text"
-                value={phone}
-                setValue={(newPhone) => setPhone(newPhone)}
-                className="flex-grow-1"
-              />
-              <div id={phoneSignInRecaptcha} />
-            </div>
+            <FormField
+              form="auth"
+              field="phone"
+              type="text"
+              value={phone}
+              setValue={(newPhone) => setPhone(newPhone)}
+              className="flex-grow-1"
+            />
             {isCodeRequested ? (
               <FormField
                 form="auth"
@@ -226,14 +219,18 @@ const AuthForm = (props: AuthFormProps): React.JSX.Element => {
                 setValue={(newCode) => setCode(newCode)}
               />
             ) : null}
-            <button
-              type="button"
-              onClick={onRequestCode}
-              className="btn btn-primary w-100"
-              disabled={!isCodeRequestLifetimeOpened}
-            >
-              {app.translator.t(`components.authForm.requestCode`)}
-            </button>
+            {isCodeRequestLifetimeOpened ? (
+              <>
+                <div id={phoneSignInRecaptcha} />
+                <button
+                  type="button"
+                  onClick={onRequestCode}
+                  className="btn btn-primary w-100"
+                >
+                  {app.translator.t(`components.authForm.requestCode`)}
+                </button>
+              </>
+            ) : null}
           </div>
         ) : null}
         {authFormType === 'phone' && !isCodeRequested ? null : (
