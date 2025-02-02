@@ -259,6 +259,9 @@
   "errors": {
     "auth/invalid-email": "Invalid email",
     "auth/wrong-password": "Wrong password",
-    "auth/invalid-verification-code": "Invalid code"
+    "auth/invalid-verification-code": "Invalid code",
+    "auth/missing-password": "Invalid password",
+    "auth/invalid-phone-number": "Invalid phone number",
+    "auth/missing-code": "Missing code"
   }
 }

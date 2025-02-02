@@ -16,6 +16,7 @@ import useInitBootstrapJs from '../src/hooks/useInitBootstrapJs';
 import useSyncUserTranslator from '../src/hooks/useSyncUserTranslator';
 import useSyncUserTheme from '../src/hooks/useSyncUserTheme';
 import useSyncUserCurrency from '../src/hooks/useSyncUserCurrency';
+import Head from 'next/head';
 
 const App = (props: AppProps): React.JSX.Element => {
   const { Component } = props;
@@ -66,6 +67,9 @@ const App = (props: AppProps): React.JSX.Element => {
           config,
         }}
       >
+        <Head>
+          <script src="https://www.google.com/recaptcha/api.js" />
+        </Head>
         <Component />
       </AppContext.Provider>
     </>

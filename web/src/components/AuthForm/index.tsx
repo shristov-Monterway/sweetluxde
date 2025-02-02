@@ -22,33 +22,57 @@ const AuthForm = (props: AuthFormProps): React.JSX.Element => {
   const [password, setPassword] = React.useState<string>('');
   const [phone, setPhone] = React.useState<string>('');
   const [code, setCode] = React.useState<string>('');
-  const [isPhoneAllowed, setIsPhoneAllowed] = React.useState<boolean>(false);
   const [isCodeRequested, setIsCodeRequested] = React.useState<boolean>(false);
   const [isCodeRequestLifetimeOpened, setIsCodeRequestLifetimeOpened] =
     React.useState<boolean>(true);
+  const [codeRequestLifetimeTimeout, setCodeRequestLifetimeTimeout] =
+    React.useState<null | NodeJS.Timeout>(null);
 
   React.useEffect(() => {
-    if (document.getElementById(phoneSignInRecaptcha)) {
-      FirebaseAuthModule().verifySignInWithPhoneIsAllowed(
-        phoneSignInRecaptcha,
-        () => {
-          setIsPhoneAllowed(true);
-        }
-      );
+    setEmail('');
+    setPassword('');
+    setPhone('');
+    setCode('');
+    setIsCodeRequested(false);
+    setIsCodeRequestLifetimeOpened(true);
+    if (codeRequestLifetimeTimeout) {
+      clearTimeout(codeRequestLifetimeTimeout);
+      setCodeRequestLifetimeTimeout(null);
     }
   }, [authFormType]);
 
   const onRequestCode = (): void => {
-    setIsCodeRequested(true);
-    setIsCodeRequestLifetimeOpened(false);
+    app.formErrors.set([]);
 
-    FirebaseAuthModule().signInWithPhone(phone, () => {
-      alert('Check you phone!');
-    });
+    setCode('');
 
-    setTimeout(() => {
-      setIsCodeRequestLifetimeOpened(true);
-    }, 60000);
+    FirebaseAuthModule().requestPhoneNumberCode(
+      phone,
+      phoneSignInRecaptcha,
+      () => {
+        setIsCodeRequestLifetimeOpened(false);
+        setIsCodeRequested(true);
+
+        const codeRequestLifetimeTimeout = setTimeout(() => {
+          setIsCodeRequestLifetimeOpened(true);
+        }, 10000);
+
+        setCodeRequestLifetimeTimeout(codeRequestLifetimeTimeout);
+      },
+      (error) => {
+        app.formErrors.set((formErrors) => [
+          ...formErrors,
+          {
+            form: 'auth',
+            field: 'phone',
+            error: error.message,
+          },
+        ]);
+
+        setIsCodeRequestLifetimeOpened(true);
+        setIsCodeRequested(false);
+      }
+    );
   };
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
@@ -92,7 +116,7 @@ const AuthForm = (props: AuthFormProps): React.JSX.Element => {
         }
       );
     } else {
-      FirebaseAuthModule().verifySignInWithPhone(
+      FirebaseAuthModule().signInWithPhoneNumber(
         code,
         {
           locale: app.translator.locale,
@@ -173,38 +197,37 @@ const AuthForm = (props: AuthFormProps): React.JSX.Element => {
       ) : null}
       {app.config.authenticationMethods.includes('phone') &&
       authFormType === 'phone' ? (
-        isPhoneAllowed ? (
-          <div className="d-flex flex-column gap-3">
+        <div className="d-flex flex-column gap-3">
+          <FormField
+            form="auth"
+            field="phone"
+            type="text"
+            value={phone}
+            setValue={(newPhone) => setPhone(newPhone)}
+            className="flex-grow-1"
+          />
+          {isCodeRequested ? (
             <FormField
               form="auth"
-              field="phone"
+              field="code"
               type="text"
-              value={phone}
-              setValue={(newPhone) => setPhone(newPhone)}
-              className="flex-grow-1"
+              value={code}
+              setValue={(newCode) => setCode(newCode)}
             />
-            {isCodeRequested ? (
-              <FormField
-                form="auth"
-                field="code"
-                type="text"
-                value={code}
-                setValue={(newCode) => setCode(newCode)}
-              />
-            ) : null}
-            {isCodeRequestLifetimeOpened ? (
+          ) : null}
+          {isCodeRequestLifetimeOpened ? (
+            <>
+              <div id={phoneSignInRecaptcha} />
               <button
                 type="button"
                 onClick={onRequestCode}
-                className="btn btn-outline-success w-100"
+                className="btn btn-primary w-100"
               >
                 {app.translator.t(`components.authForm.requestCode`)}
               </button>
-            ) : null}
-          </div>
-        ) : (
-          <div id={phoneSignInRecaptcha} />
-        )
+            </>
+          ) : null}
+        </div>
       ) : null}
       {authFormType === 'phone' && !isCodeRequested ? null : (
         <button type="submit" className="btn btn-primary w-100">

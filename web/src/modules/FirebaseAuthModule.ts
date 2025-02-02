@@ -40,12 +40,13 @@ export interface FirebaseAuthModuleType {
     onSuccess?: (uid: string) => void,
     onFailure?: (error: Error) => void
   ) => void;
-  signInWithPhone: (
+  requestPhoneNumberCode: (
     phone: string,
+    recaptchaContainerId: string,
     onSuccess?: () => void,
     onFailure?: (error: Error) => void
   ) => void;
-  verifySignInWithPhone: (
+  signInWithPhoneNumber: (
     code: string,
     initData: Omit<
       UserType,
@@ -55,10 +56,6 @@ export interface FirebaseAuthModuleType {
     onFailure?: (error: Error) => void
   ) => void;
   signOut: (onSuccess?: () => void, onFailure?: (error: Error) => void) => void;
-  verifySignInWithPhoneIsAllowed: (
-    containerId: string,
-    onSuccess: () => void
-  ) => void;
 }
 
 const FirebaseAuthModule = (): FirebaseAuthModuleType => {
@@ -245,28 +242,60 @@ const FirebaseAuthModule = (): FirebaseAuthModuleType => {
           handleOnFailure(error, onFailure);
         });
     },
-    signInWithPhone: (phone, onSuccess, onFailure) => {
+    requestPhoneNumberCode: (
+      phone,
+      recaptchaContainerId,
+      onSuccess,
+      onFailure
+    ) => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      if (!window && !window.recaptchaVerifier) {
-        handleOnFailure(new Error('Recaptcha is not checked!'), onFailure);
-      }
+      window.recaptchaVerifier = new RecaptchaVerifier(
+        FirebaseAuth,
+        recaptchaContainerId,
+        {
+          size: 'normal',
+          callback: () => {
+            defaultSignInWithPhone(
+              FirebaseAuth,
+              phone,
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
+              window.recaptchaVerifier
+            )
+              .then((confirmationResult) => {
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
+                window.confirmationResult = confirmationResult;
+                if (onSuccess) {
+                  onSuccess();
+                }
+              })
+              .catch((error) => {
+                handleOnFailure(error, onFailure);
+              });
+          },
+          'expired-callback': () => {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            grecaptcha.reset();
+            handleOnFailure(new Error('Recaptcha expired!'), onFailure);
+          },
+        }
+      );
+
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      defaultSignInWithPhone(FirebaseAuth, phone, window.recaptchaVerifier)
-        .then((confirmationResult) => {
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
-          window.confirmationResult = confirmationResult;
-          if (onSuccess) {
-            onSuccess();
-          }
-        })
-        .catch((error) => {
-          handleOnFailure(error, onFailure);
-        });
+      window.recaptchaVerifier.render().then(function (widgetId) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        window.recaptchaWidgetId = widgetId;
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        // grecaptcha.execute(window.recaptchaWidgetId);
+      });
     },
-    verifySignInWithPhone: (code, initData, onSuccess, onFailure) => {
+    signInWithPhoneNumber: (code, initData, onSuccess, onFailure) => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       if (!window && !window.confirmationResult) {
@@ -298,19 +327,6 @@ const FirebaseAuthModule = (): FirebaseAuthModuleType => {
         .catch((error) => {
           handleOnFailure(error, onFailure);
         });
-    },
-    verifySignInWithPhoneIsAllowed: (containerId, onSuccess) => {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      window.recaptchaVerifier = new RecaptchaVerifier(
-        FirebaseAuth,
-        containerId
-      );
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      window.recaptchaVerifier.render().then(() => {
-        onSuccess();
-      });
     },
   };
 };
