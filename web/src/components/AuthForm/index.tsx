@@ -4,6 +4,7 @@ import { AbstractComponentType } from '../../types/AbstractComponentType';
 import { useRouter } from 'next/router';
 import FirebaseAuthModule from '../../modules/FirebaseAuthModule';
 import FormField from '../FormField';
+import Script from 'next/script';
 
 export interface AuthFormProps extends AbstractComponentType {
   onSuccess?: (uid: string) => void;
@@ -149,92 +150,95 @@ const AuthForm = (props: AuthFormProps): React.JSX.Element => {
   };
 
   return (
-    <form
-      className={`form d-flex flex-column gap-4 ${props.className ? props.className : ''}`}
-      onSubmit={onSubmit}
-    >
-      {app.config.authenticationMethods.includes('email') &&
-      app.config.authenticationMethods.includes('phone') ? (
-        <div className="d-flex gap-3">
-          {app.config.authenticationMethods.includes('email') ? (
-            <button
-              type="button"
-              className={`flex-grow-1 btn btn-outline-primary ${authFormType === 'email' ? 'active' : ''}`}
-              onClick={() => setAuthFormType('email')}
-            >
-              Email <i className="fe fe-inbox" />
-            </button>
-          ) : null}
-          {app.config.authenticationMethods.includes('phone') ? (
-            <button
-              type="button"
-              className={`flex-grow-1 btn btn-outline-primary ${authFormType === 'phone' ? 'active' : ''}`}
-              onClick={() => setAuthFormType('phone')}
-            >
-              Phone <i className="fe fe-phone" />
-            </button>
-          ) : null}
-        </div>
-      ) : null}
-      {app.config.authenticationMethods.includes('email') &&
-      authFormType === 'email' ? (
-        <div className="d-flex flex-column gap-3">
-          <FormField
-            form="auth"
-            field="email"
-            type="email"
-            value={email}
-            setValue={(newEmail) => setEmail(newEmail)}
-          />
-          <FormField
-            form="auth"
-            field="password"
-            type="password"
-            value={password}
-            setValue={(newPassword) => setPassword(newPassword)}
-          />
-        </div>
-      ) : null}
-      {app.config.authenticationMethods.includes('phone') &&
-      authFormType === 'phone' ? (
-        <div className="d-flex flex-column gap-3">
-          <FormField
-            form="auth"
-            field="phone"
-            type="text"
-            value={phone}
-            setValue={(newPhone) => setPhone(newPhone)}
-            className="flex-grow-1"
-          />
-          {isCodeRequested ? (
-            <FormField
-              form="auth"
-              field="code"
-              type="text"
-              value={code}
-              setValue={(newCode) => setCode(newCode)}
-            />
-          ) : null}
-          {isCodeRequestLifetimeOpened ? (
-            <>
-              <div id={phoneSignInRecaptcha} />
+    <>
+      <Script src="https://www.google.com/recaptcha/api.js" />
+      <form
+        className={`form d-flex flex-column gap-4 ${props.className ? props.className : ''}`}
+        onSubmit={onSubmit}
+      >
+        {app.config.authenticationMethods.includes('email') &&
+        app.config.authenticationMethods.includes('phone') ? (
+          <div className="d-flex gap-3">
+            {app.config.authenticationMethods.includes('email') ? (
               <button
                 type="button"
-                onClick={onRequestCode}
-                className="btn btn-primary w-100"
+                className={`flex-grow-1 btn btn-outline-primary ${authFormType === 'email' ? 'active' : ''}`}
+                onClick={() => setAuthFormType('email')}
               >
-                {app.translator.t(`components.authForm.requestCode`)}
+                Email <i className="fe fe-inbox" />
               </button>
-            </>
-          ) : null}
-        </div>
-      ) : null}
-      {authFormType === 'phone' && !isCodeRequested ? null : (
-        <button type="submit" className="btn btn-primary w-100">
-          {app.translator.t(`form.submit.${id}`)}
-        </button>
-      )}
-    </form>
+            ) : null}
+            {app.config.authenticationMethods.includes('phone') ? (
+              <button
+                type="button"
+                className={`flex-grow-1 btn btn-outline-primary ${authFormType === 'phone' ? 'active' : ''}`}
+                onClick={() => setAuthFormType('phone')}
+              >
+                Phone <i className="fe fe-phone" />
+              </button>
+            ) : null}
+          </div>
+        ) : null}
+        {app.config.authenticationMethods.includes('email') &&
+        authFormType === 'email' ? (
+          <div className="d-flex flex-column gap-3">
+            <FormField
+              form="auth"
+              field="email"
+              type="email"
+              value={email}
+              setValue={(newEmail) => setEmail(newEmail)}
+            />
+            <FormField
+              form="auth"
+              field="password"
+              type="password"
+              value={password}
+              setValue={(newPassword) => setPassword(newPassword)}
+            />
+          </div>
+        ) : null}
+        {app.config.authenticationMethods.includes('phone') &&
+        authFormType === 'phone' ? (
+          <div className="d-flex flex-column gap-3">
+            <FormField
+              form="auth"
+              field="phone"
+              type="text"
+              value={phone}
+              setValue={(newPhone) => setPhone(newPhone)}
+              className="flex-grow-1"
+            />
+            {isCodeRequested ? (
+              <FormField
+                form="auth"
+                field="code"
+                type="text"
+                value={code}
+                setValue={(newCode) => setCode(newCode)}
+              />
+            ) : null}
+            {isCodeRequestLifetimeOpened ? (
+              <>
+                <div id={phoneSignInRecaptcha} />
+                <button
+                  type="button"
+                  onClick={onRequestCode}
+                  className="btn btn-primary w-100"
+                >
+                  {app.translator.t(`components.authForm.requestCode`)}
+                </button>
+              </>
+            ) : null}
+          </div>
+        ) : null}
+        {authFormType === 'phone' && !isCodeRequested ? null : (
+          <button type="submit" className="btn btn-primary w-100">
+            {app.translator.t(`form.submit.${id}`)}
+          </button>
+        )}
+      </form>
+    </>
   );
 };
 
