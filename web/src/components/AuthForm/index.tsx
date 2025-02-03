@@ -223,7 +223,7 @@ const AuthForm = (props: AuthFormProps): React.JSX.Element => {
                 setValue={(newCode) => setCode(newCode)}
               />
             ) : null}
-            <div>
+            <div className="d-flex flex-column gap-3">
               <div id={phoneSignInRecaptcha} />
               <button
                 type="button"
