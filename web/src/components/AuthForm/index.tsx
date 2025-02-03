@@ -43,6 +43,10 @@ const AuthForm = (props: AuthFormProps): React.JSX.Element => {
   }, [authFormType]);
 
   const onRequestCode = (): void => {
+    if (!isCodeRequestLifetimeOpened) {
+      return;
+    }
+
     app.formErrors.set([]);
 
     setCode('');
@@ -61,8 +65,7 @@ const AuthForm = (props: AuthFormProps): React.JSX.Element => {
         setCodeRequestLifetimeTimeout(codeRequestLifetimeTimeout);
       },
       (error) => {
-        app.formErrors.set((formErrors) => [
-          ...formErrors,
+        app.formErrors.set([
           {
             form: 'auth',
             field: 'phone',
@@ -209,6 +212,7 @@ const AuthForm = (props: AuthFormProps): React.JSX.Element => {
               value={phone}
               setValue={(newPhone) => setPhone(newPhone)}
               className="flex-grow-1"
+              disabled={!isCodeRequestLifetimeOpened}
             />
             {isCodeRequested ? (
               <FormField
@@ -219,18 +223,17 @@ const AuthForm = (props: AuthFormProps): React.JSX.Element => {
                 setValue={(newCode) => setCode(newCode)}
               />
             ) : null}
-            {isCodeRequestLifetimeOpened ? (
-              <>
-                <div id={phoneSignInRecaptcha} />
-                <button
-                  type="button"
-                  onClick={onRequestCode}
-                  className="btn btn-primary w-100"
-                >
-                  {app.translator.t(`components.authForm.requestCode`)}
-                </button>
-              </>
-            ) : null}
+            <div>
+              <div id={phoneSignInRecaptcha} />
+              <button
+                type="button"
+                onClick={onRequestCode}
+                className="btn btn-primary w-100"
+                disabled={!isCodeRequestLifetimeOpened}
+              >
+                {app.translator.t(`components.authForm.requestCode`)}
+              </button>
+            </div>
           </div>
         ) : null}
         {authFormType === 'phone' && !isCodeRequested ? null : (

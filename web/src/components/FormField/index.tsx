@@ -15,6 +15,7 @@ export interface FormFieldOptionType {
   label: string;
   value: string;
   help?: string;
+  disabled?: boolean;
 }
 
 export interface FormFieldProps extends AbstractComponentType {
@@ -33,6 +34,7 @@ export interface FormFieldProps extends AbstractComponentType {
     [key: string]: string;
   };
   inputAttributes?: { [key: string]: string };
+  disabled?: boolean;
 }
 
 const FormField = (props: FormFieldProps): React.JSX.Element | null => {
@@ -97,13 +99,17 @@ const FormField = (props: FormFieldProps): React.JSX.Element | null => {
   if (props.type === 'select') {
     inputElement = (
       <select
-        className="form-select"
+        className={`form-select ${formErrors.length > 0 ? 'is-invalid' : ''}`}
         id={`${props.form}-${props.field}`}
         aria-label={label ? label : `${props.form}_${props.field}`}
         value={props.value}
-        onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-          props.setValue(e.target.value)
-        }
+        onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+          if (props.disabled) {
+            return;
+          }
+          props.setValue(e.target.value);
+        }}
+        disabled={props.disabled}
         {...(props.inputAttributes ? props.inputAttributes : {})}
       >
         {props.selectOptions?.map((option, index) => (
@@ -120,9 +126,13 @@ const FormField = (props: FormFieldProps): React.JSX.Element | null => {
         id={`${props.form}-${props.field}`}
         aria-describedby={label ? label : undefined}
         value={props.value}
-        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
-          props.setValue(e.target.value)
-        }
+        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+          if (props.disabled) {
+            return;
+          }
+          props.setValue(e.target.value);
+        }}
+        disabled={props.disabled}
         {...(props.inputAttributes ? props.inputAttributes : {})}
       />
     );
@@ -137,12 +147,16 @@ const FormField = (props: FormFieldProps): React.JSX.Element | null => {
               id={`${props.form}-${props.field}-${option.value}`}
               checked={option.value === props.value}
               onChange={() => {
+                if (option.disabled) {
+                  return;
+                }
                 if (option.value === props.value) {
                   props.setValue('');
                 } else {
                   props.setValue(option.value);
                 }
               }}
+              disabled={option.disabled}
             />
             <label
               className="form-check-label"
@@ -170,9 +184,13 @@ const FormField = (props: FormFieldProps): React.JSX.Element | null => {
         type={props.type}
         aria-describedby={label ? label : undefined}
         value={props.value}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          props.setValue(e.target.value)
-        }
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          if (props.disabled) {
+            return;
+          }
+          props.setValue(e.target.value);
+        }}
+        disabled={props.disabled}
         {...(props.inputAttributes ? props.inputAttributes : {})}
       />
     );
