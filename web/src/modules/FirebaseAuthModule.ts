@@ -286,14 +286,14 @@ const FirebaseAuthModule = (): FirebaseAuthModuleType => {
 
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      // window.recaptchaVerifier.render().then(function (widgetId) {
-      //   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      //   // @ts-ignore
-      //   window.recaptchaWidgetId = widgetId;
-      //   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      //   // @ts-ignore
-      //   // grecaptcha.execute(window.recaptchaWidgetId);
-      // });
+      window.recaptchaVerifier.render().then(function (widgetId) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        window.recaptchaWidgetId = widgetId;
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        // grecaptcha.execute(window.recaptchaWidgetId);
+      });
     },
     signInWithPhoneNumber: (code, initData, onSuccess, onFailure) => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
