@@ -17,8 +17,8 @@ const Admin = (): React.JSX.Element => {
   return (
     <Page isFluid={false} header={<Header hasShadow={true} />}>
       <div className="d-flex flex-column gap-3">
-        <AdminSyncCurrenciesButton />
-        <AdminGenerateProductButton />
+        <AdminSyncCurrenciesButton className="flex-grow-1" />
+        <AdminGenerateProductButton className="flex-grow-1" />
         <AdminProductsList />
       </div>
     </Page>

@@ -36,6 +36,7 @@ li.nav-item {
   border-color: var(--bs-input-border-color);
 }
 
+@import "./components/admin-products-list";
 @import "./components/banner";
 @import "./components/cart-product-card";
 @import "./components/expandable";

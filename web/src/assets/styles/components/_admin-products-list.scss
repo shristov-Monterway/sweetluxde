@@ -1,0 +1,17 @@
+.admin-products-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  &__product {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__product-name {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
