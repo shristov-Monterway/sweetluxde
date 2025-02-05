@@ -1,16 +1,16 @@
 import React from 'react';
 import useApp from '../src/hooks/useApp';
-import NotFound from 'next/error';
 import Page from '../src/components/Page';
 import Header from '../src/components/Header';
 import AdminProductsList from '../src/components/AdminProductsList';
 import AdminSyncCurrenciesButton from '../src/components/AdminSyncCurrenciesButton';
 import AdminGenerateProductButton from '../src/components/AdminGenerateProductButton';
+import NotFound from 'next/error';
 
 const Admin = (): React.JSX.Element => {
   const app = useApp();
 
-  if (!app.user) {
+  if (!app.user || !app.user.isAdmin) {
     return <NotFound statusCode={404} />;
   }
 

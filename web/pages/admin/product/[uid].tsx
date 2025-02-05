@@ -12,6 +12,10 @@ const AdminProduct = (): React.JSX.Element => {
   const router = useRouter();
   const uid = router.query.uid as string;
 
+  if (!app.user || !app.user.isAdmin) {
+    return <NotFound statusCode={404} />;
+  }
+
   const product = app.products.find((product) => product.uid === uid);
 
   if (!product) {
