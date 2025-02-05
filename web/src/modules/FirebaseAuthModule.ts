@@ -254,7 +254,7 @@ const FirebaseAuthModule = (): FirebaseAuthModuleType => {
         FirebaseAuth,
         recaptchaContainerId,
         {
-          size: 'invisible',
+          size: 'normal',
           callback: () => {
             defaultSignInWithPhone(
               FirebaseAuth,
