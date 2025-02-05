@@ -216,7 +216,8 @@
       "label": "Sync currencies"
     },
     "authForm": {
-      "requestCode": "Request code"
+      "requestCode": "Request code",
+      "requestCodeMinutes": "Request code (%{seconds} sec.)"
     },
     "authModal": {
       "loginWith": "Login with:"

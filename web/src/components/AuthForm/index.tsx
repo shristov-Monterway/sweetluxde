@@ -26,8 +26,9 @@ const AuthForm = (props: AuthFormProps): React.JSX.Element => {
   const [isCodeRequested, setIsCodeRequested] = React.useState<boolean>(false);
   const [isCodeRequestLifetimeOpened, setIsCodeRequestLifetimeOpened] =
     React.useState<boolean>(true);
-  const [codeRequestLifetimeTimeout, setCodeRequestLifetimeTimeout] =
-    React.useState<null | NodeJS.Timeout>(null);
+  const [codeRequestLifetime, setCodeRequestLifetime] = React.useState<
+    null | number
+  >(null);
 
   React.useEffect(() => {
     setEmail('');
@@ -36,11 +37,21 @@ const AuthForm = (props: AuthFormProps): React.JSX.Element => {
     setCode('');
     setIsCodeRequested(false);
     setIsCodeRequestLifetimeOpened(true);
-    if (codeRequestLifetimeTimeout) {
-      clearTimeout(codeRequestLifetimeTimeout);
-      setCodeRequestLifetimeTimeout(null);
-    }
+    setCodeRequestLifetime(null);
   }, [authFormType]);
+
+  React.useEffect(() => {
+    if (codeRequestLifetime !== null) {
+      if (codeRequestLifetime === 0) {
+        setCodeRequestLifetime(null);
+        setIsCodeRequestLifetimeOpened(true);
+      } else {
+        setTimeout(() => {
+          setCodeRequestLifetime(codeRequestLifetime - 1);
+        }, 1000);
+      }
+    }
+  }, [codeRequestLifetime]);
 
   const onRequestCode = (): void => {
     if (!isCodeRequestLifetimeOpened) {
@@ -57,12 +68,7 @@ const AuthForm = (props: AuthFormProps): React.JSX.Element => {
       () => {
         setIsCodeRequestLifetimeOpened(false);
         setIsCodeRequested(true);
-
-        const codeRequestLifetimeTimeout = setTimeout(() => {
-          setIsCodeRequestLifetimeOpened(true);
-        }, 10000);
-
-        setCodeRequestLifetimeTimeout(codeRequestLifetimeTimeout);
+        setCodeRequestLifetime(10);
       },
       (error) => {
         app.formErrors.set([
@@ -224,14 +230,18 @@ const AuthForm = (props: AuthFormProps): React.JSX.Element => {
               />
             ) : null}
             <div className="d-flex flex-column">
-              <div className="pb-3" id={phoneSignInRecaptcha} />
+              <div className="pb-3 d-none" id={phoneSignInRecaptcha} />
               <button
                 type="button"
                 onClick={onRequestCode}
                 className="btn btn-primary w-100"
                 disabled={!isCodeRequestLifetimeOpened}
               >
-                {app.translator.t(`components.authForm.requestCode`)}
+                {codeRequestLifetime
+                  ? app.translator.t(`components.authForm.requestCodeMinutes`, {
+                      seconds: codeRequestLifetime,
+                    })
+                  : app.translator.t(`components.authForm.requestCode`)}
               </button>
             </div>
           </div>
