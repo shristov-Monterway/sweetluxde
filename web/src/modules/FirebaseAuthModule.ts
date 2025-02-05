@@ -248,6 +248,7 @@ const FirebaseAuthModule = (): FirebaseAuthModuleType => {
       onSuccess,
       onFailure
     ) => {
+      document.getElementById(recaptchaContainerId)!.style.display = 'block';
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       window.recaptchaVerifier = new RecaptchaVerifier(
@@ -256,6 +257,8 @@ const FirebaseAuthModule = (): FirebaseAuthModuleType => {
         {
           size: 'normal',
           callback: () => {
+            document.getElementById(recaptchaContainerId)!.style.display =
+              'none';
             defaultSignInWithPhone(
               FirebaseAuth,
               phone,
@@ -276,6 +279,8 @@ const FirebaseAuthModule = (): FirebaseAuthModuleType => {
               });
           },
           'expired-callback': () => {
+            document.getElementById(recaptchaContainerId)!.style.display =
+              'none';
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
             grecaptcha.reset();
@@ -292,7 +297,6 @@ const FirebaseAuthModule = (): FirebaseAuthModuleType => {
         window.recaptchaWidgetId = widgetId;
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        // grecaptcha.execute(window.recaptchaWidgetId);
       });
     },
     signInWithPhoneNumber: (code, initData, onSuccess, onFailure) => {
