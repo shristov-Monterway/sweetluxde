@@ -230,7 +230,11 @@ const AuthForm = (props: AuthFormProps): React.JSX.Element => {
               />
             ) : null}
             <div className="d-flex flex-column">
-              <div className="pb-3 d-none" id={phoneSignInRecaptcha} />
+              <div
+                className="pb-3"
+                id={phoneSignInRecaptcha}
+                style={{ display: 'none' }}
+              />
               <button
                 type="button"
                 onClick={onRequestCode}
