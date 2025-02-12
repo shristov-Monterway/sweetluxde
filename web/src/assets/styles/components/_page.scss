@@ -1,19 +1,13 @@
 .page {
-  position: absolute;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-
   &__header {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
+    z-index: 10000;
   }
 
   &__body {
-    flex: 1;
-    width: 100%;
-    overflow-y: scroll;
+    margin-top: 100px;
   }
 }
