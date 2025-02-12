@@ -16,6 +16,7 @@ import FixtureModule from '../modules/FixtureModule';
 import { ProductFixtureResponseType } from '../../../../types/api/admin/ProductFixtureResponseType';
 import { PublicConfigReadResponseType } from '../../../../types/api/admin/PublicConfigReadResponseType';
 import { PublicConfigType } from '../../../../types/internal/PublicConfigType';
+import { CategoryType } from '../../../../types/internal/CategoryType';
 
 const AdminRoutes = express.Router();
 
@@ -182,7 +183,15 @@ AdminRoutes.all('/currencies/sync', async (req, res) => {
 });
 
 AdminRoutes.all('/product/fixture', async (req, res) => {
-  const product = FixtureModule().generateProduct();
+  const category = FixtureModule().generateCategory(null);
+
+  await FirestoreModule<CategoryType>().writeDoc(
+    'categories',
+    category.uid,
+    category
+  );
+
+  const product = FixtureModule().generateProduct([category.uid]);
 
   await FirestoreModule<ProductType>().writeDoc(
     'products',

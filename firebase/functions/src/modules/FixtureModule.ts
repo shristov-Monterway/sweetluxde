@@ -6,10 +6,12 @@ import {
 import { v4 as uuidv4 } from 'uuid';
 import { faker } from '@faker-js/faker';
 import { TranslationType } from '../../../../types/internal/TranslationType';
+import { CategoryType } from '../../../../types/internal/CategoryType';
 
 export interface FixtureModuleType {
   generateTranslation: (value: string, locales: string[]) => TranslationType;
-  generateProduct: () => ProductType;
+  generateCategory: (parentUid: string | null) => CategoryType;
+  generateProduct: (categories: string[]) => ProductType;
 }
 
 const FixtureModule = (): FixtureModuleType => {
@@ -27,7 +29,7 @@ const FixtureModule = (): FixtureModuleType => {
         {}
       );
     },
-    generateProduct: () => {
+    generateProduct: (categories) => {
       const uid = uuidv4();
       const badgeTypes: ProductBadgeTypeType[] = [
         'success',
@@ -100,9 +102,22 @@ const FixtureModule = (): FixtureModuleType => {
           FixtureModule().generateTranslation(faker.food.fruit(), ['en', 'bg'])
         ),
         badge,
+        categories,
       };
 
       return product;
+    },
+    generateCategory: (parentUid: string | null) => {
+      const uid = uuidv4();
+      const category: CategoryType = {
+        uid,
+        name: FixtureModule().generateTranslation(
+          faker.commerce.productName(),
+          ['en', 'bg']
+        ),
+        parentUid: parentUid,
+      };
+      return category;
     },
   };
 };

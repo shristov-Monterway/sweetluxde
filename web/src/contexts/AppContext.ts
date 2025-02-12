@@ -2,8 +2,8 @@ import React from 'react';
 import { I18n } from 'i18n-js';
 import { UserType } from '../../../types/internal/UserType';
 import { FormErrorType } from '../types/FormErrorType';
-import { ProductType } from '../../../types/internal/ProductType';
 import { PublicConfigType } from '../../../types/internal/PublicConfigType';
+import { ProductDataType } from '../../../types/api/product/ProductsAllResponseType';
 
 export interface ThemeContextType {
   get: string;
@@ -35,7 +35,7 @@ export interface AppContextType {
   user: UserType | null;
   currency: CurrencyContextType;
   formErrors: FormErrorsContextType;
-  products: ProductType[];
+  products: ProductDataType[];
   activeModal: ActiveModalContextType;
   config: PublicConfigType;
 }
