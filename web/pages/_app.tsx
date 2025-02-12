@@ -16,6 +16,7 @@ import useInitBootstrapJs from '../src/hooks/useInitBootstrapJs';
 import useSyncUserTranslator from '../src/hooks/useSyncUserTranslator';
 import useSyncUserTheme from '../src/hooks/useSyncUserTheme';
 import useSyncUserCurrency from '../src/hooks/useSyncUserCurrency';
+import useInitCategories from '../src/hooks/useInitCategories';
 
 const App = (props: AppProps): React.JSX.Element => {
   const { Component } = props;
@@ -26,6 +27,10 @@ const App = (props: AppProps): React.JSX.Element => {
   const currency = useInitCurrency();
   const formErrors = useInitFormErrors();
   const products = useInitProducts({
+    locale: translator.locale,
+    currency: currency.get,
+  });
+  const categories = useInitCategories({
     locale: translator.locale,
     currency: currency.get,
   });
@@ -62,6 +67,7 @@ const App = (props: AppProps): React.JSX.Element => {
           currency,
           formErrors,
           products,
+          categories,
           activeModal,
           config,
         }}

@@ -4,6 +4,7 @@ import { UserType } from '../../../types/internal/UserType';
 import { FormErrorType } from '../types/FormErrorType';
 import { PublicConfigType } from '../../../types/internal/PublicConfigType';
 import { ProductDataType } from '../../../types/api/product/ProductsAllResponseType';
+import { CategoryType } from '../../../types/internal/CategoryType';
 
 export interface ThemeContextType {
   get: string;
@@ -36,6 +37,7 @@ export interface AppContextType {
   currency: CurrencyContextType;
   formErrors: FormErrorsContextType;
   products: ProductDataType[];
+  categories: CategoryType[];
   activeModal: ActiveModalContextType;
   config: PublicConfigType;
 }

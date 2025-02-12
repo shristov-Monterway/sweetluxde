@@ -43,6 +43,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
         },
         tags: [],
         badge: null,
+        categories: [],
       };
   const productBadgeTypes = ['success', 'danger', 'info', 'warning'];
   const [newProduct, setNewProduct] =
@@ -64,7 +65,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
   const [productVariationExpandableId, setProductVariationExpandableId] =
     React.useState<string | undefined>(undefined);
   const [newAttributeId, setNewAttributeId] = React.useState<string>('');
-  const [productAttributesExpandableId, setProductAtributesExpandableId] =
+  const [productAttributesExpandableId, setProductAttributesExpandableId] =
     React.useState<string | undefined>(undefined);
   const [newAttributeOptionId, setNewAttributeOptionId] =
     React.useState<string>('');
@@ -72,6 +73,33 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
     productAttributeOptionExpandableId,
     setProductAttributeOptionExpandableId,
   ] = React.useState<string | undefined>(undefined);
+  const [categoryNames, setCategoryNames] = React.useState<{
+    [categoryId: string]: string;
+  }>(
+    app.categories.reduce(
+      (categoryNames, category) => ({
+        ...categoryNames,
+        [category.uid]: category.name[app.translator.locale]
+          ? category.name[app.translator.locale]
+          : category.name[Object.keys(category.name)[0]],
+      }),
+      {}
+    )
+  );
+
+  React.useEffect(() => {
+    setCategoryNames(
+      app.categories.reduce(
+        (categoryNames, category) => ({
+          ...categoryNames,
+          [category.uid]: category.name[app.translator.locale]
+            ? category.name[app.translator.locale]
+            : category.name[Object.keys(category.name)[0]],
+        }),
+        {}
+      )
+    );
+  }, [app.translator.locale]);
 
   React.useEffect(() => {
     if (badgeStatus === 'enabled') {
@@ -227,6 +255,33 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
                     />
                   </>
                 ) : null}
+              </div>
+            ),
+          },
+          {
+            id: 'categories',
+            label: 'Categories',
+            children: (
+              <div className="d-flex flex-column gap-3">
+                <ListFormField
+                  form="product"
+                  field="categories"
+                  list={newProduct.categories}
+                  setList={(list) => {
+                    setNewProduct((newProduct) => ({
+                      ...newProduct,
+                      categories: list,
+                    }));
+                  }}
+                  newItem=""
+                  type="select"
+                  selectOptions={Object.keys(categoryNames).map(
+                    (categoryId) => ({
+                      label: categoryNames[categoryId],
+                      value: categoryId,
+                    })
+                  )}
+                />
               </div>
             ),
           },
@@ -406,7 +461,9 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
                                       <Expandable
                                         value={productAttributesExpandableId}
                                         setValue={(value) =>
-                                          setProductAtributesExpandableId(value)
+                                          setProductAttributesExpandableId(
+                                            value
+                                          )
                                         }
                                         elements={Object.keys(
                                           newProduct.variations[variationId]
@@ -785,7 +842,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
                                               },
                                             },
                                           }));
-                                          setProductAtributesExpandableId(
+                                          setProductAttributesExpandableId(
                                             newAttributeId
                                           );
                                           setNewAttributeId('');

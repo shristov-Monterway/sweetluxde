@@ -9,6 +9,7 @@ import {
 import ExchangeModule from '../modules/ExchangModule';
 import Config from '../Config';
 import { CategoryType } from '../../../../types/internal/CategoryType';
+import { CategoriesAllResponseType } from '../../../../types/api/product/CategoriesAllResponseType';
 
 const ProductRoutes = express.Router();
 
@@ -50,6 +51,20 @@ ProductRoutes.all('/products/all', async (req, res) => {
   const response: ResponseType<ProductsAllResponseType> = {
     data: {
       products: productsData,
+    },
+  };
+
+  res.send(response);
+  return;
+});
+
+ProductRoutes.all('/categories/all', async (req, res) => {
+  const categories =
+    await FirestoreModule<CategoryType>().getCollection('categories');
+
+  const response: ResponseType<CategoriesAllResponseType> = {
+    data: {
+      categories,
     },
   };
 
