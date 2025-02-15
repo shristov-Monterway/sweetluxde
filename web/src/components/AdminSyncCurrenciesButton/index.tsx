@@ -15,7 +15,7 @@ const AdminSyncCurrenciesButton = (
   const app = useApp();
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
-  const onPress = (): void => {
+  const onPress = async (): Promise<void> => {
     if (isLoading) {
       return;
     }
@@ -30,17 +30,21 @@ const AdminSyncCurrenciesButton = (
 
     setIsLoading(true);
 
-    FirebaseFunctionsModule<
+    await FirebaseFunctionsModule<
       CurrenciesSyncRequestType,
       CurrenciesSyncResponseType
-    >()
-      .call(
-        '/admin/currencies/sync',
-        {},
-        app.translator.locale,
-        app.currency.get
-      )
-      .finally(() => setIsLoading(false));
+    >().call(
+      '/admin/currencies/sync',
+      {},
+      app.translator.locale,
+      app.currency.get
+    );
+
+    setIsLoading(false);
+
+    if (location) {
+      location.reload();
+    }
   };
 
   return (

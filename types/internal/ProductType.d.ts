@@ -17,5 +17,5 @@ export interface ProductType {
     };
     tags: TranslationType[];
     badge: ProductBadgeType | null;
-    categories: string[];
+    categoryUids: string[];
 }

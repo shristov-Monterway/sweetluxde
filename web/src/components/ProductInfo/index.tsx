@@ -187,7 +187,7 @@ const ProductInfo = (props: ProductInfoProps): React.JSX.Element => {
     setProductVariationNames(productVariationNames);
     setProductVariationDescriptions(productVariationDescriptions);
     setBadgeText(badgeText);
-  }, [app.translator.locale]);
+  }, [app.translator.locale, props.product]);
 
   React.useEffect(() => {
     setSelectedAttributes(

@@ -7,13 +7,16 @@ export interface ModalProps extends AbstractComponentType {
   children: React.JSX.Element | null | (React.JSX.Element | null)[];
   header?: React.JSX.Element;
   closeButton?: React.JSX.Element;
+  position?: 'bottom-center' | 'full-left' | 'full-right';
 }
 
 const Modal = (props: ModalProps): React.JSX.Element => {
   const app = useApp();
 
   return (
-    <div className={`modal ${props.showModal ? 'modal--active' : ''}`}>
+    <div
+      className={`modal modal--${props.position ? props.position : 'bottom-center'} ${props.showModal ? 'modal--active' : ''}`}
+    >
       <div className="modal__card">
         <div className="modal__card-header">
           {props.header ? props.header : null}

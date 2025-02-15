@@ -154,7 +154,7 @@ const CartProductCard = (props: CartProductCardProps): React.JSX.Element => {
         {}
       )
     );
-  }, [app.translator.locale]);
+  }, [app.translator.locale, props.product, variation]);
 
   const setNewQuantity = async (quantity: -1 | 1) => {
     await FirebaseFunctionsModule<

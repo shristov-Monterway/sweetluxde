@@ -96,7 +96,7 @@ const ProductCard = (props: ProductCardProps): React.JSX.Element | null => {
     setTags(tags);
     setProductVariationNames(productVariationNames);
     setBadgeText(badgeText);
-  }, [app.translator.locale]);
+  }, [app.translator.locale, props.product]);
 
   React.useEffect(() => {
     setSelectedAttributes(

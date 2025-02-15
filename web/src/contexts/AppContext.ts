@@ -3,8 +3,8 @@ import { I18n } from 'i18n-js';
 import { UserType } from '../../../types/internal/UserType';
 import { FormErrorType } from '../types/FormErrorType';
 import { PublicConfigType } from '../../../types/internal/PublicConfigType';
-import { ProductDataType } from '../../../types/api/product/ProductsAllResponseType';
 import { CategoryType } from '../../../types/internal/CategoryType';
+import { ProductType } from '../../../types/internal/ProductType';
 
 export interface ThemeContextType {
   get: string;
@@ -26,8 +26,17 @@ export interface FormErrorsContextType {
 }
 
 export interface ActiveModalContextType {
-  get: 'authModal' | 'localeModal' | null;
-  set: (newActiveModal: 'authModal' | 'localeModal' | null) => void;
+  get: 'authModal' | 'localeModal' | 'filtersModal' | null;
+  set: (
+    newActiveModal: 'authModal' | 'localeModal' | 'filtersModal' | null
+  ) => void;
+}
+
+export interface FiltersContextType {
+  get: {
+    categories: string[];
+  };
+  set: (newFilters: { categories: string[] }) => void;
 }
 
 export interface AppContextType {
@@ -36,10 +45,11 @@ export interface AppContextType {
   user: UserType | null;
   currency: CurrencyContextType;
   formErrors: FormErrorsContextType;
-  products: ProductDataType[];
+  products: ProductType[];
   categories: CategoryType[];
   activeModal: ActiveModalContextType;
   config: PublicConfigType;
+  filters: FiltersContextType;
 }
 
 const AppContext = React.createContext<AppContextType | undefined>(undefined);

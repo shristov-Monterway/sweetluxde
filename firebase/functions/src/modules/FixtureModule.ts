@@ -11,7 +11,7 @@ import { CategoryType } from '../../../../types/internal/CategoryType';
 export interface FixtureModuleType {
   generateTranslation: (value: string, locales: string[]) => TranslationType;
   generateCategory: (parentUid: string | null) => CategoryType;
-  generateProduct: (categories: string[]) => ProductType;
+  generateProduct: (categoryUids: string[]) => ProductType;
 }
 
 const FixtureModule = (): FixtureModuleType => {
@@ -29,7 +29,7 @@ const FixtureModule = (): FixtureModuleType => {
         {}
       );
     },
-    generateProduct: (categories) => {
+    generateProduct: (categoryUids) => {
       const uid = uuidv4();
       const badgeTypes: ProductBadgeTypeType[] = [
         'success',
@@ -102,7 +102,7 @@ const FixtureModule = (): FixtureModuleType => {
           FixtureModule().generateTranslation(faker.food.fruit(), ['en', 'bg'])
         ),
         badge,
-        categories,
+        categoryUids,
       };
 
       return product;

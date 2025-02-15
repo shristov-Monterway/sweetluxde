@@ -1,10 +1,33 @@
 .expandable {
-  &__label {
+  &__button {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 35px;
+  }
+
+  &__chevron-icon {
+    font-size: 20px;
+    padding: 5px;
 
     &:hover {
       cursor: pointer;
+    }
+  }
+
+  &__label {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    &:hover {
+      cursor: default;
+    }
+
+    &--can-expand {
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 

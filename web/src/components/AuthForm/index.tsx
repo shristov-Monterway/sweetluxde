@@ -210,7 +210,7 @@ const AuthForm = (props: AuthFormProps): React.JSX.Element => {
         ) : null}
         {app.config.authenticationMethods.includes('phone') &&
         authFormType === 'phone' ? (
-          <div className="d-flex flex-column gap-3">
+          <div className="d-flex flex-column gap-4">
             <FormField
               form="auth"
               field="phone"

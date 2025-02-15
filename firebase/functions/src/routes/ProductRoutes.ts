@@ -2,10 +2,7 @@ import * as express from 'express';
 import FirestoreModule from '../modules/FirestoreModule';
 import { ProductType } from '../../../../types/internal/ProductType';
 import { ResponseType } from '../../../../types/api/ResponseType';
-import {
-  ProductDataType,
-  ProductsAllResponseType,
-} from '../../../../types/api/product/ProductsAllResponseType';
+import { ProductsAllResponseType } from '../../../../types/api/product/ProductsAllResponseType';
 import ExchangeModule from '../modules/ExchangModule';
 import Config from '../Config';
 import { CategoryType } from '../../../../types/internal/CategoryType';
@@ -36,21 +33,9 @@ ProductRoutes.all('/products/all', async (req, res) => {
     ),
   })) as unknown as ProductType[];
 
-  const categories =
-    await FirestoreModule<CategoryType>().getCollection('categories');
-
-  const productsData: ProductDataType[] = exchangedProducts.map(
-    (exchangedProduct) => ({
-      ...exchangedProduct,
-      categoriesData: categories.filter((category) =>
-        exchangedProduct.categories.includes(category.uid)
-      ),
-    })
-  );
-
   const response: ResponseType<ProductsAllResponseType> = {
     data: {
-      products: productsData,
+      products: exchangedProducts,
     },
   };
 

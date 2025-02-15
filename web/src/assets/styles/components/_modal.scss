@@ -1,35 +1,77 @@
-.modal {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100vw;
-  height: 0;
-  background-color: rgba(0, 0, 0, 0.3);
-  z-index: 2000;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
-  overflow: hidden;
-  transition: height 200ms ease;
+$block: '.modal';
 
-  &--active {
+#{$block} {
+  position: fixed;
+  // background-color: rgba(0, 0, 0, 0.3);
+  z-index: 20000;
+  display: flex;
+  overflow: hidden;
+
+  &--bottom-center {
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 0;
+    transition: height 200ms ease;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+
+    #{$block}__card {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      width: 100%;
+
+      @include media-breakpoint-up(lg) {
+        width: 80%;
+      }
+    }
+
+    #{$block}__card-body {
+      height: 500px;
+    }
+  }
+
+  &--bottom-center#{$block}--active {
     height: 100vh;
   }
 
-  &__card {
+  &--full-left {
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100vh;
+    transition: width 200ms ease;
+    justify-content: flex-start;
+    align-items: center;
+
+    #{$block}__card {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      width: 90%;
+      height: 100%;
+    }
+
+    #{$block}__card-body {
+      flex-grow: 1;
+    }
+  }
+
+  &--full-left#{$block}--active {
+    width: 100%;
+  }
+
+  &--full-right {
+
+  }
+
+  #{$block}__card {
     @extend .card;
     padding: 15px;
     margin: 0;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
     display: flex;
     gap: 10px;
-    width: 100%;
-
-    @include media-breakpoint-up(lg) {
-      width: 80%;
-    }
+    max-width: 600px;
   }
 
   &__card-header {
@@ -40,7 +82,6 @@
   }
 
   &__card-body {
-    height: 500px;
     overflow-y: scroll;
   }
 }

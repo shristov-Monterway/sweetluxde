@@ -5,6 +5,7 @@ import Header from '../src/components/Header';
 import Slider from '../src/components/Slider';
 import Banner from '../src/components/Banner';
 import ProductCard from '../src/components/ProductCard';
+import ProductsList from "../src/components/ProductsList";
 
 const Index = (): React.JSX.Element => {
   const app = useApp();
@@ -124,13 +125,7 @@ const Index = (): React.JSX.Element => {
       </Slider>
       <hr className="my-5" />
       <div className="container">
-        <div className="row">
-          {app.products.map((product, index) => (
-            <div key={index} className="col-lg-4">
-              <ProductCard product={product} />
-            </div>
-          ))}
-        </div>
+        <ProductsList showFilters={true} />
       </div>
     </Page>
   );

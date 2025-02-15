@@ -3,6 +3,7 @@ import { AbstractComponentType } from '../../types/AbstractComponentType';
 import useApp from '../../hooks/useApp';
 import AuthModal from '../AuthModal';
 import LocaleModal from '../LocaleModal';
+import FiltersModal from '../FiltersModal';
 
 export interface PageProps extends AbstractComponentType {
   children: React.JSX.Element | React.JSX.Element[];
@@ -23,6 +24,7 @@ const Page = (props: PageProps): React.JSX.Element => {
       </div>
       <AuthModal showModal={app.activeModal.get === 'authModal'} />
       <LocaleModal showModal={app.activeModal.get === 'localeModal'} />
+      <FiltersModal showModal={app.activeModal.get === 'filtersModal'} />
     </div>
   );
 };

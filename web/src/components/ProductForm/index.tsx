@@ -43,7 +43,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
         },
         tags: [],
         badge: null,
-        categories: [],
+        categoryUids: [],
       };
   const productBadgeTypes = ['success', 'danger', 'info', 'warning'];
   const [newProduct, setNewProduct] =
@@ -99,7 +99,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
         {}
       )
     );
-  }, [app.translator.locale]);
+  }, [app.translator.locale, app.categories]);
 
   React.useEffect(() => {
     if (badgeStatus === 'enabled') {
@@ -266,7 +266,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
                 <ListFormField
                   form="product"
                   field="categories"
-                  list={newProduct.categories}
+                  list={newProduct.categoryUids}
                   setList={(list) => {
                     setNewProduct((newProduct) => ({
                       ...newProduct,

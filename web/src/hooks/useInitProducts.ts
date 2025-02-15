@@ -1,18 +1,16 @@
 import React from 'react';
 import FirebaseFunctionsModule from '../modules/FirebaseFunctionsModule';
 import { ProductsAllRequestType } from '../../../types/api/product/ProductsAllRequestType';
-import {
-  ProductDataType,
-  ProductsAllResponseType,
-} from '../../../types/api/product/ProductsAllResponseType';
+import { ProductsAllResponseType } from '../../../types/api/product/ProductsAllResponseType';
+import { ProductType } from '../../../types/internal/ProductType';
 
 export interface UseInitProductsProps {
   locale: string;
   currency: string;
 }
 
-const useInitProducts = (props: UseInitProductsProps): ProductDataType[] => {
-  const [products, setProducts] = React.useState<ProductDataType[]>([]);
+const useInitProducts = (props: UseInitProductsProps): ProductType[] => {
+  const [products, setProducts] = React.useState<ProductType[]>([]);
 
   React.useEffect(() => {
     const syncProducts = async () => {

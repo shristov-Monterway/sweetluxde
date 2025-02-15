@@ -17,6 +17,7 @@ import useSyncUserTranslator from '../src/hooks/useSyncUserTranslator';
 import useSyncUserTheme from '../src/hooks/useSyncUserTheme';
 import useSyncUserCurrency from '../src/hooks/useSyncUserCurrency';
 import useInitCategories from '../src/hooks/useInitCategories';
+import useInitFilters from '../src/hooks/useInitFilters';
 
 const App = (props: AppProps): React.JSX.Element => {
   const { Component } = props;
@@ -39,6 +40,7 @@ const App = (props: AppProps): React.JSX.Element => {
     currency: currency.get,
   });
   const activeModal = useInitActiveModal();
+  const filters = useInitFilters();
   useInitBootstrapJs();
 
   useSyncUserTranslator({
@@ -70,6 +72,7 @@ const App = (props: AppProps): React.JSX.Element => {
           categories,
           activeModal,
           config,
+          filters,
         }}
       >
         <Component />

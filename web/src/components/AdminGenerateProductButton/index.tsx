@@ -15,7 +15,7 @@ const AdminGenerateProductButton = (
   const app = useApp();
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
-  const onPress = (): void => {
+  const onPress = async (): Promise<void> => {
     if (isLoading) {
       return;
     }
@@ -30,17 +30,21 @@ const AdminGenerateProductButton = (
 
     setIsLoading(true);
 
-    FirebaseFunctionsModule<
+    await FirebaseFunctionsModule<
       ProductFixtureRequestType,
       ProductFixtureResponseType
-    >()
-      .call(
-        '/admin/product/fixture',
-        {},
-        app.translator.locale,
-        app.currency.get
-      )
-      .finally(() => setIsLoading(false));
+    >().call(
+      '/admin/product/fixture',
+      {},
+      app.translator.locale,
+      app.currency.get
+    );
+
+    setIsLoading(false);
+
+    if (location) {
+      location.reload();
+    }
   };
 
   return (
