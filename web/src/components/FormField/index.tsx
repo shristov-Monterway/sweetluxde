@@ -103,11 +103,11 @@ const FormField = (props: FormFieldProps): React.JSX.Element | null => {
         id={`${props.form}-${props.field}`}
         aria-label={label ? label : `${props.form}_${props.field}`}
         value={props.value}
-        onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+        onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
           if (props.disabled) {
             return;
           }
-          props.setValue(e.target.value);
+          props.setValue(event.target.value);
         }}
         disabled={props.disabled}
         {...(props.inputAttributes ? props.inputAttributes : {})}
@@ -126,11 +126,11 @@ const FormField = (props: FormFieldProps): React.JSX.Element | null => {
         id={`${props.form}-${props.field}`}
         aria-describedby={label ? label : undefined}
         value={props.value}
-        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => {
           if (props.disabled) {
             return;
           }
-          props.setValue(e.target.value);
+          props.setValue(event.target.value);
         }}
         disabled={props.disabled}
         {...(props.inputAttributes ? props.inputAttributes : {})}
@@ -184,11 +184,11 @@ const FormField = (props: FormFieldProps): React.JSX.Element | null => {
         type={props.type}
         aria-describedby={label ? label : undefined}
         value={props.value}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           if (props.disabled) {
             return;
           }
-          props.setValue(e.target.value);
+          props.setValue(event.target.value);
         }}
         disabled={props.disabled}
         {...(props.inputAttributes ? props.inputAttributes : {})}

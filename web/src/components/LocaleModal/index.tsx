@@ -48,7 +48,9 @@ const LocaleModal = (props: LocaleModalProps): React.JSX.Element => {
           className="form-control"
           type="text"
           value={search}
-          onChange={(event) => setSearch(event.target.value)}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+            setSearch(event.target.value)
+          }
           placeholder={app.translator.t('components.localeModal.search')}
         />
       }

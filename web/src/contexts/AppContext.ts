@@ -5,6 +5,7 @@ import { FormErrorType } from '../types/FormErrorType';
 import { PublicConfigType } from '../../../types/internal/PublicConfigType';
 import { CategoryType } from '../../../types/internal/CategoryType';
 import { ProductType } from '../../../types/internal/ProductType';
+import { FilterType } from '../../../types/internal/FilterType';
 
 export interface ThemeContextType {
   get: string;
@@ -33,10 +34,9 @@ export interface ActiveModalContextType {
 }
 
 export interface FiltersContextType {
-  get: {
-    categories: string[];
-  };
-  set: (newFilters: { categories: string[] }) => void;
+  get: FilterType;
+  set: (newFilters: FilterType | ((filters: FilterType) => FilterType)) => void;
+  reset: () => void;
 }
 
 export interface AppContextType {

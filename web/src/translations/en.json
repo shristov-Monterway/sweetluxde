@@ -232,6 +232,9 @@
     "cartProductsList": {
       "noProducts": "No products in cart."
     },
+    "filtersModal": {
+      "reset": "Reset"
+    },
     "localeModal": {
       "search": "Search"
     },

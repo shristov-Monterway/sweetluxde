@@ -85,8 +85,8 @@ const AuthForm = (props: AuthFormProps): React.JSX.Element => {
     );
   };
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+    event.preventDefault();
 
     if (!app) {
       return;

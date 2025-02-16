@@ -2,7 +2,7 @@ $block: '.modal';
 
 #{$block} {
   position: fixed;
-  // background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.3);
   z-index: 20000;
   display: flex;
   overflow: hidden;
@@ -62,7 +62,28 @@ $block: '.modal';
   }
 
   &--full-right {
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 100vh;
+    transition: width 200ms ease;
+    justify-content: flex-end;
+    align-items: center;
 
+    #{$block}__card {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      width: 90%;
+      height: 100%;
+    }
+
+    #{$block}__card-body {
+      flex-grow: 1;
+    }
+  }
+
+  &--full-right#{$block}--active {
+    width: 100%;
   }
 
   #{$block}__card {

@@ -1,0 +1,26 @@
+.filters-modal {
+  &__category-section {
+    max-height: 300px;
+    overflow-y: scroll;
+
+    /* width */
+    &::-webkit-scrollbar {
+      width: $scrollbar-width;
+    }
+
+    /* Track */
+    &::-webkit-scrollbar-track {
+      background: $scrollbar-background;
+    }
+
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+      background: $scrollbar-color;
+    }
+
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+      background: $scrollbar-color-hover;
+    }
+  }
+}

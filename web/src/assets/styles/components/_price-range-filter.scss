@@ -1,0 +1,10 @@
+.price-range-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  &_values {
+    display: flex;
+    justify-content: space-between;
+  }
+}

@@ -8,16 +8,20 @@ export interface BannerProps extends AbstractComponentType {
     src: string;
     alt?: string;
   };
-  size?: 'sm' | 'md' | 'lg' | 'xlg';
+  size?: 'sm' | 'md' | 'lg';
   box: {
     title: {
       content: string;
       size?: 1 | 2 | 3 | 4 | 5 | 6;
-      color?: string;
+      color?: {
+        [theme: string]: string;
+      };
     };
     description?: {
       content: string;
-      color?: string;
+      color?: {
+        [theme: string]: string;
+      };
     };
     links?: {
       content: string;
@@ -83,7 +87,10 @@ const Banner = (props: BannerProps): React.JSX.Element => {
             <h1
               className={`display-${props.box.title.size ? props.box.title.size : 3} m-0 p-0`}
               style={{
-                color: props.box.title.color ? props.box.title.color : 'white',
+                color:
+                  props.box.title.color && props.box.title.color[app.theme.get]
+                    ? props.box.title.color[app.theme.get]
+                    : 'white',
               }}
             >
               {props.box.title.content}
@@ -92,9 +99,11 @@ const Banner = (props: BannerProps): React.JSX.Element => {
               <p
                 className="m-0 p-0"
                 style={{
-                  color: props.box.description.color
-                    ? props.box.description.color
-                    : 'white',
+                  color:
+                    props.box.description.color &&
+                    props.box.description.color[app.theme.get]
+                      ? props.box.description.color[app.theme.get]
+                      : 'white',
                 }}
               >
                 {props.box.description.content}

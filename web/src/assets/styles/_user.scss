@@ -31,19 +31,25 @@ li.nav-item {
   }
 }
 
-.form-select:disabled, .form-control:disabled, .form-check-input:disabled {
+.form-select:disabled,
+.form-control:disabled,
+.form-check-input:disabled {
   opacity: 0.5;
   border-color: var(--bs-input-border-color);
 }
 
-@import "./components/admin-products-list";
-@import "./components/banner";
-@import "./components/cart-product-card";
-@import "./components/expandable";
-@import "./components/form-field";
-@import "./components/modal";
-@import "./components/page";
-@import "./components/product-card";
-@import "./components/product-info";
-@import "./components/products-list";
-@import "./components/wishlist-product-card";
+@import './components/admin-products-list';
+@import './components/banner';
+@import './components/cart-product-card';
+@import './components/categories-filter';
+@import './components/expandable';
+@import './components/filters-modal';
+@import './components/form-field';
+@import './components/modal';
+@import './components/page';
+@import './components/price-range-filter';
+@import './components/product-card';
+@import './components/product-info';
+@import './components/products-list';
+@import './components/range-slider';
+@import './components/wishlist-product-card';

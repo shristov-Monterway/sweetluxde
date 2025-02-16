@@ -40,7 +40,9 @@ const App = (props: AppProps): React.JSX.Element => {
     currency: currency.get,
   });
   const activeModal = useInitActiveModal();
-  const filters = useInitFilters();
+  const filters = useInitFilters({
+    products,
+  });
   useInitBootstrapJs();
 
   useSyncUserTranslator({

@@ -5,7 +5,7 @@ import Header from '../src/components/Header';
 import Slider from '../src/components/Slider';
 import Banner from '../src/components/Banner';
 import ProductCard from '../src/components/ProductCard';
-import ProductsList from "../src/components/ProductsList";
+import ProductsList from '../src/components/ProductsList';
 
 const Index = (): React.JSX.Element => {
   const app = useApp();
