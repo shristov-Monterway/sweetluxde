@@ -17,6 +17,8 @@ const FiltersModal = (props: FiltersModalProps): React.JSX.Element => {
       showModal={props.showModal}
       position="full-left"
       className={`filters-modal ${props.className ? props.className : ''}`}
+      hasCloseButton={true}
+      hasCloseWithBackground={true}
     >
       <div className="d-flex flex-column gap-3">
         <div>

@@ -2,7 +2,6 @@ $block: '.modal';
 
 #{$block} {
   position: fixed;
-  background-color: rgba(0, 0, 0, 0.3);
   z-index: 20000;
   display: flex;
   overflow: hidden;
@@ -93,6 +92,24 @@ $block: '.modal';
     display: flex;
     gap: 10px;
     max-width: 600px;
+    z-index: 91;
+  }
+
+  &__card-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 90;
+    background-color: black;
+    opacity: 0.5;
+
+    &--active {
+      &:hover {
+        cursor: pointer;
+      }
+    }
   }
 
   &__card-header {

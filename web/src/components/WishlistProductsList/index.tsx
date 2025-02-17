@@ -73,9 +73,13 @@ const WishlistProductsList = (
           ))}
         </div>
       ) : (
-        <h1>
-          {app.translator.t('components.wishlistProductsList.noProducts')}
-        </h1>
+        <div className="wishlist-products-list__empty-container">
+          <hr className="flex-grow-1" />
+          <span className="wishlist-products-list__empty-label">
+            {app.translator.t('components.wishlistProductsList.noProducts')}
+          </span>
+          <hr className="flex-grow-1" />
+        </div>
       )}
     </div>
   );

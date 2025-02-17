@@ -1,3 +1,7 @@
+body {
+  min-height: unset;
+}
+
 .firebase-emulator-warning {
   display: none;
 }
@@ -41,6 +45,7 @@ li.nav-item {
 @import './components/admin-products-list';
 @import './components/banner';
 @import './components/cart-product-card';
+@import './components/cart-products-list';
 @import './components/categories-filter';
 @import './components/expandable';
 @import './components/filters-modal';
@@ -53,3 +58,4 @@ li.nav-item {
 @import './components/products-list';
 @import './components/range-slider';
 @import './components/wishlist-product-card';
+@import './components/wishlist-products-list';

@@ -103,6 +103,7 @@ const FixtureModule = (): FixtureModuleType => {
         ),
         badge,
         categoryUids,
+        publishedDate: Date.now(),
       };
 
       return product;

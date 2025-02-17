@@ -1,3 +1,5 @@
+export type FilterSortValueType = 'price-asc' | 'price-desc' | 'publishedDate-asc' | 'publishedDate-desc';
+
 export interface FilterType {
     categories: string[];
     price: {
@@ -6,4 +8,5 @@ export interface FilterType {
         minRange: number;
         maxRange: number;
     };
+    sort: FilterSortValueType;
 }

@@ -54,6 +54,8 @@ const LocaleModal = (props: LocaleModalProps): React.JSX.Element => {
           placeholder={app.translator.t('components.localeModal.search')}
         />
       }
+      hasCloseButton={true}
+      hasCloseWithBackground={true}
     >
       <div className="d-flex flex-wrap gap-1">
         {locales

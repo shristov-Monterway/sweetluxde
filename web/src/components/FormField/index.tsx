@@ -34,6 +34,7 @@ export interface FormFieldProps extends AbstractComponentType {
     [key: string]: string;
   };
   inputAttributes?: { [key: string]: string };
+  inputClassName?: string;
   disabled?: boolean;
 }
 
@@ -99,7 +100,7 @@ const FormField = (props: FormFieldProps): React.JSX.Element | null => {
   if (props.type === 'select') {
     inputElement = (
       <select
-        className={`form-select ${formErrors.length > 0 ? 'is-invalid' : ''}`}
+        className={`form-select ${props.inputClassName ? props.inputClassName : ''} ${formErrors.length > 0 ? 'is-invalid' : ''}`}
         id={`${props.form}-${props.field}`}
         aria-label={label ? label : `${props.form}_${props.field}`}
         value={props.value}
@@ -122,7 +123,7 @@ const FormField = (props: FormFieldProps): React.JSX.Element | null => {
   } else if (props.type === 'textarea') {
     inputElement = (
       <textarea
-        className={`form-control ${formErrors.length > 0 ? 'is-invalid' : ''}`}
+        className={`form-control ${props.inputClassName ? props.inputClassName : ''} ${formErrors.length > 0 ? 'is-invalid' : ''}`}
         id={`${props.form}-${props.field}`}
         aria-describedby={label ? label : undefined}
         value={props.value}
@@ -142,7 +143,7 @@ const FormField = (props: FormFieldProps): React.JSX.Element | null => {
         {props.selectOptions?.map((option, index) => (
           <div key={index} className="form-check">
             <input
-              className={`form-check-input ${formErrors.length > 0 ? 'is-invalid' : ''}`}
+              className={`form-check-input ${props.inputClassName ? props.inputClassName : ''} ${formErrors.length > 0 ? 'is-invalid' : ''}`}
               type="checkbox"
               id={`${props.form}-${props.field}-${option.value}`}
               checked={option.value === props.value}
@@ -179,7 +180,7 @@ const FormField = (props: FormFieldProps): React.JSX.Element | null => {
   } else {
     inputElement = (
       <input
-        className={`form-control ${formErrors.length > 0 ? 'is-invalid' : ''}`}
+        className={`form-control ${props.inputClassName ? props.inputClassName : ''} ${formErrors.length > 0 ? 'is-invalid' : ''}`}
         id={`${props.form}-${props.field}`}
         type={props.type}
         aria-describedby={label ? label : undefined}

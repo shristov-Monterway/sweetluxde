@@ -4,13 +4,17 @@ import useApp from '../../hooks/useApp';
 import ProductCard from '../ProductCard';
 import FiltersModalToggle from '../FiltersModalToggle';
 import { ProductType } from '../../../../types/internal/ProductType';
+import SortFilterForm from '../SortFilterForm';
 
 export interface ProductsListProps extends AbstractComponentType {
-  showFilters: boolean;
+  showFilters?: boolean;
+  showSorting?: boolean;
 }
 
 const ProductsList = (props: ProductsListProps): React.JSX.Element => {
   const app = useApp();
+  const showFilters = props.showFilters ? props.showFilters : true;
+  const showSorting = props.showSorting ? props.showSorting : true;
 
   const getCategoryDescendants = (
     categoryUid: string,
@@ -41,6 +45,54 @@ const ProductsList = (props: ProductsListProps): React.JSX.Element => {
     });
   };
 
+  const sortProducts = (products: ProductType[]) => {
+    const sortBy = app.filters.get.sort;
+
+    if (sortBy === 'price-asc') {
+      return [...products].sort((a, b) => {
+        const minPriceA = Math.min(
+          ...Object.values(a.variations).map((v) => v.price)
+        );
+        const minPriceB = Math.min(
+          ...Object.values(b.variations).map((v) => v.price)
+        );
+        return minPriceA - minPriceB;
+      });
+    }
+
+    if (sortBy === 'price-desc') {
+      return [...products].sort((a, b) => {
+        const minPriceA = Math.min(
+          ...Object.values(a.variations).map((v) => v.price)
+        );
+        const minPriceB = Math.min(
+          ...Object.values(b.variations).map((v) => v.price)
+        );
+        return minPriceB - minPriceA;
+      });
+    }
+
+    if (sortBy === 'publishedDate-asc') {
+      return [...products].sort((a, b) => {
+        return (
+          new Date(a.publishedDate).getTime() -
+          new Date(b.publishedDate).getTime()
+        );
+      });
+    }
+
+    if (sortBy === 'publishedDate-desc') {
+      return [...products].sort((a, b) => {
+        return (
+          new Date(b.publishedDate).getTime() -
+          new Date(a.publishedDate).getTime()
+        );
+      });
+    }
+
+    return products; // Default: no sorting
+  };
+
   const getFilteredProducts = () => {
     let filteredProducts = app.products;
 
@@ -65,12 +117,21 @@ const ProductsList = (props: ProductsListProps): React.JSX.Element => {
 
     filteredProducts = filteredProducts.filter(filterByPriceRange);
 
+    filteredProducts = sortProducts(filteredProducts);
+
     return filteredProducts;
   };
 
   return (
     <div className={`products-list ${props.className ? props.className : ''}`}>
-      {props.showFilters ? <FiltersModalToggle /> : null}
+      {showFilters || showSorting ? (
+        <div className="products-list__filters">
+          {showSorting ? (
+            <SortFilterForm className="products-list__sorting-filter" />
+          ) : null}
+          {showFilters ? <FiltersModalToggle /> : null}
+        </div>
+      ) : null}
       <div className="row">
         {getFilteredProducts().map((product, index) => (
           <div key={index} className="col-lg-4">

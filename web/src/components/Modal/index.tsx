@@ -5,6 +5,8 @@ import useApp from '../../hooks/useApp';
 export interface ModalProps extends AbstractComponentType {
   showModal: boolean;
   children: React.JSX.Element | null | (React.JSX.Element | null)[];
+  hasCloseButton: boolean;
+  hasCloseWithBackground: boolean;
   header?: React.JSX.Element;
   closeButton?: React.JSX.Element;
   position?: 'bottom-center' | 'full-left' | 'full-right';
@@ -20,12 +22,25 @@ const Modal = (props: ModalProps): React.JSX.Element => {
       <div className="modal__card">
         <div className="modal__card-header">
           {props.header ? props.header : null}
-          <button
-            className="btn btn-light ms-auto"
-            onClick={() => app.activeModal.set(null)}
-          >
-            {props.closeButton ? props.closeButton : <i className="fe fe-x" />}
-          </button>
+          {props.closeButton ? (
+            <button
+              className="btn btn-light ms-auto"
+              onClick={() => app.activeModal.set(null)}
+            >
+              {props.closeButton}
+            </button>
+          ) : props.hasCloseButton ? (
+            <button
+              className="btn btn-light ms-auto"
+              onClick={() => app.activeModal.set(null)}
+            >
+              {props.closeButton ? (
+                props.closeButton
+              ) : (
+                <i className="fe fe-x" />
+              )}
+            </button>
+          ) : null}
         </div>
         <div
           className={`modal__card-body ${props.className ? props.className : ''}`}
@@ -33,6 +48,16 @@ const Modal = (props: ModalProps): React.JSX.Element => {
           {props.children}
         </div>
       </div>
+      <div
+        className={`modal__card-background ${props.hasCloseWithBackground ? 'modal__card-background--active' : ''}`}
+        onClick={() => {
+          if (!props.hasCloseWithBackground) {
+            return;
+          } else {
+            app.activeModal.set(null);
+          }
+        }}
+      />
     </div>
   );
 };

@@ -18,4 +18,5 @@ export interface ProductType {
     tags: TranslationType[];
     badge: ProductBadgeType | null;
     categoryUids: string[];
+    publishedDate: number;
 }

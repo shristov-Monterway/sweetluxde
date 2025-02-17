@@ -16,6 +16,8 @@ const AuthModal = (props: AuthModalProps): React.JSX.Element => {
     <Modal
       showModal={props.showModal}
       className={`${props.className ? props.className : ''}`}
+      hasCloseButton={true}
+      hasCloseWithBackground={true}
     >
       {app.config.authenticationMethods.includes('google') ? (
         <div className="d-flex align-items-center justify-content-center gap-3">

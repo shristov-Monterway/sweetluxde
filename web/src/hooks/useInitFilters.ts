@@ -13,10 +13,11 @@ const useInitFilters = (props: UseInitFiltersProps): FiltersContextType => {
     categories: [],
     price: {
       min: 0,
-      max: 100,
+      max: 100000000000000000000000000,
       minRange: 0,
-      maxRange: 100,
+      maxRange: 0,
     },
+    sort: 'publishedDate-desc',
   };
   const router = useRouter();
   const [filters, setFilters] = React.useState<FilterType>(defaultFilter);
@@ -28,7 +29,7 @@ const useInitFilters = (props: UseInitFiltersProps): FiltersContextType => {
         const parsed: FilterType =
           typeof initialFilters === 'string'
             ? JSON.parse(initialFilters)
-            : { categories: [], price: { min: 0, max: 100 } };
+            : defaultFilter;
 
         setFilters(parsed);
       } catch (e) {
@@ -45,13 +46,7 @@ const useInitFilters = (props: UseInitFiltersProps): FiltersContextType => {
     const filtersQuery: FilterType =
       router.query.filters && typeof router.query.filters === 'string'
         ? JSON.parse(router.query.filters)
-        : {
-            categories: [],
-            price: {
-              min: 0,
-              max: 100,
-            },
-          };
+        : defaultFilter;
 
     if (JSON.stringify(filtersQuery) !== JSON.stringify(filters)) {
       router.replace(
@@ -73,7 +68,7 @@ const useInitFilters = (props: UseInitFiltersProps): FiltersContextType => {
 
   React.useEffect(() => {
     let minPriceOfProducts: number = 0;
-    let maxPriceOfProducts: number = 100;
+    let maxPriceOfProducts: number = 0;
 
     props.products.forEach((product, productIndex) => {
       Object.keys(product.variations).forEach(
@@ -105,7 +100,7 @@ const useInitFilters = (props: UseInitFiltersProps): FiltersContextType => {
 
   const reset = (): void => {
     let minPriceOfProducts: number = 0;
-    let maxPriceOfProducts: number = 100;
+    let maxPriceOfProducts: number = 0;
 
     props.products.forEach((product, productIndex) => {
       Object.keys(product.variations).forEach(

@@ -34,8 +34,8 @@ const RangeSlider = (props: RangeSliderProps): React.JSX.Element => {
       <div
         className="range-slider__track-active"
         style={{
-          left: `${(props.minValue * 100) / props.max}%`,
-          width: `${((props.maxValue - props.minValue) * 100) / props.max}%`,
+          left: `${((props.minValue - props.min) / (props.max - props.min)) * 100}%`,
+          width: `${((props.maxValue - props.minValue) / (props.max - props.min)) * 100}%`,
         }}
       />
 

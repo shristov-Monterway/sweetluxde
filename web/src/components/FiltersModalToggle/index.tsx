@@ -13,7 +13,7 @@ const FiltersModalToggle = (
 
   return (
     <button
-      className={`btn btn-primary btn-sm ${props.className ? props.className : ''}`}
+      className={`btn btn-primary ${props.className ? props.className : ''}`}
       onClick={() => app.activeModal.set('filtersModal')}
     >
       {props.label ? props.label : <i className="fe fe-filter" />}

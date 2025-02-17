@@ -56,7 +56,9 @@ const CartProductsList = (props: CartProductsListProps): React.JSX.Element => {
   }, [app.user, app.products]);
 
   return (
-    <div className={`${props.className ? props.className : ''}`}>
+    <div
+      className={`cart-products-list ${props.className ? props.className : ''}`}
+    >
       {lineItems.length > 0 ? (
         <div className="row">
           {lineItems.map((lineItem, index) => (
@@ -71,7 +73,13 @@ const CartProductsList = (props: CartProductsListProps): React.JSX.Element => {
           ))}
         </div>
       ) : (
-        <h1>{app.translator.t('components.cartProductsList.noProducts')}</h1>
+        <div className="cart-products-list__empty-container">
+          <hr className="flex-grow-1" />
+          <span className="cart-products-list__empty-label">
+            {app.translator.t('components.cartProductsList.noProducts')}
+          </span>
+          <hr className="flex-grow-1" />
+        </div>
       )}
     </div>
   );

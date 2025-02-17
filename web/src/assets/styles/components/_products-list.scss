@@ -2,4 +2,15 @@
   display: flex;
   flex-direction: column;
   gap: 50px;
+
+  &__filters {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+
+  &__sorting-filter {
+    height: 42px;
+  }
 }

@@ -44,6 +44,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
         tags: [],
         badge: null,
         categoryUids: [],
+        publishedDate: Date.now(),
       };
   const productBadgeTypes = ['success', 'danger', 'info', 'warning'];
   const [newProduct, setNewProduct] =

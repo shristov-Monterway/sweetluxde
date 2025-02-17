@@ -202,10 +202,27 @@
         "help": "Insert ID of new variation."
       }
     },
+    "sortFilter": {
+      "value": {
+        "option": {
+          "price-asc": {
+            "label": "Price (0-9)"
+          },
+          "price-desc": {
+            "label": "Price (9-0)"
+          },
+          "publishedDate-asc": {
+            "label": "Published (oldest-newest)"
+          },
+          "publishedDate-desc": {
+            "label": "Published (newest-oldest)"
+          }
+        }
+      }
+    },
     "submit": {
       "auth": "Authenticate",
-      "product": "Publish",
-      "resetPassword": "Send email"
+      "product": "Publish"
     }
   },
   "components": {
