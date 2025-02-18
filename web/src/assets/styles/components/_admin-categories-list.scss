@@ -1,23 +1,23 @@
-.admin-products-list {
+.admin-categories-list {
   &__container {
     display: flex;
     flex-direction: column;
     gap: 20px;
   }
 
-  &__product {
+  &__category {
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
 
-  &__product-name-container {
+  &__category-name-container {
     display: flex;
     flex-direction: column;
     gap: 5px;
   }
 
-  &__product-name {
+  &__category-name {
     font-size: 1.2rem;
   }
 }

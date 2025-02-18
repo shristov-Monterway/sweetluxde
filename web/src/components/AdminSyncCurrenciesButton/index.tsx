@@ -4,10 +4,9 @@ import useApp from '../../hooks/useApp';
 import FirebaseFunctionsModule from '../../modules/FirebaseFunctionsModule';
 import { CurrenciesSyncRequestType } from '../../../../types/api/admin/CurrenciesSyncRequestType';
 import { CurrenciesSyncResponseType } from '../../../../types/api/admin/CurrenciesSyncResponseType';
+import LoadingButton from '../LoadingButton/LoadingButton';
 
-export interface AdminSyncCurrenciesButtonProps extends AbstractComponentType {
-  children?: React.JSX.Element | React.JSX.Element[];
-}
+export type AdminSyncCurrenciesButtonProps = AbstractComponentType;
 
 const AdminSyncCurrenciesButton = (
   props: AdminSyncCurrenciesButtonProps
@@ -48,25 +47,12 @@ const AdminSyncCurrenciesButton = (
   };
 
   return (
-    <div className="d-flex align-items-center gap-3">
-      <button
-        className={`btn btn-primary ${isLoading ? 'disabled' : ''} ${props.className ? props.className : ''}`}
-        onClick={onPress}
-      >
-        {props.children ? (
-          props.children
-        ) : (
-          <span>
-            {app.translator.t('components.adminSyncCurrenciesButton.label')}
-          </span>
-        )}
-      </button>
-      {isLoading ? (
-        <div className="spinner-border text-primary" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </div>
-      ) : null}
-    </div>
+    <LoadingButton
+      isLoading={isLoading}
+      label={app.translator.t('components.adminSyncCurrenciesButton.label')}
+      onClick={onPress}
+      className={props.className ? props.className : ''}
+    />
   );
 };
 

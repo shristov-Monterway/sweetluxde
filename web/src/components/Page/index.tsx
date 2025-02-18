@@ -17,7 +17,13 @@ const Page = (props: PageProps): React.JSX.Element => {
   return (
     <div className={`page ${props.className ? props.className : ''}`}>
       {props.header ? <div className="page__header">{props.header}</div> : null}
-      <div className="page__body">
+      <div
+        className="page__body"
+        style={{
+          paddingTop: `${app.config.headerHeight + 10}px`,
+          paddingBottom: `${app.config.headerHeight + 10}px`,
+        }}
+      >
         <div className={props.isFluid ? 'container-fluid' : 'container'}>
           {props.children}
         </div>

@@ -5,6 +5,8 @@ import NotFound from 'next/error';
 import Page from '../src/components/Page';
 import Header from '../src/components/Header';
 import SignOutButton from '../src/components/SignOutButton';
+import AccountAdminSection from '../src/components/AccountAdminSection';
+import SideNavContainer from '../src/components/SideNavContainer';
 
 const Account = (): React.JSX.Element => {
   const app = useApp();
@@ -14,13 +16,41 @@ const Account = (): React.JSX.Element => {
     return <NotFound statusCode={404} />;
   }
 
+  const sections: {
+    id: string;
+    label: string | React.JSX.Element;
+    element?: React.JSX.Element;
+    className?: string;
+  }[] = [
+    {
+      id: 'divider',
+      label: <hr />,
+    },
+    {
+      id: 'logOut',
+      label: (
+        <SignOutButton
+          className="btn btn-primary w-100"
+          onSuccess={() => {
+            router.push('/');
+          }}
+        />
+      ),
+    },
+  ];
+
+  if (app.user && app.user.isAdmin) {
+    sections.unshift({
+      id: 'admin',
+      label: 'Admin',
+      element: <AccountAdminSection />,
+      className: 'btn btn-outline-primary w-100',
+    });
+  }
+
   return (
     <Page isFluid={false} header={<Header hasShadow={true} />}>
-      <SignOutButton
-        onSuccess={() => {
-          router.push('/');
-        }}
-      />
+      <SideNavContainer isSideBarFixed={false} sections={sections} />
     </Page>
   );
 };

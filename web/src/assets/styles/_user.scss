@@ -42,6 +42,8 @@ li.nav-item {
   border-color: var(--bs-input-border-color);
 }
 
+@import './components/account-admin-section';
+@import './components/admin-categories-list';
 @import './components/admin-products-list';
 @import './components/attribute-filter';
 @import './components/banner';
@@ -58,5 +60,6 @@ li.nav-item {
 @import './components/product-info';
 @import './components/products-list';
 @import './components/range-slider';
+@import './components/side-nav-container';
 @import './components/wishlist-product-card';
 @import './components/wishlist-products-list';

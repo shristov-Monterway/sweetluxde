@@ -1,5 +1,11 @@
 {
   "pages": {
+    "/admin/category/[uid]": {
+      "title": "Manage category %{name}"
+    },
+    "/admin/category/new": {
+      "title": "Create new category"
+    },
     "/admin/product/[uid]": {
       "title": "Manage product %{name}"
     },
@@ -11,6 +17,9 @@
     },
     "/account": {
       "title": "Account"
+    },
+    "/admin": {
+      "title": "Admin panel"
     },
     "/cart": {
       "title": "Cart"
@@ -42,6 +51,32 @@
       "code": {
         "label": "Received code",
         "help": "You've received verification code on your phone."
+      }
+    },
+    "category": {
+      "name": {
+        "label": "Category name in %{language}",
+        "help": "Insert category name for %{language}."
+      },
+      "name_locale": {
+        "label": "Language",
+        "help": "Choose language for the text."
+      },
+      "name_value": {
+        "label": "Text",
+        "help": "Write translation for the text."
+      },
+      "parentUidStatus": {
+        "option": {
+          "enabled": {
+            "label": "Enable parent category",
+            "help": "Select if the current category should have a parent category."
+          }
+        }
+      },
+      "parentUid": {
+        "label": "ID of the parent category",
+        "help": "Insert the ID of the parent category."
       }
     },
     "product": {
@@ -149,6 +184,14 @@
         "label": "Text",
         "help": "Write translation for the text."
       },
+      "categories": {
+        "label": "Category",
+        "help": "Selected category for the product."
+      },
+      "categories_new": {
+        "label": "New category",
+        "help": "Select category to be added."
+      },
       "productVariationName": {
         "label": "Product variation name in %{language}",
         "help": "Insert product variation name for %{language}."
@@ -222,12 +265,23 @@
     },
     "submit": {
       "auth": "Authenticate",
-      "product": "Publish"
+      "product": "Publish",
+      "category": "Publish"
     }
   },
   "components": {
+    "accountAdminSection": {
+      "message": "You're admin of the shop.",
+      "manage": "Manage"
+    },
+    "adminCategoriesList": {
+      "label": "Categories"
+    },
     "adminGenerateProductButton": {
       "label": "Generate product"
+    },
+    "adminProductsList": {
+      "label": "Products"
     },
     "adminSyncCurrenciesButton": {
       "label": "Sync currencies"
@@ -252,8 +306,12 @@
     "categoriesFilter": {
       "label": "Category:"
     },
-    "filtersModal": {
-      "reset": "Reset"
+    "categoryForm": {
+      "name": "Name",
+      "parentUid": "Parent category"
+    },
+    "filtersResetButton": {
+      "label": "Reset"
     },
     "localeModal": {
       "search": "Search"
@@ -264,8 +322,29 @@
     "productCard": {
       "view": "View"
     },
+    "productForm": {
+      "name": "Name",
+      "description": "Description",
+      "tags": "Tags",
+      "badge": "Badge",
+      "categories": "Categories",
+      "variations": "Variations",
+      "productVariationName": "Name",
+      "productVariationDescription": "Description",
+      "productVariationPrice": "Price",
+      "productVariationImages": "Images",
+      "productVariationAttributes": "Attributes",
+      "productVariationWeight": "Weight"
+    },
     "productInfo": {
       "addToCart": "Add to cart"
+    },
+    "productsList": {
+      "foundProductsCount": {
+        "zero": "No products found.",
+        "one": "Found 1 product.",
+        "other": "Found %{count} products."
+      }
     },
     "signOutButton": {
       "signOut": "Log out"

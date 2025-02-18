@@ -146,7 +146,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
         elements={[
           {
             id: 'name',
-            label: 'Name',
+            label: app.translator.t('components.productForm.name'),
             children: (
               <TranslationFormField
                 form="product"
@@ -163,7 +163,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
           },
           {
             id: 'description',
-            label: 'Description',
+            label: app.translator.t('components.productForm.description'),
             children: (
               <TranslationFormField
                 form="product"
@@ -184,7 +184,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
           },
           {
             id: 'tags',
-            label: 'Tags',
+            label: app.translator.t('components.productForm.tags'),
             children: (
               <ListFormField
                 form="product"
@@ -204,7 +204,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
           },
           {
             id: 'badge',
-            label: 'Badge',
+            label: app.translator.t('components.productForm.badge'),
             children: (
               <div className="d-flex flex-column gap-3">
                 <FormField
@@ -261,7 +261,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
           },
           {
             id: 'categories',
-            label: 'Categories',
+            label: app.translator.t('components.productForm.categories'),
             children: (
               <div className="d-flex flex-column gap-3">
                 <ListFormField
@@ -288,7 +288,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
           },
           {
             id: 'variations',
-            label: 'Variations',
+            label: app.translator.t('components.productForm.variations'),
             children: (
               <div className="d-flex flex-column gap-3">
                 {Object.keys(newProduct.variations).length > 0 ? (
@@ -330,7 +330,9 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
                             elements={[
                               {
                                 id: 'productVariationName',
-                                label: 'Name',
+                                label: app.translator.t(
+                                  'components.productForm.productVariationName'
+                                ),
                                 children: (
                                   <TranslationFormField
                                     form="product"
@@ -356,8 +358,10 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
                                 ),
                               },
                               {
-                                id: 'productVariationDescritpion',
-                                label: 'Description',
+                                id: 'productVariationDescription',
+                                label: app.translator.t(
+                                  'components.productForm.productVariationDescription'
+                                ),
                                 children: (
                                   <TranslationFormField
                                     form="product"
@@ -389,7 +393,9 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
                               },
                               {
                                 id: 'productVariationPrice',
-                                label: 'Price',
+                                label: app.translator.t(
+                                  'components.productForm.productVariationPrice'
+                                ),
                                 children: (
                                   <FormField
                                     form="product"
@@ -423,7 +429,9 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
                               },
                               {
                                 id: 'productVariationImages',
-                                label: 'Images',
+                                label: app.translator.t(
+                                  'components.productForm.productVariationImages'
+                                ),
                                 children: (
                                   <ListFormField
                                     form="product"
@@ -452,7 +460,9 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
                               },
                               {
                                 id: 'productVariationAttributes',
-                                label: 'Attributes',
+                                label: app.translator.t(
+                                  'components.productForm.productVariationAttributes'
+                                ),
                                 children: (
                                   <div className="d-flex flex-column gap-3">
                                     {Object.keys(
@@ -859,7 +869,9 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
                               },
                               {
                                 id: 'productVariationWeight',
-                                label: 'Weight',
+                                label: app.translator.t(
+                                  'components.productForm.productVariationWeight'
+                                ),
                                 children: (
                                   <div className="d-flex flex-column gap-3">
                                     <FormField

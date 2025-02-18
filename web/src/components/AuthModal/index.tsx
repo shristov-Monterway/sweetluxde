@@ -25,7 +25,10 @@ const AuthModal = (props: AuthModalProps): React.JSX.Element => {
             {app.translator.t('components.authModal.loginWith')}
           </h3>
           {app.config.authenticationMethods.includes('google') ? (
-            <GoogleSignInButton onSuccess={() => app.activeModal.set(null)} />
+            <GoogleSignInButton
+              className="btn btn-primary"
+              onSuccess={() => app.activeModal.set(null)}
+            />
           ) : null}
         </div>
       ) : null}

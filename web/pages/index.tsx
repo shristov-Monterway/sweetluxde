@@ -125,7 +125,7 @@ const Index = (): React.JSX.Element => {
       </Slider>
       <hr className="my-5" />
       <div className="container">
-        <ProductsList />
+        <ProductsList showFilters={true} showSorting={true} />
       </div>
     </Page>
   );

@@ -17,6 +17,8 @@ import { ProductFixtureResponseType } from '../../../../types/api/admin/ProductF
 import { PublicConfigReadResponseType } from '../../../../types/api/admin/PublicConfigReadResponseType';
 import { PublicConfigType } from '../../../../types/internal/PublicConfigType';
 import { CategoryType } from '../../../../types/internal/CategoryType';
+import { CategoryCreateUpdateRequestType } from '../../../../types/api/admin/CategoryCreateUpdateRequestType';
+import { CategoryCreateUpdateResponseType } from '../../../../types/api/admin/CategoryCreateUpdateResponseType';
 
 const AdminRoutes = express.Router();
 
@@ -140,6 +142,96 @@ AdminRoutes.all(
   }
 );
 
+AdminRoutes.all(
+  '/category/createUpdate',
+  checkSchema({
+    uid: {
+      in: 'body',
+      optional: true,
+      notEmpty: true,
+      isString: true,
+    },
+    'category.name.*': {
+      in: 'body',
+      notEmpty: true,
+      isString: true,
+    },
+    'product.parentUid': {
+      in: 'body',
+      notEmpty: true,
+      isString: true,
+    },
+  }),
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  async (req, res) => {
+    const validation = validationResult(req);
+
+    if (!validation.isEmpty()) {
+      res.status(400).send(validation.array());
+      return;
+    }
+
+    const user = req.user as UserType | null;
+
+    if (!user || !user.isAdmin) {
+      res.status(401).send();
+      return;
+    }
+
+    const request: CategoryCreateUpdateRequestType = req.body;
+    let category: CategoryType | null = null;
+
+    if (request.uid) {
+      if (
+        request.category.parentUid !== null &&
+        request.category.parentUid === request.uid
+      ) {
+        res.status(400).send();
+        return;
+      }
+
+      await FirestoreModule<CategoryType>().writeDoc(
+        'categories',
+        request.uid,
+        {
+          ...request.category,
+          uid: request.uid,
+        }
+      );
+
+      category = await FirestoreModule<CategoryType>().getDoc(
+        'categories',
+        request.uid
+      );
+    } else {
+      const uid = uuidv4();
+      await FirestoreModule<CategoryType>().writeDoc('categories', uid, {
+        ...request.category,
+        uid,
+      });
+
+      category = await FirestoreModule<CategoryType>().getDoc(
+        'categories',
+        uid
+      );
+    }
+
+    if (!category) {
+      throw new Error('Category not found');
+    }
+
+    const response: ResponseType<CategoryCreateUpdateResponseType> = {
+      data: {
+        category,
+      },
+    };
+
+    res.send(response);
+    return;
+  }
+);
+
 AdminRoutes.all('/currencies/sync', async (req, res) => {
   await FirestoreModule<CurrencyType>().deleteCollectionDocs('currencies');
   await FirestoreModule<CurrencyRatesType>().deleteCollectionDocs(
@@ -213,6 +305,7 @@ AdminRoutes.all('/config/read', async (req, res) => {
     supportedCurrencies: Config.supportedCurrencies,
     authenticationMethods: Config.authenticationMethods,
     attributesToFilter: Config.attributesToFilter,
+    headerHeight: Config.headerHeight,
   };
 
   const response: ResponseType<PublicConfigReadResponseType> = {

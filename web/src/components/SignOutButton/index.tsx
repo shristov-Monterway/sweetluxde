@@ -22,7 +22,7 @@ const SignOutButton = (props: SignOutButtonProps): React.JSX.Element => {
 
   return (
     <button
-      className={`btn btn-primary ${props.className ? props.className : ''}`}
+      className={`${props.className ? props.className : ''}`}
       onClick={onPress}
     >
       {props.children ? (

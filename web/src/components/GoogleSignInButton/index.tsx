@@ -38,7 +38,7 @@ const GoogleSignInButton = (
 
   return (
     <button
-      className={`btn btn-primary ${props.className ? props.className : ''}`}
+      className={`${props.className ? props.className : ''}`}
       onClick={onPress}
     >
       {props.children ? props.children : <span>Google</span>}

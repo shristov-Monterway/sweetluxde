@@ -3,14 +3,33 @@
   flex-direction: column;
   gap: 50px;
 
+  &__actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   &__filters {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: 10px;
+    gap: 20px;
   }
 
   &__sorting-filter {
     height: 42px;
+  }
+
+  &__empty-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+  }
+
+  &__empty-label {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 1.2rem;
   }
 }

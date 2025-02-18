@@ -11,7 +11,7 @@ const AuthModalToggle = (props: AuthModalToggleProps): React.JSX.Element => {
 
   return (
     <button
-      className={`btn btn-primary btn-sm ${props.className ? props.className : ''}`}
+      className={`${props.className ? props.className : ''}`}
       onClick={() => app.activeModal.set('authModal')}
     >
       {props.label ? props.label : <i className="fe fe-user" />}

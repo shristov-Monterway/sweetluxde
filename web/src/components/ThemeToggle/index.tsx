@@ -26,7 +26,7 @@ const ThemeToggle = (props: ThemeToggleProps): React.JSX.Element => {
 
   return (
     <button
-      className={`btn btn-primary btn-sm ${props.className ? props.className : ''}`}
+      className={`${props.className ? props.className : ''}`}
       onClick={onPress}
     >
       {props.label ? (

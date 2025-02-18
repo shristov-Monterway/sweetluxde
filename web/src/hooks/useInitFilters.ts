@@ -77,7 +77,7 @@ const useInitFilters = (props: UseInitFiltersProps): FiltersContextType => {
 
   React.useEffect(() => {
     let minPriceOfProducts: number = 0;
-    let maxPriceOfProducts: number = 0;
+    let maxPriceOfProducts: number = 100000000000000000000000000;
 
     props.products.forEach((product, productIndex) => {
       Object.keys(product.variations).forEach(
@@ -112,11 +112,11 @@ const useInitFilters = (props: UseInitFiltersProps): FiltersContextType => {
         {}
       ),
     }));
-  }, [props.products]);
+  }, [props.products, router.pathname]);
 
   const reset = (): void => {
     let minPriceOfProducts: number = 0;
-    let maxPriceOfProducts: number = 0;
+    let maxPriceOfProducts: number = 100000000000000000000000000;
 
     props.products.forEach((product, productIndex) => {
       Object.keys(product.variations).forEach(

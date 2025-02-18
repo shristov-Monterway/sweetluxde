@@ -53,8 +53,8 @@ const Header = (props: HeaderProps): React.JSX.Element => {
             </li>
             <li className="nav-item">
               <div className="nav-link d-flex gap-1">
-                <ThemeToggle />
-                <LocaleModalToggle />
+                <ThemeToggle className="btn btn-primary btn-sm" />
+                <LocaleModalToggle className="btn btn-primary btn-sm" />
                 {app.user ? (
                   <>
                     <Link href="/account" passHref={true}>
@@ -84,7 +84,7 @@ const Header = (props: HeaderProps): React.JSX.Element => {
                     </Link>
                   </>
                 ) : (
-                  <AuthModalToggle />
+                  <AuthModalToggle className="btn btn-primary btn-sm" />
                 )}
               </div>
             </li>

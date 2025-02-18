@@ -5,16 +5,15 @@ import ProductCard from '../ProductCard';
 import FiltersModalToggle from '../FiltersModalToggle';
 import { ProductType } from '../../../../types/internal/ProductType';
 import SortFilterForm from '../SortFilterForm';
+import FiltersResetButton from '../FiltersResetButton';
 
 export interface ProductsListProps extends AbstractComponentType {
-  showFilters?: boolean;
-  showSorting?: boolean;
+  showFilters: boolean;
+  showSorting: boolean;
 }
 
 const ProductsList = (props: ProductsListProps): React.JSX.Element => {
   const app = useApp();
-  const showFilters = props.showFilters ? props.showFilters : true;
-  const showSorting = props.showSorting ? props.showSorting : true;
 
   const getCategoryDescendants = (
     categoryUid: string,
@@ -143,22 +142,48 @@ const ProductsList = (props: ProductsListProps): React.JSX.Element => {
     return filteredProducts;
   };
 
+  const products = getFilteredProducts();
+
   return (
     <div className={`products-list ${props.className ? props.className : ''}`}>
-      {showFilters || showSorting ? (
-        <div className="products-list__filters">
-          {showSorting ? (
-            <SortFilterForm className="products-list__sorting-filter" />
-          ) : null}
-          {showFilters ? <FiltersModalToggle /> : null}
-        </div>
-      ) : null}
-      <div className="row">
-        {getFilteredProducts().map((product, index) => (
-          <div key={index} className="col-lg-4">
-            <ProductCard product={product} />
+      <div className="products-list__actions">
+        <span>
+          {app.translator.t('components.productsList.foundProductsCount', {
+            count: products.length,
+          })}
+        </span>
+        {props.showFilters || props.showSorting ? (
+          <div className="products-list__filters">
+            {props.showFilters ? (
+              <FiltersResetButton className="products-list__sorting-filter btn btn-outline-danger" />
+            ) : null}
+            {props.showSorting ? (
+              <SortFilterForm className="products-list__sorting-filter" />
+            ) : null}
+            {props.showFilters ? (
+              <FiltersModalToggle className="products-list__sorting-filter btn btn-primary" />
+            ) : null}
           </div>
-        ))}
+        ) : null}
+      </div>
+      <div className="row">
+        {products.length > 0 ? (
+          products.map((product, index) => (
+            <div key={index} className="col-lg-4">
+              <ProductCard product={product} />
+            </div>
+          ))
+        ) : (
+          <div className="products-list__empty-container">
+            <hr className="flex-grow-1" />
+            <span className="products-list__empty-label">
+              {app.translator.t('components.productsList.foundProductsCount', {
+                count: 0,
+              })}
+            </span>
+            <hr className="flex-grow-1" />
+          </div>
+        )}
       </div>
     </div>
   );

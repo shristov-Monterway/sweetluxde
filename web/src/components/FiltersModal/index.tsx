@@ -1,18 +1,16 @@
 import React from 'react';
 import { AbstractComponentType } from '../../types/AbstractComponentType';
-import useApp from '../../hooks/useApp';
 import Modal from '../Modal';
 import CategoriesFilter from '../CategoriesFilter';
 import PriceRangeFilter from '../PriceRangeFilter/PriceRangeFilter';
 import AttributeFilter from '../AttributeFilter';
+import FiltersResetButton from '../FiltersResetButton';
 
 export interface FiltersModalProps extends AbstractComponentType {
   showModal: boolean;
 }
 
 const FiltersModal = (props: FiltersModalProps): React.JSX.Element => {
-  const app = useApp();
-
   return (
     <Modal
       showModal={props.showModal}
@@ -23,12 +21,7 @@ const FiltersModal = (props: FiltersModalProps): React.JSX.Element => {
     >
       <div className="d-flex flex-column gap-3">
         <div>
-          <button
-            className="btn btn-outline-danger btn-sm"
-            onClick={() => app.filters.reset()}
-          >
-            {app.translator.t('components.filtersModal.reset')}
-          </button>
+          <FiltersResetButton className="btn btn-outline-danger" />
         </div>
         <hr />
         <CategoriesFilter containerClassName="filters-modal__category-section" />

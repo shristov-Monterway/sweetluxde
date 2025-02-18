@@ -13,7 +13,7 @@ const LocaleModalToggle = (
 
   return (
     <button
-      className={`btn btn-primary btn-sm ${props.className ? props.className : ''}`}
+      className={`${props.className ? props.className : ''}`}
       onClick={() => app.activeModal.set('localeModal')}
     >
       {props.label ? props.label : <i className="fe fe-globe" />}

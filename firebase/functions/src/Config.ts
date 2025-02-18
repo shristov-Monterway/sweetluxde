@@ -9,6 +9,7 @@ const Config: ConfigType = {
     'whsec_b7176a49daa031aa728f43b60c8af76f85022c7ef313f1e0492b0f8e17c3372f',
   authenticationMethods: ['google', 'email', 'phone'],
   attributesToFilter: ['size'],
+  headerHeight: 90,
 };
 
 export default Config;

@@ -7,6 +7,7 @@ import { CheckoutNewResponseType } from '../../../../types/api/payment/CheckoutN
 import { CheckoutPreviewResponseType } from '../../../../types/api/payment/CheckoutPreviewResponseType';
 import { CheckoutPreviewRequestType } from '../../../../types/api/payment/CheckoutPreviewRequestType';
 import Price from '../Price';
+import LoadingButton from '../LoadingButton/LoadingButton';
 
 export type CartOverviewProps = AbstractComponentType;
 
@@ -90,19 +91,12 @@ const CartOverview = (props: CartOverviewProps): React.JSX.Element => {
               ]}
             />
           </div>
-          <div className="d-flex align-items-center gap-3">
-            <button
-              className={`btn btn-primary ${isCheckoutCreationLoading ? 'disabled' : ''}`}
-              onClick={onClick}
-            >
-              {app.translator.t('components.cartOverview.placeOrder')}
-            </button>
-            {isCheckoutCreationLoading ? (
-              <div className="spinner-border text-primary" role="status">
-                <span className="visually-hidden">Loading...</span>
-              </div>
-            ) : null}
-          </div>
+          <LoadingButton
+            isLoading={isCheckoutCreationLoading}
+            label={app.translator.t('components.cartOverview.placeOrder')}
+            onClick={onClick}
+            className="btn btn-primary"
+          />
         </div>
       ) : null}
     </div>
