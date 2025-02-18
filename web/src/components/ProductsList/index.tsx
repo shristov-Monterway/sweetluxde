@@ -45,6 +45,25 @@ const ProductsList = (props: ProductsListProps): React.JSX.Element => {
     });
   };
 
+  const filterByAttributes = (product: ProductType) => {
+    const selectedAttributes = app.filters.get.attributes;
+
+    if (Object.keys(selectedAttributes).length === 0) return true;
+
+    return Object.values(product.variations).some((variation) => {
+      return Object.entries(selectedAttributes).every(
+        ([attributeId, selectedOptions]) => {
+          const variationOptions =
+            variation.attributes[attributeId]?.options || {};
+
+          return selectedOptions.every((optionId) =>
+            Object.keys(variationOptions).includes(optionId)
+          );
+        }
+      );
+    });
+  };
+
   const sortProducts = (products: ProductType[]) => {
     const sortBy = app.filters.get.sort;
 
@@ -90,7 +109,7 @@ const ProductsList = (props: ProductsListProps): React.JSX.Element => {
       });
     }
 
-    return products; // Default: no sorting
+    return products;
   };
 
   const getFilteredProducts = () => {
@@ -116,6 +135,8 @@ const ProductsList = (props: ProductsListProps): React.JSX.Element => {
     }
 
     filteredProducts = filteredProducts.filter(filterByPriceRange);
+
+    filteredProducts = filteredProducts.filter(filterByAttributes);
 
     filteredProducts = sortProducts(filteredProducts);
 

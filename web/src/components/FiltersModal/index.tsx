@@ -4,6 +4,7 @@ import useApp from '../../hooks/useApp';
 import Modal from '../Modal';
 import CategoriesFilter from '../CategoriesFilter';
 import PriceRangeFilter from '../PriceRangeFilter/PriceRangeFilter';
+import AttributeFilter from '../AttributeFilter';
 
 export interface FiltersModalProps extends AbstractComponentType {
   showModal: boolean;
@@ -30,14 +31,14 @@ const FiltersModal = (props: FiltersModalProps): React.JSX.Element => {
           </button>
         </div>
         <hr />
-        <div className="filters-modal__category-section">
-          <CategoriesFilter />
-        </div>
+        <CategoriesFilter containerClassName="filters-modal__category-section" />
         <hr />
-        <div>
-          <PriceRangeFilter />
-        </div>
+        <PriceRangeFilter />
         <hr />
+        <AttributeFilter
+          attributeId="size"
+          containerClassName="filters-modal__attribute-section"
+        />
       </div>
     </Modal>
   );

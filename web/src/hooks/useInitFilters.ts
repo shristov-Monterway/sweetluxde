@@ -3,9 +3,11 @@ import { FiltersContextType } from '../contexts/AppContext';
 import { useRouter } from 'next/router';
 import { FilterType } from '../../../types/internal/FilterType';
 import { ProductType } from '../../../types/internal/ProductType';
+import { PublicConfigType } from '../../../types/internal/PublicConfigType';
 
 export interface UseInitFiltersProps {
   products: ProductType[];
+  config: PublicConfigType;
 }
 
 const useInitFilters = (props: UseInitFiltersProps): FiltersContextType => {
@@ -17,6 +19,13 @@ const useInitFilters = (props: UseInitFiltersProps): FiltersContextType => {
       minRange: 0,
       maxRange: 0,
     },
+    attributes: props.config.attributesToFilter.reduce(
+      (attributesFilter, attributeId) => ({
+        ...attributesFilter,
+        [attributeId]: [],
+      }),
+      {}
+    ),
     sort: 'publishedDate-desc',
   };
   const router = useRouter();
@@ -95,6 +104,13 @@ const useInitFilters = (props: UseInitFiltersProps): FiltersContextType => {
         minRange: minPriceOfProducts,
         maxRange: maxPriceOfProducts,
       },
+      attributes: props.config.attributesToFilter.reduce(
+        (attributesFilter, attributeId) => ({
+          ...attributesFilter,
+          [attributeId]: [],
+        }),
+        {}
+      ),
     }));
   }, [props.products]);
 
@@ -128,6 +144,13 @@ const useInitFilters = (props: UseInitFiltersProps): FiltersContextType => {
         minRange: minPriceOfProducts,
         maxRange: maxPriceOfProducts,
       },
+      attributes: props.config.attributesToFilter.reduce(
+        (attributesFilter, attributeId) => ({
+          ...attributesFilter,
+          [attributeId]: [],
+        }),
+        {}
+      ),
     });
   };
 

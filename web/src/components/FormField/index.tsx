@@ -141,7 +141,10 @@ const FormField = (props: FormFieldProps): React.JSX.Element | null => {
     inputElement = (
       <div>
         {props.selectOptions?.map((option, index) => (
-          <div key={index} className="form-check">
+          <div
+            key={index}
+            className="form-check d-flex gap-3 align-items-center"
+          >
             <input
               className={`form-check-input ${props.inputClassName ? props.inputClassName : ''} ${formErrors.length > 0 ? 'is-invalid' : ''}`}
               type="checkbox"
@@ -159,20 +162,22 @@ const FormField = (props: FormFieldProps): React.JSX.Element | null => {
               }}
               disabled={option.disabled}
             />
-            <label
-              className="form-check-label"
-              htmlFor={`${props.form}-${props.field}-${option.value}`}
-            >
-              {option.label}
-            </label>
-            {option.help ? (
-              <div
-                id={`${props.form}-${props.field}-${option.value}-help`}
-                className="form-text"
+            <div className="d-flex flex-column gap-1">
+              <label
+                className="form-check-label"
+                htmlFor={`${props.form}-${props.field}-${option.value}`}
               >
-                {option.help}
-              </div>
-            ) : null}
+                {option.label}
+              </label>
+              {option.help ? (
+                <div
+                  id={`${props.form}-${props.field}-${option.value}-help`}
+                  className="form-text"
+                >
+                  {option.help}
+                </div>
+              ) : null}
+            </div>
           </div>
         ))}
       </div>

@@ -4,7 +4,9 @@ import { CategoryType } from '../../../../types/internal/CategoryType';
 import Expandable, { ExpandableElementType } from '../Expandable';
 import useApp from '../../hooks/useApp';
 
-export interface CategoriesFilterProps extends AbstractComponentType {}
+export interface CategoriesFilterProps extends AbstractComponentType {
+  containerClassName?: string;
+}
 
 const CategoriesFilter = (props: CategoriesFilterProps): React.JSX.Element => {
   const app = useApp();
@@ -100,7 +102,7 @@ const CategoriesFilter = (props: CategoriesFilterProps): React.JSX.Element => {
         id: category.uid,
         label: (
           <div
-            className={`categories-filter__label ${app.filters.get.categories.includes(category.uid) ? 'categories-filter__label--active' : ''}`}
+            className={`categories-filter__category-name ${app.filters.get.categories.includes(category.uid) ? 'categories-filter__category-name--active' : ''}`}
             onClick={() => {
               const newCategoriesFilter = app.filters.get.categories;
               if (app.filters.get.categories.includes(category.uid)) {
@@ -150,18 +152,29 @@ const CategoriesFilter = (props: CategoriesFilterProps): React.JSX.Element => {
   };
 
   return (
-    <Expandable
-      value={expandedCategoryUids[0]}
-      setValue={(value) => {
-        setExpandedCategoryUids((expandedCategoryUids) => ({
-          ...expandedCategoryUids,
-          0: value,
-        }));
-      }}
-      elements={buildCategoryExpandableElements(categories)}
-      className={`d-flex flex-column ${props.className ? props.className : ''}`}
-      itemClassName="ps-4"
-    />
+    <div
+      className={`categories-filter ${props.className ? props.className : ''}`}
+    >
+      <h3 className="p-0 m-0">
+        {app.translator.t('components.categoriesFilter.label')}
+      </h3>
+      <div
+        className={`${props.containerClassName ? props.containerClassName : ''}`}
+      >
+        <Expandable
+          value={expandedCategoryUids[0]}
+          setValue={(value) => {
+            setExpandedCategoryUids((expandedCategoryUids) => ({
+              ...expandedCategoryUids,
+              0: value,
+            }));
+          }}
+          elements={buildCategoryExpandableElements(categories)}
+          className="d-flex flex-column"
+          itemClassName="ps-4"
+        />
+      </div>
+    </div>
   );
 };
 

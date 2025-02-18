@@ -75,23 +75,25 @@ const FixtureModule = (): FixtureModuleType => {
                 ? generateNumberFromTo(10000, 50000)
                 : null,
               attributes: {
-                color: {
-                  name: FixtureModule().generateTranslation('Color', [
+                size: {
+                  name: FixtureModule().generateTranslation('Size', [
                     'en',
                     'bg',
                   ]),
-                  options: [...Array(generateNumberFromTo(1, 7)).keys()].reduce(
-                    (options, optionId) => ({
-                      ...options,
-                      [optionId]: {
-                        name: FixtureModule().generateTranslation(
-                          faker.color.human(),
-                          ['en', 'bg']
-                        ),
-                      },
-                    }),
-                    {}
-                  ),
+                  options: ['s', 'm', 'l', 'xl', 'xxl', 'xxxl']
+                    .slice(0, generateNumberFromTo(1, 5))
+                    .reduce(
+                      (options, optionId) => ({
+                        ...options,
+                        [optionId]: {
+                          name: FixtureModule().generateTranslation(optionId, [
+                            'en',
+                            'bg',
+                          ]),
+                        },
+                      }),
+                      {}
+                    ),
                 },
               },
             },

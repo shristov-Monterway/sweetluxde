@@ -42,6 +42,7 @@ const App = (props: AppProps): React.JSX.Element => {
   const activeModal = useInitActiveModal();
   const filters = useInitFilters({
     products,
+    config,
   });
   useInitBootstrapJs();
 

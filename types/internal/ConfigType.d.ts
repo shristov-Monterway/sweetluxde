@@ -6,4 +6,5 @@ export interface ConfigType {
     stripeSecretKey: string;
     stripeWebhookSecretKey: string;
     authenticationMethods: ConfigAuthenticationMethodsType[];
+    attributesToFilter: string[];
 }

@@ -212,6 +212,7 @@ AdminRoutes.all('/config/read', async (req, res) => {
     defaultCurrency: Config.defaultCurrency,
     supportedCurrencies: Config.supportedCurrencies,
     authenticationMethods: Config.authenticationMethods,
+    attributesToFilter: Config.attributesToFilter,
   };
 
   const response: ResponseType<PublicConfigReadResponseType> = {

@@ -1,5 +1,9 @@
 .categories-filter {
-  &__label {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  &__category-name {
     display: flex;
     align-items: center;
     gap: 10px;

@@ -14,6 +14,7 @@ const useInitConfig = (props: UseInitConfigProps): PublicConfigType => {
     defaultCurrency: 'USD',
     supportedCurrencies: ['USD'],
     authenticationMethods: [],
+    attributesToFilter: [],
   });
 
   React.useEffect(() => {

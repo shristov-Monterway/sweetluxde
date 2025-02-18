@@ -9,6 +9,8 @@ export interface RangeSliderProps extends AbstractComponentType {
   min: number;
   max: number;
   step?: number;
+  minValueOutput?: string | React.JSX.Element;
+  maxValueOutput?: string | React.JSX.Element;
 }
 
 const RangeSlider = (props: RangeSliderProps): React.JSX.Element => {
@@ -30,46 +32,60 @@ const RangeSlider = (props: RangeSliderProps): React.JSX.Element => {
 
   return (
     <div className={`range-slider ${props.className ? props.className : ''}`}>
-      <div className="range-slider__track" />
-      <div
-        className="range-slider__track-active"
-        style={{
-          left: `${((props.minValue - props.min) / (props.max - props.min)) * 100}%`,
-          width: `${((props.maxValue - props.minValue) / (props.max - props.min)) * 100}%`,
-        }}
-      />
+      <div className="range-slider__container">
+        <div className="range-slider__track" />
+        <div
+          className="range-slider__track-active"
+          style={{
+            left: `${((props.minValue - props.min) / (props.max - props.min)) * 100}%`,
+            width: `${((props.maxValue - props.minValue) / (props.max - props.min)) * 100}%`,
+          }}
+        />
 
-      <input
-        type="range"
-        min={props.min}
-        max={props.max}
-        step={step}
-        value={props.minValue}
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-          const value = Math.min(
-            Number(event.target.value),
-            props.maxValue - step
-          );
-          props.setMinValue(value);
-        }}
-        className="range-slider__slider range-slider__slide--min"
-      />
+        <input
+          type="range"
+          min={props.min}
+          max={props.max}
+          step={step}
+          value={props.minValue}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+            const value = Math.min(
+              Number(event.target.value),
+              props.maxValue - step
+            );
+            props.setMinValue(value);
+          }}
+          className="range-slider__slider range-slider__slide--min"
+        />
 
-      <input
-        type="range"
-        min={props.min}
-        max={props.max}
-        step={step}
-        value={props.maxValue}
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-          const value = Math.max(
-            Number(event.target.value),
-            props.minValue + step
-          );
-          props.setMaxValue(value);
-        }}
-        className="range-slider__slider range-slider__slider--max"
-      />
+        <input
+          type="range"
+          min={props.min}
+          max={props.max}
+          step={step}
+          value={props.maxValue}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+            const value = Math.max(
+              Number(event.target.value),
+              props.minValue + step
+            );
+            props.setMaxValue(value);
+          }}
+          className="range-slider__slider range-slider__slider--max"
+        />
+      </div>
+      <div className="range-slider__values">
+        {props.minValueOutput ? (
+          props.minValueOutput
+        ) : (
+          <span>{props.minValue}</span>
+        )}
+        {props.maxValueOutput ? (
+          props.maxValueOutput
+        ) : (
+          <span>{props.maxValue}</span>
+        )}
+      </div>
     </div>
   );
 };

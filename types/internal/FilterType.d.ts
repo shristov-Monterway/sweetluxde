@@ -8,5 +8,8 @@ export interface FilterType {
         minRange: number;
         maxRange: number;
     };
+    attributes: {
+        [key: string]: string[];
+    };
     sort: FilterSortValueType;
 }

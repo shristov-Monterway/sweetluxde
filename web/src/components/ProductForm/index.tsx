@@ -727,6 +727,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
                                                     }))}
                                                     labelClassName="border-bottom p-3"
                                                     itemClassName="ps-5 py-5"
+                                                    canLabelExpand={true}
                                                     className="d-flex flex-column gap-3"
                                                   />
                                                 ) : null}
@@ -805,6 +806,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
                                         }))}
                                         labelClassName="border-bottom p-3"
                                         itemClassName="ps-5 py-5"
+                                        canLabelExpand={true}
                                         className="d-flex flex-column gap-3"
                                       />
                                     ) : null}
@@ -938,6 +940,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
                             ]}
                             labelClassName="border-bottom p-3"
                             itemClassName="ps-5 py-5"
+                            canLabelExpand={true}
                             className="d-flex flex-column gap-3"
                           />
                         ),
@@ -945,6 +948,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
                     )}
                     labelClassName="border-bottom p-3"
                     itemClassName="ps-5 py-5"
+                    canLabelExpand={true}
                     className="d-flex flex-column gap-3"
                   />
                 ) : null}
@@ -988,6 +992,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
         ]}
         labelClassName="border-bottom p-3"
         itemClassName="ps-5 py-5"
+        canLabelExpand={true}
         className="d-flex flex-column gap-3"
       />
       <button type="submit" className="btn btn-primary">
