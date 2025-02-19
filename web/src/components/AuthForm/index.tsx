@@ -102,9 +102,10 @@ const AuthForm = (props: AuthFormProps): React.JSX.Element => {
           locale: app.translator.locale,
           theme: app.theme.get,
           currency: app.currency.get,
-          invitedBy: localStorage.getItem('invitedBy')
-            ? localStorage.getItem('invitedBy')
-            : null,
+          invitedBy:
+            app.config.hasInvitations && localStorage.getItem('invitedBy')
+              ? localStorage.getItem('invitedBy')
+              : null,
         },
         (uid) => {
           if (props.onSuccess) {
@@ -133,9 +134,10 @@ const AuthForm = (props: AuthFormProps): React.JSX.Element => {
           locale: app.translator.locale,
           theme: app.theme.get,
           currency: app.currency.get,
-          invitedBy: localStorage.getItem('invitedBy')
-            ? localStorage.getItem('invitedBy')
-            : null,
+          invitedBy:
+            app.config.hasInvitations && localStorage.getItem('invitedBy')
+              ? localStorage.getItem('invitedBy')
+              : null,
         },
         (uid) => {
           if (props.onSuccess) {

@@ -27,9 +27,10 @@ const GoogleSignInButton = (
         locale: app.translator.locale,
         theme: app.theme.get,
         currency: app.currency.get,
-        invitedBy: localStorage.getItem('invitedBy')
-          ? localStorage.getItem('invitedBy')
-          : null,
+        invitedBy:
+          app.config.hasInvitations && localStorage.getItem('invitedBy')
+            ? localStorage.getItem('invitedBy')
+            : null,
       },
       props.onSuccess,
       props.onFailure
