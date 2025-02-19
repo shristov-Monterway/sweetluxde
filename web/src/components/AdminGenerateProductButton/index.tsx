@@ -10,9 +10,13 @@ export type AdminGenerateProductButtonProps = AbstractComponentType;
 
 const AdminGenerateProductButton = (
   props: AdminGenerateProductButtonProps
-): React.JSX.Element => {
+): React.JSX.Element | null => {
   const app = useApp();
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
+
+  if (process.env.NODE_ENV !== 'development') {
+    return null;
+  }
 
   const onPress = async (): Promise<void> => {
     if (isLoading) {

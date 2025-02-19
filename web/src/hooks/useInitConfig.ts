@@ -17,6 +17,7 @@ const useInitConfig = (props: UseInitConfigProps): PublicConfigType => {
     attributesToFilter: [],
     headerHeight: 0,
     hasInvitations: false,
+    hasRequiredInvitation: false,
   });
 
   React.useEffect(() => {

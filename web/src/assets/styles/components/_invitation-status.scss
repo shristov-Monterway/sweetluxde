@@ -1,0 +1,36 @@
+$block: '.invitation-status';
+
+#{$block} {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 5px;
+
+  &--error {
+    #{$block}__label {
+      height: 40px;
+    }
+  }
+
+  &__label {
+    height: 20px;
+    white-space: nowrap;
+    overflow-x: scroll;
+  }
+
+  &__input-container {
+    min-width: 50%;
+    height: 20px;
+  }
+
+  &__input {
+    height: 20px;
+    border: none;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: var(--bs-input-border-color);
+    border-radius: 0;
+    padding-left: 0;
+    padding-right: 0 !important;
+  }
+}

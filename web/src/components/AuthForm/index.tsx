@@ -1,7 +1,6 @@
 import React from 'react';
 import useApp from '../../hooks/useApp';
 import { AbstractComponentType } from '../../types/AbstractComponentType';
-import { useRouter } from 'next/router';
 import FirebaseAuthModule from '../../modules/FirebaseAuthModule';
 import FormField from '../FormField';
 import Script from 'next/script';
@@ -15,7 +14,6 @@ const AuthForm = (props: AuthFormProps): React.JSX.Element => {
   const id = 'auth';
   const phoneSignInRecaptcha = 'phone-sign-in-recaptcha';
   const app = useApp();
-  const router = useRouter();
   const [authFormType, setAuthFormType] = React.useState<'email' | 'phone'>(
     app.config.authenticationMethods.includes('email') ? 'email' : 'phone'
   );
@@ -88,8 +86,18 @@ const AuthForm = (props: AuthFormProps): React.JSX.Element => {
   const onSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
 
-    if (!app) {
-      return;
+    if (app.config.hasRequiredInvitation) {
+      const invitedBy = localStorage.getItem('invitedBy');
+      if (!invitedBy) {
+        app.formErrors.set([
+          {
+            form: 'invitation',
+            field: 'invitedBy',
+            error: 'Required to be invited!',
+          },
+        ]);
+        return;
+      }
     }
 
     app.formErrors.set([]);
@@ -102,8 +110,11 @@ const AuthForm = (props: AuthFormProps): React.JSX.Element => {
           locale: app.translator.locale,
           theme: app.theme.get,
           currency: app.currency.get,
-          invitedBy:
-            app.config.hasInvitations && localStorage.getItem('invitedBy')
+          invitedBy: app.config.hasRequiredInvitation
+            ? localStorage.getItem('invitedBy')
+            : app.config.hasInvitations &&
+                localStorage.getItem('invitedBy') &&
+                localStorage.getItem('invitedBy') !== ''
               ? localStorage.getItem('invitedBy')
               : null,
         },
@@ -134,8 +145,11 @@ const AuthForm = (props: AuthFormProps): React.JSX.Element => {
           locale: app.translator.locale,
           theme: app.theme.get,
           currency: app.currency.get,
-          invitedBy:
-            app.config.hasInvitations && localStorage.getItem('invitedBy')
+          invitedBy: app.config.hasRequiredInvitation
+            ? localStorage.getItem('invitedBy')
+            : app.config.hasInvitations &&
+                localStorage.getItem('invitedBy') &&
+                localStorage.getItem('invitedBy') !== ''
               ? localStorage.getItem('invitedBy')
               : null,
         },

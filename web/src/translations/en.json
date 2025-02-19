@@ -291,8 +291,7 @@
       "requestCodeMinutes": "Request code (%{seconds} sec.)"
     },
     "authModal": {
-      "loginWith": "Login with:",
-      "invitedBy": "You're invited by user with ID: %{id}"
+      "loginWith": "Login with:"
     },
     "cartOverview": {
       "totalPrice": "Total price:",
@@ -317,6 +316,9 @@
     "invitationLinkSection": {
       "title": "Invitation link",
       "description": "Copy the link and invite a friend."
+    },
+    "invitationStatus": {
+      "label": "My invitation code is: "
     },
     "localeModal": {
       "search": "Search"

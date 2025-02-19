@@ -11,6 +11,7 @@ const Config: ConfigType = {
   attributesToFilter: ['size'],
   headerHeight: 90,
   hasInvitations: true,
+  hasRequiredInvitation: true,
 };
 
 export default Config;

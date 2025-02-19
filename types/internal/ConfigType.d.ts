@@ -9,4 +9,5 @@ export interface ConfigType {
     attributesToFilter: string[];
     headerHeight: number;
     hasInvitations: boolean;
+    hasRequiredInvitation: boolean;
 }

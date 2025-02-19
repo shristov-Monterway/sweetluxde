@@ -13,10 +13,6 @@ const SignOutButton = (props: SignOutButtonProps): React.JSX.Element => {
   const app = useApp();
 
   const onPress = (): void => {
-    if (!app) {
-      return;
-    }
-
     FirebaseAuthModule().signOut(props.onSuccess, props.onFailure);
   };
 

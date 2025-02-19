@@ -47,7 +47,6 @@ const App = (props: AppProps): React.JSX.Element => {
   });
   useInitInvitedBy({
     user,
-    config,
   });
   useInitBootstrapJs();
 

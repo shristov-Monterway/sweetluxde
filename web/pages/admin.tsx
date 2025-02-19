@@ -9,6 +9,7 @@ import AdminGenerateProductButton from '../src/components/AdminGenerateProductBu
 import NotFound from 'next/error';
 import Link from 'next/link';
 import SideNavContainer from '../src/components/SideNavContainer';
+import SignOutButton from '../src/components/SignOutButton';
 
 const Admin = (): React.JSX.Element => {
   const app = useApp();
@@ -17,57 +18,64 @@ const Admin = (): React.JSX.Element => {
     return <NotFound statusCode={404} />;
   }
 
+  const sections: {
+    id: string;
+    label: string | React.JSX.Element;
+    element?: React.JSX.Element;
+    className?: string;
+  }[] = [
+    {
+      id: 'products',
+      label: 'View products',
+      element: <AdminProductsList />,
+      className: 'btn btn-outline-primary w-100',
+    },
+    {
+      id: 'categories',
+      label: 'View categories',
+      element: <AdminCategoriesList />,
+      className: 'btn btn-outline-primary w-100',
+    },
+    {
+      id: 'newProduct',
+      label: (
+        <Link href="/admin/product/new" passHref={true}>
+          <a className="btn btn-primary w-100">New product</a>
+        </Link>
+      ),
+    },
+    {
+      id: 'newCategory',
+      label: (
+        <Link href="/admin/category/new" passHref={true}>
+          <a className="btn btn-primary w-100">New category</a>
+        </Link>
+      ),
+    },
+    {
+      id: 'divider',
+      label: <hr />,
+    },
+    {
+      id: 'syncCurrencies',
+      label: (
+        <AdminSyncCurrenciesButton className="btn btn-outline-primary w-100" />
+      ),
+    },
+  ];
+
+  if (process.env.NODE_ENV === 'development') {
+    sections.push({
+      id: 'generateProduct',
+      label: (
+        <AdminGenerateProductButton className="btn btn-outline-primary w-100" />
+      ),
+    });
+  }
+
   return (
     <Page isFluid={false} header={<Header hasShadow={true} />}>
-      <SideNavContainer
-        isSideBarFixed={true}
-        sections={[
-          {
-            id: 'products',
-            label: 'View products',
-            element: <AdminProductsList />,
-            className: 'btn btn-outline-primary w-100',
-          },
-          {
-            id: 'categories',
-            label: 'View categories',
-            element: <AdminCategoriesList />,
-            className: 'btn btn-outline-primary w-100',
-          },
-          {
-            id: 'newProduct',
-            label: (
-              <Link href="/admin/product/new" passHref={true}>
-                <a className="btn btn-primary w-100">New product</a>
-              </Link>
-            ),
-          },
-          {
-            id: 'newCategory',
-            label: (
-              <Link href="/admin/category/new" passHref={true}>
-                <a className="btn btn-primary w-100">New category</a>
-              </Link>
-            ),
-          },
-          {
-            id: 'divider',
-            label: <hr />,
-          },
-          {
-            id: 'syncCurrencies',
-            label: (
-              <AdminSyncCurrenciesButton className="btn btn-outline-primary w-100" />
-            ),
-          },
-          {
-            id: 'generateProduct',
-            label: (
-              <AdminGenerateProductButton className="btn btn-outline-primary w-100" />
-            ),
-          },
-        ]}
-      />
+      <SideNavContainer isSideBarFixed={true} sections={sections} />
     </Page>
   );
 };

@@ -307,6 +307,7 @@ AdminRoutes.all('/config/read', async (req, res) => {
     attributesToFilter: Config.attributesToFilter,
     headerHeight: Config.headerHeight,
     hasInvitations: Config.hasInvitations,
+    hasRequiredInvitation: Config.hasRequiredInvitation,
   };
 
   const response: ResponseType<PublicConfigReadResponseType> = {

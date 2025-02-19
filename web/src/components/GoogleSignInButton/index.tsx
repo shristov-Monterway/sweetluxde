@@ -2,7 +2,6 @@ import React from 'react';
 import { AbstractComponentType } from '../../types/AbstractComponentType';
 import FirebaseAuthModule from '../../modules/FirebaseAuthModule';
 import useApp from '../../hooks/useApp';
-import { useRouter } from 'next/router';
 
 export interface GoogleSignInButtonProps extends AbstractComponentType {
   children?: React.JSX.Element | React.JSX.Element[];
@@ -14,12 +13,23 @@ const GoogleSignInButton = (
   props: GoogleSignInButtonProps
 ): React.JSX.Element => {
   const app = useApp();
-  const router = useRouter();
 
   const onPress = (): void => {
-    if (!app) {
-      return;
+    if (app.config.hasRequiredInvitation) {
+      const invitedBy = localStorage.getItem('invitedBy');
+      if (!invitedBy) {
+        app.formErrors.set([
+          {
+            form: 'invitation',
+            field: 'invitedBy',
+            error: 'Required to be invited!',
+          },
+        ]);
+        return;
+      }
     }
+
+    app.formErrors.set([]);
 
     FirebaseAuthModule().signInWithPopup(
       'google',
@@ -27,8 +37,11 @@ const GoogleSignInButton = (
         locale: app.translator.locale,
         theme: app.theme.get,
         currency: app.currency.get,
-        invitedBy:
-          app.config.hasInvitations && localStorage.getItem('invitedBy')
+        invitedBy: app.config.hasRequiredInvitation
+          ? localStorage.getItem('invitedBy')
+          : app.config.hasInvitations &&
+              localStorage.getItem('invitedBy') &&
+              localStorage.getItem('invitedBy') !== ''
             ? localStorage.getItem('invitedBy')
             : null,
       },

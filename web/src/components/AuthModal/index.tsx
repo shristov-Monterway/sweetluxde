@@ -4,6 +4,7 @@ import Modal from '../Modal';
 import AuthForm from '../AuthForm';
 import GoogleSignInButton from '../GoogleSignInButton';
 import useApp from '../../hooks/useApp';
+import InvitationStatus from '../InvitationStatus/InvitationStatus';
 
 export interface AuthModalProps extends AbstractComponentType {
   showModal: boolean;
@@ -15,7 +16,7 @@ const AuthModal = (props: AuthModalProps): React.JSX.Element => {
   return (
     <Modal
       showModal={props.showModal}
-      className={`${props.className ? props.className : ''}`}
+      className={`auth-modal ${props.className ? props.className : ''}`}
       hasCloseButton={true}
       hasCloseWithBackground={true}
     >
@@ -32,23 +33,12 @@ const AuthModal = (props: AuthModalProps): React.JSX.Element => {
           ) : null}
         </div>
       ) : null}
-      {app.config.hasInvitations &&
-      localStorage.getItem('invitedBy') !== null ? (
-        <>
-          <hr className="m-4" />
-          <div className="d-flex align-items-center justify-content-center">
-            <small>
-              {app.translator.t('components.authModal.invitedBy', {
-                id: localStorage.getItem('invitedBy'),
-              })}
-            </small>
-          </div>
-        </>
-      ) : null}
-      {app.config.authenticationMethods.includes('google') &&
-      (app.config.authenticationMethods.includes('phone') ||
-        app.config.authenticationMethods.includes('email')) ? (
-        <hr className="m-4" />
+      {app.config.hasRequiredInvitation ? (
+        <div>
+          <hr className="m-0 p-0 mb-4" />
+          <InvitationStatus />
+          <hr className="m-0 p-0 mt-4" />
+        </div>
       ) : null}
       {app.config.authenticationMethods.includes('phone') ||
       app.config.authenticationMethods.includes('email') ? (
