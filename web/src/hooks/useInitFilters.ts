@@ -107,7 +107,9 @@ const useInitFilters = (props: UseInitFiltersProps): FiltersContextType => {
       attributes: props.config.attributesToFilter.reduce(
         (attributesFilter, attributeId) => ({
           ...attributesFilter,
-          [attributeId]: [],
+          [attributeId]: filters.attributes[attributeId]
+            ? filters.attributes[attributeId]
+            : [],
         }),
         {}
       ),
