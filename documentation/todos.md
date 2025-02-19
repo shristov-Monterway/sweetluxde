@@ -10,3 +10,5 @@
 - Remove products, product variations and product attributes, which are selected inside cart, but doesn't exist
 - Check to store in localStorage currency, theme, locale
 - Add dynamic category page
+- Check bug: when clicked on add to cart button/add to wishlist on ProductCard the page scrolls to the top
+- Create orders list on account page
