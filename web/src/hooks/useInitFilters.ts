@@ -100,7 +100,8 @@ const useInitFilters = (props: UseInitFiltersProps): FiltersContextType => {
     setFilters((filters) => ({
       ...filters,
       price: {
-        ...filters.price,
+        min: minPriceOfProducts,
+        max: maxPriceOfProducts,
         minRange: minPriceOfProducts,
         maxRange: maxPriceOfProducts,
       },

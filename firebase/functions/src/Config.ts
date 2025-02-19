@@ -10,6 +10,7 @@ const Config: ConfigType = {
   authenticationMethods: ['google', 'email', 'phone'],
   attributesToFilter: ['size'],
   headerHeight: 90,
+  hasInvitations: true,
 };
 
 export default Config;

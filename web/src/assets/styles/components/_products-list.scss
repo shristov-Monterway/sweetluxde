@@ -5,8 +5,22 @@
 
   &__actions {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: center;
+    gap: 15px;
+
+    @include media-breakpoint-up(lg) {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  &__count {
+    order: 2;
+
+    @include media-breakpoint-up(lg) {
+      order: 1;
+    }
   }
 
   &__filters {
@@ -14,6 +28,11 @@
     align-items: center;
     justify-content: flex-end;
     gap: 20px;
+    order: 1;
+
+    @include media-breakpoint-up(lg) {
+      order: 2;
+    }
   }
 
   &__sorting-filter {

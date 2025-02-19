@@ -8,4 +8,5 @@ export interface ConfigType {
     authenticationMethods: ConfigAuthenticationMethodsType[];
     attributesToFilter: string[];
     headerHeight: number;
+    hasInvitations: boolean;
 }

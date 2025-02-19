@@ -18,6 +18,7 @@ import useSyncUserTheme from '../src/hooks/useSyncUserTheme';
 import useSyncUserCurrency from '../src/hooks/useSyncUserCurrency';
 import useInitCategories from '../src/hooks/useInitCategories';
 import useInitFilters from '../src/hooks/useInitFilters';
+import useInitInvitedBy from '../src/hooks/useInitInvitedBy';
 
 const App = (props: AppProps): React.JSX.Element => {
   const { Component } = props;
@@ -42,6 +43,10 @@ const App = (props: AppProps): React.JSX.Element => {
   const activeModal = useInitActiveModal();
   const filters = useInitFilters({
     products,
+    config,
+  });
+  useInitInvitedBy({
+    user,
     config,
   });
   useInitBootstrapJs();

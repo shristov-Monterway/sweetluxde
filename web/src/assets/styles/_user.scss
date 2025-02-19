@@ -35,6 +35,10 @@ li.nav-item {
   }
 }
 
+.form-control:not(.form-select) {
+  padding-right: $input-btn-padding-x;
+}
+
 .form-select:disabled,
 .form-control:disabled,
 .form-check-input:disabled {
@@ -53,6 +57,7 @@ li.nav-item {
 @import './components/expandable';
 @import './components/filters-modal';
 @import './components/form-field';
+@import './components/invitation-link-section';
 @import './components/modal';
 @import './components/page';
 @import './components/price-range-filter';

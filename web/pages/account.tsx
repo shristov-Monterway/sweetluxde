@@ -7,6 +7,7 @@ import Header from '../src/components/Header';
 import SignOutButton from '../src/components/SignOutButton';
 import AccountAdminSection from '../src/components/AccountAdminSection';
 import SideNavContainer from '../src/components/SideNavContainer';
+import InvitationLinkSection from '../src/components/InvitationLinkSection';
 
 const Account = (): React.JSX.Element => {
   const app = useApp();
@@ -38,6 +39,15 @@ const Account = (): React.JSX.Element => {
       ),
     },
   ];
+
+  if (app.config.hasInvitations) {
+    sections.unshift({
+      id: 'invitation',
+      label: 'Invitation',
+      element: <InvitationLinkSection uid={app.user.uid} />,
+      className: 'btn btn-outline-primary w-100',
+    });
+  }
 
   if (app.user && app.user.isAdmin) {
     sections.unshift({

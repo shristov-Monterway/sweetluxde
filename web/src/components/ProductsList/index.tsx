@@ -147,7 +147,7 @@ const ProductsList = (props: ProductsListProps): React.JSX.Element => {
   return (
     <div className={`products-list ${props.className ? props.className : ''}`}>
       <div className="products-list__actions">
-        <span>
+        <span className="products-list__count">
           {app.translator.t('components.productsList.foundProductsCount', {
             count: products.length,
           })}

@@ -32,6 +32,19 @@ const AuthModal = (props: AuthModalProps): React.JSX.Element => {
           ) : null}
         </div>
       ) : null}
+      {app.config.hasInvitations &&
+      localStorage.getItem('invitedBy') !== null ? (
+        <>
+          <hr className="m-4" />
+          <div className="d-flex align-items-center justify-content-center">
+            <small>
+              {app.translator.t('components.authModal.invitedBy', {
+                id: localStorage.getItem('invitedBy'),
+              })}
+            </small>
+          </div>
+        </>
+      ) : null}
       {app.config.authenticationMethods.includes('google') &&
       (app.config.authenticationMethods.includes('phone') ||
         app.config.authenticationMethods.includes('email')) ? (
