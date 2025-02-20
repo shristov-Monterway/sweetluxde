@@ -7,6 +7,13 @@ import { CategoryType } from '../../../types/internal/CategoryType';
 import { ProductType } from '../../../types/internal/ProductType';
 import { FilterType } from '../../../types/internal/FilterType';
 
+export interface IsAppLoadingContextType {
+  get: boolean;
+  set: (
+    newIsAppLoading: boolean | ((newIsAppLoading: boolean) => boolean)
+  ) => void;
+}
+
 export interface ThemeContextType {
   get: string;
   set: (newTheme: string | ((theme: string) => string)) => void;
@@ -40,6 +47,7 @@ export interface FiltersContextType {
 }
 
 export interface AppContextType {
+  isAppLoading: IsAppLoadingContextType;
   translator: I18n;
   theme: ThemeContextType;
   user: UserType | null;

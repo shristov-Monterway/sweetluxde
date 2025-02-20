@@ -1,0 +1,29 @@
+.page-loading {
+  position: fixed;
+  z-index: 100000;
+  background-color: var(--bs-body-bg);
+  width: 100vw;
+  height: 0;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  transition: height 200ms ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+
+  &--active {
+    height: 100vh;
+  }
+
+  &__dots {
+    display: flex;
+    gap: 30px;
+  }
+
+  &__label {
+    font-size: 1rem;
+  }
+}

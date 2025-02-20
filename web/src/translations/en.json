@@ -323,6 +323,9 @@
     "localeModal": {
       "search": "Search"
     },
+    "pageLoading": {
+      "label": "Loading ..."
+    },
     "priceRangeFilter": {
       "label": "Price:"
     },

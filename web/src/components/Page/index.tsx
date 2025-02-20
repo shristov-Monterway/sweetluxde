@@ -4,6 +4,7 @@ import useApp from '../../hooks/useApp';
 import AuthModal from '../AuthModal';
 import LocaleModal from '../LocaleModal';
 import FiltersModal from '../FiltersModal';
+import PageLoading from '../PageLoading/PageLoading';
 
 export interface PageProps extends AbstractComponentType {
   children: React.JSX.Element | React.JSX.Element[];
@@ -16,6 +17,7 @@ const Page = (props: PageProps): React.JSX.Element => {
 
   return (
     <div className={`page ${props.className ? props.className : ''}`}>
+      <PageLoading isAppLoading={app.isAppLoading.get} />
       {props.header ? <div className="page__header">{props.header}</div> : null}
       <div
         className="page__body"
