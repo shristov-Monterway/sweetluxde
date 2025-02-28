@@ -11,6 +11,8 @@ import Expandable from '../Expandable';
 
 export interface CategoryFormProps extends AbstractComponentType {
   category?: CategoryType;
+  onSuccess?: () => void;
+  onFailure?: (error: Error) => void;
 }
 
 const CategoryForm = (props: CategoryFormProps): React.JSX.Element => {
@@ -55,7 +57,6 @@ const CategoryForm = (props: CategoryFormProps): React.JSX.Element => {
   );
 
   React.useEffect(() => {
-    console.log('test');
     setCategoryNames(
       app.categories
         .filter((category) => {
@@ -88,23 +89,32 @@ const CategoryForm = (props: CategoryFormProps): React.JSX.Element => {
     }
   }, [parentUidStatus, parentUid]);
 
-  const onSubmit = async (
-    e: React.FormEvent<HTMLFormElement>
-  ): Promise<void> => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
-    await FirebaseFunctionsModule<
+    FirebaseFunctionsModule<
       CategoryCreateUpdateRequestType,
       CategoryCreateUpdateResponseType
-    >().call(
-      '/admin/category/createUpdate',
-      {
-        category: newCategory,
-        uid,
-      },
-      app.translator.locale,
-      app.currency.get
-    );
+    >()
+      .call(
+        '/admin/category/createUpdate',
+        {
+          category: newCategory,
+          uid,
+        },
+        app.translator.locale,
+        app.currency.get
+      )
+      .then(() => {
+        if (props.onSuccess) {
+          props.onSuccess();
+        }
+      })
+      .catch(() => {
+        if (props.onFailure) {
+          props.onFailure(new Error('Error managing category.'));
+        }
+      });
   };
 
   return (

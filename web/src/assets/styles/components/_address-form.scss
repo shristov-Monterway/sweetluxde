@@ -1,0 +1,33 @@
+.address-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  &__row {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    @include media-breakpoint-up(lg) {
+      flex-direction: row;
+    }
+  }
+
+  &__col {
+    flex-grow: 1;
+
+    &--street {
+      @include media-breakpoint-up(lg) {
+        flex-grow: 6;
+        flex-basis: 60%;
+      }
+    }
+
+    &--street-number {
+      @include media-breakpoint-up(lg) {
+        flex-grow: 4;
+        flex-basis: 40%;
+      }
+    }
+  }
+}

@@ -16,6 +16,8 @@ import Expandable from '../Expandable';
 
 export interface ProductFormProps extends AbstractComponentType {
   product?: ProductType;
+  onSuccess?: () => void;
+  onFailure?: (error: Error) => void;
 }
 
 const ProductForm = (props: ProductFormProps): React.JSX.Element => {
@@ -116,28 +118,37 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
     }
   }, [badgeStatus, badge]);
 
-  const onSubmit = async (
-    e: React.FormEvent<HTMLFormElement>
-  ): Promise<void> => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
-    await FirebaseFunctionsModule<
+    FirebaseFunctionsModule<
       ProductCreateUpdateRequestType,
       ProductCreateUpdateResponseType
-    >().call(
-      '/admin/product/createUpdate',
-      {
-        product: newProduct,
-        uid,
-      },
-      app.translator.locale,
-      app.currency.get
-    );
+    >()
+      .call(
+        '/admin/product/createUpdate',
+        {
+          product: newProduct,
+          uid,
+        },
+        app.translator.locale,
+        app.currency.get
+      )
+      .then(() => {
+        if (props.onSuccess) {
+          props.onSuccess();
+        }
+      })
+      .catch(() => {
+        if (props.onFailure) {
+          props.onFailure(new Error('Error managing product.'));
+        }
+      });
   };
 
   return (
     <form
-      className={`form product-form ${props.className ? props.className : ''}`}
+      className={`form ${props.className ? props.className : ''}`}
       onSubmit={onSubmit}
     >
       <Expandable
@@ -149,7 +160,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
             label: app.translator.t('components.productForm.name'),
             children: (
               <TranslationFormField
-                form="product"
+                form={id}
                 field="name"
                 translations={newProduct.name}
                 setTranslations={(translations) => {
@@ -166,7 +177,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
             label: app.translator.t('components.productForm.description'),
             children: (
               <TranslationFormField
-                form="product"
+                form={id}
                 field="description"
                 translations={newProduct.description}
                 setTranslations={(translations) => {
@@ -187,7 +198,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
             label: app.translator.t('components.productForm.tags'),
             children: (
               <ListFormField
-                form="product"
+                form={id}
                 field="tags"
                 list={newProduct.tags}
                 setList={(list) => {
@@ -208,7 +219,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
             children: (
               <div className="d-flex flex-column gap-3">
                 <FormField
-                  form="product"
+                  form={id}
                   field="badgeStatus"
                   type="checkbox"
                   value={badgeStatus}
@@ -228,7 +239,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
                 {badgeStatus === 'enabled' ? (
                   <>
                     <FormField
-                      form="product"
+                      form={id}
                       field="badgeType"
                       type="select"
                       value={badge.type}
@@ -244,7 +255,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
                       }))}
                     />
                     <TranslationFormField
-                      form="product"
+                      form={id}
                       field="badgeText"
                       translations={badge.text}
                       setTranslations={(translations) => {
@@ -265,7 +276,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
             children: (
               <div className="d-flex flex-column gap-3">
                 <ListFormField
-                  form="product"
+                  form={id}
                   field="categories"
                   list={newProduct.categoryUids}
                   setList={(list) => {
@@ -335,7 +346,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
                                 ),
                                 children: (
                                   <TranslationFormField
-                                    form="product"
+                                    form={id}
                                     field="productVariationName"
                                     translations={
                                       newProduct.variations[variationId].name
@@ -364,7 +375,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
                                 ),
                                 children: (
                                   <TranslationFormField
-                                    form="product"
+                                    form={id}
                                     field="productVariationDescription"
                                     translations={
                                       newProduct.variations[variationId]
@@ -398,7 +409,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
                                 ),
                                 children: (
                                   <FormField
-                                    form="product"
+                                    form={id}
                                     field="productVariationPrice"
                                     type="text"
                                     value={newProduct.variations[
@@ -434,7 +445,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
                                 ),
                                 children: (
                                   <ListFormField
-                                    form="product"
+                                    form={id}
                                     field="productVariationImages"
                                     list={
                                       newProduct.variations[variationId].images
@@ -522,7 +533,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
                                           children: (
                                             <div className="d-flex flex-column gap-3">
                                               <TranslationFormField
-                                                form="product"
+                                                form={id}
                                                 field="productAttributeName"
                                                 translations={
                                                   newProduct.variations[
@@ -655,7 +666,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
                                                       children: (
                                                         <div className="d-flex flex-column gap-3">
                                                           <TranslationFormField
-                                                            form="product"
+                                                            form={id}
                                                             field="productAttributeOptionName"
                                                             translations={
                                                               newProduct
@@ -743,7 +754,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
                                                 ) : null}
                                                 <div className="d-flex align-items-center gap-3">
                                                   <FormField
-                                                    form="product"
+                                                    form={id}
                                                     field="productAttributeOptionId"
                                                     type="text"
                                                     value={newAttributeOptionId}
@@ -822,7 +833,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
                                     ) : null}
                                     <div className="d-flex align-items-center gap-3">
                                       <FormField
-                                        form="product"
+                                        form={id}
                                         field="productAttributeId"
                                         type="text"
                                         value={newAttributeId}
@@ -875,7 +886,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
                                 children: (
                                   <div className="d-flex flex-column gap-3">
                                     <FormField
-                                      form="product"
+                                      form={id}
                                       field="productVariationWeightStatus"
                                       type="checkbox"
                                       value={
@@ -917,7 +928,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
                                       .weight !== null ? (
                                       <>
                                         <FormField
-                                          form="product"
+                                          form={id}
                                           field="productVariationWeight"
                                           type="text"
                                           value={newProduct.variations[
@@ -966,7 +977,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
                 ) : null}
                 <div className="d-flex align-items-center gap-3">
                   <FormField
-                    form="product"
+                    form={id}
                     field="productVariationId"
                     type="text"
                     value={newVariationId}

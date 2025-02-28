@@ -12,7 +12,6 @@ const useSyncUserCurrency = (props: UseSyncUserCurrencyProps): void => {
     if (props.user && props.user.currency) {
       props.currency.set(props.user.currency);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.user]);
 };
 

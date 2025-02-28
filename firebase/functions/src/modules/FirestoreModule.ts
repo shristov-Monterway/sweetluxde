@@ -1,4 +1,6 @@
 import * as admin from 'firebase-admin';
+import { firestore } from 'firebase-admin';
+import WhereFilterOp = firestore.WhereFilterOp;
 
 export interface FirestoreModuleType<T> {
   getDocRef: (
@@ -9,8 +11,16 @@ export interface FirestoreModuleType<T> {
     entity: string
   ) => FirebaseFirestore.CollectionReference<T>;
   getDoc: (entity: string, uid: string) => Promise<T | null>;
-  getCollection: (entity: string) => Promise<T[]>;
+  getCollection: (
+    entity: string,
+    queries?: {
+      property: string;
+      opStr: WhereFilterOp;
+      value: any;
+    }[]
+  ) => Promise<T[]>;
   writeDoc: (entity: string, uid: string, data: T) => Promise<void>;
+  deleteDoc: (entity: string, uid: string) => Promise<void>;
   deleteCollectionDocs: (entity: string) => Promise<void>;
 }
 
@@ -45,10 +55,15 @@ const FirestoreModule = <T>(): FirestoreModuleType<T> => {
         return null;
       }
     },
-    getCollection: async (entity) => {
+    getCollection: async (entity, queries) => {
       const ref = admin
         .firestore()
         .collection(entity) as FirebaseFirestore.CollectionReference<T>;
+      if (queries) {
+        queries.forEach((query) => {
+          ref.where(query.property, query.opStr, query.value);
+        });
+      }
       const response = await ref.get();
       return response.docs.map((doc) => ({
         ...doc.data(),
@@ -60,6 +75,12 @@ const FirestoreModule = <T>(): FirestoreModuleType<T> => {
         .firestore()
         .doc(`${entity}/${uid}`) as FirebaseFirestore.DocumentReference<T>;
       await ref.set(data);
+    },
+    deleteDoc: async (entity: string, uid: string) => {
+      const ref = admin
+        .firestore()
+        .doc(`${entity}/${uid}`) as FirebaseFirestore.DocumentReference<T>;
+      await ref.delete();
     },
     deleteCollectionDocs: async (entity: string) => {
       const ref = admin

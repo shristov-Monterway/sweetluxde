@@ -19,11 +19,11 @@ const LocaleModal = (props: LocaleModalProps): React.JSX.Element => {
   const [search, setSearch] = React.useState<string>('');
 
   if (!locale) {
-    throw new Error('Locale is not defined!');
+    throw new Error('Locale is not defined.');
   }
 
   if (!locales || locales.length === 0) {
-    throw new Error('No list with supported locales!');
+    throw new Error('No list with supported locales.');
   }
 
   const onPress = (newLocale: string) => {

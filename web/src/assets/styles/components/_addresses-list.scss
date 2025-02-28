@@ -1,0 +1,28 @@
+.addresses-list {
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  &__item {
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-left-color: $primary;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  &__empty-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__empty-label {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 1.2rem;
+  }
+}

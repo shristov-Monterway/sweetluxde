@@ -26,7 +26,13 @@ export interface FirebaseAuthModuleType {
     password: string,
     initData: Omit<
       UserType,
-      'uid' | 'email' | 'lastLogin' | 'cart' | 'wishlist' | 'isAdmin'
+      | 'uid'
+      | 'email'
+      | 'lastLogin'
+      | 'cart'
+      | 'wishlist'
+      | 'isAdmin'
+      | 'addresses'
     >,
     onSuccess?: (uid: string) => void,
     onFailure?: (error: Error) => void
@@ -35,7 +41,13 @@ export interface FirebaseAuthModuleType {
     provider: FirebaseAuthModuleSignInProvider,
     initData: Omit<
       UserType,
-      'uid' | 'email' | 'lastLogin' | 'cart' | 'wishlist' | 'isAdmin'
+      | 'uid'
+      | 'email'
+      | 'lastLogin'
+      | 'cart'
+      | 'wishlist'
+      | 'isAdmin'
+      | 'addresses'
     >,
     onSuccess?: (uid: string) => void,
     onFailure?: (error: Error) => void
@@ -50,7 +62,7 @@ export interface FirebaseAuthModuleType {
     code: string,
     initData: Omit<
       UserType,
-      'uid' | 'lastLogin' | 'cart' | 'wishlist' | 'isAdmin'
+      'uid' | 'lastLogin' | 'cart' | 'wishlist' | 'isAdmin' | 'addresses'
     >,
     onSuccess?: (uid: string) => void,
     onFailure?: (error: Error) => void
@@ -138,6 +150,7 @@ const FirebaseAuthModule = (): FirebaseAuthModuleType => {
                     },
                     email,
                     isAdmin: false,
+                    addresses: [],
                   })
                   .then(() => {
                     if (onSuccess) {
@@ -164,7 +177,7 @@ const FirebaseAuthModule = (): FirebaseAuthModuleType => {
       }
 
       if (!authProvider) {
-        throw new Error('Not valid provider given!');
+        throw new Error('Not valid provider given.');
       }
 
       defaultSignInWithPopup(FirebaseAuth, authProvider)
@@ -177,7 +190,7 @@ const FirebaseAuthModule = (): FirebaseAuthModuleType => {
               : null;
 
           if (!email) {
-            throw new Error('User has issue with the data!');
+            throw new Error('User has issue with the data.');
           }
 
           if (isNewUser) {
@@ -194,6 +207,7 @@ const FirebaseAuthModule = (): FirebaseAuthModuleType => {
                 },
                 email,
                 isAdmin: false,
+                addresses: [],
               })
               .then(() => {
                 if (onSuccess) {
@@ -284,7 +298,7 @@ const FirebaseAuthModule = (): FirebaseAuthModuleType => {
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
             grecaptcha.reset();
-            handleOnFailure(new Error('Recaptcha expired!'), onFailure);
+            handleOnFailure(new Error('Recaptcha expired.'), onFailure);
           },
         }
       );
@@ -304,7 +318,7 @@ const FirebaseAuthModule = (): FirebaseAuthModuleType => {
       // @ts-ignore
       if (!window && !window.confirmationResult) {
         handleOnFailure(
-          new Error('Recaptcha confirmation is not checked!'),
+          new Error('Recaptcha confirmation is not checked.'),
           onFailure
         );
       }
@@ -330,6 +344,7 @@ const FirebaseAuthModule = (): FirebaseAuthModuleType => {
                 },
                 email: initData.email,
                 isAdmin: false,
+                addresses: [],
               })
               .then(() => {
                 if (onSuccess) {

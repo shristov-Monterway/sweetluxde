@@ -17,7 +17,6 @@ const useSyncUserTranslator = (props: UseSyncUserTranslatorProps): void => {
         locale: props.user.locale,
       });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.user]);
 };
 

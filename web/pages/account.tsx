@@ -8,6 +8,7 @@ import SignOutButton from '../src/components/SignOutButton';
 import AccountAdminSection from '../src/components/AccountAdminSection';
 import SideNavContainer from '../src/components/SideNavContainer';
 import InvitationLinkSection from '../src/components/InvitationLinkSection';
+import AccountAddressSection from '../src/components/AccountAddressSection/AccountAddressSection';
 
 const Account = (): React.JSX.Element => {
   const app = useApp();
@@ -23,6 +24,12 @@ const Account = (): React.JSX.Element => {
     element?: React.JSX.Element;
     className?: string;
   }[] = [
+    {
+      id: 'addresses',
+      label: 'Addresses',
+      element: <AccountAddressSection />,
+      className: 'btn btn-outline-primary w-100',
+    },
     {
       id: 'divider',
       label: <hr />,

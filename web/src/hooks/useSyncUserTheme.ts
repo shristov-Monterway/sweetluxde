@@ -12,7 +12,6 @@ const useSyncUserTheme = (props: UseSyncUserThemeProps): void => {
     if (props.user && props.user.theme) {
       props.theme.set(props.user.theme);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.user]);
 };
 

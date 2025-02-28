@@ -37,13 +37,13 @@ const WishlistProductsList = (
             );
 
             if (!product) {
-              throw new Error('Product from wishlist is not found!');
+              throw new Error('Product from wishlist is not found.');
             }
 
             const variation = product.variations[lineItem.variation];
 
             if (!variation) {
-              throw new Error('Product variation from wishlist is not found!');
+              throw new Error('Product variation from wishlist is not found.');
             }
 
             return {

@@ -35,6 +35,36 @@
     }
   },
   "form": {
+    "address": {
+      "street": {
+        "label": "Street",
+        "help": "Insert your street."
+      },
+      "streetNumber": {
+        "label": "Street number",
+        "help": "Insert your street number."
+      },
+      "city": {
+        "label": "City",
+        "help": "Insert your city."
+      },
+      "postalCode": {
+        "label": "Postal code",
+        "help": "Insert your postal code."
+      },
+      "country": {
+        "label": "Country",
+        "help": "Insert your country."
+      },
+      "name": {
+        "label": "Name",
+        "help": "Insert recipient name."
+      },
+      "phone": {
+        "label": "Phone",
+        "help": "Insert recipient phone."
+      }
+    },
     "auth": {
       "email": {
         "label": "Email address",
@@ -264,6 +294,7 @@
       }
     },
     "submit": {
+      "address": "Publish",
       "auth": "Authenticate",
       "product": "Publish",
       "category": "Publish"
@@ -273,6 +304,12 @@
     "accountAdminSection": {
       "message": "You're admin of the shop.",
       "manage": "Manage"
+    },
+    "accountNewAddress": {
+      "openNewAddress": "Add new address"
+    },
+    "addressesList": {
+      "noAddresses": "No addresses"
     },
     "adminCategoriesList": {
       "label": "Categories"

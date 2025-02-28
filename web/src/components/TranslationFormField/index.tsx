@@ -34,7 +34,7 @@ const TranslationFormField = (
     React.useState<string>('');
 
   if (!locales || locales.length === 0) {
-    throw new Error('No list with supported locales!');
+    throw new Error('No list with supported locales.');
   }
 
   const newTranslationLocaleOptions = locales

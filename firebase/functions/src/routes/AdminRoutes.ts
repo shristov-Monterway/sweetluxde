@@ -28,8 +28,14 @@ AdminRoutes.all(
     uid: {
       in: 'body',
       optional: true,
-      notEmpty: true,
-      isString: true,
+      custom: {
+        options: (value) => {
+          if (value === null || typeof value === 'string') {
+            return true;
+          }
+          throw new Error('uid must be either null or a string');
+        },
+      },
     },
     'product.name.*': {
       in: 'body',
@@ -148,8 +154,14 @@ AdminRoutes.all(
     uid: {
       in: 'body',
       optional: true,
-      notEmpty: true,
-      isString: true,
+      custom: {
+        options: (value) => {
+          if (value === null || typeof value === 'string') {
+            return true;
+          }
+          throw new Error('uid must be either null or a string');
+        },
+      },
     },
     'category.name.*': {
       in: 'body',
