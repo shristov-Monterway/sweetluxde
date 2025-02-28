@@ -1,5 +1,5 @@
 import { CategoryType } from "../../internal/CategoryType";
 
 export interface CategoriesAllResponseType {
-    categories: CategoryType[];
+  categories: CategoryType[];
 }

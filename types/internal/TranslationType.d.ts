@@ -1,3 +1,3 @@
 export interface TranslationType {
-    [locale: string]: string;
+  [locale: string]: string;
 }

@@ -1,3 +1,3 @@
 export interface ResponseType<A> {
-    data: A;
+  data: A;
 }

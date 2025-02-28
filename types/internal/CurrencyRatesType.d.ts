@@ -1,6 +1,6 @@
 export interface CurrencyRatesType {
-    code: string;
-    rates: {
-        [currencyCode: string]: number;
-    };
+  code: string;
+  rates: {
+    [currencyCode: string]: number;
+  };
 }
