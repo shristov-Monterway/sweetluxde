@@ -12,7 +12,7 @@ export type FormFieldType =
   | 'checkbox';
 
 export interface FormFieldOptionType {
-  label: string;
+  label: string | React.JSX.Element;
   value: string;
   help?: string;
   disabled?: boolean;
@@ -139,7 +139,7 @@ const FormField = (props: FormFieldProps): React.JSX.Element | null => {
     );
   } else if (props.type === 'checkbox') {
     inputElement = (
-      <div>
+      <div className="d-flex flex-column gap-3">
         {props.selectOptions?.map((option, index) => (
           <div
             key={index}
@@ -162,7 +162,7 @@ const FormField = (props: FormFieldProps): React.JSX.Element | null => {
               }}
               disabled={option.disabled}
             />
-            <div className="d-flex flex-column gap-1">
+            <div className="d-flex flex-column gap-1 flex-grow-1">
               <label
                 className="form-check-label"
                 htmlFor={`${props.form}-${props.field}-${option.value}`}

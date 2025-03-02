@@ -1,4 +1,4 @@
-$block: '.account-new-address';
+$block: '.account-address-action';
 
 #{$block} {
   display: flex;
@@ -31,9 +31,10 @@ $block: '.account-new-address';
     #{$block}__form {
       margin-top: 10px;
       height: 695px;
+      overflow: scroll;
 
       @include media-breakpoint-up(lg) {
-        height: 415px;
+        height: 431px;
       }
     }
 

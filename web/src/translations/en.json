@@ -83,6 +83,12 @@
         "help": "You've received verification code on your phone."
       }
     },
+    "cartOverview": {
+      "address": {
+        "label": "Choose address of delivery",
+        "help": "Address where the products will be delivered."
+      }
+    },
     "category": {
       "name": {
         "label": "Category name in %{language}",
@@ -301,15 +307,16 @@
     }
   },
   "components": {
+    "accountAddressAction": {
+      "newLabel": "New address",
+      "editLabel": "Edit address"
+    },
+    "accountAddresses": {
+      "noAddresses": "No addresses"
+    },
     "accountAdminSection": {
       "message": "You're admin of the shop.",
       "manage": "Manage"
-    },
-    "accountNewAddress": {
-      "openNewAddress": "Add new address"
-    },
-    "addressesList": {
-      "noAddresses": "No addresses"
     },
     "adminCategoriesList": {
       "label": "Categories"

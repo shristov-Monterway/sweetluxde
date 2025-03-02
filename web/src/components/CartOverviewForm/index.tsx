@@ -8,10 +8,14 @@ import { CheckoutPreviewResponseType } from '../../../../types/api/payment/Check
 import { CheckoutPreviewRequestType } from '../../../../types/api/payment/CheckoutPreviewRequestType';
 import Price from '../Price';
 import LoadingButton from '../LoadingButton/LoadingButton';
+import AccountAddresses from '../AccountAddresses';
 
-export type CartOverviewProps = AbstractComponentType;
+export type CartOverviewFormProps = AbstractComponentType;
 
-const CartOverview = (props: CartOverviewProps): React.JSX.Element => {
+const CartOverviewForm = (
+  props: CartOverviewFormProps
+): React.JSX.Element | null => {
+  const id = 'cartOverview';
   const app = useApp();
   const [totalPrice, setTotalPrice] = React.useState<number | null>(null);
   const [totalPriceCurrency, setTotalPriceCurrency] = React.useState<
@@ -19,6 +23,9 @@ const CartOverview = (props: CartOverviewProps): React.JSX.Element => {
   >(null);
   const [isCheckoutCreationLoading, setIsCheckoutCreationLoading] =
     React.useState<boolean>(false);
+  const [selectedAddressIndex, setSelectedAddressIndex] = React.useState<
+    number | null
+  >(null);
 
   React.useEffect(() => {
     const makeCheckoutPreview = async () => {
@@ -44,6 +51,17 @@ const CartOverview = (props: CartOverviewProps): React.JSX.Element => {
 
     makeCheckoutPreview();
   }, [app.user, app.currency.get, app.translator.locale]);
+
+  React.useEffect(() => {
+    if (!app.user) {
+      setSelectedAddressIndex(null);
+      return;
+    }
+
+    const addresses = app.user.addresses;
+
+    setSelectedAddressIndex(addresses.length > 0 ? 0 : null);
+  }, [app.user]);
 
   const onClick = async () => {
     if (isCheckoutCreationLoading) {
@@ -76,11 +94,25 @@ const CartOverview = (props: CartOverviewProps): React.JSX.Element => {
     setIsCheckoutCreationLoading(false);
   };
 
+  if (!app.user) {
+    return null;
+  }
+
   return (
-    <div className={`${props.className ? props.className : ''}`}>
+    <div
+      className={`cart-overview-form ${props.className ? props.className : ''}`}
+    >
+      <div className="cart-overview-form__address">
+        <AccountAddresses
+          form={id}
+          field="address"
+          selectedAddressIndex={selectedAddressIndex}
+          setSelectedAddressIndex={setSelectedAddressIndex}
+        />
+      </div>
       {totalPrice && totalPriceCurrency ? (
-        <div>
-          <div className="d-flex gap-3 h2">
+        <div className="cart-overview-form__price-container">
+          <div className="h2 cart-overview-form__total-price-container">
             {app.translator.t('components.cartOverview.totalPrice')}
             <Price
               prices={[
@@ -103,4 +135,4 @@ const CartOverview = (props: CartOverviewProps): React.JSX.Element => {
   );
 };
 
-export default CartOverview;
+export default CartOverviewForm;

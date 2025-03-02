@@ -35,6 +35,11 @@ li.nav-item {
   }
 }
 
+.form-label {
+  margin: 0;
+  padding: 0;
+}
+
 .form-control:not(.form-select) {
   padding-right: $input-btn-padding-x;
 }
@@ -46,17 +51,18 @@ li.nav-item {
   border-color: var(--bs-input-border-color);
 }
 
+@import './components/account-address-action';
 @import './components/account-address-section';
+@import './components/account-addresses';
 @import './components/account-admin-section';
-@import './components/account-new-address';
 @import './components/address-card';
 @import './components/address-form';
-@import './components/addresses-list';
 @import './components/admin-categories-list';
 @import './components/admin-products-list';
 @import './components/attribute-filter';
 @import './components/auth-modal';
 @import './components/banner';
+@import './components/cart-overview-form';
 @import './components/cart-product-card';
 @import './components/cart-products-list';
 @import './components/categories-filter';

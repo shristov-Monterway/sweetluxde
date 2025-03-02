@@ -27,7 +27,11 @@ const AddressForm = (props: AddressFormProps): React.JSX.Element => {
   });
 
   React.useEffect(() => {
-    if (props.addressIndex && props.address) {
+    if (
+      typeof props.addressIndex === 'number' &&
+      props.addressIndex > -1 &&
+      props.address
+    ) {
       setAddress(props.address);
     }
   }, []);
@@ -41,7 +45,11 @@ const AddressForm = (props: AddressFormProps): React.JSX.Element => {
 
     const newAddresses = app.user.addresses;
 
-    if (props.addressIndex && props.address) {
+    if (
+      typeof props.addressIndex === 'number' &&
+      props.addressIndex > -1 &&
+      props.address
+    ) {
       newAddresses[props.addressIndex] = address;
     } else {
       newAddresses.push(address);

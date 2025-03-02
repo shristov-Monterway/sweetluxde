@@ -1,26 +1,33 @@
-.addresses-list {
+.account-addresses {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
   &__list {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 20px;
   }
 
-  &__item {
+  &__list-item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     border-left-style: solid;
     border-left-width: 1px;
     border-left-color: $primary;
-    padding-left: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
+    padding-left: 10px;
   }
 
-  &__empty-container {
+  &__list-empty-container {
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
-  &__empty-label {
+  &__list-empty-label {
     flex-grow: 1;
     text-align: center;
     font-size: 1.2rem;

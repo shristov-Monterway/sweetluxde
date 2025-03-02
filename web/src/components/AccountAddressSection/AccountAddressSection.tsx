@@ -1,8 +1,7 @@
 import React from 'react';
 import { AbstractComponentType } from '../../types/AbstractComponentType';
 import useApp from '../../hooks/useApp';
-import AccountNewAddress from '../AccountNewAddress';
-import AddressesList from '../AddressesList';
+import AccountAddresses from '../AccountAddresses';
 
 export type AccountAddressSectionProps = AbstractComponentType;
 
@@ -19,11 +18,7 @@ const AccountAddressSection = (
     <div
       className={`account-address-section card card-body ${props.className ? props.className : ''}`}
     >
-      <AccountNewAddress />
-      <AddressesList
-        addresses={app.user.addresses}
-        includeDeleteFunctionality={true}
-      />
+      <AccountAddresses />
     </div>
   );
 };

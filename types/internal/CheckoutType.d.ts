@@ -1,3 +1,5 @@
+import {AddressType} from "./AddressType";
+
 export interface CheckoutLineItemType {
   product: {
     name: string;
@@ -18,4 +20,5 @@ export interface CheckoutType {
   successUrl: string;
   status: "waiting" | "done";
   url: string;
+  address: AddressType;
 }

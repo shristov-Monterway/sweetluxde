@@ -1,46 +1,17 @@
 import React from 'react';
 import { AbstractComponentType } from '../../types/AbstractComponentType';
 import { AddressType } from '../../../../types/internal/AddressType';
-import useApp from '../../hooks/useApp';
-import FirestoreModule from '../../modules/FirestoreModule';
-import { UserType } from '../../../../types/internal/UserType';
 
 export interface AddressCardProps extends AbstractComponentType {
   address: AddressType;
-  indexToDelete?: number;
-  onSuccessDelete?: () => void;
-  onFailureDelete?: (error: Error) => void;
+  actions?: {
+    label: string | React.JSX.Element;
+    onClick: () => void;
+    className?: string;
+  }[];
 }
 
 const AddressCard = (props: AddressCardProps): React.JSX.Element => {
-  const app = useApp();
-
-  const onDelete = () => {
-    if (!app.user) {
-      return;
-    }
-
-    if (typeof props.indexToDelete !== 'undefined') {
-      const newAddresses = app.user.addresses;
-      newAddresses.splice(props.indexToDelete, 1);
-      FirestoreModule<UserType>()
-        .writeDoc('users', app.user.uid, {
-          ...app.user,
-          addresses: newAddresses,
-        })
-        .then(() => {
-          if (props.onSuccessDelete) {
-            props.onSuccessDelete();
-          }
-        })
-        .catch(() => {
-          if (props.onFailureDelete) {
-            props.onFailureDelete(new Error('Error deleting address.'));
-          }
-        });
-    }
-  };
-
   return (
     <div className={`address-card ${props.className ? props.className : ''}`}>
       <div className="address-card__address-container">
@@ -59,16 +30,17 @@ const AddressCard = (props: AddressCardProps): React.JSX.Element => {
           <span>{props.address.phone}</span>
         </div>
       </div>
-      {typeof props.indexToDelete !== 'undefined' ? (
+      {props.actions ? (
         <div className="address-card__actions">
-          {typeof props.indexToDelete !== 'undefined' ? (
+          {props.actions.map((action, index) => (
             <button
-              className="address-card__action btn btn-outline-danger"
-              onClick={onDelete}
+              key={index}
+              className={`address-card__action ${action.className ? action.className : ''}`}
+              onClick={action.onClick}
             >
-              <i className="fe fe-trash" />
+              {action.label}
             </button>
-          ) : null}
+          ))}
         </div>
       ) : null}
     </div>
