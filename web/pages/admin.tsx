@@ -9,7 +9,6 @@ import AdminGenerateProductButton from '../src/components/AdminGenerateProductBu
 import NotFound from 'next/error';
 import Link from 'next/link';
 import SideNavContainer from '../src/components/SideNavContainer';
-import SignOutButton from '../src/components/SignOutButton';
 
 const Admin = (): React.JSX.Element => {
   const app = useApp();

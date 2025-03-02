@@ -3,7 +3,7 @@ import { AbstractComponentType } from '../../types/AbstractComponentType';
 import useApp from '../../hooks/useApp';
 import FormField from '../FormField';
 
-export interface InvitationStatusProps extends AbstractComponentType {}
+export type InvitationStatusProps = AbstractComponentType;
 
 const InvitationStatus = (props: InvitationStatusProps): React.JSX.Element => {
   const app = useApp();
