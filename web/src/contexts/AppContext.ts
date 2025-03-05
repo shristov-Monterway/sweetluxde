@@ -46,6 +46,15 @@ export interface FiltersContextType {
   reset: () => void;
 }
 
+export interface InvitationStatusContextType {
+  get: {
+    value: string;
+    isValid: boolean;
+    isLoading: boolean;
+  };
+  set: (newValue: string) => void;
+}
+
 export interface AppContextType {
   isAppLoading: IsAppLoadingContextType;
   translator: I18n;
@@ -58,6 +67,7 @@ export interface AppContextType {
   activeModal: ActiveModalContextType;
   config: PublicConfigType;
   filters: FiltersContextType;
+  invitationStatus: InvitationStatusContextType;
 }
 
 const AppContext = React.createContext<AppContextType | undefined>(undefined);

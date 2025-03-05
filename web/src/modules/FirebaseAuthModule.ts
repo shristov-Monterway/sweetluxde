@@ -135,6 +135,7 @@ const FirebaseAuthModule = (): FirebaseAuthModuleType => {
         })
         .catch((error) => {
           if (error.code === 'auth/user-not-found') {
+            // TODO Check invitation code
             createUserWithEmailAndPassword(FirebaseAuth, email, password)
               .then((result) => {
                 FirestoreModule<UserType>()
@@ -179,6 +180,8 @@ const FirebaseAuthModule = (): FirebaseAuthModuleType => {
       if (!authProvider) {
         throw new Error('Not valid provider given.');
       }
+
+      // TODO Check invitation code
 
       defaultSignInWithPopup(FirebaseAuth, authProvider)
         .then((result) => {
@@ -322,6 +325,9 @@ const FirebaseAuthModule = (): FirebaseAuthModuleType => {
           onFailure
         );
       }
+
+      // TODO Check invitation code
+
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       window.confirmationResult

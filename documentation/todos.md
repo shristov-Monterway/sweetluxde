@@ -1,5 +1,6 @@
 # TODOS
 
+- Add validation to place order address
 - Add viewed products history
 - Add filters history
 - Add strict validation rules for the firebase functions

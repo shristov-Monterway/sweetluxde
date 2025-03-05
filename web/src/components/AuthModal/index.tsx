@@ -4,7 +4,6 @@ import Modal from '../Modal';
 import AuthForm from '../AuthForm';
 import GoogleSignInButton from '../GoogleSignInButton';
 import useApp from '../../hooks/useApp';
-import InvitationStatus from '../InvitationStatus/InvitationStatus';
 
 export interface AuthModalProps extends AbstractComponentType {
   showModal: boolean;
@@ -31,13 +30,6 @@ const AuthModal = (props: AuthModalProps): React.JSX.Element => {
               onSuccess={() => app.activeModal.set(null)}
             />
           ) : null}
-        </div>
-      ) : null}
-      {app.config.hasRequiredInvitation ? (
-        <div>
-          <hr className="m-0 p-0 mb-4" />
-          <InvitationStatus />
-          <hr className="m-0 p-0 mt-4" />
         </div>
       ) : null}
       {app.config.authenticationMethods.includes('phone') ||

@@ -2,7 +2,7 @@ import React from 'react';
 import { AbstractComponentType } from '../../types/AbstractComponentType';
 import Modal from '../Modal';
 import CategoriesFilter from '../CategoriesFilter';
-import PriceRangeFilter from '../PriceRangeFilter/PriceRangeFilter';
+import PriceRangeFilter from '../PriceRangeFilter';
 import AttributeFilter from '../AttributeFilter';
 import FiltersResetButton from '../FiltersResetButton';
 

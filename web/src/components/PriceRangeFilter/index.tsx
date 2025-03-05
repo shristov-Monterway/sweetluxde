@@ -1,7 +1,7 @@
 import React from 'react';
 import { AbstractComponentType } from '../../types/AbstractComponentType';
 import useApp from '../../hooks/useApp';
-import RangeSlider from '../RangeSlider/RangeSlider';
+import RangeSlider from '../RangeSlider';
 import Price from '../Price';
 
 export interface PriceRangeFilterProps extends AbstractComponentType {

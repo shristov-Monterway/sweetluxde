@@ -4,7 +4,7 @@ import useApp from '../../hooks/useApp';
 import FirebaseFunctionsModule from '../../modules/FirebaseFunctionsModule';
 import { ProductFixtureRequestType } from '../../../../types/api/admin/ProductFixtureRequestType';
 import { ProductFixtureResponseType } from '../../../../types/api/admin/ProductFixtureResponseType';
-import LoadingButton from '../LoadingButton/LoadingButton';
+import LoadingButton from '../LoadingButton';
 
 export type AdminGenerateProductButtonProps = AbstractComponentType;
 

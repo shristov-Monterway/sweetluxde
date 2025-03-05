@@ -19,7 +19,7 @@ import useSyncUserTheme from '../src/hooks/useSyncUserTheme';
 import useSyncUserCurrency from '../src/hooks/useSyncUserCurrency';
 import useInitCategories from '../src/hooks/useInitCategories';
 import useInitFilters from '../src/hooks/useInitFilters';
-import useInitInvitedBy from '../src/hooks/useInitInvitedBy';
+import useInitInvitationStatus from '../src/hooks/useInitInvitationStatus';
 
 const App = (props: AppProps): React.JSX.Element => {
   const { Component } = props;
@@ -47,8 +47,10 @@ const App = (props: AppProps): React.JSX.Element => {
     products,
     config,
   });
-  useInitInvitedBy({
+  const invitationStatus = useInitInvitationStatus({
     user,
+    formErrors,
+    config,
   });
   useInitBootstrapJs();
 
@@ -83,6 +85,7 @@ const App = (props: AppProps): React.JSX.Element => {
           activeModal,
           config,
           filters,
+          invitationStatus,
         }}
       >
         <Component />

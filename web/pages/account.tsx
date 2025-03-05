@@ -8,7 +8,7 @@ import SignOutButton from '../src/components/SignOutButton';
 import AccountAdminSection from '../src/components/AccountAdminSection';
 import SideNavContainer from '../src/components/SideNavContainer';
 import InvitationLinkSection from '../src/components/InvitationLinkSection';
-import AccountAddressSection from '../src/components/AccountAddressSection/AccountAddressSection';
+import AccountAddressSection from '../src/components/AccountAddressSection';
 
 const Account = (): React.JSX.Element => {
   const app = useApp();

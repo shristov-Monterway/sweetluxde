@@ -7,7 +7,7 @@ import { CheckoutNewResponseType } from '../../../../types/api/payment/CheckoutN
 import { CheckoutPreviewResponseType } from '../../../../types/api/payment/CheckoutPreviewResponseType';
 import { CheckoutPreviewRequestType } from '../../../../types/api/payment/CheckoutPreviewRequestType';
 import Price from '../Price';
-import LoadingButton from '../LoadingButton/LoadingButton';
+import LoadingButton from '../LoadingButton';
 import AccountAddresses from '../AccountAddresses';
 
 export type CartOverviewFormProps = AbstractComponentType;

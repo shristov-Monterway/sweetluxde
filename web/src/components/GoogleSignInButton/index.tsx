@@ -20,7 +20,7 @@ const GoogleSignInButton = (
       if (!invitedBy) {
         app.formErrors.set([
           {
-            form: 'invitation',
+            form: 'invitationStatus',
             field: 'invitedBy',
             error: 'Required to be invited!',
           },

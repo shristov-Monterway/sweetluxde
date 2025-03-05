@@ -4,7 +4,7 @@ import useApp from '../../hooks/useApp';
 import FirebaseFunctionsModule from '../../modules/FirebaseFunctionsModule';
 import { CurrenciesSyncRequestType } from '../../../../types/api/admin/CurrenciesSyncRequestType';
 import { CurrenciesSyncResponseType } from '../../../../types/api/admin/CurrenciesSyncResponseType';
-import LoadingButton from '../LoadingButton/LoadingButton';
+import LoadingButton from '../LoadingButton';
 
 export type AdminSyncCurrenciesButtonProps = AbstractComponentType;
 
