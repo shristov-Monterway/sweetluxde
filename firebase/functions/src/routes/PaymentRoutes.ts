@@ -208,6 +208,7 @@ PaymentRoutes.all(
       currency: req.currency,
       locale: req.locale,
       successUrl: request.successUrl,
+      address: request.address,
     };
 
     const checkout = await StripeService().createCheckoutSession(newCheckout);

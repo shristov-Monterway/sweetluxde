@@ -19,7 +19,9 @@ const Page = (props: PageProps): React.JSX.Element => {
   return (
     <div className={`page ${props.className ? props.className : ''}`}>
       <PageLoading isAppLoading={app.isAppLoading.get} />
-      {app.config.hasRequiredInvitation && app.invitationStatus.get.isValid ? (
+      {app.config.hasRequiredInvitation && !app.invitationStatus.get.isValid ? (
+        <PageClosedWithInvitations />
+      ) : (
         <>
           {props.header ? (
             <div className="page__header">{props.header}</div>
@@ -39,8 +41,6 @@ const Page = (props: PageProps): React.JSX.Element => {
           <LocaleModal showModal={app.activeModal.get === 'localeModal'} />
           <FiltersModal showModal={app.activeModal.get === 'filtersModal'} />
         </>
-      ) : (
-        <PageClosedWithInvitations />
       )}
     </div>
   );

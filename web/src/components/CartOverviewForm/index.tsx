@@ -72,6 +72,13 @@ const CartOverviewForm = (
       return;
     }
 
+    if (
+      selectedAddressIndex === null ||
+      typeof app.user.addresses[selectedAddressIndex] === 'undefined'
+    ) {
+      return;
+    }
+
     setIsCheckoutCreationLoading(true);
 
     const response = await FirebaseFunctionsModule<
@@ -82,6 +89,7 @@ const CartOverviewForm = (
       {
         lineItems: app.user.cart.lineItems,
         successUrl: 'http://localhost:3000/',
+        address: app.user.addresses[selectedAddressIndex],
       },
       app.translator.locale,
       app.currency.get

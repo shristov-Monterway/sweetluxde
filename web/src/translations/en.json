@@ -42,7 +42,7 @@
       },
       "streetNumber": {
         "label": "Street number",
-        "help": "Insert your street number."
+        "help": "Insert your number."
       },
       "city": {
         "label": "City",

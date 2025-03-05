@@ -73,6 +73,13 @@ const useInitInvitationStatus = (
       return !!user;
     };
 
+    if (props.user) {
+      if (!props.config.hasRequiredInvitation) {
+        setIsValid(true);
+        return;
+      }
+    }
+
     if (value !== null && value.length === 28) {
       setIsLoading(true);
       checkIsCodeValid(value)
@@ -88,7 +95,7 @@ const useInitInvitationStatus = (
     } else {
       setIsValid(false);
     }
-  }, [value]);
+  }, [props.config, props.user, value]);
 
   React.useEffect(() => {
     if (isValid) {
@@ -107,12 +114,25 @@ const useInitInvitationStatus = (
     }
   }, [isValid]);
 
+  React.useEffect(() => {
+    if (props.user) {
+      if (props.config.hasRequiredInvitation) {
+        if (isValid) {
+          if (value !== props.user.invitedBy) {
+            FirestoreModule<UserType>().writeDoc('users', props.user.uid, {
+              ...props.user,
+              invitedBy: value,
+            });
+          }
+        }
+      }
+    }
+  }, [props.user, props.config, value, isValid]);
+
   const set = (value: string): void => {
     localStorage.setItem('invitedBy', value);
     window.dispatchEvent(new Event('localStorageChange'));
   };
-
-  console.log(value);
 
   return {
     get: {

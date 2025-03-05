@@ -1,3 +1,5 @@
+import {AddressType} from "../../internal/AddressType";
+
 export interface CheckoutNewRequestType {
   lineItems: {
     product: string;
@@ -5,4 +7,5 @@ export interface CheckoutNewRequestType {
     quantity: number;
   }[];
   successUrl: string;
+  address: AddressType;
 }
