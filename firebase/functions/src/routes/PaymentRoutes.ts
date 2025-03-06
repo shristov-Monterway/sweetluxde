@@ -184,19 +184,67 @@ PaymentRoutes.all(
         continue;
       }
 
+      const attributes: {
+        [uid: string]: {
+          name: string;
+          optionUid: string;
+          optionName: string;
+        };
+      } = {};
+
+      if (
+        Object.keys(lineItem.attributes).length !==
+        Object.keys(variation.attributes).length
+      ) {
+        continue;
+      }
+
+      Object.keys(variation.attributes).forEach((attributeUid) => {
+        const attributeNameTranslations =
+          variation.attributes[attributeUid].name;
+        const attributeNameTranslationsLanguages = Object.keys(
+          attributeNameTranslations
+        );
+
+        const optionUid = lineItem.attributes[attributeUid];
+        const optionNameTranslations =
+          variation.attributes[attributeUid].options[optionUid].name;
+        const optionNameTranslationsLanguages = Object.keys(
+          optionNameTranslations
+        );
+
+        attributes[attributeUid] = {
+          name: attributeNameTranslations[req.locale]
+            ? attributeNameTranslations[req.locale]
+            : attributeNameTranslations[attributeNameTranslationsLanguages[0]],
+          optionUid: optionUid,
+          optionName: optionNameTranslations[req.locale]
+            ? optionNameTranslations[req.locale]
+            : optionNameTranslations[optionNameTranslationsLanguages[0]],
+        };
+      });
+
       const price = Math.ceil(rate * variation.price);
 
       lineItems.push({
-        product: {
-          name: product.name[req.locale]
-            ? product.name[req.locale]
-            : product.name[Object.keys(product.name)[0]],
-          description: product.description[req.locale]
-            ? product.description[req.locale]
-            : product.description[Object.keys(product.description)[0]],
-          price,
-          currency: req.currency,
-        },
+        productUid: product.uid,
+        productName: product.name[req.locale]
+          ? product.name[req.locale]
+          : product.name[Object.keys(product.name)[0]],
+        productDescription: product.description[req.locale]
+          ? product.description[req.locale]
+          : product.description[Object.keys(product.description)[0]],
+        variationUid: lineItem.variation,
+        variationName: variation.name[req.locale]
+          ? variation.name[req.locale]
+          : variation.name[Object.keys(variation.name)[0]],
+        variationDescription: variation.description[req.locale]
+          ? variation.description[req.locale]
+          : variation.description[Object.keys(variation.description)[0]],
+        price,
+        currency: req.currency,
+        attributes,
+        image: variation.images.length ? variation.images[0] : null,
         quantity: lineItem.quantity,
       });
     }

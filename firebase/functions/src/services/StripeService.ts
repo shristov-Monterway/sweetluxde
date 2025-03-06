@@ -1,5 +1,5 @@
 import Stripe from 'stripe';
-import config from '../Config';
+import Config from '../Config';
 import { CheckoutType } from '../../../../types/internal/CheckoutType';
 
 export interface StripeServiceType {
@@ -10,26 +10,36 @@ export interface StripeServiceType {
 }
 
 const StripeService = (): StripeServiceType => {
-  const stripe = new Stripe(config.stripeSecretKey);
+  const stripe = new Stripe(Config.stripeSecretKey);
 
   return {
     createCheckoutSession: async (checkout) => {
       const stripeCheckoutSession: Stripe.Checkout.SessionCreateParams = {
+        billing_address_collection: 'auto',
         customer_email: checkout.userEmail,
         line_items: checkout.lineItems.map((lineItem) => ({
           price_data: {
-            currency: lineItem.product.currency,
+            currency: lineItem.currency,
             product_data: {
-              name: lineItem.product.name,
-              description: lineItem.product.description,
+              name: lineItem.productName,
+              description: `${lineItem.variationName}; ${Object.keys(
+                lineItem.attributes
+              )
+                .map(
+                  (attributeId) =>
+                    `${lineItem.attributes[attributeId].name}: ${lineItem.attributes[attributeId].optionName}`
+                )
+                .join('; ')}`,
+              images: lineItem.image ? [lineItem.image] : [],
             },
             tax_behavior: 'inclusive',
-            unit_amount: lineItem.product.price,
+            unit_amount: lineItem.price,
           },
           quantity: lineItem.quantity,
         })),
         mode: 'payment',
         success_url: checkout.successUrl,
+        locale: checkout.locale as Stripe.Checkout.SessionCreateParams.Locale,
       };
 
       const checkoutSession = await stripe.checkout.sessions.create(
@@ -54,7 +64,7 @@ const StripeService = (): StripeServiceType => {
       return stripe.webhooks.constructEvent(
         body,
         signature,
-        config.stripeWebhookSecretKey
+        Config.stripeWebhookSecretKey
       );
     },
   };
