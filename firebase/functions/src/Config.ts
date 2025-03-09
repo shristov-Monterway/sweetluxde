@@ -11,7 +11,14 @@ const Config: ConfigType = {
   attributesToFilter: ['size'],
   headerHeight: 90,
   hasInvitations: true,
-  hasRequiredInvitation: true,
+  hasRequiredInvitation: false,
+  mailerHost: 'smtp.gmail.com',
+  mailerPort: 465,
+  mailerUseSsl: true,
+  mailerUsername: 's.hristov@monterway.com',
+  mailerPassword: 'ctlb hmvq daof ycwh',
+  mailerFromName: 'Simeon Hristov',
+  mailerFromEmail: 's.hristov@monterway.com',
 };
 
 export default Config;

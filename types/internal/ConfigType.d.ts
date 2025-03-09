@@ -10,4 +10,11 @@ export interface ConfigType {
   headerHeight: number;
   hasInvitations: boolean;
   hasRequiredInvitation: boolean;
+  mailerHost: string;
+  mailerPort: number;
+  mailerUseSsl: boolean;
+  mailerUsername: string;
+  mailerPassword: string;
+  mailerFromName: string;
+  mailerFromEmail: string;
 }
