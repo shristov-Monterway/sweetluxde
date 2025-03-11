@@ -5,6 +5,7 @@ import LocaleModalToggle from '../LocaleModalToggle';
 import useApp from '../../hooks/useApp';
 import AuthModalToggle from '../AuthModalToggle';
 import Link from 'next/link';
+import CurrencyModalToggle from '../CurrencyModalToggle';
 
 export interface HeaderProps extends AbstractComponentType {
   hasShadow?: boolean;
@@ -55,6 +56,7 @@ const Header = (props: HeaderProps): React.JSX.Element => {
               <div className="nav-link d-flex gap-1">
                 <ThemeToggle className="btn btn-primary btn-sm" />
                 <LocaleModalToggle className="btn btn-primary btn-sm" />
+                <CurrencyModalToggle className="btn btn-primary btn-sm" />
                 {app.user ? (
                   <>
                     <Link href="/account" passHref={true}>

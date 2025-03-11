@@ -2,12 +2,13 @@ import React from 'react';
 import { AbstractComponentType } from '../../types/AbstractComponentType';
 import useApp from '../../hooks/useApp';
 
-export interface InvitationLinkSectionProps extends AbstractComponentType {
+export interface AccountInvitationLinkSectionProps
+  extends AbstractComponentType {
   uid: string;
 }
 
-const InvitationLinkSection = (
-  props: InvitationLinkSectionProps
+const AccountInvitationLinkSection = (
+  props: AccountInvitationLinkSectionProps
 ): React.JSX.Element => {
   const app = useApp();
   const origin =
@@ -37,16 +38,18 @@ const InvitationLinkSection = (
   };
 
   return (
-    <div className="invitation-link-section card">
+    <div
+      className={`account-invitation-link-section card ${props.className ? props.className : ''}`}
+    >
       <div className="card-body d-flex flex-column gap-3">
         <h3 className="m-0 p-0">
-          {app.translator.t('components.invitationLinkSection.title')}
+          {app.translator.t('components.accountInvitationLinkSection.title')}
         </h3>
         <div className="d-flex flex-column gap-1">
           <div className="d-flex align-items-center gap-3">
             <input
               type="text"
-              className="form-control invitation-link-section__input"
+              className="form-control account-invitation-link-section__input"
               value={invitationLink}
               disabled={true}
             />
@@ -57,7 +60,9 @@ const InvitationLinkSection = (
             </button>
           </div>
           <p>
-            {app.translator.t('components.invitationLinkSection.description')}
+            {app.translator.t(
+              'components.accountInvitationLinkSection.description'
+            )}
           </p>
         </div>
       </div>
@@ -65,4 +70,4 @@ const InvitationLinkSection = (
   );
 };
 
-export default InvitationLinkSection;
+export default AccountInvitationLinkSection;

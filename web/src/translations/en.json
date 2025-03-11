@@ -318,6 +318,16 @@
       "message": "You're admin of the shop.",
       "manage": "Manage"
     },
+    "accountInvitationLinkSection": {
+      "title": "Invitation link",
+      "description": "Copy the link and invite a friend."
+    },
+    "accountSettingsSection": {
+      "title": "Settings",
+      "changeTheme": "Change theme",
+      "chooseLanguage": "Choose language",
+      "chooseCurrency": "Choose currency"
+    },
     "adminCategoriesList": {
       "label": "Categories"
     },
@@ -354,12 +364,11 @@
       "name": "Name",
       "parentUid": "Parent category"
     },
+    "currencyModal": {
+      "search": "Search"
+    },
     "filtersResetButton": {
       "label": "Reset"
-    },
-    "invitationLinkSection": {
-      "title": "Invitation link",
-      "description": "Copy the link and invite a friend."
     },
     "invitationStatus": {
       "label": "My invitation code is: "

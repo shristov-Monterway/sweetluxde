@@ -55,6 +55,8 @@ li.nav-item {
 @import './components/account-address-section';
 @import './components/account-addresses';
 @import './components/account-admin-section';
+@import './components/account-invitation-link-section';
+@import './components/account-settings-section';
 @import './components/address-card';
 @import './components/address-form';
 @import './components/admin-categories-list';
@@ -69,7 +71,6 @@ li.nav-item {
 @import './components/expandable';
 @import './components/filters-modal';
 @import './components/form-field';
-@import './components/invitation-link-section';
 @import './components/invitation-status';
 @import './components/modal';
 @import './components/page';

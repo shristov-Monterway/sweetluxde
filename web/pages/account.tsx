@@ -7,8 +7,9 @@ import Header from '../src/components/Header';
 import SignOutButton from '../src/components/SignOutButton';
 import AccountAdminSection from '../src/components/AccountAdminSection';
 import SideNavContainer from '../src/components/SideNavContainer';
-import InvitationLinkSection from '../src/components/InvitationLinkSection';
+import AccountInvitationLinkSection from '../src/components/AccountInvitationLinkSection';
 import AccountAddressSection from '../src/components/AccountAddressSection';
+import AccountSettingsSection from "../src/components/AccountSettingsSection";
 
 const Account = (): React.JSX.Element => {
   const app = useApp();
@@ -24,6 +25,12 @@ const Account = (): React.JSX.Element => {
     element?: React.JSX.Element;
     className?: string;
   }[] = [
+    {
+      id: 'settings',
+      label: 'Settings',
+      element: <AccountSettingsSection />,
+      className: 'btn btn-outline-primary w-100',
+    },
     {
       id: 'addresses',
       label: 'Addresses',
@@ -51,7 +58,7 @@ const Account = (): React.JSX.Element => {
     sections.unshift({
       id: 'invitation',
       label: 'Invitation',
-      element: <InvitationLinkSection uid={app.user.uid} />,
+      element: <AccountInvitationLinkSection uid={app.user.uid} />,
       className: 'btn btn-outline-primary w-100',
     });
   }

@@ -6,6 +6,7 @@ import LocaleModal from '../LocaleModal';
 import FiltersModal from '../FiltersModal';
 import PageLoading from '../PageLoading';
 import PageClosedWithInvitations from '../PageClosedWithInvitations';
+import CurrencyModal from '../CurrencyModal';
 
 export interface PageProps extends AbstractComponentType {
   children: React.JSX.Element | React.JSX.Element[];
@@ -39,6 +40,7 @@ const Page = (props: PageProps): React.JSX.Element => {
           </div>
           <AuthModal showModal={app.activeModal.get === 'authModal'} />
           <LocaleModal showModal={app.activeModal.get === 'localeModal'} />
+          <CurrencyModal showModal={app.activeModal.get === 'currencyModal'} />
           <FiltersModal showModal={app.activeModal.get === 'filtersModal'} />
         </>
       )}
