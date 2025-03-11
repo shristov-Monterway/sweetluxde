@@ -9,7 +9,7 @@ import AccountAdminSection from '../src/components/AccountAdminSection';
 import SideNavContainer from '../src/components/SideNavContainer';
 import AccountInvitationLinkSection from '../src/components/AccountInvitationLinkSection';
 import AccountAddressSection from '../src/components/AccountAddressSection';
-import AccountSettingsSection from "../src/components/AccountSettingsSection";
+import AccountSettingsSection from '../src/components/AccountSettingsSection';
 
 const Account = (): React.JSX.Element => {
   const app = useApp();
