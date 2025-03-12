@@ -118,6 +118,10 @@ const FixtureModule = (): FixtureModuleType => {
           faker.commerce.productName(),
           ['en', 'bg']
         ),
+        description: FixtureModule().generateTranslation(
+          faker.commerce.productDescription(),
+          ['en', 'bg']
+        ),
         parentUid: parentUid,
       };
       return category;

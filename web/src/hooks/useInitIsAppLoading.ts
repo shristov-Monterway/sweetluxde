@@ -7,7 +7,7 @@ const useInitIsAppLoading = (): IsAppLoadingContextType => {
   React.useEffect(() => {
     setTimeout(() => {
       setIsAppLoading(false);
-    }, 2000);
+    }, 1000);
   }, []);
 
   return {

@@ -163,6 +163,11 @@ AdminRoutes.all(
         },
       },
     },
+    'category.description.*': {
+      in: 'body',
+      notEmpty: true,
+      isString: true,
+    },
     'category.name.*': {
       in: 'body',
       notEmpty: true,

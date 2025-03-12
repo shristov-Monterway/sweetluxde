@@ -12,6 +12,9 @@
     "/admin/product/new": {
       "title": "Create new product"
     },
+    "/category/[uid]": {
+      "title": "Category %{name}"
+    },
     "/product/[uid]": {
       "title": "Product %{name}"
     },
@@ -99,6 +102,18 @@
         "help": "Choose language for the text."
       },
       "name_value": {
+        "label": "Text",
+        "help": "Write translation for the text."
+      },
+      "description": {
+        "label": "Category description in %{language}",
+        "help": "Insert category description for %{language}."
+      },
+      "description_locale": {
+        "label": "Language",
+        "help": "Choose language for the text."
+      },
+      "description_value": {
         "label": "Text",
         "help": "Write translation for the text."
       },
@@ -362,6 +377,7 @@
     },
     "categoryForm": {
       "name": "Name",
+      "description": "Description",
       "parentUid": "Parent category"
     },
     "currencyModal": {

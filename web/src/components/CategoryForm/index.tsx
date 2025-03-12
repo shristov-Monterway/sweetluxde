@@ -27,6 +27,7 @@ const CategoryForm = (props: CategoryFormProps): React.JSX.Element => {
       })()
     : {
         name: {},
+        description: {},
         parentUid: null,
       };
   const [newCategory, setNewCategory] =
@@ -138,6 +139,23 @@ const CategoryForm = (props: CategoryFormProps): React.JSX.Element => {
                   setNewCategory((newCategory) => ({
                     ...newCategory,
                     name: translations,
+                  }));
+                }}
+              />
+            ),
+          },
+          {
+            id: 'description',
+            label: app.translator.t('components.categoryForm.description'),
+            children: (
+              <TranslationFormField
+                form="category"
+                field="description"
+                translations={newCategory.description}
+                setTranslations={(translations) => {
+                  setNewCategory((newCategory) => ({
+                    ...newCategory,
+                    description: translations,
                   }));
                 }}
               />
