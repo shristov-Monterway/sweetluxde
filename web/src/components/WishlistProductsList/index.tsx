@@ -26,13 +26,13 @@ const WishlistProductsList = (
       setLineItems(
         app.user.wishlist.lineItems
           .filter((lineItem) => {
-            const product = app.products.find(
+            const product = app.products.get.find(
               (product) => lineItem.product === product.uid
             );
             return product && product.variations[lineItem.variation];
           })
           .map((lineItem) => {
-            const product = app.products.find(
+            const product = app.products.get.find(
               (product) => lineItem.product === product.uid
             );
 
@@ -55,7 +55,7 @@ const WishlistProductsList = (
           })
       );
     }
-  }, [app.user, app.products]);
+  }, [app.user, app.products.get]);
 
   return (
     <div className={`${props.className ? props.className : ''}`}>

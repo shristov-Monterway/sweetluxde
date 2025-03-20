@@ -16,7 +16,7 @@ const AdminCategory = (): React.JSX.Element => {
     return <NotFound statusCode={404} />;
   }
 
-  const category = app.categories.find((category) => category.uid === uid);
+  const category = app.categories.get.find((category) => category.uid === uid);
 
   if (!category) {
     return <NotFound statusCode={404} />;
@@ -33,7 +33,14 @@ const AdminCategory = (): React.JSX.Element => {
           name,
         })}
       />
-      <CategoryForm category={category} />
+      <CategoryForm
+        category={category}
+        onSuccess={(category) => {
+          app.categories.refresh().then(() => {
+            router.push(`/category/${category.uid}`);
+          });
+        }}
+      />
     </Page>
   );
 };

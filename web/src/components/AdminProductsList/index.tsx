@@ -12,7 +12,7 @@ const AdminProductsList = (
   const [productNames, setProductNames] = React.useState<{
     [id: string]: string;
   }>(
-    app.products.reduce(
+    app.products.get.reduce(
       (productNames, product) => ({
         ...productNames,
         [product.uid]: product.name[app.translator.locale]
@@ -24,7 +24,7 @@ const AdminProductsList = (
   );
 
   React.useEffect(() => {
-    const newProductNames = app.products.reduce(
+    const newProductNames = app.products.get.reduce(
       (productNames, product) => ({
         ...productNames,
         [product.uid]: product.name[app.translator.locale]
@@ -34,7 +34,7 @@ const AdminProductsList = (
       {}
     );
     setProductNames(newProductNames);
-  }, [app.products]);
+  }, [app.products.get]);
 
   return (
     <div
@@ -44,7 +44,7 @@ const AdminProductsList = (
         {app.translator.t('components.adminProductsList.label')}
       </h1>
       <div className="admin-products-list__container">
-        {app.products.map((product, index) => (
+        {app.products.get.map((product, index) => (
           <div key={index} className="admin-products-list__product">
             <div className="admin-products-list__product-name-container">
               <span className="admin-products-list__product-name">

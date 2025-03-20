@@ -6,13 +6,14 @@ import { NextSeo } from 'next-seo';
 import NotFound from 'next/error';
 import ProductInfo from '../../src/components/ProductInfo';
 import Header from '../../src/components/Header';
+import SuggestedCategoryProducts from '../../src/components/SuggestedCategoryProducts';
 
 const Product = (): React.JSX.Element => {
   const app = useApp();
   const router = useRouter();
   const uid = router.query.uid as string;
 
-  const product = app.products.find((product) => product.uid === uid);
+  const product = app.products.get.find((product) => product.uid === uid);
 
   if (!product) {
     return <NotFound statusCode={404} />;
@@ -29,7 +30,10 @@ const Product = (): React.JSX.Element => {
           name,
         })}
       />
-      <ProductInfo product={product} />
+      <div className="d-flex flex-column gap-5">
+        <ProductInfo product={product} />
+        <SuggestedCategoryProducts product={product} />
+      </div>
     </Page>
   );
 };

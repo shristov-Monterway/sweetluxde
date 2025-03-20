@@ -19,6 +19,10 @@ import { PublicConfigType } from '../../../../types/internal/PublicConfigType';
 import { CategoryType } from '../../../../types/internal/CategoryType';
 import { CategoryCreateUpdateRequestType } from '../../../../types/api/admin/CategoryCreateUpdateRequestType';
 import { CategoryCreateUpdateResponseType } from '../../../../types/api/admin/CategoryCreateUpdateResponseType';
+import { CategoryDeleteRequestType } from '../../../../types/api/admin/CategoryDeleteRequestType';
+import { CategoryDeleteResponseType } from '../../../../types/api/admin/CategoryDeleteResponseType';
+import { ProductDeleteRequestType } from '../../../../types/api/admin/ProductDeleteRequestType';
+import { ProductDeleteResponseType } from '../../../../types/api/admin/ProductDeleteResponseType';
 
 const AdminRoutes = express.Router();
 
@@ -64,10 +68,14 @@ AdminRoutes.all(
     },
     'product.variations.*.weight': {
       in: 'body',
-      isInt: {
-        options: { min: 0 },
+      custom: {
+        options: (value) => {
+          if (value === null || typeof value === 'number') {
+            return true;
+          }
+          throw new Error('weight must be either null or a string');
+        },
       },
-      toInt: true,
     },
     'product.variations.*.images.*': {
       in: 'body',
@@ -149,6 +157,109 @@ AdminRoutes.all(
 );
 
 AdminRoutes.all(
+  '/product/delete',
+  checkSchema({
+    uid: {
+      in: 'body',
+      notEmpty: true,
+      isString: true,
+    },
+  }),
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  async (req, res) => {
+    const validation = validationResult(req);
+
+    if (!validation.isEmpty()) {
+      res.status(400).send(validation.array());
+      return;
+    }
+
+    const user = req.user as UserType | null;
+
+    if (!user || !user.isAdmin) {
+      res.status(401).send();
+      return;
+    }
+
+    const request: ProductDeleteRequestType = req.body;
+
+    await FirestoreModule<ProductType>().deleteDoc('products', request.uid);
+
+    const users = await FirestoreModule<UserType>().getCollection('users');
+
+    for (const user of users) {
+      if (
+        !user.cart.lineItems
+          .map((lineItem) => lineItem.product)
+          .includes(request.uid) &&
+        !user.wishlist.lineItems
+          .map((lineItem) => lineItem.product)
+          .includes(request.uid)
+      ) {
+        continue;
+      }
+
+      const cartIndexesToRemove: number[] = [];
+      const wishlistIndexesToRemove: number[] = [];
+
+      user.cart.lineItems.forEach((lineItem, index) => {
+        if (lineItem.product === request.uid) {
+          cartIndexesToRemove.push(index);
+        }
+      });
+
+      user.wishlist.lineItems.forEach((lineItem, index) => {
+        if (lineItem.product === request.uid) {
+          wishlistIndexesToRemove.push(index);
+        }
+      });
+
+      const newCartLineItems = user.cart.lineItems;
+      const newWishlistLineItems = user.wishlist.lineItems;
+
+      cartIndexesToRemove.sort((a, b) => b - a);
+      wishlistIndexesToRemove.sort((a, b) => b - a);
+
+      for (const cartIndexToRemove of cartIndexesToRemove) {
+        if (
+          cartIndexToRemove >= 0 &&
+          cartIndexToRemove < newCartLineItems.length
+        ) {
+          newCartLineItems.splice(cartIndexToRemove, 1);
+        }
+      }
+
+      for (const wishlistIndexToRemove of wishlistIndexesToRemove) {
+        if (
+          wishlistIndexToRemove >= 0 &&
+          wishlistIndexToRemove < newWishlistLineItems.length
+        ) {
+          newWishlistLineItems.splice(wishlistIndexToRemove, 1);
+        }
+      }
+
+      await FirestoreModule<UserType>().writeDoc('users', user.uid, {
+        ...user,
+        cart: {
+          lineItems: newCartLineItems,
+        },
+        wishlist: {
+          lineItems: newWishlistLineItems,
+        },
+      });
+    }
+
+    const response: ResponseType<ProductDeleteResponseType> = {
+      data: {},
+    };
+
+    res.send(response);
+    return;
+  }
+);
+
+AdminRoutes.all(
   '/category/createUpdate',
   checkSchema({
     uid: {
@@ -173,10 +284,16 @@ AdminRoutes.all(
       notEmpty: true,
       isString: true,
     },
-    'product.parentUid': {
+    'category.parentUid': {
       in: 'body',
-      notEmpty: true,
-      isString: true,
+      custom: {
+        options: (value) => {
+          if (value === null || typeof value === 'string') {
+            return true;
+          }
+          throw new Error('parentUid must be either null or a string');
+        },
+      },
     },
   }),
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -242,6 +359,93 @@ AdminRoutes.all(
       data: {
         category,
       },
+    };
+
+    res.send(response);
+    return;
+  }
+);
+
+AdminRoutes.all(
+  '/category/delete',
+  checkSchema({
+    uid: {
+      in: 'body',
+      notEmpty: true,
+      isString: true,
+    },
+  }),
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  async (req, res) => {
+    const validation = validationResult(req);
+
+    if (!validation.isEmpty()) {
+      res.status(400).send(validation.array());
+      return;
+    }
+
+    const user = req.user as UserType | null;
+
+    if (!user || !user.isAdmin) {
+      res.status(401).send();
+      return;
+    }
+
+    const request: CategoryDeleteRequestType = req.body;
+
+    await FirestoreModule<CategoryType>().deleteDoc('categories', request.uid);
+
+    const categories =
+      await FirestoreModule<CategoryType>().getCollection('categories');
+
+    for (const category of categories) {
+      if (category.parentUid === request.uid) {
+        const newCategory: CategoryType = {
+          ...category,
+          parentUid: null,
+        };
+        await FirestoreModule<CategoryType>().writeDoc(
+          'categories',
+          newCategory.uid,
+          newCategory
+        );
+      }
+    }
+
+    const products =
+      await FirestoreModule<ProductType>().getCollection('products');
+
+    for (const product of products) {
+      const categoryUidsIndexesToRemove: number[] = [];
+
+      product.categoryUids.forEach((categoryUid, index) => {
+        if (categoryUid === request.uid) {
+          categoryUidsIndexesToRemove.push(index);
+        }
+      });
+
+      const newCategoryUids = product.categoryUids;
+
+      categoryUidsIndexesToRemove.sort((a, b) => b - a);
+
+      for (const categoryUidsIndexToRemove of categoryUidsIndexesToRemove) {
+        if (
+          categoryUidsIndexToRemove >= 0 &&
+          categoryUidsIndexToRemove < newCategoryUids.length
+        ) {
+          newCategoryUids.splice(categoryUidsIndexToRemove, 1);
+        }
+      }
+
+      await FirestoreModule<ProductType>().writeDoc('products', product.uid, {
+        ...product,
+        categoryUids: newCategoryUids,
+      });
+    }
+
+    const response: ResponseType<CategoryDeleteResponseType> = {
+      data: {},
     };
 
     res.send(response);

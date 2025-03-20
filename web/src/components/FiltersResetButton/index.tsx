@@ -2,7 +2,9 @@ import React from 'react';
 import { AbstractComponentType } from '../../types/AbstractComponentType';
 import useApp from '../../hooks/useApp';
 
-export type FiltersResetButtonProps = AbstractComponentType;
+export interface FiltersResetButtonProps extends AbstractComponentType {
+  resetFilters: () => void;
+}
 
 const FiltersResetButton = (
   props: FiltersResetButtonProps
@@ -12,7 +14,7 @@ const FiltersResetButton = (
   return (
     <button
       className={`${props.className ? props.className : ''}`}
-      onClick={() => app.filters.reset()}
+      onClick={() => props.resetFilters()}
     >
       {app.translator.t('components.filtersResetButton.label')}
     </button>

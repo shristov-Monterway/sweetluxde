@@ -43,6 +43,10 @@ const AddressForm = (props: AddressFormProps): React.JSX.Element => {
       return;
     }
 
+    if (Object.values(address).includes('')) {
+      return;
+    }
+
     const newAddresses = app.user.addresses;
 
     if (

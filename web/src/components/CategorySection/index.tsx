@@ -5,6 +5,7 @@ import Section from '../Section';
 import CategoryButton from '../CategoryButton';
 import useApp from '../../hooks/useApp';
 import ProductsList from '../ProductsList';
+import Link from 'next/link';
 
 export interface CategorySectionProps extends AbstractComponentType {
   category: CategoryType;
@@ -25,7 +26,7 @@ const CategorySection = (props: CategorySectionProps): React.JSX.Element => {
     const parentCategories: CategoryType[] = [];
 
     const findParents = (currentUid: string): void => {
-      const currentCategory = app.categories.find(
+      const currentCategory = app.categories.get.find(
         (category) => category.uid === currentUid
       );
 
@@ -46,7 +47,7 @@ const CategorySection = (props: CategorySectionProps): React.JSX.Element => {
   };
 
   const parentCategories = getParentCategories(props.category.uid);
-  const childCategories = app.categories.filter(
+  const childCategories = app.categories.get.filter(
     (category) => category.parentUid === props.category.uid
   );
 
@@ -66,6 +67,18 @@ const CategorySection = (props: CategorySectionProps): React.JSX.Element => {
       headerContent={
         childCategories.length > 0 ? (
           <div className="category-section__header-actions">
+            {app.user && app.user.isAdmin ? (
+              <div className="d-flex justify-content-end">
+                <Link
+                  href={`/admin/category/${props.category.uid}`}
+                  passHref={true}
+                >
+                  <a className="btn btn-primary d-flex align-items-center justify-content-center">
+                    <i className="fe fe-pen-tool" />
+                  </a>
+                </Link>
+              </div>
+            ) : null}
             {childCategories.map((category, index) => (
               <div key={index}>
                 <CategoryButton
@@ -79,7 +92,17 @@ const CategorySection = (props: CategorySectionProps): React.JSX.Element => {
       }
       className={`category-section ${props.className}`}
     >
-      <ProductsList showFilters={true} showSorting={true} />
+      <ProductsList
+        products={app.products.get}
+        showFilters={true}
+        showSorting={true}
+        filters={{
+          categories: [props.category.uid],
+        }}
+        showCategoryFilter={false}
+        showPriceFilter={true}
+        showAttributesFilter={true}
+      />
     </Section>
   );
 };

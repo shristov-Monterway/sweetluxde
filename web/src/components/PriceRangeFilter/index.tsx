@@ -3,8 +3,13 @@ import { AbstractComponentType } from '../../types/AbstractComponentType';
 import useApp from '../../hooks/useApp';
 import RangeSlider from '../RangeSlider';
 import Price from '../Price';
+import { FilterType } from '../../../../types/internal/FilterType';
 
 export interface PriceRangeFilterProps extends AbstractComponentType {
+  filters: FilterType;
+  setFilters: (
+    newFilters: FilterType | ((filters: FilterType) => FilterType)
+  ) => void;
   containerClassName?: string;
 }
 
@@ -22,9 +27,9 @@ const PriceRangeFilter = (props: PriceRangeFilterProps): React.JSX.Element => {
         className={`${props.containerClassName ? props.containerClassName : ''}`}
       >
         <RangeSlider
-          minValue={app.filters.get.price.min}
+          minValue={props.filters.price.min}
           setMinValue={(newMinValue) => {
-            app.filters.set((filters) => ({
+            props.setFilters((filters) => ({
               ...filters,
               price: {
                 ...filters.price,
@@ -32,9 +37,9 @@ const PriceRangeFilter = (props: PriceRangeFilterProps): React.JSX.Element => {
               },
             }));
           }}
-          maxValue={app.filters.get.price.max}
+          maxValue={props.filters.price.max}
           setMaxValue={(newMaxValue) => {
-            app.filters.set((filters) => ({
+            props.setFilters((filters) => ({
               ...filters,
               price: {
                 ...filters.price,
@@ -42,14 +47,14 @@ const PriceRangeFilter = (props: PriceRangeFilterProps): React.JSX.Element => {
               },
             }));
           }}
-          min={app.filters.get.price.minRange}
-          max={app.filters.get.price.maxRange}
+          min={props.filters.price.minRange}
+          max={props.filters.price.maxRange}
           step={1}
           minValueOutput={
             <Price
               prices={[
                 {
-                  value: app.filters.get.price.min,
+                  value: props.filters.price.min,
                   currency: app.currency.get,
                 },
               ]}
@@ -59,7 +64,7 @@ const PriceRangeFilter = (props: PriceRangeFilterProps): React.JSX.Element => {
             <Price
               prices={[
                 {
-                  value: app.filters.get.price.max,
+                  value: props.filters.price.max,
                   currency: app.currency.get,
                 },
               ]}

@@ -4,6 +4,9 @@ import useApp from '../../hooks/useApp';
 
 export interface ModalProps extends AbstractComponentType {
   showModal: boolean;
+  setShowModal?: (
+    newShowModal: boolean | ((showModal: boolean) => boolean)
+  ) => void;
   children: React.JSX.Element | null | (React.JSX.Element | null)[];
   hasCloseButton: boolean;
   hasCloseWithBackground: boolean;
@@ -15,6 +18,14 @@ export interface ModalProps extends AbstractComponentType {
 const Modal = (props: ModalProps): React.JSX.Element => {
   const app = useApp();
 
+  const closeModal = () => {
+    if (props.setShowModal) {
+      props.setShowModal(false);
+    } else {
+      app.activeModal.set(null);
+    }
+  };
+
   return (
     <div
       className={`modal modal--${props.position ? props.position : 'bottom-center'} ${props.showModal ? 'modal--active' : ''}`}
@@ -25,14 +36,14 @@ const Modal = (props: ModalProps): React.JSX.Element => {
           {props.closeButton ? (
             <button
               className="btn btn-light ms-auto"
-              onClick={() => app.activeModal.set(null)}
+              onClick={() => closeModal()}
             >
               {props.closeButton}
             </button>
           ) : props.hasCloseButton ? (
             <button
               className="btn btn-light ms-auto"
-              onClick={() => app.activeModal.set(null)}
+              onClick={() => closeModal()}
             >
               {props.closeButton ? (
                 props.closeButton
@@ -54,7 +65,7 @@ const Modal = (props: ModalProps): React.JSX.Element => {
           if (!props.hasCloseWithBackground) {
             return;
           } else {
-            app.activeModal.set(null);
+            closeModal();
           }
         }}
       />

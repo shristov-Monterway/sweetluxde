@@ -1,4 +1,13 @@
 .filters-modal {
+  &__sections {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__section {
+
+  }
+
   &__category-section {
     max-height: 300px;
     overflow-y: scroll;

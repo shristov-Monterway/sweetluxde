@@ -16,7 +16,7 @@ const AdminProduct = (): React.JSX.Element => {
     return <NotFound statusCode={404} />;
   }
 
-  const product = app.products.find((product) => product.uid === uid);
+  const product = app.products.get.find((product) => product.uid === uid);
 
   if (!product) {
     return <NotFound statusCode={404} />;
@@ -33,7 +33,14 @@ const AdminProduct = (): React.JSX.Element => {
           name,
         })}
       />
-      <ProductForm product={product} />
+      <ProductForm
+        product={product}
+        onSuccess={(product) => {
+          app.products.refresh().then(() => {
+            router.push(`/product/${product.uid}`);
+          });
+        }}
+      />
     </Page>
   );
 };

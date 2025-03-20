@@ -3,7 +3,6 @@ import { AbstractComponentType } from '../../types/AbstractComponentType';
 import useApp from '../../hooks/useApp';
 import AuthModal from '../AuthModal';
 import LocaleModal from '../LocaleModal';
-import FiltersModal from '../FiltersModal';
 import PageLoading from '../PageLoading';
 import PageClosedWithInvitations from '../PageClosedWithInvitations';
 import CurrencyModal from '../CurrencyModal';
@@ -41,7 +40,6 @@ const Page = (props: PageProps): React.JSX.Element => {
           <AuthModal showModal={app.activeModal.get === 'authModal'} />
           <LocaleModal showModal={app.activeModal.get === 'localeModal'} />
           <CurrencyModal showModal={app.activeModal.get === 'currencyModal'} />
-          <FiltersModal showModal={app.activeModal.get === 'filtersModal'} />
         </>
       )}
     </div>

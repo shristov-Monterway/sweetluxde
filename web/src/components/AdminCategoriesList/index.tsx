@@ -12,7 +12,7 @@ const AdminCategoriesList = (
   const [categoryNames, setCategoryNames] = React.useState<{
     [id: string]: string;
   }>(
-    app.categories.reduce(
+    app.categories.get.reduce(
       (categoryNames, category) => ({
         ...categoryNames,
         [category.uid]: category.name[app.translator.locale]
@@ -24,7 +24,7 @@ const AdminCategoriesList = (
   );
 
   React.useEffect(() => {
-    const newCategoryNames = app.categories.reduce(
+    const newCategoryNames = app.categories.get.reduce(
       (categoryNames, category) => ({
         ...categoryNames,
         [category.uid]: category.name[app.translator.locale]
@@ -34,7 +34,7 @@ const AdminCategoriesList = (
       {}
     );
     setCategoryNames(newCategoryNames);
-  }, [app.categories]);
+  }, [app.categories.get]);
 
   return (
     <div
@@ -44,7 +44,7 @@ const AdminCategoriesList = (
         {app.translator.t('components.adminCategoriesList.label')}
       </h1>
       <div className="admin-categories-list__container">
-        {app.categories.map((category, index) => (
+        {app.categories.get.map((category, index) => (
           <div key={index} className="admin-categories-list__category">
             <div className="admin-categories-list__category-name-container">
               <span className="admin-categories-list__category-name">

@@ -378,7 +378,9 @@
     "categoryForm": {
       "name": "Name",
       "description": "Description",
-      "parentUid": "Parent category"
+      "parentUid": "Parent category",
+      "actions": "Actions",
+      "deleteAction": "Delete"
     },
     "currencyModal": {
       "search": "Search"
@@ -413,7 +415,9 @@
       "productVariationPrice": "Price",
       "productVariationImages": "Images",
       "productVariationAttributes": "Attributes",
-      "productVariationWeight": "Weight"
+      "productVariationWeight": "Weight",
+      "actions": "Actions",
+      "deleteAction": "Delete"
     },
     "productInfo": {
       "addToCart": "Add to cart"
@@ -427,6 +431,9 @@
     },
     "signOutButton": {
       "signOut": "Log out"
+    },
+    "suggestedCategoryProducts": {
+      "label": "Similar products"
     },
     "weight": {
       "unit": {

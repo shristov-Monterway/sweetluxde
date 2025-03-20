@@ -77,6 +77,10 @@
     }
   }
 
+  &__category-link {
+    color: unset;
+  }
+
   &__info {
     display: flex;
     flex-direction: column;

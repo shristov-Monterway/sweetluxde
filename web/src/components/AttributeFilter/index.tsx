@@ -2,8 +2,13 @@ import React from 'react';
 import useApp from '../../hooks/useApp';
 import { AbstractComponentType } from '../../types/AbstractComponentType';
 import FormField from '../FormField';
+import { FilterType } from '../../../../types/internal/FilterType';
 
 export interface AttributeFilterProps extends AbstractComponentType {
+  filters: FilterType;
+  setFilters: (
+    newFilters: FilterType | ((filters: FilterType) => FilterType)
+  ) => void;
   attributeId: string;
   containerClassName?: string;
 }
@@ -21,16 +26,16 @@ const AttributeFilter = (
 
   React.useEffect(() => {
     setIsAttributeReady(
-      Object.keys(app.filters.get.attributes).includes(props.attributeId)
+      Object.keys(props.filters.attributes).includes(props.attributeId)
     );
-  }, [app.filters.get, props.attributeId]);
+  }, [props.filters, props.attributeId]);
 
   React.useEffect(() => {
     let newAttributeName: string = '';
     const attributeOptionNames: {
       [attributeOptionId: string]: string;
     } = {};
-    app.products.forEach((product) => {
+    app.products.get.forEach((product) => {
       Object.keys(product.variations).forEach((variationId) => {
         Object.keys(product.variations[variationId].attributes).forEach(
           (attributeId) => {
@@ -71,7 +76,7 @@ const AttributeFilter = (
     });
     setAttributeName(newAttributeName);
     setAttributeOptionNames(attributeOptionNames);
-  }, [props.attributeId, app.translator.locale, app.products]);
+  }, [props.attributeId, app.translator.locale, app.products.get]);
 
   if (!isAttributeReady) {
     return null;
@@ -92,7 +97,7 @@ const AttributeFilter = (
             field={attributeOptionId}
             type="checkbox"
             value={
-              app.filters.get.attributes[props.attributeId].includes(
+              props.filters.attributes[props.attributeId].includes(
                 attributeOptionId
               )
                 ? 'enabled'
@@ -100,7 +105,7 @@ const AttributeFilter = (
             }
             setValue={(value) => {
               const selectedAttributeOptionIds: string[] =
-                app.filters.get.attributes[props.attributeId];
+                props.filters.attributes[props.attributeId];
               if (value === 'enabled') {
                 if (!selectedAttributeOptionIds.includes(attributeOptionId)) {
                   selectedAttributeOptionIds.push(attributeOptionId);
@@ -115,7 +120,7 @@ const AttributeFilter = (
                   );
                 }
               }
-              app.filters.set((filters) => ({
+              props.setFilters((filters) => ({
                 ...filters,
                 attributes: {
                   ...filters.attributes,

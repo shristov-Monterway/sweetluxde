@@ -5,7 +5,6 @@ import { FormErrorType } from '../types/FormErrorType';
 import { PublicConfigType } from '../../../types/internal/PublicConfigType';
 import { CategoryType } from '../../../types/internal/CategoryType';
 import { ProductType } from '../../../types/internal/ProductType';
-import { FilterType } from '../../../types/internal/FilterType';
 
 export interface IsAppLoadingContextType {
   get: boolean;
@@ -24,6 +23,24 @@ export interface CurrencyContextType {
   set: (newCurrency: string | ((currency: string) => string)) => void;
 }
 
+export interface ProductsContextType {
+  get: ProductType[];
+  set: (
+    newProducts: ProductType[] | ((products: ProductType[]) => ProductType[])
+  ) => void;
+  refresh: () => Promise<void>;
+}
+
+export interface CategoriesContextType {
+  get: CategoryType[];
+  set: (
+    newCategories:
+      | CategoryType[]
+      | ((categories: CategoryType[]) => CategoryType[])
+  ) => void;
+  refresh: () => Promise<void>;
+}
+
 export interface FormErrorsContextType {
   get: FormErrorType[];
   set: (
@@ -34,21 +51,10 @@ export interface FormErrorsContextType {
 }
 
 export interface ActiveModalContextType {
-  get: 'authModal' | 'localeModal' | 'currencyModal' | 'filtersModal' | null;
+  get: 'authModal' | 'localeModal' | 'currencyModal' | null;
   set: (
-    newActiveModal:
-      | 'authModal'
-      | 'localeModal'
-      | 'currencyModal'
-      | 'filtersModal'
-      | null
+    newActiveModal: 'authModal' | 'localeModal' | 'currencyModal' | null
   ) => void;
-}
-
-export interface FiltersContextType {
-  get: FilterType;
-  set: (newFilters: FilterType | ((filters: FilterType) => FilterType)) => void;
-  reset: () => void;
 }
 
 export interface InvitationStatusContextType {
@@ -67,11 +73,10 @@ export interface AppContextType {
   user: UserType | null;
   currency: CurrencyContextType;
   formErrors: FormErrorsContextType;
-  products: ProductType[];
-  categories: CategoryType[];
+  products: ProductsContextType;
+  categories: CategoriesContextType;
   activeModal: ActiveModalContextType;
   config: PublicConfigType;
-  filters: FiltersContextType;
   invitationStatus: InvitationStatusContextType;
 }
 

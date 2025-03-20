@@ -4,8 +4,11 @@ import Header from '../src/components/Header';
 import Slider from '../src/components/Slider';
 import Banner from '../src/components/Banner';
 import ProductsList from '../src/components/ProductsList';
+import useApp from '../src/hooks/useApp';
 
 const Index = (): React.JSX.Element => {
+  const app = useApp();
+
   return (
     <Page isFluid={true} header={<Header hasShadow={true} />}>
       <Slider
@@ -121,7 +124,14 @@ const Index = (): React.JSX.Element => {
       </Slider>
       <hr className="my-5" />
       <div className="container">
-        <ProductsList showFilters={true} showSorting={true} />
+        <ProductsList
+          products={app.products.get}
+          showFilters={true}
+          showSorting={true}
+          showCategoryFilter={true}
+          showPriceFilter={true}
+          showAttributesFilter={true}
+        />
       </div>
     </Page>
   );

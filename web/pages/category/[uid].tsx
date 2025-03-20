@@ -12,7 +12,7 @@ const Category = (): React.JSX.Element => {
   const router = useRouter();
   const uid = router.query.uid as string;
 
-  const category = app.categories.find((category) => category.uid === uid);
+  const category = app.categories.get.find((category) => category.uid === uid);
 
   if (!category) {
     return <NotFound statusCode={404} />;

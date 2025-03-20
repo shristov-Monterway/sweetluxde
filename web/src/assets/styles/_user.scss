@@ -27,6 +27,11 @@ li.nav-item {
   display: flex;
   flex-direction: column;
   gap: 10px;
+
+  &__actions {
+    display: flex;
+    gap: 10px;
+  }
 }
 
 .form-select {
@@ -86,5 +91,6 @@ li.nav-item {
 @import './components/range-slider';
 @import './components/section';
 @import './components/side-nav-container';
+@import './components/suggested-category-products';
 @import './components/wishlist-product-card';
 @import './components/wishlist-products-list';

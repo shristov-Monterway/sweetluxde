@@ -12,17 +12,21 @@ import FormField from '../FormField';
 import FirebaseFunctionsModule from '../../modules/FirebaseFunctionsModule';
 import { ProductCreateUpdateRequestType } from '../../../../types/api/admin/ProductCreateUpdateRequestType';
 import { ProductCreateUpdateResponseType } from '../../../../types/api/admin/ProductCreateUpdateResponseType';
-import Expandable from '../Expandable';
+import Expandable, { ExpandableElementType } from '../Expandable';
+import { ProductDeleteRequestType } from '../../../../types/api/admin/ProductDeleteRequestType';
+import { ProductDeleteResponseType } from '../../../../types/api/admin/ProductDeleteResponseType';
+import { useRouter } from 'next/router';
 
 export interface ProductFormProps extends AbstractComponentType {
   product?: ProductType;
-  onSuccess?: () => void;
+  onSuccess?: (product: ProductType) => void;
   onFailure?: (error: Error) => void;
 }
 
 const ProductForm = (props: ProductFormProps): React.JSX.Element => {
   const id = 'product';
   const app = useApp();
+  const router = useRouter();
   const uid = props.product ? props.product.uid : undefined;
   const product: Omit<ProductType, 'uid'> = props.product
     ? (() => {
@@ -38,7 +42,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
             name: {},
             description: {},
             price: 10000,
-            weight: 1000000,
+            weight: null,
             images: [],
             attributes: {},
           },
@@ -79,7 +83,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
   const [categoryNames, setCategoryNames] = React.useState<{
     [categoryId: string]: string;
   }>(
-    app.categories.reduce(
+    app.categories.get.reduce(
       (categoryNames, category) => ({
         ...categoryNames,
         [category.uid]: category.name[app.translator.locale]
@@ -92,7 +96,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
 
   React.useEffect(() => {
     setCategoryNames(
-      app.categories.reduce(
+      app.categories.get.reduce(
         (categoryNames, category) => ({
           ...categoryNames,
           [category.uid]: category.name[app.translator.locale]
@@ -102,7 +106,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
         {}
       )
     );
-  }, [app.translator.locale, app.categories]);
+  }, [app.translator.locale, app.categories.get]);
 
   React.useEffect(() => {
     if (badgeStatus === 'enabled') {
@@ -134,9 +138,9 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
         app.translator.locale,
         app.currency.get
       )
-      .then(() => {
+      .then((response) => {
         if (props.onSuccess) {
-          props.onSuccess();
+          props.onSuccess(response.product);
         }
       })
       .catch(() => {
@@ -145,6 +149,47 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
         }
       });
   };
+
+  const onDelete = async (): Promise<void> => {
+    if (!uid) {
+      return;
+    }
+
+    await FirebaseFunctionsModule<
+      ProductDeleteRequestType,
+      ProductDeleteResponseType
+    >().call(
+      '/admin/product/delete',
+      {
+        uid,
+      },
+      app.translator.locale,
+      app.currency.get
+    );
+
+    app.products.refresh().then(() => {
+      router.push('/admin');
+    });
+  };
+
+  const optionalExpandables: ExpandableElementType[] = [];
+
+  if (uid) {
+    optionalExpandables.push({
+      id: 'actions',
+      label: app.translator.t('components.productForm.actions'),
+      children: (
+        <button
+          className="btn btn-danger d-flex gap-3 justify-content-center align-items-center"
+          onClick={onDelete}
+          type="button"
+        >
+          <i className="fe fe-trash" />{' '}
+          {app.translator.t('components.productForm.deleteAction')}
+        </button>
+      ),
+    });
+  }
 
   return (
     <form
@@ -275,25 +320,27 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
             label: app.translator.t('components.productForm.categories'),
             children: (
               <div className="d-flex flex-column gap-3">
-                <ListFormField
-                  form={id}
-                  field="categories"
-                  list={newProduct.categoryUids}
-                  setList={(list) => {
-                    setNewProduct((newProduct) => ({
-                      ...newProduct,
-                      categories: list,
-                    }));
-                  }}
-                  newItem=""
-                  type="select"
-                  selectOptions={Object.keys(categoryNames).map(
-                    (categoryId) => ({
-                      label: categoryNames[categoryId],
-                      value: categoryId,
-                    })
-                  )}
-                />
+                {Object.keys(categoryNames).length > 0 ? (
+                  <ListFormField
+                    form={id}
+                    field="categories"
+                    list={newProduct.categoryUids}
+                    setList={(list) => {
+                      setNewProduct((newProduct) => ({
+                        ...newProduct,
+                        categories: list,
+                      }));
+                    }}
+                    newItem=""
+                    type="select"
+                    selectOptions={Object.keys(categoryNames).map(
+                      (categoryId) => ({
+                        label: categoryNames[categoryId],
+                        value: categoryId,
+                      })
+                    )}
+                  />
+                ) : null}
               </div>
             ),
           },
@@ -1012,6 +1059,7 @@ const ProductForm = (props: ProductFormProps): React.JSX.Element => {
               </div>
             ),
           },
+          ...optionalExpandables,
         ]}
         labelClassName="border-bottom p-3"
         itemClassName="ps-5 py-5"

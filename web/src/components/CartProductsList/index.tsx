@@ -24,13 +24,13 @@ const CartProductsList = (props: CartProductsListProps): React.JSX.Element => {
       setLineItems(
         app.user.cart.lineItems
           .filter((lineItem) => {
-            const product = app.products.find(
+            const product = app.products.get.find(
               (product) => lineItem.product === product.uid
             );
             return product && product.variations[lineItem.variation];
           })
           .map((lineItem) => {
-            const product = app.products.find(
+            const product = app.products.get.find(
               (product) => lineItem.product === product.uid
             );
 
@@ -53,7 +53,7 @@ const CartProductsList = (props: CartProductsListProps): React.JSX.Element => {
           })
       );
     }
-  }, [app.user, app.products]);
+  }, [app.user, app.products.get]);
 
   return (
     <div

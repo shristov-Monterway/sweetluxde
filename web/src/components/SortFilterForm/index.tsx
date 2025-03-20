@@ -2,9 +2,17 @@ import React from 'react';
 import useApp from '../../hooks/useApp';
 import { AbstractComponentType } from '../../types/AbstractComponentType';
 import FormField from '../FormField';
-import { FilterSortValueType } from '../../../../types/internal/FilterType';
+import {
+  FilterSortValueType,
+  FilterType,
+} from '../../../../types/internal/FilterType';
 
-export type SortFilterFormProps = AbstractComponentType;
+export interface SortFilterFormProps extends AbstractComponentType {
+  filters: FilterType;
+  setFilters: (
+    newFilters: FilterType | ((filters: FilterType) => FilterType)
+  ) => void;
+}
 
 const SortFilterForm = (props: SortFilterFormProps): React.JSX.Element => {
   const app = useApp();
@@ -20,9 +28,9 @@ const SortFilterForm = (props: SortFilterFormProps): React.JSX.Element => {
       form="sortFilter"
       field="value"
       type="select"
-      value={app.filters.get.sort}
+      value={props.filters.sort}
       setValue={(value) => {
-        app.filters.set((filters) => ({
+        props.setFilters((filters) => ({
           ...filters,
           sort: value as FilterSortValueType,
         }));

@@ -3,28 +3,39 @@ import FirebaseFunctionsModule from '../modules/FirebaseFunctionsModule';
 import { CategoriesAllRequestType } from '../../../types/api/product/CategoriesAllRequestType';
 import { CategoryType } from '../../../types/internal/CategoryType';
 import { CategoriesAllResponseType } from '../../../types/api/product/CategoriesAllResponseType';
+import { CategoriesContextType } from '../contexts/AppContext';
 
 export interface UseInitCategoriesProps {
   locale: string;
   currency: string;
 }
 
-const useInitCategories = (props: UseInitCategoriesProps): CategoryType[] => {
+const useInitCategories = (
+  props: UseInitCategoriesProps
+): CategoriesContextType => {
   const [categories, setCategories] = React.useState<CategoryType[]>([]);
 
-  React.useEffect(() => {
-    const syncCategories = async () => {
-      const response = await FirebaseFunctionsModule<
-        CategoriesAllRequestType,
-        CategoriesAllResponseType
-      >().call('/product/categories/all', {}, props.locale, props.currency);
-      setCategories(response.categories);
-    };
+  const syncCategories = async () => {
+    const response = await FirebaseFunctionsModule<
+      CategoriesAllRequestType,
+      CategoriesAllResponseType
+    >().call('/product/categories/all', {}, props.locale, props.currency);
+    setCategories(response.categories);
+  };
 
+  React.useEffect(() => {
     syncCategories();
   }, [props.currency, props.locale]);
 
-  return categories;
+  const refresh = async () => {
+    await syncCategories();
+  };
+
+  return {
+    get: categories,
+    set: setCategories,
+    refresh,
+  };
 };
 
 export default useInitCategories;

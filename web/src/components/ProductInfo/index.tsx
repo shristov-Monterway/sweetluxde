@@ -11,6 +11,7 @@ import { CartUpdateResponseType } from '../../../../types/api/cart/CartUpdateRes
 import FormField from '../FormField';
 import { WishlistUpdateRequestType } from '../../../../types/api/wishlist/WishlistUpdateRequestType';
 import { WishlistUpdateResponseType } from '../../../../types/api/wishlist/WishlistUpdateResponseType';
+import Link from 'next/link';
 
 export interface ProductInfoProps extends AbstractComponentType {
   product: ProductType;
@@ -399,6 +400,42 @@ const ProductInfo = (props: ProductInfoProps): React.JSX.Element => {
         </div>
       </div>
       <div className="product-info__info">
+        {props.product.categoryUids.length > 0 ? (
+          <div className="d-flex align-items-center column-gap-3 flex-wrap">
+            {props.product.categoryUids
+              .map((categoryUid) => {
+                const category = app.categories.get.find(
+                  (category) => category.uid === categoryUid
+                );
+                if (!category) {
+                  throw new Error('Category not found!');
+                }
+                return category;
+              })
+              .map((category, index) => (
+                <Link
+                  key={index}
+                  href={`/category/${category.uid}`}
+                  passHref={true}
+                >
+                  <a className="product-info__category-link">
+                    {category.name[app.translator.locale]
+                      ? category.name[app.translator.locale]
+                      : category.name[Object.keys(category.name)[0]]}
+                  </a>
+                </Link>
+              ))}
+          </div>
+        ) : null}
+        {app.user && app.user.isAdmin ? (
+          <div className="d-flex justify-content-end">
+            <Link href={`/admin/product/${props.product.uid}`} passHref={true}>
+              <a className="btn btn-primary d-flex align-items-center justify-content-center">
+                <i className="fe fe-pen-tool" />
+              </a>
+            </Link>
+          </div>
+        ) : null}
         <h1 className="p-0 m-0">{name}</h1>
         <p className="p-0 m-0">{description}</p>
         {tags.length > 0 ? (

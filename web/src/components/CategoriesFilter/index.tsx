@@ -3,8 +3,13 @@ import { AbstractComponentType } from '../../types/AbstractComponentType';
 import { CategoryType } from '../../../../types/internal/CategoryType';
 import Expandable, { ExpandableElementType } from '../Expandable';
 import useApp from '../../hooks/useApp';
+import { FilterType } from '../../../../types/internal/FilterType';
 
 export interface CategoriesFilterProps extends AbstractComponentType {
+  filters: FilterType;
+  setFilters: (
+    newFilters: FilterType | ((filters: FilterType) => FilterType)
+  ) => void;
   containerClassName?: string;
 }
 
@@ -15,7 +20,7 @@ const CategoriesFilter = (props: CategoriesFilterProps): React.JSX.Element => {
   const [categoryNames, setCategoryNames] = React.useState<{
     [categoryId: string]: string;
   }>(
-    app.categories.reduce(
+    app.categories.get.reduce(
       (categoryNames, category) => ({
         ...categoryNames,
         [category.uid]: category.name[app.translator.locale]
@@ -33,14 +38,14 @@ const CategoriesFilter = (props: CategoriesFilterProps): React.JSX.Element => {
 
   React.useEffect(() => {
     const categories: CategoryType[] = [];
-    app.products.forEach((product) => {
+    app.products.get.forEach((product) => {
       product.categoryUids.forEach((productCategoryUid) => {
         if (
           !categories
             .map((category) => category.uid)
             .includes(productCategoryUid)
         ) {
-          const category = app.categories.find(
+          const category = app.categories.get.find(
             (category) => category.uid === productCategoryUid
           );
           if (category) {
@@ -50,11 +55,11 @@ const CategoriesFilter = (props: CategoriesFilterProps): React.JSX.Element => {
       });
     });
     setCategories(categories);
-  }, [app.products]);
+  }, [app.products.get]);
 
   React.useEffect(() => {
     setCategoryNames(
-      app.categories.reduce(
+      app.categories.get.reduce(
         (categoryNames, category) => ({
           ...categoryNames,
           [category.uid]: category.name[app.translator.locale]
@@ -89,7 +94,7 @@ const CategoriesFilter = (props: CategoriesFilterProps): React.JSX.Element => {
 
   const categoryChildCounts: {
     [categoryUid: string]: number;
-  } = calculateCategoryChildCount(app.categories);
+  } = calculateCategoryChildCount(app.categories.get);
 
   const buildCategoryExpandableElements = (
     categories: CategoryType[],
@@ -102,12 +107,12 @@ const CategoriesFilter = (props: CategoriesFilterProps): React.JSX.Element => {
         id: category.uid,
         label: (
           <div
-            className={`categories-filter__category-name ${app.filters.get.categories.includes(category.uid) ? 'categories-filter__category-name--active' : ''}`}
+            className={`categories-filter__category-name ${props.filters.categories.includes(category.uid) ? 'categories-filter__category-name--active' : ''}`}
             onClick={() => {
-              const newCategoriesFilter = app.filters.get.categories;
-              if (app.filters.get.categories.includes(category.uid)) {
+              const newCategoriesFilter = props.filters.categories;
+              if (props.filters.categories.includes(category.uid)) {
                 const indexOfExistingCategoryInFilters =
-                  app.filters.get.categories.indexOf(category.uid);
+                  props.filters.categories.indexOf(category.uid);
                 if (indexOfExistingCategoryInFilters > -1) {
                   newCategoriesFilter.splice(
                     indexOfExistingCategoryInFilters,
@@ -117,13 +122,13 @@ const CategoriesFilter = (props: CategoriesFilterProps): React.JSX.Element => {
               } else {
                 newCategoriesFilter.push(category.uid);
               }
-              app.filters.set((filters) => ({
+              props.setFilters((filters) => ({
                 ...filters,
                 categories: newCategoriesFilter,
               }));
             }}
           >
-            {app.filters.get.categories.includes(category.uid) ? (
+            {props.filters.categories.includes(category.uid) ? (
               <i className="fe fe-check-circle h4 p-0 m-0" />
             ) : null}
             {categoryNames[category.uid]}

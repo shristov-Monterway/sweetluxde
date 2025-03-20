@@ -7,17 +7,21 @@ import FormField from '../FormField';
 import FirebaseFunctionsModule from '../../modules/FirebaseFunctionsModule';
 import { CategoryCreateUpdateRequestType } from '../../../../types/api/admin/CategoryCreateUpdateRequestType';
 import { CategoryCreateUpdateResponseType } from '../../../../types/api/admin/CategoryCreateUpdateResponseType';
-import Expandable from '../Expandable';
+import Expandable, { ExpandableElementType } from '../Expandable';
+import { CategoryDeleteRequestType } from '../../../../types/api/admin/CategoryDeleteRequestType';
+import { CategoryDeleteResponseType } from '../../../../types/api/admin/CategoryDeleteResponseType';
+import { useRouter } from 'next/router';
 
 export interface CategoryFormProps extends AbstractComponentType {
   category?: CategoryType;
-  onSuccess?: () => void;
+  onSuccess?: (category: CategoryType) => void;
   onFailure?: (error: Error) => void;
 }
 
 const CategoryForm = (props: CategoryFormProps): React.JSX.Element => {
   const id = 'category';
   const app = useApp();
+  const router = useRouter();
   const uid = props.category ? props.category.uid : undefined;
   const category: Omit<CategoryType, 'uid'> = props.category
     ? (() => {
@@ -41,7 +45,7 @@ const CategoryForm = (props: CategoryFormProps): React.JSX.Element => {
   const [categoryNames, setCategoryNames] = React.useState<{
     [categoryId: string]: string;
   }>(
-    app.categories
+    app.categories.get
       .filter((category) => {
         if (uid) return category.uid !== uid;
         return true;
@@ -59,7 +63,7 @@ const CategoryForm = (props: CategoryFormProps): React.JSX.Element => {
 
   React.useEffect(() => {
     setCategoryNames(
-      app.categories
+      app.categories.get
         .filter((category) => {
           if (uid) return category.uid !== uid;
           return true;
@@ -74,7 +78,7 @@ const CategoryForm = (props: CategoryFormProps): React.JSX.Element => {
           {}
         )
     );
-  }, [app.categories, uid, app.translator.locale]);
+  }, [app.categories.get, uid, app.translator.locale]);
 
   React.useEffect(() => {
     if (parentUidStatus === 'enabled') {
@@ -106,9 +110,9 @@ const CategoryForm = (props: CategoryFormProps): React.JSX.Element => {
         app.translator.locale,
         app.currency.get
       )
-      .then(() => {
+      .then((response) => {
         if (props.onSuccess) {
-          props.onSuccess();
+          props.onSuccess(response.category);
         }
       })
       .catch(() => {
@@ -117,6 +121,47 @@ const CategoryForm = (props: CategoryFormProps): React.JSX.Element => {
         }
       });
   };
+
+  const onDelete = async (): Promise<void> => {
+    if (!uid) {
+      return;
+    }
+
+    await FirebaseFunctionsModule<
+      CategoryDeleteRequestType,
+      CategoryDeleteResponseType
+    >().call(
+      '/admin/category/delete',
+      {
+        uid,
+      },
+      app.translator.locale,
+      app.currency.get
+    );
+
+    app.categories.refresh().then(() => {
+      router.push('/admin');
+    });
+  };
+
+  const optionalExpandables: ExpandableElementType[] = [];
+
+  if (uid) {
+    optionalExpandables.push({
+      id: 'actions',
+      label: app.translator.t('components.categoryForm.actions'),
+      children: (
+        <button
+          className="btn btn-danger d-flex gap-3 justify-content-center align-items-center"
+          onClick={onDelete}
+          type="button"
+        >
+          <i className="fe fe-trash" />{' '}
+          {app.translator.t('components.categoryForm.deleteAction')}
+        </button>
+      ),
+    });
+  }
 
   return (
     <form
@@ -204,6 +249,7 @@ const CategoryForm = (props: CategoryFormProps): React.JSX.Element => {
               </div>
             ),
           },
+          ...optionalExpandables,
         ]}
         labelClassName="border-bottom p-3"
         itemClassName="ps-5 py-5"

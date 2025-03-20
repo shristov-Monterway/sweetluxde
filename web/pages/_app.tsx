@@ -18,7 +18,6 @@ import useSyncUserTranslator from '../src/hooks/useSyncUserTranslator';
 import useSyncUserTheme from '../src/hooks/useSyncUserTheme';
 import useSyncUserCurrency from '../src/hooks/useSyncUserCurrency';
 import useInitCategories from '../src/hooks/useInitCategories';
-import useInitFilters from '../src/hooks/useInitFilters';
 import useInitInvitationStatus from '../src/hooks/useInitInvitationStatus';
 
 const App = (props: AppProps): React.JSX.Element => {
@@ -43,10 +42,6 @@ const App = (props: AppProps): React.JSX.Element => {
     currency: currency.get,
   });
   const activeModal = useInitActiveModal();
-  const filters = useInitFilters({
-    products,
-    config,
-  });
   const invitationStatus = useInitInvitationStatus({
     user,
     formErrors,
@@ -84,7 +79,6 @@ const App = (props: AppProps): React.JSX.Element => {
           categories,
           activeModal,
           config,
-          filters,
           invitationStatus,
         }}
       >

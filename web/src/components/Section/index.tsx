@@ -4,7 +4,7 @@ import Breadcrumb from '../Breadcrumb';
 
 export interface SectionProps extends AbstractComponentType {
   title: string;
-  children: React.JSX.Element;
+  children: React.JSX.Element | React.JSX.Element[];
   description?: string;
   breadcrumbLink?: {
     label: string;
@@ -15,7 +15,7 @@ export interface SectionProps extends AbstractComponentType {
 
 const Section = (props: SectionProps): React.JSX.Element => {
   return (
-    <div className={`section ${props.className ? props.className : ''}`}>
+    <div className="section">
       <div className="section__header">
         {props.breadcrumbLink && props.breadcrumbLink.length > 0 ? (
           <Breadcrumb links={props.breadcrumbLink} />
@@ -29,7 +29,9 @@ const Section = (props: SectionProps): React.JSX.Element => {
         {props.headerContent ? props.headerContent : null}
       </div>
       <hr className="m-0 p-0" />
-      <div>{props.children}</div>
+      <div className={`${props.className ? props.className : ''}`}>
+        {props.children}
+      </div>
     </div>
   );
 };
