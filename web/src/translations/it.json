@@ -1,0 +1,460 @@
+{
+  "pages": {
+    "/admin/category/[uid]": {
+      "title": "Gestisci categoria %{name}"
+    },
+    "/admin/category/new": {
+      "title": "Crea nuova categoria"
+    },
+    "/admin/product/[uid]": {
+      "title": "Gestisci prodotto %{name}"
+    },
+    "/admin/product/new": {
+      "title": "Crea nuovo prodotto"
+    },
+    "/category/[uid]": {
+      "title": "Categoria %{name}"
+    },
+    "/product/[uid]": {
+      "title": "Prodotto %{name}"
+    },
+    "/account": {
+      "title": "Account"
+    },
+    "/admin": {
+      "title": "Pannello admin"
+    },
+    "/cart": {
+      "title": "Carrello"
+    },
+    "/components": {
+      "title": "Componenti"
+    },
+    "/": {
+      "title": "Home"
+    },
+    "/wishlist": {
+      "title": "Lista desideri"
+    }
+  },
+  "form": {
+    "address": {
+      "street": {
+        "label": "Via",
+        "help": "Inserisci la tua via."
+      },
+      "streetNumber": {
+        "label": "Numero civico",
+        "help": "Inserisci il tuo numero civico."
+      },
+      "city": {
+        "label": "Città",
+        "help": "Inserisci la tua città."
+      },
+      "postalCode": {
+        "label": "CAP",
+        "help": "Inserisci il tuo CAP."
+      },
+      "country": {
+        "label": "Paese",
+        "help": "Inserisci il tuo paese."
+      },
+      "name": {
+        "label": "Nome",
+        "help": "Inserisci il nome del destinatario."
+      },
+      "phone": {
+        "label": "Telefono",
+        "help": "Inserisci il telefono del destinatario."
+      }
+    },
+    "auth": {
+      "email": {
+        "label": "Indirizzo email",
+        "help": "Inserisci il tuo indirizzo email."
+      },
+      "password": {
+        "label": "Password",
+        "help": "Inserisci una password sicura."
+      },
+      "phone": {
+        "label": "Numero di telefono",
+        "help": "Inserisci il tuo numero di telefono. (es. '+39 1234567890')"
+      },
+      "code": {
+        "label": "Codice ricevuto",
+        "help": "Hai ricevuto un codice di verifica sul tuo telefono."
+      }
+    },
+    "cartOverview": {
+      "address": {
+        "label": "Scegli indirizzo di consegna",
+        "help": "Indirizzo dove verranno consegnati i prodotti."
+      }
+    },
+    "category": {
+      "name": {
+        "label": "Nome categoria in %{language}",
+        "help": "Inserisci il nome della categoria per %{language}."
+      },
+      "name_locale": {
+        "label": "Lingua",
+        "help": "Scegli la lingua per il testo."
+      },
+      "name_value": {
+        "label": "Testo",
+        "help": "Scrivi la traduzione del testo."
+      },
+      "description": {
+        "label": "Descrizione categoria in %{language}",
+        "help": "Inserisci la descrizione della categoria per %{language}."
+      },
+      "description_locale": {
+        "label": "Lingua",
+        "help": "Scegli la lingua per il testo."
+      },
+      "description_value": {
+        "label": "Testo",
+        "help": "Scrivi la traduzione del testo."
+      },
+      "parentUidStatus": {
+        "option": {
+          "enabled": {
+            "label": "Abilita categoria genitore",
+            "help": "Seleziona se la categoria corrente deve avere una categoria genitore."
+          }
+        }
+      },
+      "parentUid": {
+        "label": "ID della categoria genitore",
+        "help": "Inserisci l'ID della categoria genitore."
+      }
+    },
+    "product": {
+      "name": {
+        "label": "Nome prodotto in %{language}",
+        "help": "Inserisci il nome del prodotto per %{language}."
+      },
+      "name_locale": {
+        "label": "Lingua",
+        "help": "Scegli la lingua per il testo."
+      },
+      "name_value": {
+        "label": "Testo",
+        "help": "Scrivi la traduzione del testo."
+      },
+      "description": {
+        "label": "Descrizione prodotto in %{language}",
+        "help": "Inserisci la descrizione del prodotto per %{language}."
+      },
+      "description_locale": {
+        "label": "Lingua",
+        "help": "Scegli la lingua per il testo."
+      },
+      "description_value": {
+        "label": "Testo",
+        "help": "Scrivi la traduzione del testo."
+      },
+      "tags": {
+        "label": "Tag prodotto %{count} in %{language}",
+        "help": "Inserisci il tag del prodotto per %{language}."
+      },
+      "tags_locale": {
+        "label": "Lingua",
+        "help": "Scegli la lingua per il testo."
+      },
+      "tags_value": {
+        "label": "Testo",
+        "help": "Scrivi la traduzione del testo."
+      },
+      "tags_new": {
+        "label": "Nuovo tag prodotto in %{language}",
+        "help": "Inserisci il tag del prodotto."
+      },
+      "tags_new_locale": {
+        "label": "Lingua",
+        "help": "Scegli la lingua per il testo."
+      },
+      "tags_new_value": {
+        "label": "Testo",
+        "help": "Scrivi la traduzione del testo."
+      },
+      "productAttributeName": {
+        "label": "Nome attributo prodotto in %{language}",
+        "help": "Inserisci il nome dell'attributo del prodotto per %{language}."
+      },
+      "productAttributeName_locale": {
+        "label": "Lingua",
+        "help": "Scegli la lingua per il testo."
+      },
+      "productAttributeName_value": {
+        "label": "Testo",
+        "help": "Scrivi la traduzione del testo."
+      },
+      "productAttributeOptionName": {
+        "label": "Nome opzione attributo prodotto in %{language}",
+        "help": "Inserisci il nome dell'opzione dell'attributo del prodotto per %{language}."
+      },
+      "productAttributeOptionName_locale": {
+        "label": "Lingua",
+        "help": "Scegli la lingua per il testo."
+      },
+      "productAttributeOptionName_value": {
+        "label": "Testo",
+        "help": "Scrivi la traduzione del testo."
+      },
+      "productAttributeOptionId": {
+        "label": "ID della nuova opzione attributo",
+        "help": "Inserisci l'ID della nuova opzione attributo."
+      },
+      "productAttributeId": {
+        "label": "ID del nuovo attributo",
+        "help": "Inserisci l'ID del nuovo attributo."
+      },
+      "badgeStatus": {
+        "option": {
+          "enabled": {
+            "label": "Abilita badge",
+            "help": "Aggiungi un badge alla scheda prodotto con messaggi come 'SALDI'."
+          }
+        }
+      },
+      "badgeType": {
+        "label": "Tipo badge prodotto",
+        "help": "Scegli il colore del badge."
+      },
+      "badgeText": {
+        "label": "Badge prodotto in %{language}",
+        "help": "Inserisci il badge del prodotto per %{language}."
+      },
+      "badgeText_locale": {
+        "label": "Lingua",
+        "help": "Scegli la lingua per il testo."
+      },
+      "badgeText_value": {
+        "label": "Testo",
+        "help": "Scrivi la traduzione del testo."
+      },
+      "categories": {
+        "label": "Categoria",
+        "help": "Categoria selezionata per il prodotto."
+      },
+      "categories_new": {
+        "label": "Nuova categoria",
+        "help": "Seleziona la categoria da aggiungere."
+      },
+      "productVariationName": {
+        "label": "Nome variazione prodotto in %{language}",
+        "help": "Inserisci il nome della variazione del prodotto per %{language}."
+      },
+      "productVariationName_locale": {
+        "label": "Lingua",
+        "help": "Scegli la lingua per il testo."
+      },
+      "productVariationName_value": {
+        "label": "Testo",
+        "help": "Scrivi la traduzione del testo."
+      },
+      "productVariationDescription": {
+        "label": "Descrizione variazione prodotto in %{language}",
+        "help": "Inserisci la descrizione della variazione del prodotto per %{language}."
+      },
+      "productVariationDescription_locale": {
+        "label": "Lingua",
+        "help": "Scegli la lingua per il testo."
+      },
+      "productVariationDescription_value": {
+        "label": "Testo",
+        "help": "Scrivi la traduzione del testo."
+      },
+      "productVariationPrice": {
+        "label": "Prezzo variazione prodotto",
+        "help": "Inserisci il prezzo della variazione del prodotto."
+      },
+      "productVariationImages": {
+        "label": "Immagine variazione prodotto %{count}",
+        "help": "Inserisci l'immagine della variazione del prodotto %{count}."
+      },
+      "productVariationImages_new": {
+        "label": "Nuova immagine variazione prodotto",
+        "help": "Inserisci un'immagine della variazione del prodotto."
+      },
+      "productVariationWeightStatus": {
+        "option": {
+          "enabled": {
+            "label": "Abilita peso",
+            "help": "Aggiungi il peso al prodotto."
+          }
+        }
+      },
+      "productVariationWeight": {
+        "label": "Peso",
+        "help": "Inserisci il peso del prodotto."
+      },
+      "productVariationId": {
+        "label": "ID della nuova variazione",
+        "help": "Inserisci l'ID della nuova variazione."
+      }
+    },
+    "sortFilter": {
+      "value": {
+        "option": {
+          "price-asc": {
+            "label": "Prezzo (0-9)"
+          },
+          "price-desc": {
+            "label": "Prezzo (9-0)"
+          },
+          "publishedDate-asc": {
+            "label": "Pubblicato (più vecchi-nuovi)"
+          },
+          "publishedDate-desc": {
+            "label": "Pubblicato (più nuovi-vecchi)"
+          }
+        }
+      }
+    },
+    "submit": {
+      "address": "Pubblica",
+      "auth": "Autentica",
+      "product": "Pubblica",
+      "category": "Pubblica"
+    }
+  },
+  "components": {
+    "accountAddressAction": {
+      "newLabel": "Nuovo indirizzo",
+      "editLabel": "Modifica indirizzo"
+    },
+    "accountAddresses": {
+      "noAddresses": "Nessun indirizzo"
+    },
+    "accountAdminSection": {
+      "message": "Sei l'amministratore del negozio.",
+      "manage": "Gestisci"
+    },
+    "accountInvitationLinkSection": {
+      "title": "Link invito",
+      "description": "Copia il link e invita un amico."
+    },
+    "accountSettingsSection": {
+      "title": "Impostazioni",
+      "changeTheme": "Cambia tema",
+      "chooseLanguage": "Scegli lingua",
+      "chooseCurrency": "Scegli valuta"
+    },
+    "adminCategoriesList": {
+      "label": "Categorie"
+    },
+    "adminGenerateProductButton": {
+      "label": "Genera prodotto"
+    },
+    "adminProductsList": {
+      "label": "Prodotti"
+    },
+    "adminSyncCurrenciesButton": {
+      "label": "Sincronizza valute"
+    },
+    "authForm": {
+      "requestCode": "Richiedi codice",
+      "requestCodeMinutes": "Richiedi codice (%{seconds} sec.)"
+    },
+    "authModal": {
+      "loginWith": "Accedi con:"
+    },
+    "cartOverview": {
+      "totalPrice": "Prezzo totale:",
+      "placeOrder": "Effettua ordine"
+    },
+    "cartProductCard": {
+      "weight": "Peso:"
+    },
+    "cartProductsList": {
+      "noProducts": "Nessun prodotto nel carrello."
+    },
+    "categoriesFilter": {
+      "label": "Categoria:"
+    },
+    "categoryForm": {
+      "name": "Nome",
+      "description": "Descrizione",
+      "parentUid": "Categoria genitore",
+      "actions": "Azioni",
+      "deleteAction": "Elimina"
+    },
+    "currencyModal": {
+      "search": "Cerca"
+    },
+    "filtersResetButton": {
+      "label": "Resetta"
+    },
+    "invitationStatus": {
+      "label": "Il mio codice invito è: "
+    },
+    "localeModal": {
+      "search": "Cerca"
+    },
+    "pageLoading": {
+      "label": "Caricamento ..."
+    },
+    "priceRangeFilter": {
+      "label": "Prezzo:"
+    },
+    "productCard": {
+      "view": "Visualizza"
+    },
+    "productForm": {
+      "name": "Nome",
+      "description": "Descrizione",
+      "tags": "Tag",
+      "badge": "Badge",
+      "categories": "Categorie",
+      "variations": "Variazioni",
+      "productVariationName": "Nome",
+      "productVariationDescription": "Descrizione",
+      "productVariationPrice": "Prezzo",
+      "productVariationImages": "Immagini",
+      "productVariationAttributes": "Attributi",
+      "productVariationWeight": "Peso",
+      "actions": "Azioni",
+      "deleteAction": "Elimina"
+    },
+    "productInfo": {
+      "addToCart": "Aggiungi al carrello"
+    },
+    "productsList": {
+      "foundProductsCount": {
+        "zero": "Nessun prodotto trovato.",
+        "one": "Trovato 1 prodotto.",
+        "other": "Trovati %{count} prodotti."
+      }
+    },
+    "signOutButton": {
+      "signOut": "Esci"
+    },
+    "suggestedCategoryProducts": {
+      "label": "Prodotti simili"
+    },
+    "weight": {
+      "unit": {
+        "gr": "gr.",
+        "kg": "kg."
+      }
+    },
+    "wishlistProductCard": {
+      "weight": "Peso:"
+    },
+    "wishlistProductsList": {
+      "noProducts": "Nessun prodotto nella lista desideri."
+    }
+  },
+  "errors": {
+    "auth/invalid-email": "Email non valida",
+    "auth/wrong-password": "Password errata",
+    "auth/invalid-verification-code": "Codice non valido",
+    "auth/missing-password": "Password non valida",
+    "auth/invalid-phone-number": "Numero di telefono non valido",
+    "auth/missing-code": "Codice mancante",
+    "auth/operation-not-allowed": "Operazione non consentita"
+  }
+}

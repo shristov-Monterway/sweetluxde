@@ -1,0 +1,460 @@
+{
+  "pages": {
+    "/admin/category/[uid]": {
+      "title": "Gestionează categoria %{name}"
+    },
+    "/admin/category/new": {
+      "title": "Creează categorie nouă"
+    },
+    "/admin/product/[uid]": {
+      "title": "Gestionează produsul %{name}"
+    },
+    "/admin/product/new": {
+      "title": "Creează produs nou"
+    },
+    "/category/[uid]": {
+      "title": "Categoria %{name}"
+    },
+    "/product/[uid]": {
+      "title": "Produsul %{name}"
+    },
+    "/account": {
+      "title": "Cont"
+    },
+    "/admin": {
+      "title": "Panou administrare"
+    },
+    "/cart": {
+      "title": "Coș"
+    },
+    "/components": {
+      "title": "Componente"
+    },
+    "/": {
+      "title": "Acasă"
+    },
+    "/wishlist": {
+      "title": "Listă de dorințe"
+    }
+  },
+  "form": {
+    "address": {
+      "street": {
+        "label": "Stradă",
+        "help": "Introduceți strada."
+      },
+      "streetNumber": {
+        "label": "Număr",
+        "help": "Introduceți numărul."
+      },
+      "city": {
+        "label": "Oraș",
+        "help": "Introduceți orașul."
+      },
+      "postalCode": {
+        "label": "Cod poștal",
+        "help": "Introduceți codul poștal."
+      },
+      "country": {
+        "label": "Țară",
+        "help": "Introduceți țara."
+      },
+      "name": {
+        "label": "Nume",
+        "help": "Introduceți numele destinatarului."
+      },
+      "phone": {
+        "label": "Telefon",
+        "help": "Introduceți telefonul destinatarului."
+      }
+    },
+    "auth": {
+      "email": {
+        "label": "Adresă email",
+        "help": "Introduceți adresa de email."
+      },
+      "password": {
+        "label": "Parolă",
+        "help": "Introduceți o parolă puternică."
+      },
+      "phone": {
+        "label": "Număr telefon",
+        "help": "Introduceți numărul de telefon. (ex. '+40 712345678')"
+      },
+      "code": {
+        "label": "Cod primit",
+        "help": "Ați primit un cod de verificare pe telefon."
+      }
+    },
+    "cartOverview": {
+      "address": {
+        "label": "Alege adresa de livrare",
+        "help": "Adresa unde vor fi livrate produsele."
+      }
+    },
+    "category": {
+      "name": {
+        "label": "Nume categorie în %{language}",
+        "help": "Introduceți numele categoriei pentru %{language}."
+      },
+      "name_locale": {
+        "label": "Limba",
+        "help": "Alegeți limba pentru text."
+      },
+      "name_value": {
+        "label": "Text",
+        "help": "Scrieți traducerea textului."
+      },
+      "description": {
+        "label": "Descriere categorie în %{language}",
+        "help": "Introduceți descrierea categoriei pentru %{language}."
+      },
+      "description_locale": {
+        "label": "Limba",
+        "help": "Alegeți limba pentru text."
+      },
+      "description_value": {
+        "label": "Text",
+        "help": "Scrieți traducerea textului."
+      },
+      "parentUidStatus": {
+        "option": {
+          "enabled": {
+            "label": "Activează categoria părinte",
+            "help": "Selectați dacă categoria curentă ar trebui să aibă o categorie părinte."
+          }
+        }
+      },
+      "parentUid": {
+        "label": "ID-ul categoriei părinte",
+        "help": "Introduceți ID-ul categoriei părinte."
+      }
+    },
+    "product": {
+      "name": {
+        "label": "Nume produs în %{language}",
+        "help": "Introduceți numele produsului pentru %{language}."
+      },
+      "name_locale": {
+        "label": "Limba",
+        "help": "Alegeți limba pentru text."
+      },
+      "name_value": {
+        "label": "Text",
+        "help": "Scrieți traducerea textului."
+      },
+      "description": {
+        "label": "Descriere produs în %{language}",
+        "help": "Introduceți descrierea produsului pentru %{language}."
+      },
+      "description_locale": {
+        "label": "Limba",
+        "help": "Alegeți limba pentru text."
+      },
+      "description_value": {
+        "label": "Text",
+        "help": "Scrieți traducerea textului."
+      },
+      "tags": {
+        "label": "Etichetă produs %{count} în %{language}",
+        "help": "Introduceți eticheta produsului pentru %{language}."
+      },
+      "tags_locale": {
+        "label": "Limba",
+        "help": "Alegeți limba pentru text."
+      },
+      "tags_value": {
+        "label": "Text",
+        "help": "Scrieți traducerea textului."
+      },
+      "tags_new": {
+        "label": "Etichetă nouă produs în %{language}",
+        "help": "Introduceți eticheta produsului."
+      },
+      "tags_new_locale": {
+        "label": "Limba",
+        "help": "Alegeți limba pentru text."
+      },
+      "tags_new_value": {
+        "label": "Text",
+        "help": "Scrieți traducerea textului."
+      },
+      "productAttributeName": {
+        "label": "Nume atribut produs în %{language}",
+        "help": "Introduceți numele atributului produsului pentru %{language}."
+      },
+      "productAttributeName_locale": {
+        "label": "Limba",
+        "help": "Alegeți limba pentru text."
+      },
+      "productAttributeName_value": {
+        "label": "Text",
+        "help": "Scrieți traducerea textului."
+      },
+      "productAttributeOptionName": {
+        "label": "Nume opțiune atribut produs în %{language}",
+        "help": "Introduceți numele opțiunii atributului produsului pentru %{language}."
+      },
+      "productAttributeOptionName_locale": {
+        "label": "Limba",
+        "help": "Alegeți limba pentru text."
+      },
+      "productAttributeOptionName_value": {
+        "label": "Text",
+        "help": "Scrieți traducerea textului."
+      },
+      "productAttributeOptionId": {
+        "label": "ID nouă opțiune atribut",
+        "help": "Introduceți ID-ul noii opțiuni de atribut."
+      },
+      "productAttributeId": {
+        "label": "ID nou atribut",
+        "help": "Introduceți ID-ul noului atribut."
+      },
+      "badgeStatus": {
+        "option": {
+          "enabled": {
+            "label": "Activează insignă",
+            "help": "Adăugați o insignă pe cardul produsului cu mesaje precum 'REDUCERE'."
+          }
+        }
+      },
+      "badgeType": {
+        "label": "Tip insignă produs",
+        "help": "Alegeți culoarea insignei."
+      },
+      "badgeText": {
+        "label": "Insignă produs în %{language}",
+        "help": "Introduceți insigna produsului pentru %{language}."
+      },
+      "badgeText_locale": {
+        "label": "Limba",
+        "help": "Alegeți limba pentru text."
+      },
+      "badgeText_value": {
+        "label": "Text",
+        "help": "Scrieți traducerea textului."
+      },
+      "categories": {
+        "label": "Categorie",
+        "help": "Categorie selectată pentru produs."
+      },
+      "categories_new": {
+        "label": "Categorie nouă",
+        "help": "Selectați categoria de adăugat."
+      },
+      "productVariationName": {
+        "label": "Nume variație produs în %{language}",
+        "help": "Introduceți numele variației produsului pentru %{language}."
+      },
+      "productVariationName_locale": {
+        "label": "Limba",
+        "help": "Alegeți limba pentru text."
+      },
+      "productVariationName_value": {
+        "label": "Text",
+        "help": "Scrieți traducerea textului."
+      },
+      "productVariationDescription": {
+        "label": "Descriere variație produs în %{language}",
+        "help": "Introduceți descrierea variației produsului pentru %{language}."
+      },
+      "productVariationDescription_locale": {
+        "label": "Limba",
+        "help": "Alegeți limba pentru text."
+      },
+      "productVariationDescription_value": {
+        "label": "Text",
+        "help": "Scrieți traducerea textului."
+      },
+      "productVariationPrice": {
+        "label": "Preț variație produs",
+        "help": "Introduceți prețul variației produsului."
+      },
+      "productVariationImages": {
+        "label": "Imagine variație produs %{count}",
+        "help": "Introduceți imaginea variației produsului %{count}."
+      },
+      "productVariationImages_new": {
+        "label": "Imagine nouă variație produs",
+        "help": "Introduceți imaginea variației produsului."
+      },
+      "productVariationWeightStatus": {
+        "option": {
+          "enabled": {
+            "label": "Activează greutate",
+            "help": "Adăugați greutate la produs."
+          }
+        }
+      },
+      "productVariationWeight": {
+        "label": "Greutate",
+        "help": "Introduceți greutatea produsului."
+      },
+      "productVariationId": {
+        "label": "ID nouă variație",
+        "help": "Introduceți ID-ul noii variații."
+      }
+    },
+    "sortFilter": {
+      "value": {
+        "option": {
+          "price-asc": {
+            "label": "Preț (0-9)"
+          },
+          "price-desc": {
+            "label": "Preț (9-0)"
+          },
+          "publishedDate-asc": {
+            "label": "Publicat (vechi-noi)"
+          },
+          "publishedDate-desc": {
+            "label": "Publicat (noi-vechi)"
+          }
+        }
+      }
+    },
+    "submit": {
+      "address": "Publică",
+      "auth": "Autentifică",
+      "product": "Publică",
+      "category": "Publică"
+    }
+  },
+  "components": {
+    "accountAddressAction": {
+      "newLabel": "Adresă nouă",
+      "editLabel": "Editează adresa"
+    },
+    "accountAddresses": {
+      "noAddresses": "Fără adrese"
+    },
+    "accountAdminSection": {
+      "message": "Ești administratorul magazinului.",
+      "manage": "Gestionează"
+    },
+    "accountInvitationLinkSection": {
+      "title": "Link invitație",
+      "description": "Copiază linkul și invită un prieten."
+    },
+    "accountSettingsSection": {
+      "title": "Setări",
+      "changeTheme": "Schimbă tema",
+      "chooseLanguage": "Alege limba",
+      "chooseCurrency": "Alege moneda"
+    },
+    "adminCategoriesList": {
+      "label": "Categorii"
+    },
+    "adminGenerateProductButton": {
+      "label": "Generează produs"
+    },
+    "adminProductsList": {
+      "label": "Produse"
+    },
+    "adminSyncCurrenciesButton": {
+      "label": "Sincronizează monede"
+    },
+    "authForm": {
+      "requestCode": "Solicită cod",
+      "requestCodeMinutes": "Solicită cod (%{seconds} sec.)"
+    },
+    "authModal": {
+      "loginWith": "Autentifică-te cu:"
+    },
+    "cartOverview": {
+      "totalPrice": "Preț total:",
+      "placeOrder": "Plasează comandă"
+    },
+    "cartProductCard": {
+      "weight": "Greutate:"
+    },
+    "cartProductsList": {
+      "noProducts": "Niciun produs în coș."
+    },
+    "categoriesFilter": {
+      "label": "Categorie:"
+    },
+    "categoryForm": {
+      "name": "Nume",
+      "description": "Descriere",
+      "parentUid": "Categorie părinte",
+      "actions": "Acțiuni",
+      "deleteAction": "Șterge"
+    },
+    "currencyModal": {
+      "search": "Caută"
+    },
+    "filtersResetButton": {
+      "label": "Resetează"
+    },
+    "invitationStatus": {
+      "label": "Codul meu de invitație este: "
+    },
+    "localeModal": {
+      "search": "Caută"
+    },
+    "pageLoading": {
+      "label": "Se încarcă ..."
+    },
+    "priceRangeFilter": {
+      "label": "Preț:"
+    },
+    "productCard": {
+      "view": "Vezi"
+    },
+    "productForm": {
+      "name": "Nume",
+      "description": "Descriere",
+      "tags": "Etichete",
+      "badge": "Insignă",
+      "categories": "Categorii",
+      "variations": "Variații",
+      "productVariationName": "Nume",
+      "productVariationDescription": "Descriere",
+      "productVariationPrice": "Preț",
+      "productVariationImages": "Imagini",
+      "productVariationAttributes": "Atribute",
+      "productVariationWeight": "Greutate",
+      "actions": "Acțiuni",
+      "deleteAction": "Șterge"
+    },
+    "productInfo": {
+      "addToCart": "Adaugă în coș"
+    },
+    "productsList": {
+      "foundProductsCount": {
+        "zero": "Niciun produs găsit.",
+        "one": "Găsit 1 produs.",
+        "other": "Găsite %{count} produse."
+      }
+    },
+    "signOutButton": {
+      "signOut": "Deconectează-te"
+    },
+    "suggestedCategoryProducts": {
+      "label": "Produse similare"
+    },
+    "weight": {
+      "unit": {
+        "gr": "gr.",
+        "kg": "kg."
+      }
+    },
+    "wishlistProductCard": {
+      "weight": "Greutate:"
+    },
+    "wishlistProductsList": {
+      "noProducts": "Niciun produs în lista de dorințe."
+    }
+  },
+  "errors": {
+    "auth/invalid-email": "Email invalid",
+    "auth/wrong-password": "Parolă greșită",
+    "auth/invalid-verification-code": "Cod invalid",
+    "auth/missing-password": "Parolă invalidă",
+    "auth/invalid-phone-number": "Număr telefon invalid",
+    "auth/missing-code": "Cod lipsă",
+    "auth/operation-not-allowed": "Operație nepermisă"
+  }
+}

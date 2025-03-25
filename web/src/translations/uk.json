@@ -1,0 +1,460 @@
+{
+  "pages": {
+    "/admin/category/[uid]": {
+      "title": "Керування категорією %{name}"
+    },
+    "/admin/category/new": {
+      "title": "Створити нову категорію"
+    },
+    "/admin/product/[uid]": {
+      "title": "Керування продуктом %{name}"
+    },
+    "/admin/product/new": {
+      "title": "Створити новий продукт"
+    },
+    "/category/[uid]": {
+      "title": "Категорія %{name}"
+    },
+    "/product/[uid]": {
+      "title": "Продукт %{name}"
+    },
+    "/account": {
+      "title": "Акаунт"
+    },
+    "/admin": {
+      "title": "Панель адміністратора"
+    },
+    "/cart": {
+      "title": "Кошик"
+    },
+    "/components": {
+      "title": "Компоненти"
+    },
+    "/": {
+      "title": "Головна"
+    },
+    "/wishlist": {
+      "title": "Список бажань"
+    }
+  },
+  "form": {
+    "address": {
+      "street": {
+        "label": "Вулиця",
+        "help": "Введіть вашу вулицю."
+      },
+      "streetNumber": {
+        "label": "Номер будинку",
+        "help": "Введіть ваш номер."
+      },
+      "city": {
+        "label": "Місто",
+        "help": "Введіть ваше місто."
+      },
+      "postalCode": {
+        "label": "Поштовий індекс",
+        "help": "Введіть ваш поштовий індекс."
+      },
+      "country": {
+        "label": "Країна",
+        "help": "Введіть вашу країну."
+      },
+      "name": {
+        "label": "Ім'я",
+        "help": "Введіть ім'я отримувача."
+      },
+      "phone": {
+        "label": "Телефон",
+        "help": "Введіть телефон отримувача."
+      }
+    },
+    "auth": {
+      "email": {
+        "label": "Електронна пошта",
+        "help": "Введіть вашу електронну пошту."
+      },
+      "password": {
+        "label": "Пароль",
+        "help": "Введіть надійний пароль."
+      },
+      "phone": {
+        "label": "Номер телефону",
+        "help": "Введіть номер телефону. (напр. '+380 991234567')"
+      },
+      "code": {
+        "label": "Отриманий код",
+        "help": "Ви отримали код підтвердження на ваш телефон."
+      }
+    },
+    "cartOverview": {
+      "address": {
+        "label": "Виберіть адресу доставки",
+        "help": "Адреса, на яку будуть доставлені товари."
+      }
+    },
+    "category": {
+      "name": {
+        "label": "Назва категорії %{language}",
+        "help": "Введіть назву категорії для %{language}."
+      },
+      "name_locale": {
+        "label": "Мова",
+        "help": "Виберіть мову для тексту."
+      },
+      "name_value": {
+        "label": "Текст",
+        "help": "Введіть переклад тексту."
+      },
+      "description": {
+        "label": "Опис категорії %{language}",
+        "help": "Введіть опис категорії для %{language}."
+      },
+      "description_locale": {
+        "label": "Мова",
+        "help": "Виберіть мову для тексту."
+      },
+      "description_value": {
+        "label": "Текст",
+        "help": "Введіть переклад тексту."
+      },
+      "parentUidStatus": {
+        "option": {
+          "enabled": {
+            "label": "Увімкнути батьківську категорію",
+            "help": "Виберіть, чи повинна поточна категорія мати батьківську категорію."
+          }
+        }
+      },
+      "parentUid": {
+        "label": "ID батьківської категорії",
+        "help": "Введіть ID батьківської категорії."
+      }
+    },
+    "product": {
+      "name": {
+        "label": "Назва продукту %{language}",
+        "help": "Введіть назву продукту для %{language}."
+      },
+      "name_locale": {
+        "label": "Мова",
+        "help": "Виберіть мову для тексту."
+      },
+      "name_value": {
+        "label": "Текст",
+        "help": "Введіть переклад тексту."
+      },
+      "description": {
+        "label": "Опис продукту %{language}",
+        "help": "Введіть опис продукту для %{language}."
+      },
+      "description_locale": {
+        "label": "Мова",
+        "help": "Виберіть мову для тексту."
+      },
+      "description_value": {
+        "label": "Текст",
+        "help": "Введіть переклад тексту."
+      },
+      "tags": {
+        "label": "Тег продукту %{count} %{language}",
+        "help": "Введіть тег продукту для %{language}."
+      },
+      "tags_locale": {
+        "label": "Мова",
+        "help": "Виберіть мову для тексту."
+      },
+      "tags_value": {
+        "label": "Текст",
+        "help": "Введіть переклад тексту."
+      },
+      "tags_new": {
+        "label": "Новий тег продукту %{language}",
+        "help": "Введіть тег продукту."
+      },
+      "tags_new_locale": {
+        "label": "Мова",
+        "help": "Виберіть мову для тексту."
+      },
+      "tags_new_value": {
+        "label": "Текст",
+        "help": "Введіть переклад тексту."
+      },
+      "productAttributeName": {
+        "label": "Назва атрибуту продукту %{language}",
+        "help": "Введіть назву атрибуту продукту для %{language}."
+      },
+      "productAttributeName_locale": {
+        "label": "Мова",
+        "help": "Виберіть мову для тексту."
+      },
+      "productAttributeName_value": {
+        "label": "Текст",
+        "help": "Введіть переклад тексту."
+      },
+      "productAttributeOptionName": {
+        "label": "Назва опції атрибуту продукту %{language}",
+        "help": "Введіть назву опції атрибуту продукту для %{language}."
+      },
+      "productAttributeOptionName_locale": {
+        "label": "Мова",
+        "help": "Виберіть мову для тексту."
+      },
+      "productAttributeOptionName_value": {
+        "label": "Текст",
+        "help": "Введіть переклад тексту."
+      },
+      "productAttributeOptionId": {
+        "label": "ID нової опції атрибуту",
+        "help": "Введіть ID нової опції атрибуту."
+      },
+      "productAttributeId": {
+        "label": "ID нового атрибуту",
+        "help": "Введіть ID нового атрибуту."
+      },
+      "badgeStatus": {
+        "option": {
+          "enabled": {
+            "label": "Увімкнути бейдж",
+            "help": "Додайте бейдж до картки продукту з повідомленням типу 'ЗНИЖКА'."
+          }
+        }
+      },
+      "badgeType": {
+        "label": "Тип бейджа продукту",
+        "help": "Виберіть колір бейджа."
+      },
+      "badgeText": {
+        "label": "Бейдж продукту %{language}",
+        "help": "Введіть бейдж продукту для %{language}."
+      },
+      "badgeText_locale": {
+        "label": "Мова",
+        "help": "Виберіть мову для тексту."
+      },
+      "badgeText_value": {
+        "label": "Текст",
+        "help": "Введіть переклад тексту."
+      },
+      "categories": {
+        "label": "Категорія",
+        "help": "Вибрана категорія для продукту."
+      },
+      "categories_new": {
+        "label": "Нова категорія",
+        "help": "Виберіть категорію для додавання."
+      },
+      "productVariationName": {
+        "label": "Назва варіації продукту %{language}",
+        "help": "Введіть назву варіації продукту для %{language}."
+      },
+      "productVariationName_locale": {
+        "label": "Мова",
+        "help": "Виберіть мову для тексту."
+      },
+      "productVariationName_value": {
+        "label": "Текст",
+        "help": "Введіть переклад тексту."
+      },
+      "productVariationDescription": {
+        "label": "Опис варіації продукту %{language}",
+        "help": "Введіть опис варіації продукту для %{language}."
+      },
+      "productVariationDescription_locale": {
+        "label": "Мова",
+        "help": "Виберіть мову для тексту."
+      },
+      "productVariationDescription_value": {
+        "label": "Текст",
+        "help": "Введіть переклад тексту."
+      },
+      "productVariationPrice": {
+        "label": "Ціна варіації продукту",
+        "help": "Введіть ціну варіації продукту."
+      },
+      "productVariationImages": {
+        "label": "Зображення варіації продукту %{count}",
+        "help": "Введіть зображення варіації продукту %{count}."
+      },
+      "productVariationImages_new": {
+        "label": "Нове зображення варіації продукту",
+        "help": "Введіть зображення варіації продукту."
+      },
+      "productVariationWeightStatus": {
+        "option": {
+          "enabled": {
+            "label": "Увімкнути вагу",
+            "help": "Додайте вагу до продукту."
+          }
+        }
+      },
+      "productVariationWeight": {
+        "label": "Вага",
+        "help": "Введіть вагу продукту."
+      },
+      "productVariationId": {
+        "label": "ID нової варіації",
+        "help": "Введіть ID нової варіації."
+      }
+    },
+    "sortFilter": {
+      "value": {
+        "option": {
+          "price-asc": {
+            "label": "Ціна (0-9)"
+          },
+          "price-desc": {
+            "label": "Ціна (9-0)"
+          },
+          "publishedDate-asc": {
+            "label": "Дата публікації (старі-нові)"
+          },
+          "publishedDate-desc": {
+            "label": "Дата публікації (нові-старі)"
+          }
+        }
+      }
+    },
+    "submit": {
+      "address": "Опублікувати",
+      "auth": "Автентифікувати",
+      "product": "Опублікувати",
+      "category": "Опублікувати"
+    }
+  },
+  "components": {
+    "accountAddressAction": {
+      "newLabel": "Нова адреса",
+      "editLabel": "Редагувати адресу"
+    },
+    "accountAddresses": {
+      "noAddresses": "Немає адрес"
+    },
+    "accountAdminSection": {
+      "message": "Ви адміністратор магазину.",
+      "manage": "Керувати"
+    },
+    "accountInvitationLinkSection": {
+      "title": "Посилання запрошення",
+      "description": "Скопіюйте посилання та запросіть друга."
+    },
+    "accountSettingsSection": {
+      "title": "Налаштування",
+      "changeTheme": "Змінити тему",
+      "chooseLanguage": "Вибрати мову",
+      "chooseCurrency": "Вибрати валюту"
+    },
+    "adminCategoriesList": {
+      "label": "Категорії"
+    },
+    "adminGenerateProductButton": {
+      "label": "Згенерувати продукт"
+    },
+    "adminProductsList": {
+      "label": "Продукти"
+    },
+    "adminSyncCurrenciesButton": {
+      "label": "Синхронізувати валюти"
+    },
+    "authForm": {
+      "requestCode": "Запитати код",
+      "requestCodeMinutes": "Запитати код (%{seconds} сек.)"
+    },
+    "authModal": {
+      "loginWith": "Увійти через:"
+    },
+    "cartOverview": {
+      "totalPrice": "Загальна ціна:",
+      "placeOrder": "Зробити замовлення"
+    },
+    "cartProductCard": {
+      "weight": "Вага:"
+    },
+    "cartProductsList": {
+      "noProducts": "Немає товарів у кошику."
+    },
+    "categoriesFilter": {
+      "label": "Категорія:"
+    },
+    "categoryForm": {
+      "name": "Назва",
+      "description": "Опис",
+      "parentUid": "Батьківська категорія",
+      "actions": "Дії",
+      "deleteAction": "Видалити"
+    },
+    "currencyModal": {
+      "search": "Пошук"
+    },
+    "filtersResetButton": {
+      "label": "Скинути"
+    },
+    "invitationStatus": {
+      "label": "Мій код запрошення: "
+    },
+    "localeModal": {
+      "search": "Пошук"
+    },
+    "pageLoading": {
+      "label": "Завантаження ..."
+    },
+    "priceRangeFilter": {
+      "label": "Ціна:"
+    },
+    "productCard": {
+      "view": "Переглянути"
+    },
+    "productForm": {
+      "name": "Назва",
+      "description": "Опис",
+      "tags": "Теги",
+      "badge": "Бейдж",
+      "categories": "Категорії",
+      "variations": "Варіації",
+      "productVariationName": "Назва",
+      "productVariationDescription": "Опис",
+      "productVariationPrice": "Ціна",
+      "productVariationImages": "Зображення",
+      "productVariationAttributes": "Атрибути",
+      "productVariationWeight": "Вага",
+      "actions": "Дії",
+      "deleteAction": "Видалити"
+    },
+    "productInfo": {
+      "addToCart": "Додати до кошика"
+    },
+    "productsList": {
+      "foundProductsCount": {
+        "zero": "Продуктів не знайдено.",
+        "one": "Знайдено 1 продукт.",
+        "other": "Знайдено %{count} продуктів."
+      }
+    },
+    "signOutButton": {
+      "signOut": "Вийти"
+    },
+    "suggestedCategoryProducts": {
+      "label": "Схожі продукти"
+    },
+    "weight": {
+      "unit": {
+        "gr": "гр.",
+        "kg": "кг."
+      }
+    },
+    "wishlistProductCard": {
+      "weight": "Вага:"
+    },
+    "wishlistProductsList": {
+      "noProducts": "Немає товарів у списку бажань."
+    }
+  },
+  "errors": {
+    "auth/invalid-email": "Невірний email",
+    "auth/wrong-password": "Невірний пароль",
+    "auth/invalid-verification-code": "Невірний код",
+    "auth/missing-password": "Невірний пароль",
+    "auth/invalid-phone-number": "Невірний номер телефону",
+    "auth/missing-code": "Відсутній код",
+    "auth/operation-not-allowed": "Операція не дозволена"
+  }
+}

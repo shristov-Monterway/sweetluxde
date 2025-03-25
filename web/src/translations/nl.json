@@ -1,0 +1,460 @@
+{
+  "pages": {
+    "/admin/category/[uid]": {
+      "title": "Beheer categorie %{name}"
+    },
+    "/admin/category/new": {
+      "title": "Nieuwe categorie aanmaken"
+    },
+    "/admin/product/[uid]": {
+      "title": "Beheer product %{name}"
+    },
+    "/admin/product/new": {
+      "title": "Nieuw product aanmaken"
+    },
+    "/category/[uid]": {
+      "title": "Categorie %{name}"
+    },
+    "/product/[uid]": {
+      "title": "Product %{name}"
+    },
+    "/account": {
+      "title": "Account"
+    },
+    "/admin": {
+      "title": "Beheerpaneel"
+    },
+    "/cart": {
+      "title": "Winkelwagen"
+    },
+    "/components": {
+      "title": "Componenten"
+    },
+    "/": {
+      "title": "Home"
+    },
+    "/wishlist": {
+      "title": "Verlanglijst"
+    }
+  },
+  "form": {
+    "address": {
+      "street": {
+        "label": "Straat",
+        "help": "Voer uw straat in."
+      },
+      "streetNumber": {
+        "label": "Huisnummer",
+        "help": "Voer uw huisnummer in."
+      },
+      "city": {
+        "label": "Stad",
+        "help": "Voer uw stad in."
+      },
+      "postalCode": {
+        "label": "Postcode",
+        "help": "Voer uw postcode in."
+      },
+      "country": {
+        "label": "Land",
+        "help": "Voer uw land in."
+      },
+      "name": {
+        "label": "Naam",
+        "help": "Voer de naam van de ontvanger in."
+      },
+      "phone": {
+        "label": "Telefoon",
+        "help": "Voer de telefoon van de ontvanger in."
+      }
+    },
+    "auth": {
+      "email": {
+        "label": "E-mailadres",
+        "help": "Voer uw e-mailadres in."
+      },
+      "password": {
+        "label": "Wachtwoord",
+        "help": "Voer een sterk wachtwoord in."
+      },
+      "phone": {
+        "label": "Telefoonnummer",
+        "help": "Voer uw telefoonnummer in. (bijv. '+31 612345678')"
+      },
+      "code": {
+        "label": "Ontvangen code",
+        "help": "U heeft een verificatiecode op uw telefoon ontvangen."
+      }
+    },
+    "cartOverview": {
+      "address": {
+        "label": "Kies bezorgadres",
+        "help": "Adres waar de producten worden bezorgd."
+      }
+    },
+    "category": {
+      "name": {
+        "label": "Categorienaam in %{language}",
+        "help": "Voer de categorienaam in voor %{language}."
+      },
+      "name_locale": {
+        "label": "Taal",
+        "help": "Kies de taal voor de tekst."
+      },
+      "name_value": {
+        "label": "Tekst",
+        "help": "Voer de vertaling van de tekst in."
+      },
+      "description": {
+        "label": "Categoriebeschrijving in %{language}",
+        "help": "Voer de categoriebeschrijving in voor %{language}."
+      },
+      "description_locale": {
+        "label": "Taal",
+        "help": "Kies de taal voor de tekst."
+      },
+      "description_value": {
+        "label": "Tekst",
+        "help": "Voer de vertaling van de tekst in."
+      },
+      "parentUidStatus": {
+        "option": {
+          "enabled": {
+            "label": "Hoofdcategorie inschakelen",
+            "help": "Selecteer of de huidige categorie een hoofdcategorie moet hebben."
+          }
+        }
+      },
+      "parentUid": {
+        "label": "ID van de hoofdcategorie",
+        "help": "Voer het ID van de hoofdcategorie in."
+      }
+    },
+    "product": {
+      "name": {
+        "label": "Productnaam in %{language}",
+        "help": "Voer de productnaam in voor %{language}."
+      },
+      "name_locale": {
+        "label": "Taal",
+        "help": "Kies de taal voor de tekst."
+      },
+      "name_value": {
+        "label": "Tekst",
+        "help": "Voer de vertaling van de tekst in."
+      },
+      "description": {
+        "label": "Productbeschrijving in %{language}",
+        "help": "Voer de productbeschrijving in voor %{language}."
+      },
+      "description_locale": {
+        "label": "Taal",
+        "help": "Kies de taal voor de tekst."
+      },
+      "description_value": {
+        "label": "Tekst",
+        "help": "Voer de vertaling van de tekst in."
+      },
+      "tags": {
+        "label": "Producttag %{count} in %{language}",
+        "help": "Voer de producttag in voor %{language}."
+      },
+      "tags_locale": {
+        "label": "Taal",
+        "help": "Kies de taal voor de tekst."
+      },
+      "tags_value": {
+        "label": "Tekst",
+        "help": "Voer de vertaling van de tekst in."
+      },
+      "tags_new": {
+        "label": "Nieuwe producttag in %{language}",
+        "help": "Voer de producttag in."
+      },
+      "tags_new_locale": {
+        "label": "Taal",
+        "help": "Kies de taal voor de tekst."
+      },
+      "tags_new_value": {
+        "label": "Tekst",
+        "help": "Voer de vertaling van de tekst in."
+      },
+      "productAttributeName": {
+        "label": "Productattribuutnaam in %{language}",
+        "help": "Voer de productattribuutnaam in voor %{language}."
+      },
+      "productAttributeName_locale": {
+        "label": "Taal",
+        "help": "Kies de taal voor de tekst."
+      },
+      "productAttributeName_value": {
+        "label": "Tekst",
+        "help": "Voer de vertaling van de tekst in."
+      },
+      "productAttributeOptionName": {
+        "label": "Productattribuutoptienaam in %{language}",
+        "help": "Voer de productattribuutoptienaam in voor %{language}."
+      },
+      "productAttributeOptionName_locale": {
+        "label": "Taal",
+        "help": "Kies de taal voor de tekst."
+      },
+      "productAttributeOptionName_value": {
+        "label": "Tekst",
+        "help": "Voer de vertaling van de tekst in."
+      },
+      "productAttributeOptionId": {
+        "label": "ID van nieuwe attribuutoptie",
+        "help": "Voer het ID van de nieuwe attribuutoptie in."
+      },
+      "productAttributeId": {
+        "label": "ID van nieuw attribuut",
+        "help": "Voer het ID van het nieuwe attribuut in."
+      },
+      "badgeStatus": {
+        "option": {
+          "enabled": {
+            "label": "Badge inschakelen",
+            "help": "Voeg een badge toe aan de productkaart met een bericht zoals 'AANBIEDING'."
+          }
+        }
+      },
+      "badgeType": {
+        "label": "Productbadgetype",
+        "help": "Kies de kleur van de badge."
+      },
+      "badgeText": {
+        "label": "Productbadge in %{language}",
+        "help": "Voer de productbadge in voor %{language}."
+      },
+      "badgeText_locale": {
+        "label": "Taal",
+        "help": "Kies de taal voor de tekst."
+      },
+      "badgeText_value": {
+        "label": "Tekst",
+        "help": "Voer de vertaling van de tekst in."
+      },
+      "categories": {
+        "label": "Categorie",
+        "help": "Geselecteerde categorie voor het product."
+      },
+      "categories_new": {
+        "label": "Nieuwe categorie",
+        "help": "Selecteer categorie om toe te voegen."
+      },
+      "productVariationName": {
+        "label": "Productvariantnaam in %{language}",
+        "help": "Voer de productvariantnaam in voor %{language}."
+      },
+      "productVariationName_locale": {
+        "label": "Taal",
+        "help": "Kies de taal voor de tekst."
+      },
+      "productVariationName_value": {
+        "label": "Tekst",
+        "help": "Voer de vertaling van de tekst in."
+      },
+      "productVariationDescription": {
+        "label": "Productvariantbeschrijving in %{language}",
+        "help": "Voer de productvariantbeschrijving in voor %{language}."
+      },
+      "productVariationDescription_locale": {
+        "label": "Taal",
+        "help": "Kies de taal voor de tekst."
+      },
+      "productVariationDescription_value": {
+        "label": "Tekst",
+        "help": "Voer de vertaling van de tekst in."
+      },
+      "productVariationPrice": {
+        "label": "Productvariantprijs",
+        "help": "Voer de productvariantprijs in."
+      },
+      "productVariationImages": {
+        "label": "Productvariantafbeelding %{count}",
+        "help": "Voer de productvariantafbeelding %{count} in."
+      },
+      "productVariationImages_new": {
+        "label": "Nieuwe productvariantafbeelding",
+        "help": "Voer de productvariantafbeelding in."
+      },
+      "productVariationWeightStatus": {
+        "option": {
+          "enabled": {
+            "label": "Gewicht inschakelen",
+            "help": "Voeg gewicht toe aan het product."
+          }
+        }
+      },
+      "productVariationWeight": {
+        "label": "Gewicht",
+        "help": "Voer het gewicht van het product in."
+      },
+      "productVariationId": {
+        "label": "ID van nieuwe variant",
+        "help": "Voer het ID van de nieuwe variant in."
+      }
+    },
+    "sortFilter": {
+      "value": {
+        "option": {
+          "price-asc": {
+            "label": "Prijs (0-9)"
+          },
+          "price-desc": {
+            "label": "Prijs (9-0)"
+          },
+          "publishedDate-asc": {
+            "label": "Gepubliceerd (oud-nieuw)"
+          },
+          "publishedDate-desc": {
+            "label": "Gepubliceerd (nieuw-oud)"
+          }
+        }
+      }
+    },
+    "submit": {
+      "address": "Publiceren",
+      "auth": "Authenticeren",
+      "product": "Publiceren",
+      "category": "Publiceren"
+    }
+  },
+  "components": {
+    "accountAddressAction": {
+      "newLabel": "Nieuw adres",
+      "editLabel": "Adres bewerken"
+    },
+    "accountAddresses": {
+      "noAddresses": "Geen adressen"
+    },
+    "accountAdminSection": {
+      "message": "U bent beheerder van de winkel.",
+      "manage": "Beheren"
+    },
+    "accountInvitationLinkSection": {
+      "title": "Uitnodigingslink",
+      "description": "Kopieer de link en nodig een vriend uit."
+    },
+    "accountSettingsSection": {
+      "title": "Instellingen",
+      "changeTheme": "Thema wijzigen",
+      "chooseLanguage": "Taal kiezen",
+      "chooseCurrency": "Valuta kiezen"
+    },
+    "adminCategoriesList": {
+      "label": "Categorieën"
+    },
+    "adminGenerateProductButton": {
+      "label": "Product genereren"
+    },
+    "adminProductsList": {
+      "label": "Producten"
+    },
+    "adminSyncCurrenciesButton": {
+      "label": "Valuta synchroniseren"
+    },
+    "authForm": {
+      "requestCode": "Code aanvragen",
+      "requestCodeMinutes": "Code aanvragen (%{seconds} sec.)"
+    },
+    "authModal": {
+      "loginWith": "Inloggen met:"
+    },
+    "cartOverview": {
+      "totalPrice": "Totale prijs:",
+      "placeOrder": "Bestelling plaatsen"
+    },
+    "cartProductCard": {
+      "weight": "Gewicht:"
+    },
+    "cartProductsList": {
+      "noProducts": "Geen producten in winkelwagen."
+    },
+    "categoriesFilter": {
+      "label": "Categorie:"
+    },
+    "categoryForm": {
+      "name": "Naam",
+      "description": "Beschrijving",
+      "parentUid": "Hoofdcategorie",
+      "actions": "Acties",
+      "deleteAction": "Verwijderen"
+    },
+    "currencyModal": {
+      "search": "Zoeken"
+    },
+    "filtersResetButton": {
+      "label": "Resetten"
+    },
+    "invitationStatus": {
+      "label": "Mijn uitnodigingscode is: "
+    },
+    "localeModal": {
+      "search": "Zoeken"
+    },
+    "pageLoading": {
+      "label": "Laden ..."
+    },
+    "priceRangeFilter": {
+      "label": "Prijs:"
+    },
+    "productCard": {
+      "view": "Bekijken"
+    },
+    "productForm": {
+      "name": "Naam",
+      "description": "Beschrijving",
+      "tags": "Tags",
+      "badge": "Badge",
+      "categories": "Categorieën",
+      "variations": "Varianten",
+      "productVariationName": "Naam",
+      "productVariationDescription": "Beschrijving",
+      "productVariationPrice": "Prijs",
+      "productVariationImages": "Afbeeldingen",
+      "productVariationAttributes": "Attributen",
+      "productVariationWeight": "Gewicht",
+      "actions": "Acties",
+      "deleteAction": "Verwijderen"
+    },
+    "productInfo": {
+      "addToCart": "Toevoegen aan winkelwagen"
+    },
+    "productsList": {
+      "foundProductsCount": {
+        "zero": "Geen producten gevonden.",
+        "one": "1 product gevonden.",
+        "other": "%{count} producten gevonden."
+      }
+    },
+    "signOutButton": {
+      "signOut": "Uitloggen"
+    },
+    "suggestedCategoryProducts": {
+      "label": "Vergelijkbare producten"
+    },
+    "weight": {
+      "unit": {
+        "gr": "gr.",
+        "kg": "kg."
+      }
+    },
+    "wishlistProductCard": {
+      "weight": "Gewicht:"
+    },
+    "wishlistProductsList": {
+      "noProducts": "Geen producten in verlanglijst."
+    }
+  },
+  "errors": {
+    "auth/invalid-email": "Ongeldig e-mailadres",
+    "auth/wrong-password": "Verkeerd wachtwoord",
+    "auth/invalid-verification-code": "Ongeldige code",
+    "auth/missing-password": "Ongeldig wachtwoord",
+    "auth/invalid-phone-number": "Ongeldig telefoonnummer",
+    "auth/missing-code": "Code ontbreekt",
+    "auth/operation-not-allowed": "Bewerking niet toegestaan"
+  }
+}

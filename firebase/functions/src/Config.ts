@@ -2,7 +2,7 @@ import { ConfigType } from '../../../types/internal/ConfigType';
 
 const Config: ConfigType = {
   defaultCurrency: 'USD',
-  supportedCurrencies: ['USD', 'EUR', 'GBP', 'AUD', 'CAD', 'CHF', 'CNH', 'HKD', 'NZD', 'BGN'],
+  supportedCurrencies: ['USD', 'EUR', 'GBP', 'AUD', 'CAD', 'CHF', 'CNH', 'HKD', 'NZD', 'BGN', 'CNY'],
   stripeSecretKey:
     'sk_test_51NIyYzLadHO4qOyFcedEE9H3nKPkgQMi2KmW74Uj3VO6BxX7jLwKYpP2rRKztslkfHptWNXhJywz03eN2fR3iILb00KvJ9Z2Au',
   stripeWebhookSecretKey:

@@ -1,0 +1,460 @@
+{
+  "pages": {
+    "/admin/category/[uid]": {
+      "title": "Kategorie %{name} verwalten"
+    },
+    "/admin/category/new": {
+      "title": "Neue Kategorie erstellen"
+    },
+    "/admin/product/[uid]": {
+      "title": "Produkt %{name} verwalten"
+    },
+    "/admin/product/new": {
+      "title": "Neues Produkt erstellen"
+    },
+    "/category/[uid]": {
+      "title": "Kategorie %{name}"
+    },
+    "/product/[uid]": {
+      "title": "Produkt %{name}"
+    },
+    "/account": {
+      "title": "Konto"
+    },
+    "/admin": {
+      "title": "Admin-Bereich"
+    },
+    "/cart": {
+      "title": "Warenkorb"
+    },
+    "/components": {
+      "title": "Komponenten"
+    },
+    "/": {
+      "title": "Startseite"
+    },
+    "/wishlist": {
+      "title": "Wunschliste"
+    }
+  },
+  "form": {
+    "address": {
+      "street": {
+        "label": "Straße",
+        "help": "Geben Sie Ihre Straße ein."
+      },
+      "streetNumber": {
+        "label": "Hausnummer",
+        "help": "Geben Sie Ihre Hausnummer ein."
+      },
+      "city": {
+        "label": "Stadt",
+        "help": "Geben Sie Ihre Stadt ein."
+      },
+      "postalCode": {
+        "label": "Postleitzahl",
+        "help": "Geben Sie Ihre Postleitzahl ein."
+      },
+      "country": {
+        "label": "Land",
+        "help": "Geben Sie Ihr Land ein."
+      },
+      "name": {
+        "label": "Name",
+        "help": "Geben Sie den Namen des Empfängers ein."
+      },
+      "phone": {
+        "label": "Telefon",
+        "help": "Geben Sie die Telefonnummer des Empfängers ein."
+      }
+    },
+    "auth": {
+      "email": {
+        "label": "E-Mail-Adresse",
+        "help": "Geben Sie Ihre E-Mail-Adresse ein."
+      },
+      "password": {
+        "label": "Passwort",
+        "help": "Geben Sie ein sicheres Passwort ein."
+      },
+      "phone": {
+        "label": "Telefonnummer",
+        "help": "Geben Sie Ihre Telefonnummer ein. (z.B. '+49 1512345678')"
+      },
+      "code": {
+        "label": "Empfangener Code",
+        "help": "Sie haben einen Bestätigungscode per SMS erhalten."
+      }
+    },
+    "cartOverview": {
+      "address": {
+        "label": "Lieferadresse auswählen",
+        "help": "Adresse, an die die Produkte geliefert werden sollen."
+      }
+    },
+    "category": {
+      "name": {
+        "label": "Kategoriename in %{language}",
+        "help": "Geben Sie den Kategorienamen für %{language} ein."
+      },
+      "name_locale": {
+        "label": "Sprache",
+        "help": "Wählen Sie die Sprache für den Text."
+      },
+      "name_value": {
+        "label": "Text",
+        "help": "Geben Sie die Übersetzung für den Text ein."
+      },
+      "description": {
+        "label": "Kategoriebeschreibung in %{language}",
+        "help": "Geben Sie die Kategoriebeschreibung für %{language} ein."
+      },
+      "description_locale": {
+        "label": "Sprache",
+        "help": "Wählen Sie die Sprache für den Text."
+      },
+      "description_value": {
+        "label": "Text",
+        "help": "Geben Sie die Übersetzung für den Text ein."
+      },
+      "parentUidStatus": {
+        "option": {
+          "enabled": {
+            "label": "Übergeordnete Kategorie aktivieren",
+            "help": "Wählen Sie, ob diese Kategorie eine übergeordnete Kategorie haben soll."
+          }
+        }
+      },
+      "parentUid": {
+        "label": "ID der übergeordneten Kategorie",
+        "help": "Geben Sie die ID der übergeordneten Kategorie ein."
+      }
+    },
+    "product": {
+      "name": {
+        "label": "Produktname in %{language}",
+        "help": "Geben Sie den Produktnamen für %{language} ein."
+      },
+      "name_locale": {
+        "label": "Sprache",
+        "help": "Wählen Sie die Sprache für den Text."
+      },
+      "name_value": {
+        "label": "Text",
+        "help": "Geben Sie die Übersetzung für den Text ein."
+      },
+      "description": {
+        "label": "Produktbeschreibung in %{language}",
+        "help": "Geben Sie die Produktbeschreibung für %{language} ein."
+      },
+      "description_locale": {
+        "label": "Sprache",
+        "help": "Wählen Sie die Sprache für den Text."
+      },
+      "description_value": {
+        "label": "Text",
+        "help": "Geben Sie die Übersetzung für den Text ein."
+      },
+      "tags": {
+        "label": "Produkt-Tag %{count} in %{language}",
+        "help": "Geben Sie den Produkt-Tag für %{language} ein."
+      },
+      "tags_locale": {
+        "label": "Sprache",
+        "help": "Wählen Sie die Sprache für den Text."
+      },
+      "tags_value": {
+        "label": "Text",
+        "help": "Geben Sie die Übersetzung für den Text ein."
+      },
+      "tags_new": {
+        "label": "Neuer Produkt-Tag in %{language}",
+        "help": "Geben Sie den Produkt-Tag ein."
+      },
+      "tags_new_locale": {
+        "label": "Sprache",
+        "help": "Wählen Sie die Sprache für den Text."
+      },
+      "tags_new_value": {
+        "label": "Text",
+        "help": "Geben Sie die Übersetzung für den Text ein."
+      },
+      "productAttributeName": {
+        "label": "Produktattributname in %{language}",
+        "help": "Geben Sie den Produktattributnamen für %{language} ein."
+      },
+      "productAttributeName_locale": {
+        "label": "Sprache",
+        "help": "Wählen Sie die Sprache für den Text."
+      },
+      "productAttributeName_value": {
+        "label": "Text",
+        "help": "Geben Sie die Übersetzung für den Text ein."
+      },
+      "productAttributeOptionName": {
+        "label": "Produktattributoptionsname in %{language}",
+        "help": "Geben Sie den Produktattributoptionsnamen für %{language} ein."
+      },
+      "productAttributeOptionName_locale": {
+        "label": "Sprache",
+        "help": "Wählen Sie die Sprache für den Text."
+      },
+      "productAttributeOptionName_value": {
+        "label": "Text",
+        "help": "Geben Sie die Übersetzung für den Text ein."
+      },
+      "productAttributeOptionId": {
+        "label": "ID der neuen Attributoption",
+        "help": "Geben Sie die ID der neuen Attributoption ein."
+      },
+      "productAttributeId": {
+        "label": "ID des neuen Attributs",
+        "help": "Geben Sie die ID des neuen Attributs ein."
+      },
+      "badgeStatus": {
+        "option": {
+          "enabled": {
+            "label": "Badge aktivieren",
+            "help": "Fügen Sie der Produktkarte ein Badge mit einer Nachricht wie 'SALE' hinzu."
+          }
+        }
+      },
+      "badgeType": {
+        "label": "Produktbadge-Typ",
+        "help": "Wählen Sie die Farbe des Badges."
+      },
+      "badgeText": {
+        "label": "Produktbadge in %{language}",
+        "help": "Geben Sie das Produktbadge für %{language} ein."
+      },
+      "badgeText_locale": {
+        "label": "Sprache",
+        "help": "Wählen Sie die Sprache für den Text."
+      },
+      "badgeText_value": {
+        "label": "Text",
+        "help": "Geben Sie die Übersetzung für den Text ein."
+      },
+      "categories": {
+        "label": "Kategorie",
+        "help": "Ausgewählte Kategorie für das Produkt."
+      },
+      "categories_new": {
+        "label": "Neue Kategorie",
+        "help": "Wählen Sie eine hinzuzufügende Kategorie aus."
+      },
+      "productVariationName": {
+        "label": "Produktvariationsname in %{language}",
+        "help": "Geben Sie den Produktvariationsnamen für %{language} ein."
+      },
+      "productVariationName_locale": {
+        "label": "Sprache",
+        "help": "Wählen Sie die Sprache für den Text."
+      },
+      "productVariationName_value": {
+        "label": "Text",
+        "help": "Geben Sie die Übersetzung für den Text ein."
+      },
+      "productVariationDescription": {
+        "label": "Produktvariationsbeschreibung in %{language}",
+        "help": "Geben Sie die Produktvariationsbeschreibung für %{language} ein."
+      },
+      "productVariationDescription_locale": {
+        "label": "Sprache",
+        "help": "Wählen Sie die Sprache für den Text."
+      },
+      "productVariationDescription_value": {
+        "label": "Text",
+        "help": "Geben Sie die Übersetzung für den Text ein."
+      },
+      "productVariationPrice": {
+        "label": "Produktvariationspreis",
+        "help": "Geben Sie den Produktvariationspreis ein."
+      },
+      "productVariationImages": {
+        "label": "Produktvariationsbild %{count}",
+        "help": "Geben Sie das Produktvariationsbild %{count} ein."
+      },
+      "productVariationImages_new": {
+        "label": "Neues Produktvariationsbild",
+        "help": "Geben Sie ein Produktvariationsbild ein."
+      },
+      "productVariationWeightStatus": {
+        "option": {
+          "enabled": {
+            "label": "Gewicht aktivieren",
+            "help": "Fügen Sie dem Produkt ein Gewicht hinzu."
+          }
+        }
+      },
+      "productVariationWeight": {
+        "label": "Gewicht",
+        "help": "Geben Sie das Gewicht des Produkts ein."
+      },
+      "productVariationId": {
+        "label": "ID der neuen Variation",
+        "help": "Geben Sie die ID der neuen Variation ein."
+      }
+    },
+    "sortFilter": {
+      "value": {
+        "option": {
+          "price-asc": {
+            "label": "Preis (0-9)"
+          },
+          "price-desc": {
+            "label": "Preis (9-0)"
+          },
+          "publishedDate-asc": {
+            "label": "Veröffentlichung (älteste-neueste)"
+          },
+          "publishedDate-desc": {
+            "label": "Veröffentlichung (neueste-älteste)"
+          }
+        }
+      }
+    },
+    "submit": {
+      "address": "Veröffentlichen",
+      "auth": "Authentifizieren",
+      "product": "Veröffentlichen",
+      "category": "Veröffentlichen"
+    }
+  },
+  "components": {
+    "accountAddressAction": {
+      "newLabel": "Neue Adresse",
+      "editLabel": "Adresse bearbeiten"
+    },
+    "accountAddresses": {
+      "noAddresses": "Keine Adressen"
+    },
+    "accountAdminSection": {
+      "message": "Sie sind Administrator des Shops.",
+      "manage": "Verwalten"
+    },
+    "accountInvitationLinkSection": {
+      "title": "Einladungslink",
+      "description": "Kopieren Sie den Link und laden Sie einen Freund ein."
+    },
+    "accountSettingsSection": {
+      "title": "Einstellungen",
+      "changeTheme": "Design ändern",
+      "chooseLanguage": "Sprache wählen",
+      "chooseCurrency": "Währung wählen"
+    },
+    "adminCategoriesList": {
+      "label": "Kategorien"
+    },
+    "adminGenerateProductButton": {
+      "label": "Produkt generieren"
+    },
+    "adminProductsList": {
+      "label": "Produkte"
+    },
+    "adminSyncCurrenciesButton": {
+      "label": "Währungen synchronisieren"
+    },
+    "authForm": {
+      "requestCode": "Code anfordern",
+      "requestCodeMinutes": "Code anfordern (%{seconds} Sek.)"
+    },
+    "authModal": {
+      "loginWith": "Anmelden mit:"
+    },
+    "cartOverview": {
+      "totalPrice": "Gesamtpreis:",
+      "placeOrder": "Bestellung aufgeben"
+    },
+    "cartProductCard": {
+      "weight": "Gewicht:"
+    },
+    "cartProductsList": {
+      "noProducts": "Keine Produkte im Warenkorb."
+    },
+    "categoriesFilter": {
+      "label": "Kategorie:"
+    },
+    "categoryForm": {
+      "name": "Name",
+      "description": "Beschreibung",
+      "parentUid": "Übergeordnete Kategorie",
+      "actions": "Aktionen",
+      "deleteAction": "Löschen"
+    },
+    "currencyModal": {
+      "search": "Suche"
+    },
+    "filtersResetButton": {
+      "label": "Zurücksetzen"
+    },
+    "invitationStatus": {
+      "label": "Mein Einladungscode lautet: "
+    },
+    "localeModal": {
+      "search": "Suche"
+    },
+    "pageLoading": {
+      "label": "Ladevorgang ..."
+    },
+    "priceRangeFilter": {
+      "label": "Preis:"
+    },
+    "productCard": {
+      "view": "Ansehen"
+    },
+    "productForm": {
+      "name": "Name",
+      "description": "Beschreibung",
+      "tags": "Tags",
+      "badge": "Badge",
+      "categories": "Kategorien",
+      "variations": "Varianten",
+      "productVariationName": "Name",
+      "productVariationDescription": "Beschreibung",
+      "productVariationPrice": "Preis",
+      "productVariationImages": "Bilder",
+      "productVariationAttributes": "Attribute",
+      "productVariationWeight": "Gewicht",
+      "actions": "Aktionen",
+      "deleteAction": "Löschen"
+    },
+    "productInfo": {
+      "addToCart": "In den Warenkorb"
+    },
+    "productsList": {
+      "foundProductsCount": {
+        "zero": "Keine Produkte gefunden.",
+        "one": "1 Produkt gefunden.",
+        "other": "%{count} Produkte gefunden."
+      }
+    },
+    "signOutButton": {
+      "signOut": "Abmelden"
+    },
+    "suggestedCategoryProducts": {
+      "label": "Ähnliche Produkte"
+    },
+    "weight": {
+      "unit": {
+        "gr": "g",
+        "kg": "kg"
+      }
+    },
+    "wishlistProductCard": {
+      "weight": "Gewicht:"
+    },
+    "wishlistProductsList": {
+      "noProducts": "Keine Produkte auf der Wunschliste."
+    }
+  },
+  "errors": {
+    "auth/invalid-email": "Ungültige E-Mail",
+    "auth/wrong-password": "Falsches Passwort",
+    "auth/invalid-verification-code": "Ungültiger Code",
+    "auth/missing-password": "Ungültiges Passwort",
+    "auth/invalid-phone-number": "Ungültige Telefonnummer",
+    "auth/missing-code": "Fehlender Code",
+    "auth/operation-not-allowed": "Vorgang nicht erlaubt"
+  }
+}

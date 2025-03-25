@@ -1,0 +1,460 @@
+{
+  "pages": {
+    "/admin/category/[uid]": {
+      "title": "管理分类 %{name}"
+    },
+    "/admin/category/new": {
+      "title": "创建新分类"
+    },
+    "/admin/product/[uid]": {
+      "title": "管理产品 %{name}"
+    },
+    "/admin/product/new": {
+      "title": "创建新产品"
+    },
+    "/category/[uid]": {
+      "title": "分类 %{name}"
+    },
+    "/product/[uid]": {
+      "title": "产品 %{name}"
+    },
+    "/account": {
+      "title": "账户"
+    },
+    "/admin": {
+      "title": "管理面板"
+    },
+    "/cart": {
+      "title": "购物车"
+    },
+    "/components": {
+      "title": "组件"
+    },
+    "/": {
+      "title": "首页"
+    },
+    "/wishlist": {
+      "title": "愿望清单"
+    }
+  },
+  "form": {
+    "address": {
+      "street": {
+        "label": "街道",
+        "help": "输入您的街道。"
+      },
+      "streetNumber": {
+        "label": "门牌号",
+        "help": "输入您的门牌号。"
+      },
+      "city": {
+        "label": "城市",
+        "help": "输入您的城市。"
+      },
+      "postalCode": {
+        "label": "邮政编码",
+        "help": "输入您的邮政编码。"
+      },
+      "country": {
+        "label": "国家",
+        "help": "输入您的国家。"
+      },
+      "name": {
+        "label": "姓名",
+        "help": "输入收件人姓名。"
+      },
+      "phone": {
+        "label": "电话",
+        "help": "输入收件人电话。"
+      }
+    },
+    "auth": {
+      "email": {
+        "label": "电子邮件地址",
+        "help": "输入您的电子邮件地址。"
+      },
+      "password": {
+        "label": "密码",
+        "help": "输入强密码。"
+      },
+      "phone": {
+        "label": "电话号码",
+        "help": "输入电话号码。(例如 '+86 13812345678')"
+      },
+      "code": {
+        "label": "收到的验证码",
+        "help": "您已收到手机验证码。"
+      }
+    },
+    "cartOverview": {
+      "address": {
+        "label": "选择送货地址",
+        "help": "产品将送达的地址。"
+      }
+    },
+    "category": {
+      "name": {
+        "label": "%{language}分类名称",
+        "help": "输入%{language}的分类名称。"
+      },
+      "name_locale": {
+        "label": "语言",
+        "help": "选择文本语言。"
+      },
+      "name_value": {
+        "label": "文本",
+        "help": "输入文本翻译。"
+      },
+      "description": {
+        "label": "%{language}分类描述",
+        "help": "输入%{language}的分类描述。"
+      },
+      "description_locale": {
+        "label": "语言",
+        "help": "选择文本语言。"
+      },
+      "description_value": {
+        "label": "文本",
+        "help": "输入文本翻译。"
+      },
+      "parentUidStatus": {
+        "option": {
+          "enabled": {
+            "label": "启用父分类",
+            "help": "选择当前分类是否应有父分类。"
+          }
+        }
+      },
+      "parentUid": {
+        "label": "父分类ID",
+        "help": "输入父分类的ID。"
+      }
+    },
+    "product": {
+      "name": {
+        "label": "%{language}产品名称",
+        "help": "输入%{language}的产品名称。"
+      },
+      "name_locale": {
+        "label": "语言",
+        "help": "选择文本语言。"
+      },
+      "name_value": {
+        "label": "文本",
+        "help": "输入文本翻译。"
+      },
+      "description": {
+        "label": "%{language}产品描述",
+        "help": "输入%{language}的产品描述。"
+      },
+      "description_locale": {
+        "label": "语言",
+        "help": "选择文本语言。"
+      },
+      "description_value": {
+        "label": "文本",
+        "help": "输入文本翻译。"
+      },
+      "tags": {
+        "label": "%{language}产品标签%{count}",
+        "help": "输入%{language}的产品标签。"
+      },
+      "tags_locale": {
+        "label": "语言",
+        "help": "选择文本语言。"
+      },
+      "tags_value": {
+        "label": "文本",
+        "help": "输入文本翻译。"
+      },
+      "tags_new": {
+        "label": "%{language}新产品标签",
+        "help": "输入产品标签。"
+      },
+      "tags_new_locale": {
+        "label": "语言",
+        "help": "选择文本语言。"
+      },
+      "tags_new_value": {
+        "label": "文本",
+        "help": "输入文本翻译。"
+      },
+      "productAttributeName": {
+        "label": "%{language}产品属性名称",
+        "help": "输入%{language}的产品属性名称。"
+      },
+      "productAttributeName_locale": {
+        "label": "语言",
+        "help": "选择文本语言。"
+      },
+      "productAttributeName_value": {
+        "label": "文本",
+        "help": "输入文本翻译。"
+      },
+      "productAttributeOptionName": {
+        "label": "%{language}产品属性选项名称",
+        "help": "输入%{language}的产品属性选项名称。"
+      },
+      "productAttributeOptionName_locale": {
+        "label": "语言",
+        "help": "选择文本语言。"
+      },
+      "productAttributeOptionName_value": {
+        "label": "文本",
+        "help": "输入文本翻译。"
+      },
+      "productAttributeOptionId": {
+        "label": "新属性选项ID",
+        "help": "输入新属性选项的ID。"
+      },
+      "productAttributeId": {
+        "label": "新属性ID",
+        "help": "输入新属性的ID。"
+      },
+      "badgeStatus": {
+        "option": {
+          "enabled": {
+            "label": "启用徽章",
+            "help": "在产品卡上添加徽章，如'促销'。"
+          }
+        }
+      },
+      "badgeType": {
+        "label": "产品徽章类型",
+        "help": "选择徽章颜色。"
+      },
+      "badgeText": {
+        "label": "%{language}产品徽章",
+        "help": "输入%{language}的产品徽章。"
+      },
+      "badgeText_locale": {
+        "label": "语言",
+        "help": "选择文本语言。"
+      },
+      "badgeText_value": {
+        "label": "文本",
+        "help": "输入文本翻译。"
+      },
+      "categories": {
+        "label": "分类",
+        "help": "为产品选择的分类。"
+      },
+      "categories_new": {
+        "label": "新分类",
+        "help": "选择要添加的分类。"
+      },
+      "productVariationName": {
+        "label": "%{language}产品变体名称",
+        "help": "输入%{language}的产品变体名称。"
+      },
+      "productVariationName_locale": {
+        "label": "语言",
+        "help": "选择文本语言。"
+      },
+      "productVariationName_value": {
+        "label": "文本",
+        "help": "输入文本翻译。"
+      },
+      "productVariationDescription": {
+        "label": "%{language}产品变体描述",
+        "help": "输入%{language}的产品变体描述。"
+      },
+      "productVariationDescription_locale": {
+        "label": "语言",
+        "help": "选择文本语言。"
+      },
+      "productVariationDescription_value": {
+        "label": "文本",
+        "help": "输入文本翻译。"
+      },
+      "productVariationPrice": {
+        "label": "产品变体价格",
+        "help": "输入产品变体价格。"
+      },
+      "productVariationImages": {
+        "label": "产品变体图片%{count}",
+        "help": "输入产品变体图片%{count}。"
+      },
+      "productVariationImages_new": {
+        "label": "新产品变体图片",
+        "help": "输入产品变体图片。"
+      },
+      "productVariationWeightStatus": {
+        "option": {
+          "enabled": {
+            "label": "启用重量",
+            "help": "为产品添加重量。"
+          }
+        }
+      },
+      "productVariationWeight": {
+        "label": "重量",
+        "help": "输入产品重量。"
+      },
+      "productVariationId": {
+        "label": "新变体ID",
+        "help": "输入新变体的ID。"
+      }
+    },
+    "sortFilter": {
+      "value": {
+        "option": {
+          "price-asc": {
+            "label": "价格 (低到高)"
+          },
+          "price-desc": {
+            "label": "价格 (高到低)"
+          },
+          "publishedDate-asc": {
+            "label": "发布日期 (旧到新)"
+          },
+          "publishedDate-desc": {
+            "label": "发布日期 (新到旧)"
+          }
+        }
+      }
+    },
+    "submit": {
+      "address": "发布",
+      "auth": "验证",
+      "product": "发布",
+      "category": "发布"
+    }
+  },
+  "components": {
+    "accountAddressAction": {
+      "newLabel": "新地址",
+      "editLabel": "编辑地址"
+    },
+    "accountAddresses": {
+      "noAddresses": "无地址"
+    },
+    "accountAdminSection": {
+      "message": "您是商店管理员。",
+      "manage": "管理"
+    },
+    "accountInvitationLinkSection": {
+      "title": "邀请链接",
+      "description": "复制链接并邀请朋友。"
+    },
+    "accountSettingsSection": {
+      "title": "设置",
+      "changeTheme": "更改主题",
+      "chooseLanguage": "选择语言",
+      "chooseCurrency": "选择货币"
+    },
+    "adminCategoriesList": {
+      "label": "分类"
+    },
+    "adminGenerateProductButton": {
+      "label": "生成产品"
+    },
+    "adminProductsList": {
+      "label": "产品"
+    },
+    "adminSyncCurrenciesButton": {
+      "label": "同步货币"
+    },
+    "authForm": {
+      "requestCode": "请求验证码",
+      "requestCodeMinutes": "请求验证码 (%{seconds} 秒)"
+    },
+    "authModal": {
+      "loginWith": "登录方式:"
+    },
+    "cartOverview": {
+      "totalPrice": "总价:",
+      "placeOrder": "下单"
+    },
+    "cartProductCard": {
+      "weight": "重量:"
+    },
+    "cartProductsList": {
+      "noProducts": "购物车中没有商品。"
+    },
+    "categoriesFilter": {
+      "label": "分类:"
+    },
+    "categoryForm": {
+      "name": "名称",
+      "description": "描述",
+      "parentUid": "父分类",
+      "actions": "操作",
+      "deleteAction": "删除"
+    },
+    "currencyModal": {
+      "search": "搜索"
+    },
+    "filtersResetButton": {
+      "label": "重置"
+    },
+    "invitationStatus": {
+      "label": "我的邀请码是: "
+    },
+    "localeModal": {
+      "search": "搜索"
+    },
+    "pageLoading": {
+      "label": "加载中..."
+    },
+    "priceRangeFilter": {
+      "label": "价格:"
+    },
+    "productCard": {
+      "view": "查看"
+    },
+    "productForm": {
+      "name": "名称",
+      "description": "描述",
+      "tags": "标签",
+      "badge": "徽章",
+      "categories": "分类",
+      "variations": "变体",
+      "productVariationName": "名称",
+      "productVariationDescription": "描述",
+      "productVariationPrice": "价格",
+      "productVariationImages": "图片",
+      "productVariationAttributes": "属性",
+      "productVariationWeight": "重量",
+      "actions": "操作",
+      "deleteAction": "删除"
+    },
+    "productInfo": {
+      "addToCart": "加入购物车"
+    },
+    "productsList": {
+      "foundProductsCount": {
+        "zero": "未找到商品。",
+        "one": "找到1个商品。",
+        "other": "找到%{count}个商品。"
+      }
+    },
+    "signOutButton": {
+      "signOut": "退出登录"
+    },
+    "suggestedCategoryProducts": {
+      "label": "类似产品"
+    },
+    "weight": {
+      "unit": {
+        "gr": "克",
+        "kg": "千克"
+      }
+    },
+    "wishlistProductCard": {
+      "weight": "重量:"
+    },
+    "wishlistProductsList": {
+      "noProducts": "愿望清单中没有商品。"
+    }
+  },
+  "errors": {
+    "auth/invalid-email": "无效的电子邮件",
+    "auth/wrong-password": "密码错误",
+    "auth/invalid-verification-code": "无效的验证码",
+    "auth/missing-password": "无效的密码",
+    "auth/invalid-phone-number": "无效的电话号码",
+    "auth/missing-code": "缺少验证码",
+    "auth/operation-not-allowed": "不允许的操作"
+  }
+}

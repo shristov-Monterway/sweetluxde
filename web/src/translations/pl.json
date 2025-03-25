@@ -1,0 +1,460 @@
+{
+  "pages": {
+    "/admin/category/[uid]": {
+      "title": "Zarządzaj kategorią %{name}"
+    },
+    "/admin/category/new": {
+      "title": "Utwórz nową kategorię"
+    },
+    "/admin/product/[uid]": {
+      "title": "Zarządzaj produktem %{name}"
+    },
+    "/admin/product/new": {
+      "title": "Utwórz nowy produkt"
+    },
+    "/category/[uid]": {
+      "title": "Kategoria %{name}"
+    },
+    "/product/[uid]": {
+      "title": "Produkt %{name}"
+    },
+    "/account": {
+      "title": "Konto"
+    },
+    "/admin": {
+      "title": "Panel administracyjny"
+    },
+    "/cart": {
+      "title": "Koszyk"
+    },
+    "/components": {
+      "title": "Komponenty"
+    },
+    "/": {
+      "title": "Strona główna"
+    },
+    "/wishlist": {
+      "title": "Lista życzeń"
+    }
+  },
+  "form": {
+    "address": {
+      "street": {
+        "label": "Ulica",
+        "help": "Wprowadź swoją ulicę."
+      },
+      "streetNumber": {
+        "label": "Numer ulicy",
+        "help": "Wprowadź swój numer."
+      },
+      "city": {
+        "label": "Miasto",
+        "help": "Wprowadź swoje miasto."
+      },
+      "postalCode": {
+        "label": "Kod pocztowy",
+        "help": "Wprowadź swój kod pocztowy."
+      },
+      "country": {
+        "label": "Kraj",
+        "help": "Wprowadź swój kraj."
+      },
+      "name": {
+        "label": "Nazwa",
+        "help": "Wprowadź nazwę odbiorcy."
+      },
+      "phone": {
+        "label": "Telefon",
+        "help": "Wprowadź telefon odbiorcy."
+      }
+    },
+    "auth": {
+      "email": {
+        "label": "Adres e-mail",
+        "help": "Wprowadź swój adres e-mail."
+      },
+      "password": {
+        "label": "Hasło",
+        "help": "Wprowadź silne hasło."
+      },
+      "phone": {
+        "label": "Numer telefonu",
+        "help": "Wprowadź numer telefonu. (np. '+48 123456789')"
+      },
+      "code": {
+        "label": "Otrzymany kod",
+        "help": "Otrzymałeś kod weryfikacyjny na swój telefon."
+      }
+    },
+    "cartOverview": {
+      "address": {
+        "label": "Wybierz adres dostawy",
+        "help": "Adres, na który zostaną dostarczone produkty."
+      }
+    },
+    "category": {
+      "name": {
+        "label": "Nazwa kategorii w %{language}",
+        "help": "Wprowadź nazwę kategorii dla %{language}."
+      },
+      "name_locale": {
+        "label": "Język",
+        "help": "Wybierz język tekstu."
+      },
+      "name_value": {
+        "label": "Tekst",
+        "help": "Wprowadź tłumaczenie tekstu."
+      },
+      "description": {
+        "label": "Opis kategorii w %{language}",
+        "help": "Wprowadź opis kategorii dla %{language}."
+      },
+      "description_locale": {
+        "label": "Język",
+        "help": "Wybierz język tekstu."
+      },
+      "description_value": {
+        "label": "Tekst",
+        "help": "Wprowadź tłumaczenie tekstu."
+      },
+      "parentUidStatus": {
+        "option": {
+          "enabled": {
+            "label": "Włącz kategorię nadrzędną",
+            "help": "Wybierz, czy bieżąca kategoria powinna mieć kategorię nadrzędną."
+          }
+        }
+      },
+      "parentUid": {
+        "label": "ID kategorii nadrzędnej",
+        "help": "Wprowadź ID kategorii nadrzędnej."
+      }
+    },
+    "product": {
+      "name": {
+        "label": "Nazwa produktu w %{language}",
+        "help": "Wprowadź nazwę produktu dla %{language}."
+      },
+      "name_locale": {
+        "label": "Język",
+        "help": "Wybierz język tekstu."
+      },
+      "name_value": {
+        "label": "Tekst",
+        "help": "Wprowadź tłumaczenie tekstu."
+      },
+      "description": {
+        "label": "Opis produktu w %{language}",
+        "help": "Wprowadź opis produktu dla %{language}."
+      },
+      "description_locale": {
+        "label": "Język",
+        "help": "Wybierz język tekstu."
+      },
+      "description_value": {
+        "label": "Tekst",
+        "help": "Wprowadź tłumaczenie tekstu."
+      },
+      "tags": {
+        "label": "Etykieta produktu %{count} w %{language}",
+        "help": "Wprowadź etykietę produktu dla %{language}."
+      },
+      "tags_locale": {
+        "label": "Język",
+        "help": "Wybierz język tekstu."
+      },
+      "tags_value": {
+        "label": "Tekst",
+        "help": "Wprowadź tłumaczenie tekstu."
+      },
+      "tags_new": {
+        "label": "Nowa etykieta produktu w %{language}",
+        "help": "Wprowadź etykietę produktu."
+      },
+      "tags_new_locale": {
+        "label": "Język",
+        "help": "Wybierz język tekstu."
+      },
+      "tags_new_value": {
+        "label": "Tekst",
+        "help": "Wprowadź tłumaczenie tekstu."
+      },
+      "productAttributeName": {
+        "label": "Nazwa atrybutu produktu w %{language}",
+        "help": "Wprowadź nazwę atrybutu produktu dla %{language}."
+      },
+      "productAttributeName_locale": {
+        "label": "Język",
+        "help": "Wybierz język tekstu."
+      },
+      "productAttributeName_value": {
+        "label": "Tekst",
+        "help": "Wprowadź tłumaczenie tekstu."
+      },
+      "productAttributeOptionName": {
+        "label": "Nazwa opcji atrybutu produktu w %{language}",
+        "help": "Wprowadź nazwę opcji atrybutu produktu dla %{language}."
+      },
+      "productAttributeOptionName_locale": {
+        "label": "Język",
+        "help": "Wybierz język tekstu."
+      },
+      "productAttributeOptionName_value": {
+        "label": "Tekst",
+        "help": "Wprowadź tłumaczenie tekstu."
+      },
+      "productAttributeOptionId": {
+        "label": "ID nowej opcji atrybutu",
+        "help": "Wprowadź ID nowej opcji atrybutu."
+      },
+      "productAttributeId": {
+        "label": "ID nowego atrybutu",
+        "help": "Wprowadź ID nowego atrybutu."
+      },
+      "badgeStatus": {
+        "option": {
+          "enabled": {
+            "label": "Włącz oznaczenie",
+            "help": "Dodaj oznaczenie do karty produktu z komunikatem np. 'WYPRZEDAŻ'."
+          }
+        }
+      },
+      "badgeType": {
+        "label": "Typ oznaczenia produktu",
+        "help": "Wybierz kolor oznaczenia."
+      },
+      "badgeText": {
+        "label": "Oznaczenie produktu w %{language}",
+        "help": "Wprowadź oznaczenie produktu dla %{language}."
+      },
+      "badgeText_locale": {
+        "label": "Język",
+        "help": "Wybierz język tekstu."
+      },
+      "badgeText_value": {
+        "label": "Tekst",
+        "help": "Wprowadź tłumaczenie tekstu."
+      },
+      "categories": {
+        "label": "Kategoria",
+        "help": "Wybrana kategoria dla produktu."
+      },
+      "categories_new": {
+        "label": "Nowa kategoria",
+        "help": "Wybierz kategorię do dodania."
+      },
+      "productVariationName": {
+        "label": "Nazwa wariantu produktu w %{language}",
+        "help": "Wprowadź nazwę wariantu produktu dla %{language}."
+      },
+      "productVariationName_locale": {
+        "label": "Język",
+        "help": "Wybierz język tekstu."
+      },
+      "productVariationName_value": {
+        "label": "Tekst",
+        "help": "Wprowadź tłumaczenie tekstu."
+      },
+      "productVariationDescription": {
+        "label": "Opis wariantu produktu w %{language}",
+        "help": "Wprowadź opis wariantu produktu dla %{language}."
+      },
+      "productVariationDescription_locale": {
+        "label": "Język",
+        "help": "Wybierz język tekstu."
+      },
+      "productVariationDescription_value": {
+        "label": "Tekst",
+        "help": "Wprowadź tłumaczenie tekstu."
+      },
+      "productVariationPrice": {
+        "label": "Cena wariantu produktu",
+        "help": "Wprowadź cenę wariantu produktu."
+      },
+      "productVariationImages": {
+        "label": "Obraz wariantu produktu %{count}",
+        "help": "Wprowadź obraz wariantu produktu %{count}."
+      },
+      "productVariationImages_new": {
+        "label": "Nowy obraz wariantu produktu",
+        "help": "Wprowadź obraz wariantu produktu."
+      },
+      "productVariationWeightStatus": {
+        "option": {
+          "enabled": {
+            "label": "Włącz wagę",
+            "help": "Dodaj wagę do produktu."
+          }
+        }
+      },
+      "productVariationWeight": {
+        "label": "Waga",
+        "help": "Wprowadź wagę produktu."
+      },
+      "productVariationId": {
+        "label": "ID nowego wariantu",
+        "help": "Wprowadź ID nowego wariantu."
+      }
+    },
+    "sortFilter": {
+      "value": {
+        "option": {
+          "price-asc": {
+            "label": "Cena (0-9)"
+          },
+          "price-desc": {
+            "label": "Cena (9-0)"
+          },
+          "publishedDate-asc": {
+            "label": "Data publikacji (najstarsza-najnowsza)"
+          },
+          "publishedDate-desc": {
+            "label": "Data publikacji (najnowsza-najstarsza)"
+          }
+        }
+      }
+    },
+    "submit": {
+      "address": "Opublikuj",
+      "auth": "Uwierzytelnij",
+      "product": "Opublikuj",
+      "category": "Opublikuj"
+    }
+  },
+  "components": {
+    "accountAddressAction": {
+      "newLabel": "Nowy adres",
+      "editLabel": "Edytuj adres"
+    },
+    "accountAddresses": {
+      "noAddresses": "Brak adresów"
+    },
+    "accountAdminSection": {
+      "message": "Jesteś administratorem sklepu.",
+      "manage": "Zarządzaj"
+    },
+    "accountInvitationLinkSection": {
+      "title": "Link zaproszenia",
+      "description": "Skopiuj link i zaproś znajomego."
+    },
+    "accountSettingsSection": {
+      "title": "Ustawienia",
+      "changeTheme": "Zmień motyw",
+      "chooseLanguage": "Wybierz język",
+      "chooseCurrency": "Wybierz walutę"
+    },
+    "adminCategoriesList": {
+      "label": "Kategorie"
+    },
+    "adminGenerateProductButton": {
+      "label": "Wygeneruj produkt"
+    },
+    "adminProductsList": {
+      "label": "Produkty"
+    },
+    "adminSyncCurrenciesButton": {
+      "label": "Synchronizuj waluty"
+    },
+    "authForm": {
+      "requestCode": "Poproś o kod",
+      "requestCodeMinutes": "Poproś o kod (%{seconds} sek.)"
+    },
+    "authModal": {
+      "loginWith": "Zaloguj się przez:"
+    },
+    "cartOverview": {
+      "totalPrice": "Cena całkowita:",
+      "placeOrder": "Złóż zamówienie"
+    },
+    "cartProductCard": {
+      "weight": "Waga:"
+    },
+    "cartProductsList": {
+      "noProducts": "Brak produktów w koszyku."
+    },
+    "categoriesFilter": {
+      "label": "Kategoria:"
+    },
+    "categoryForm": {
+      "name": "Nazwa",
+      "description": "Opis",
+      "parentUid": "Kategoria nadrzędna",
+      "actions": "Akcje",
+      "deleteAction": "Usuń"
+    },
+    "currencyModal": {
+      "search": "Szukaj"
+    },
+    "filtersResetButton": {
+      "label": "Resetuj"
+    },
+    "invitationStatus": {
+      "label": "Mój kod zaproszenia to: "
+    },
+    "localeModal": {
+      "search": "Szukaj"
+    },
+    "pageLoading": {
+      "label": "Ładowanie ..."
+    },
+    "priceRangeFilter": {
+      "label": "Cena:"
+    },
+    "productCard": {
+      "view": "Zobacz"
+    },
+    "productForm": {
+      "name": "Nazwa",
+      "description": "Opis",
+      "tags": "Etykiety",
+      "badge": "Oznaczenie",
+      "categories": "Kategorie",
+      "variations": "Warianty",
+      "productVariationName": "Nazwa",
+      "productVariationDescription": "Opis",
+      "productVariationPrice": "Cena",
+      "productVariationImages": "Obrazy",
+      "productVariationAttributes": "Atrybuty",
+      "productVariationWeight": "Waga",
+      "actions": "Akcje",
+      "deleteAction": "Usuń"
+    },
+    "productInfo": {
+      "addToCart": "Dodaj do koszyka"
+    },
+    "productsList": {
+      "foundProductsCount": {
+        "zero": "Nie znaleziono produktów.",
+        "one": "Znaleziono 1 produkt.",
+        "other": "Znaleziono %{count} produktów."
+      }
+    },
+    "signOutButton": {
+      "signOut": "Wyloguj się"
+    },
+    "suggestedCategoryProducts": {
+      "label": "Podobne produkty"
+    },
+    "weight": {
+      "unit": {
+        "gr": "gr.",
+        "kg": "kg."
+      }
+    },
+    "wishlistProductCard": {
+      "weight": "Waga:"
+    },
+    "wishlistProductsList": {
+      "noProducts": "Brak produktów na liście życzeń."
+    }
+  },
+  "errors": {
+    "auth/invalid-email": "Nieprawidłowy email",
+    "auth/wrong-password": "Nieprawidłowe hasło",
+    "auth/invalid-verification-code": "Nieprawidłowy kod",
+    "auth/missing-password": "Nieprawidłowe hasło",
+    "auth/invalid-phone-number": "Nieprawidłowy numer telefonu",
+    "auth/missing-code": "Brak kodu",
+    "auth/operation-not-allowed": "Operacja niedozwolona"
+  }
+}

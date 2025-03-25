@@ -1,7 +1,460 @@
 {
   "pages": {
+    "/admin/category/[uid]": {
+      "title": "Управление на категория %{name}"
+    },
+    "/admin/category/new": {
+      "title": "Създаване на нова категория"
+    },
+    "/admin/product/[uid]": {
+      "title": "Управление на продукт %{name}"
+    },
+    "/admin/product/new": {
+      "title": "Създаване на нов продукт"
+    },
+    "/category/[uid]": {
+      "title": "Категория %{name}"
+    },
+    "/product/[uid]": {
+      "title": "Продукт %{name}"
+    },
+    "/account": {
+      "title": "Акаунт"
+    },
+    "/admin": {
+      "title": "Администраторски панел"
+    },
+    "/cart": {
+      "title": "Количка"
+    },
+    "/components": {
+      "title": "Компоненти"
+    },
     "/": {
-      "title": "Начална страница"
+      "title": "Начало"
+    },
+    "/wishlist": {
+      "title": "Списък с желания"
     }
+  },
+  "form": {
+    "address": {
+      "street": {
+        "label": "Улица",
+        "help": "Въведете вашата улица."
+      },
+      "streetNumber": {
+        "label": "Номер",
+        "help": "Въведете вашия номер."
+      },
+      "city": {
+        "label": "Град",
+        "help": "Въведете вашия град."
+      },
+      "postalCode": {
+        "label": "Пощенски код",
+        "help": "Въведете вашия пощенски код."
+      },
+      "country": {
+        "label": "Държава",
+        "help": "Въведете вашата държава."
+      },
+      "name": {
+        "label": "Име",
+        "help": "Въведете име на получателя."
+      },
+      "phone": {
+        "label": "Телефон",
+        "help": "Въведете телефон на получателя."
+      }
+    },
+    "auth": {
+      "email": {
+        "label": "Имейл адрес",
+        "help": "Въведете вашия имейл адрес."
+      },
+      "password": {
+        "label": "Парола",
+        "help": "Въведете силна парола."
+      },
+      "phone": {
+        "label": "Телефонен номер",
+        "help": "Въведете телефонен номер. (напр. '+359 881234567')"
+      },
+      "code": {
+        "label": "Получен код",
+        "help": "Получихте код за потвърждение на телефона си."
+      }
+    },
+    "cartOverview": {
+      "address": {
+        "label": "Изберете адрес за доставка",
+        "help": "Адрес, на който ще бъдат доставени продуктите."
+      }
+    },
+    "category": {
+      "name": {
+        "label": "Име на категория на %{language}",
+        "help": "Въведете име на категория за %{language}."
+      },
+      "name_locale": {
+        "label": "Език",
+        "help": "Изберете език за текста."
+      },
+      "name_value": {
+        "label": "Текст",
+        "help": "Въведете превод на текста."
+      },
+      "description": {
+        "label": "Описание на категория на %{language}",
+        "help": "Въведете описание на категория за %{language}."
+      },
+      "description_locale": {
+        "label": "Език",
+        "help": "Изберете език за текста."
+      },
+      "description_value": {
+        "label": "Текст",
+        "help": "Въведете превод на текста."
+      },
+      "parentUidStatus": {
+        "option": {
+          "enabled": {
+            "label": "Активиране на родителска категория",
+            "help": "Изберете дали текущата категория трябва да има родителска категория."
+          }
+        }
+      },
+      "parentUid": {
+        "label": "ID на родителска категория",
+        "help": "Въведете ID на родителската категория."
+      }
+    },
+    "product": {
+      "name": {
+        "label": "Име на продукт на %{language}",
+        "help": "Въведете име на продукт за %{language}."
+      },
+      "name_locale": {
+        "label": "Език",
+        "help": "Изберете език за текста."
+      },
+      "name_value": {
+        "label": "Текст",
+        "help": "Въведете превод на текста."
+      },
+      "description": {
+        "label": "Описание на продукт на %{language}",
+        "help": "Въведете описание на продукт за %{language}."
+      },
+      "description_locale": {
+        "label": "Език",
+        "help": "Изберете език за текста."
+      },
+      "description_value": {
+        "label": "Текст",
+        "help": "Въведете превод на текста."
+      },
+      "tags": {
+        "label": "Етикет на продукт %{count} на %{language}",
+        "help": "Въведете етикет на продукт за %{language}."
+      },
+      "tags_locale": {
+        "label": "Език",
+        "help": "Изберете език за текста."
+      },
+      "tags_value": {
+        "label": "Текст",
+        "help": "Въведете превод на текста."
+      },
+      "tags_new": {
+        "label": "Нов етикет на продукт на %{language}",
+        "help": "Въведете етикет на продукт."
+      },
+      "tags_new_locale": {
+        "label": "Език",
+        "help": "Изберете език за текста."
+      },
+      "tags_new_value": {
+        "label": "Текст",
+        "help": "Въведете превод на текста."
+      },
+      "productAttributeName": {
+        "label": "Име на атрибут на продукт на %{language}",
+        "help": "Въведете име на атрибут на продукт за %{language}."
+      },
+      "productAttributeName_locale": {
+        "label": "Език",
+        "help": "Изберете език за текста."
+      },
+      "productAttributeName_value": {
+        "label": "Текст",
+        "help": "Въведете превод на текста."
+      },
+      "productAttributeOptionName": {
+        "label": "Име на опция за атрибут на продукт на %{language}",
+        "help": "Въведете име на опция за атрибут на продукт за %{language}."
+      },
+      "productAttributeOptionName_locale": {
+        "label": "Език",
+        "help": "Изберете език за текста."
+      },
+      "productAttributeOptionName_value": {
+        "label": "Текст",
+        "help": "Въведете превод на текста."
+      },
+      "productAttributeOptionId": {
+        "label": "ID на нова опция за атрибут",
+        "help": "Въведете ID на новата опция за атрибут."
+      },
+      "productAttributeId": {
+        "label": "ID на нов атрибут",
+        "help": "Въведете ID на новия атрибут."
+      },
+      "badgeStatus": {
+        "option": {
+          "enabled": {
+            "label": "Активиране на бадж",
+            "help": "Добавете бадж към картата на продукта с съобщение като 'ПРОМОЦИЯ'."
+          }
+        }
+      },
+      "badgeType": {
+        "label": "Тип на бадж на продукт",
+        "help": "Изберете цвета на баджа."
+      },
+      "badgeText": {
+        "label": "Бадж на продукт на %{language}",
+        "help": "Въведете бадж на продукт за %{language}."
+      },
+      "badgeText_locale": {
+        "label": "Език",
+        "help": "Изберете език за текста."
+      },
+      "badgeText_value": {
+        "label": "Текст",
+        "help": "Въведете превод на текста."
+      },
+      "categories": {
+        "label": "Категория",
+        "help": "Избрана категория за продукта."
+      },
+      "categories_new": {
+        "label": "Нова категория",
+        "help": "Изберете категория за добавяне."
+      },
+      "productVariationName": {
+        "label": "Име на вариация на продукт на %{language}",
+        "help": "Въведете име на вариация на продукт за %{language}."
+      },
+      "productVariationName_locale": {
+        "label": "Език",
+        "help": "Изберете език за текста."
+      },
+      "productVariationName_value": {
+        "label": "Текст",
+        "help": "Въведете превод на текста."
+      },
+      "productVariationDescription": {
+        "label": "Описание на вариация на продукт на %{language}",
+        "help": "Въведете описание на вариация на продукт за %{language}."
+      },
+      "productVariationDescription_locale": {
+        "label": "Език",
+        "help": "Изберете език за текста."
+      },
+      "productVariationDescription_value": {
+        "label": "Текст",
+        "help": "Въведете превод на текста."
+      },
+      "productVariationPrice": {
+        "label": "Цена на вариация на продукт",
+        "help": "Въведете цена на вариация на продукт."
+      },
+      "productVariationImages": {
+        "label": "Изображение на вариация на продукт %{count}",
+        "help": "Въведете изображение на вариация на продукт %{count}."
+      },
+      "productVariationImages_new": {
+        "label": "Ново изображение на вариация на продукт",
+        "help": "Въведете изображение на вариация на продукт."
+      },
+      "productVariationWeightStatus": {
+        "option": {
+          "enabled": {
+            "label": "Активиране на тегло",
+            "help": "Добавете тегло към продукта."
+          }
+        }
+      },
+      "productVariationWeight": {
+        "label": "Тегло",
+        "help": "Въведете теглото на продукта."
+      },
+      "productVariationId": {
+        "label": "ID на нова вариация",
+        "help": "Въведете ID на новата вариация."
+      }
+    },
+    "sortFilter": {
+      "value": {
+        "option": {
+          "price-asc": {
+            "label": "Цена (0-9)"
+          },
+          "price-desc": {
+            "label": "Цена (9-0)"
+          },
+          "publishedDate-asc": {
+            "label": "Публикувани (стари-нови)"
+          },
+          "publishedDate-desc": {
+            "label": "Публикувани (нови-стари)"
+          }
+        }
+      }
+    },
+    "submit": {
+      "address": "Публикувай",
+      "auth": "Удостовери",
+      "product": "Публикувай",
+      "category": "Публикувай"
+    }
+  },
+  "components": {
+    "accountAddressAction": {
+      "newLabel": "Нов адрес",
+      "editLabel": "Редактирай адрес"
+    },
+    "accountAddresses": {
+      "noAddresses": "Няма адреси"
+    },
+    "accountAdminSection": {
+      "message": "Вие сте администратор на магазина.",
+      "manage": "Управление"
+    },
+    "accountInvitationLinkSection": {
+      "title": "Линк за покана",
+      "description": "Копирайте линка и поканете приятел."
+    },
+    "accountSettingsSection": {
+      "title": "Настройки",
+      "changeTheme": "Смяна на тема",
+      "chooseLanguage": "Избор на език",
+      "chooseCurrency": "Избор на валута"
+    },
+    "adminCategoriesList": {
+      "label": "Категории"
+    },
+    "adminGenerateProductButton": {
+      "label": "Генерирай продукт"
+    },
+    "adminProductsList": {
+      "label": "Продукти"
+    },
+    "adminSyncCurrenciesButton": {
+      "label": "Синхронизирай валути"
+    },
+    "authForm": {
+      "requestCode": "Поискай код",
+      "requestCodeMinutes": "Поискай код (%{seconds} сек.)"
+    },
+    "authModal": {
+      "loginWith": "Влез с:"
+    },
+    "cartOverview": {
+      "totalPrice": "Обща цена:",
+      "placeOrder": "Направи поръчка"
+    },
+    "cartProductCard": {
+      "weight": "Тегло:"
+    },
+    "cartProductsList": {
+      "noProducts": "Няма продукти в количката."
+    },
+    "categoriesFilter": {
+      "label": "Категория:"
+    },
+    "categoryForm": {
+      "name": "Име",
+      "description": "Описание",
+      "parentUid": "Родителска категория",
+      "actions": "Действия",
+      "deleteAction": "Изтрий"
+    },
+    "currencyModal": {
+      "search": "Търсене"
+    },
+    "filtersResetButton": {
+      "label": "Нулиране"
+    },
+    "invitationStatus": {
+      "label": "Моят код за покана е: "
+    },
+    "localeModal": {
+      "search": "Търсене"
+    },
+    "pageLoading": {
+      "label": "Зареждане ..."
+    },
+    "priceRangeFilter": {
+      "label": "Цена:"
+    },
+    "productCard": {
+      "view": "Преглед"
+    },
+    "productForm": {
+      "name": "Име",
+      "description": "Описание",
+      "tags": "Етикети",
+      "badge": "Бадж",
+      "categories": "Категории",
+      "variations": "Вариации",
+      "productVariationName": "Име",
+      "productVariationDescription": "Описание",
+      "productVariationPrice": "Цена",
+      "productVariationImages": "Изображения",
+      "productVariationAttributes": "Атрибути",
+      "productVariationWeight": "Тегло",
+      "actions": "Действия",
+      "deleteAction": "Изтрий"
+    },
+    "productInfo": {
+      "addToCart": "Добави в количката"
+    },
+    "productsList": {
+      "foundProductsCount": {
+        "zero": "Няма намерени продукти.",
+        "one": "Намерен 1 продукт.",
+        "other": "Намерени %{count} продукта."
+      }
+    },
+    "signOutButton": {
+      "signOut": "Излез"
+    },
+    "suggestedCategoryProducts": {
+      "label": "Подобни продукти"
+    },
+    "weight": {
+      "unit": {
+        "gr": "гр.",
+        "kg": "кг."
+      }
+    },
+    "wishlistProductCard": {
+      "weight": "Тегло:"
+    },
+    "wishlistProductsList": {
+      "noProducts": "Няма продукти в списъка с желания."
+    }
+  },
+  "errors": {
+    "auth/invalid-email": "Невалиден имейл",
+    "auth/wrong-password": "Грешна парола",
+    "auth/invalid-verification-code": "Невалиден код",
+    "auth/missing-password": "Невалидна парола",
+    "auth/invalid-phone-number": "Невалиден телефонен номер",
+    "auth/missing-code": "Липсващ код",
+    "auth/operation-not-allowed": "Операцията не е разрешена"
   }
 }

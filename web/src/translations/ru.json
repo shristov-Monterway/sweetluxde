@@ -1,0 +1,460 @@
+{
+  "pages": {
+    "/admin/category/[uid]": {
+      "title": "Управление категорией %{name}"
+    },
+    "/admin/category/new": {
+      "title": "Создать новую категорию"
+    },
+    "/admin/product/[uid]": {
+      "title": "Управление товаром %{name}"
+    },
+    "/admin/product/new": {
+      "title": "Создать новый товар"
+    },
+    "/category/[uid]": {
+      "title": "Категория %{name}"
+    },
+    "/product/[uid]": {
+      "title": "Товар %{name}"
+    },
+    "/account": {
+      "title": "Аккаунт"
+    },
+    "/admin": {
+      "title": "Панель администратора"
+    },
+    "/cart": {
+      "title": "Корзина"
+    },
+    "/components": {
+      "title": "Компоненты"
+    },
+    "/": {
+      "title": "Главная"
+    },
+    "/wishlist": {
+      "title": "Список желаний"
+    }
+  },
+  "form": {
+    "address": {
+      "street": {
+        "label": "Улица",
+        "help": "Введите название улицы."
+      },
+      "streetNumber": {
+        "label": "Номер дома",
+        "help": "Введите номер дома."
+      },
+      "city": {
+        "label": "Город",
+        "help": "Введите название города."
+      },
+      "postalCode": {
+        "label": "Почтовый индекс",
+        "help": "Введите почтовый индекс."
+      },
+      "country": {
+        "label": "Страна",
+        "help": "Введите название страны."
+      },
+      "name": {
+        "label": "Имя",
+        "help": "Введите имя получателя."
+      },
+      "phone": {
+        "label": "Телефон",
+        "help": "Введите телефон получателя."
+      }
+    },
+    "auth": {
+      "email": {
+        "label": "Электронная почта",
+        "help": "Введите ваш email."
+      },
+      "password": {
+        "label": "Пароль",
+        "help": "Введите надежный пароль."
+      },
+      "phone": {
+        "label": "Номер телефона",
+        "help": "Введите номер телефона. (например, '+7 9123456789')"
+      },
+      "code": {
+        "label": "Полученный код",
+        "help": "Вы получили код подтверждения на ваш телефон."
+      }
+    },
+    "cartOverview": {
+      "address": {
+        "label": "Выберите адрес доставки",
+        "help": "Адрес, по которому будут доставлены товары."
+      }
+    },
+    "category": {
+      "name": {
+        "label": "Название категории на %{language}",
+        "help": "Введите название категории для %{language}."
+      },
+      "name_locale": {
+        "label": "Язык",
+        "help": "Выберите язык для текста."
+      },
+      "name_value": {
+        "label": "Текст",
+        "help": "Введите перевод текста."
+      },
+      "description": {
+        "label": "Описание категории на %{language}",
+        "help": "Введите описание категории для %{language}."
+      },
+      "description_locale": {
+        "label": "Язык",
+        "help": "Выберите язык для текста."
+      },
+      "description_value": {
+        "label": "Текст",
+        "help": "Введите перевод текста."
+      },
+      "parentUidStatus": {
+        "option": {
+          "enabled": {
+            "label": "Включить родительскую категорию",
+            "help": "Выберите, должна ли текущая категория иметь родительскую категорию."
+          }
+        }
+      },
+      "parentUid": {
+        "label": "ID родительской категории",
+        "help": "Введите ID родительской категории."
+      }
+    },
+    "product": {
+      "name": {
+        "label": "Название товара на %{language}",
+        "help": "Введите название товара для %{language}."
+      },
+      "name_locale": {
+        "label": "Язык",
+        "help": "Выберите язык для текста."
+      },
+      "name_value": {
+        "label": "Текст",
+        "help": "Введите перевод текста."
+      },
+      "description": {
+        "label": "Описание товара на %{language}",
+        "help": "Введите описание товара для %{language}."
+      },
+      "description_locale": {
+        "label": "Язык",
+        "help": "Выберите язык для текста."
+      },
+      "description_value": {
+        "label": "Текст",
+        "help": "Введите перевод текста."
+      },
+      "tags": {
+        "label": "Тег товара %{count} на %{language}",
+        "help": "Введите тег товара для %{language}."
+      },
+      "tags_locale": {
+        "label": "Язык",
+        "help": "Выберите язык для текста."
+      },
+      "tags_value": {
+        "label": "Текст",
+        "help": "Введите перевод текста."
+      },
+      "tags_new": {
+        "label": "Новый тег товара на %{language}",
+        "help": "Введите тег товара."
+      },
+      "tags_new_locale": {
+        "label": "Язык",
+        "help": "Выберите язык для текста."
+      },
+      "tags_new_value": {
+        "label": "Текст",
+        "help": "Введите перевод текста."
+      },
+      "productAttributeName": {
+        "label": "Название атрибута товара на %{language}",
+        "help": "Введите название атрибута товара для %{language}."
+      },
+      "productAttributeName_locale": {
+        "label": "Язык",
+        "help": "Выберите язык для текста."
+      },
+      "productAttributeName_value": {
+        "label": "Текст",
+        "help": "Введите перевод текста."
+      },
+      "productAttributeOptionName": {
+        "label": "Название опции атрибута товара на %{language}",
+        "help": "Введите название опции атрибута товара для %{language}."
+      },
+      "productAttributeOptionName_locale": {
+        "label": "Язык",
+        "help": "Выберите язык для текста."
+      },
+      "productAttributeOptionName_value": {
+        "label": "Текст",
+        "help": "Введите перевод текста."
+      },
+      "productAttributeOptionId": {
+        "label": "ID новой опции атрибута",
+        "help": "Введите ID новой опции атрибута."
+      },
+      "productAttributeId": {
+        "label": "ID нового атрибута",
+        "help": "Введите ID нового атрибута."
+      },
+      "badgeStatus": {
+        "option": {
+          "enabled": {
+            "label": "Включить бейдж",
+            "help": "Добавьте бейдж к карточке товара с сообщением, например 'РАСПРОДАЖА'."
+          }
+        }
+      },
+      "badgeType": {
+        "label": "Тип бейджа товара",
+        "help": "Выберите цвет бейджа."
+      },
+      "badgeText": {
+        "label": "Бейдж товара на %{language}",
+        "help": "Введите бейдж товара для %{language}."
+      },
+      "badgeText_locale": {
+        "label": "Язык",
+        "help": "Выберите язык для текста."
+      },
+      "badgeText_value": {
+        "label": "Текст",
+        "help": "Введите перевод текста."
+      },
+      "categories": {
+        "label": "Категория",
+        "help": "Выбранная категория для товара."
+      },
+      "categories_new": {
+        "label": "Новая категория",
+        "help": "Выберите категорию для добавления."
+      },
+      "productVariationName": {
+        "label": "Название вариации товара на %{language}",
+        "help": "Введите название вариации товара для %{language}."
+      },
+      "productVariationName_locale": {
+        "label": "Язык",
+        "help": "Выберите язык для текста."
+      },
+      "productVariationName_value": {
+        "label": "Текст",
+        "help": "Введите перевод текста."
+      },
+      "productVariationDescription": {
+        "label": "Описание вариации товара на %{language}",
+        "help": "Введите описание вариации товара для %{language}."
+      },
+      "productVariationDescription_locale": {
+        "label": "Язык",
+        "help": "Выберите язык для текста."
+      },
+      "productVariationDescription_value": {
+        "label": "Текст",
+        "help": "Введите перевод текста."
+      },
+      "productVariationPrice": {
+        "label": "Цена вариации товара",
+        "help": "Введите цену вариации товара."
+      },
+      "productVariationImages": {
+        "label": "Изображение вариации товара %{count}",
+        "help": "Загрузите изображение вариации товара %{count}."
+      },
+      "productVariationImages_new": {
+        "label": "Новое изображение вариации товара",
+        "help": "Загрузите изображение вариации товара."
+      },
+      "productVariationWeightStatus": {
+        "option": {
+          "enabled": {
+            "label": "Включить вес",
+            "help": "Добавьте вес к товару."
+          }
+        }
+      },
+      "productVariationWeight": {
+        "label": "Вес",
+        "help": "Введите вес товара."
+      },
+      "productVariationId": {
+        "label": "ID новой вариации",
+        "help": "Введите ID новой вариации."
+      }
+    },
+    "sortFilter": {
+      "value": {
+        "option": {
+          "price-asc": {
+            "label": "Цена (по возрастанию)"
+          },
+          "price-desc": {
+            "label": "Цена (по убыванию)"
+          },
+          "publishedDate-asc": {
+            "label": "Дата публикации (старые-новые)"
+          },
+          "publishedDate-desc": {
+            "label": "Дата публикации (новые-старые)"
+          }
+        }
+      }
+    },
+    "submit": {
+      "address": "Опубликовать",
+      "auth": "Аутентификация",
+      "product": "Опубликовать",
+      "category": "Опубликовать"
+    }
+  },
+  "components": {
+    "accountAddressAction": {
+      "newLabel": "Новый адрес",
+      "editLabel": "Редактировать адрес"
+    },
+    "accountAddresses": {
+      "noAddresses": "Нет адресов"
+    },
+    "accountAdminSection": {
+      "message": "Вы администратор магазина.",
+      "manage": "Управление"
+    },
+    "accountInvitationLinkSection": {
+      "title": "Пригласительная ссылка",
+      "description": "Скопируйте ссылку и пригласите друга."
+    },
+    "accountSettingsSection": {
+      "title": "Настройки",
+      "changeTheme": "Изменить тему",
+      "chooseLanguage": "Выбрать язык",
+      "chooseCurrency": "Выбрать валюту"
+    },
+    "adminCategoriesList": {
+      "label": "Категории"
+    },
+    "adminGenerateProductButton": {
+      "label": "Сгенерировать товар"
+    },
+    "adminProductsList": {
+      "label": "Товары"
+    },
+    "adminSyncCurrenciesButton": {
+      "label": "Синхронизировать валюты"
+    },
+    "authForm": {
+      "requestCode": "Запросить код",
+      "requestCodeMinutes": "Запросить код (%{seconds} сек.)"
+    },
+    "authModal": {
+      "loginWith": "Войти с помощью:"
+    },
+    "cartOverview": {
+      "totalPrice": "Итоговая цена:",
+      "placeOrder": "Оформить заказ"
+    },
+    "cartProductCard": {
+      "weight": "Вес:"
+    },
+    "cartProductsList": {
+      "noProducts": "Нет товаров в корзине."
+    },
+    "categoriesFilter": {
+      "label": "Категория:"
+    },
+    "categoryForm": {
+      "name": "Название",
+      "description": "Описание",
+      "parentUid": "Родительская категория",
+      "actions": "Действия",
+      "deleteAction": "Удалить"
+    },
+    "currencyModal": {
+      "search": "Поиск"
+    },
+    "filtersResetButton": {
+      "label": "Сбросить"
+    },
+    "invitationStatus": {
+      "label": "Мой пригласительный код: "
+    },
+    "localeModal": {
+      "search": "Поиск"
+    },
+    "pageLoading": {
+      "label": "Загрузка ..."
+    },
+    "priceRangeFilter": {
+      "label": "Цена:"
+    },
+    "productCard": {
+      "view": "Просмотр"
+    },
+    "productForm": {
+      "name": "Название",
+      "description": "Описание",
+      "tags": "Теги",
+      "badge": "Бейдж",
+      "categories": "Категории",
+      "variations": "Вариации",
+      "productVariationName": "Название",
+      "productVariationDescription": "Описание",
+      "productVariationPrice": "Цена",
+      "productVariationImages": "Изображения",
+      "productVariationAttributes": "Атрибуты",
+      "productVariationWeight": "Вес",
+      "actions": "Действия",
+      "deleteAction": "Удалить"
+    },
+    "productInfo": {
+      "addToCart": "Добавить в корзину"
+    },
+    "productsList": {
+      "foundProductsCount": {
+        "zero": "Товары не найдены.",
+        "one": "Найден 1 товар.",
+        "other": "Найдено %{count} товаров."
+      }
+    },
+    "signOutButton": {
+      "signOut": "Выйти"
+    },
+    "suggestedCategoryProducts": {
+      "label": "Похожие товары"
+    },
+    "weight": {
+      "unit": {
+        "gr": "гр.",
+        "kg": "кг."
+      }
+    },
+    "wishlistProductCard": {
+      "weight": "Вес:"
+    },
+    "wishlistProductsList": {
+      "noProducts": "Нет товаров в списке желаний."
+    }
+  },
+  "errors": {
+    "auth/invalid-email": "Неверный email",
+    "auth/wrong-password": "Неверный пароль",
+    "auth/invalid-verification-code": "Неверный код",
+    "auth/missing-password": "Неверный пароль",
+    "auth/invalid-phone-number": "Неверный номер телефона",
+    "auth/missing-code": "Отсутствует код",
+    "auth/operation-not-allowed": "Операция не разрешена"
+  }
+}
