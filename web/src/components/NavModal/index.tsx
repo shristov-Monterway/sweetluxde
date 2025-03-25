@@ -29,13 +29,13 @@ const NavModal = (props: NavModalProps): React.JSX.Element => {
       header={
         <ul className="nav-modal__nav-actions">
           <li className="nav-modal__nav-actions-item">
-            <ThemeToggle className="btn btn-primary" />
+            <ThemeToggle className="btn btn-outline-primary" />
           </li>
           <li className="nav-modal__nav-actions-item">
-            <LocaleModalToggle className="btn btn-primary" />
+            <LocaleModalToggle className="btn btn-outline-primary" />
           </li>
           <li className="nav-modal__nav-actions-item">
-            <CurrencyModalToggle className="btn btn-primary" />
+            <CurrencyModalToggle className="btn btn-outline-primary" />
           </li>
         </ul>
       }

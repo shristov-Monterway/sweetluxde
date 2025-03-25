@@ -11,10 +11,11 @@ const AuthModalToggle = (props: AuthModalToggleProps): React.JSX.Element => {
 
   return (
     <button
-      className={`${props.className ? props.className : ''}`}
+      className={`d-flex justify-content-center align-items-center gap-1 ${props.className ? props.className : ''}`}
       onClick={() => app.activeModal.set('authModal')}
     >
-      {props.label ? props.label : <i className="fe fe-user" />}
+      {app.translator.t('components.authModalToggle.label')}
+      {props.label ? props.label : <i className="fe fe-log-in" />}
     </button>
   );
 };
