@@ -1,0 +1,15 @@
+//
+// user-variables.scss
+// Use this to overwrite Bootstrap and theme variables
+//
+
+// Example of a variable override to change theme's background color
+// Remove the "//" to comment it in and see it in action!
+// $body-bg: #12263F;
+
+$path-to-fonts: '../../fonts' !default;
+$path-to-img: '../../img' !default;
+$scrollbar-width: 5px;
+$scrollbar-background: transparent;
+$scrollbar-color: #888;
+$scrollbar-color-hover: #555;

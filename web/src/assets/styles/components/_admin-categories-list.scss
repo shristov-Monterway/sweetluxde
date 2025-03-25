@@ -1,0 +1,23 @@
+.admin-categories-list {
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__category {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__category-name-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  &__category-name {
+    font-size: 1.2rem;
+  }
+}

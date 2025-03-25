@@ -1,0 +1,14 @@
+.account-settings-section {
+  margin: 0;
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    @include media-breakpoint-up(lg) {
+      flex-direction: row;
+    }
+  }
+}

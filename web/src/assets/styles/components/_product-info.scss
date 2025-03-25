@@ -1,0 +1,105 @@
+.product-info {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  @include media-breakpoint-up(lg) {
+    flex-direction: row;
+  }
+
+  &__slides {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    @include media-breakpoint-up(lg) {
+      width: 50%;
+    }
+  }
+
+  &__badge {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    border-radius: 50px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9rem;
+    overflow: hidden;
+    z-index: 2;
+  }
+
+  &__main-slide-image {
+    @extend .rounded;
+
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    pointer-events: none;
+
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+
+    /*
+      Introduced in IE 10.
+      See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+    */
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  &__nav-slider {
+    display: flex;
+    gap: 10px;
+    overflow-x: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  &__nav-slide-image {
+    width: 100px;
+    height: 100%;
+    object-fit: cover;
+    max-height: 60px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__category-link {
+    color: unset;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    @include media-breakpoint-up(lg) {
+      width: 50%;
+    }
+  }
+
+  &__product-variations {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  &__product-attributes {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+}

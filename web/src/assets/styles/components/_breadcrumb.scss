@@ -1,0 +1,38 @@
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 16px;
+
+  &__item {
+    position: relative;
+    font-size: 13px;
+
+    &:not(:last-child) {
+      &:after {
+        content: '>';
+        color: $primary;
+        font-size: 10px;
+        width: 8px;
+        height: 10px;
+        position: absolute;
+        top: 3px;
+        right: -12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+
+  &__link {
+    color: unset;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__label {
+    font-weight: bold;
+  }
+}

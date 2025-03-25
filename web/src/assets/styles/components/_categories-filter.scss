@@ -1,0 +1,22 @@
+.categories-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  &__category-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+
+    &--active {
+      color: $primary;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

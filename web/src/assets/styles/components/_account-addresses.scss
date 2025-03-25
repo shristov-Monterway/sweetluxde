@@ -1,0 +1,35 @@
+.account-addresses {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__list-item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-left-color: $primary;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+  }
+
+  &__list-empty-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__list-empty-label {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 1.2rem;
+  }
+}

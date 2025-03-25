@@ -1,0 +1,22 @@
+.cart-overview-form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+  &__address {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &__price-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &__total-price-container {
+    margin: 0;
+    padding: 0;
+  }
+}
