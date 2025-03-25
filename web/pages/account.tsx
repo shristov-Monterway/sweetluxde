@@ -73,7 +73,7 @@ const Account = (): React.JSX.Element => {
   }
 
   return (
-    <Page isFluid={false} header={<Header hasShadow={true} />}>
+    <Page isFluid={false} header={<Header />}>
       <SideNavContainer isSideBarFixed={false} sections={sections} />
     </Page>
   );

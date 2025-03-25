@@ -24,7 +24,7 @@ const Product = (): React.JSX.Element => {
     : product.name[Object.keys(product.name)[0]];
 
   return (
-    <Page isFluid={false} header={<Header hasShadow={true} />}>
+    <Page isFluid={false} header={<Header />}>
       <NextSeo
         title={app.translator.t(`pages.${router.pathname}.title`, {
           name,

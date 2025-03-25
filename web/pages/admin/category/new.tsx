@@ -15,7 +15,7 @@ const AdminCategoryNew = (): React.JSX.Element => {
   }
 
   return (
-    <Page isFluid={false} header={<Header hasShadow={true} />}>
+    <Page isFluid={false} header={<Header />}>
       <CategoryForm
         onSuccess={(category) => {
           app.categories.refresh().then(() => {

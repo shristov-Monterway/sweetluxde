@@ -10,7 +10,7 @@ const Index = (): React.JSX.Element => {
   const app = useApp();
 
   return (
-    <Page isFluid={true} header={<Header hasShadow={true} />}>
+    <Page isFluid={true} header={<Header />}>
       <Slider
         config={{
           desktop: {

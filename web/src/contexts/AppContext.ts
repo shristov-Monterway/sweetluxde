@@ -51,9 +51,14 @@ export interface FormErrorsContextType {
 }
 
 export interface ActiveModalContextType {
-  get: 'authModal' | 'localeModal' | 'currencyModal' | null;
+  get: 'authModal' | 'localeModal' | 'currencyModal' | 'navModal' | null;
   set: (
-    newActiveModal: 'authModal' | 'localeModal' | 'currencyModal' | null
+    newActiveModal:
+      | 'authModal'
+      | 'localeModal'
+      | 'currencyModal'
+      | 'navModal'
+      | null
   ) => void;
 }
 

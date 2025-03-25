@@ -14,7 +14,7 @@ const Cart = (): React.JSX.Element => {
   }
 
   return (
-    <Page isFluid={false} header={<Header hasShadow={true} />}>
+    <Page isFluid={false} header={<Header />}>
       <div className="row">
         <div className="col-lg-8">
           <CartProductsList />

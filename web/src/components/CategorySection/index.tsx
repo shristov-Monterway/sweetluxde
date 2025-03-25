@@ -65,30 +65,32 @@ const CategorySection = (props: CategorySectionProps): React.JSX.Element => {
             : `/category/${category.uid}`,
       }))}
       headerContent={
-        childCategories.length > 0 ? (
-          <div className="category-section__header-actions">
-            {app.user && app.user.isAdmin ? (
-              <div className="d-flex justify-content-end">
-                <Link
-                  href={`/admin/category/${props.category.uid}`}
-                  passHref={true}
-                >
-                  <a className="btn btn-primary d-flex align-items-center justify-content-center">
-                    <i className="fe fe-pen-tool" />
-                  </a>
-                </Link>
-              </div>
-            ) : null}
-            {childCategories.map((category, index) => (
-              <div key={index}>
-                <CategoryButton
-                  className="category-section__header-action"
-                  category={category}
-                />
-              </div>
-            ))}
-          </div>
-        ) : null
+        <>
+          {app.user && app.user.isAdmin ? (
+            <div className="d-flex justify-content-end">
+              <Link
+                href={`/admin/category/${props.category.uid}`}
+                passHref={true}
+              >
+                <a className="btn btn-primary">
+                  <i className="fe fe-pen-tool" />
+                </a>
+              </Link>
+            </div>
+          ) : null}
+          {childCategories.length > 0 ? (
+            <div className="category-section__header-actions">
+              {childCategories.map((category, index) => (
+                <div key={index}>
+                  <CategoryButton
+                    className="category-section__header-action"
+                    category={category}
+                  />
+                </div>
+              ))}
+            </div>
+          ) : null}
+        </>
       }
       className={`category-section ${props.className}`}
     >

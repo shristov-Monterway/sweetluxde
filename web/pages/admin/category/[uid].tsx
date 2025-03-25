@@ -27,7 +27,7 @@ const AdminCategory = (): React.JSX.Element => {
     : category.name[Object.keys(category.name)[0]];
 
   return (
-    <Page isFluid={false} header={<Header hasShadow={true} />}>
+    <Page isFluid={false} header={<Header />}>
       <NextSeo
         title={app.translator.t(`pages.${router.pathname}.title`, {
           name,

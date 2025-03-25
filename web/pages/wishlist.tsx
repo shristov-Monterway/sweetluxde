@@ -13,7 +13,7 @@ const Wishlist = (): React.JSX.Element => {
   }
 
   return (
-    <Page isFluid={false} header={<Header hasShadow={true} />}>
+    <Page isFluid={false} header={<Header />}>
       <WishlistProductsList />
     </Page>
   );
