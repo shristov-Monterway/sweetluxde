@@ -1,7 +1,6 @@
 import React from 'react';
 import { AbstractComponentType } from '../../types/AbstractComponentType';
 import Modal from '../Modal';
-import Link from 'next/link';
 import ThemeToggle from '../ThemeToggle';
 import LocaleModalToggle from '../LocaleModalToggle';
 import CurrencyModalToggle from '../CurrencyModalToggle';
