@@ -1,4 +1,4 @@
-import {AddressType} from "./AddressType";
+import { AddressType } from "./AddressType";
 
 export interface CheckoutLineItemType {
   productUid: string;
