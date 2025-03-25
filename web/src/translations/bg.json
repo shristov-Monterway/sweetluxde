@@ -362,6 +362,9 @@
     "authModal": {
       "loginWith": "Влез с:"
     },
+    "authModalToggle": {
+      "label": "Влизане"
+    },
     "cartOverview": {
       "totalPrice": "Обща цена:",
       "placeOrder": "Направи поръчка"
@@ -455,6 +458,7 @@
     "auth/missing-password": "Невалидна парола",
     "auth/invalid-phone-number": "Невалиден телефонен номер",
     "auth/missing-code": "Липсващ код",
-    "auth/operation-not-allowed": "Операцията не е разрешена"
+    "auth/operation-not-allowed": "Операцията не е разрешена",
+    "auth/invalid-credential": "Операцията не е разрешена"
   }
 }

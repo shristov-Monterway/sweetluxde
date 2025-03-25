@@ -362,6 +362,9 @@
     "authModal": {
       "loginWith": "Anmelden mit:"
     },
+    "authModalToggle": {
+      "label": "Einloggen"
+    },
     "cartOverview": {
       "totalPrice": "Gesamtpreis:",
       "placeOrder": "Bestellung aufgeben"
@@ -455,6 +458,7 @@
     "auth/missing-password": "Ungültiges Passwort",
     "auth/invalid-phone-number": "Ungültige Telefonnummer",
     "auth/missing-code": "Fehlender Code",
-    "auth/operation-not-allowed": "Vorgang nicht erlaubt"
+    "auth/operation-not-allowed": "Vorgang nicht erlaubt",
+    "auth/invalid-credential": "Vorgang nicht erlaubt"
   }
 }

@@ -362,6 +362,9 @@
     "authModal": {
       "loginWith": "登录方式:"
     },
+    "authModalToggle": {
+      "label": "登录"
+    },
     "cartOverview": {
       "totalPrice": "总价:",
       "placeOrder": "下单"
@@ -455,6 +458,7 @@
     "auth/missing-password": "无效的密码",
     "auth/invalid-phone-number": "无效的电话号码",
     "auth/missing-code": "缺少验证码",
-    "auth/operation-not-allowed": "不允许的操作"
+    "auth/operation-not-allowed": "不允许的操作",
+    "auth/invalid-credential": "不允许的操作"
   }
 }

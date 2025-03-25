@@ -362,6 +362,9 @@
     "authModal": {
       "loginWith": "Autentifică-te cu:"
     },
+    "authModalToggle": {
+      "label": "Autentificare"
+    },
     "cartOverview": {
       "totalPrice": "Preț total:",
       "placeOrder": "Plasează comandă"
@@ -455,6 +458,7 @@
     "auth/missing-password": "Parolă invalidă",
     "auth/invalid-phone-number": "Număr telefon invalid",
     "auth/missing-code": "Cod lipsă",
-    "auth/operation-not-allowed": "Operație nepermisă"
+    "auth/operation-not-allowed": "Operație nepermisă",
+    "auth/invalid-credential": "Operație nepermisă"
   }
 }

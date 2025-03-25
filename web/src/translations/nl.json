@@ -362,6 +362,9 @@
     "authModal": {
       "loginWith": "Inloggen met:"
     },
+    "authModalToggle": {
+      "label": "Inloggen"
+    },
     "cartOverview": {
       "totalPrice": "Totale prijs:",
       "placeOrder": "Bestelling plaatsen"
@@ -455,6 +458,7 @@
     "auth/missing-password": "Ongeldig wachtwoord",
     "auth/invalid-phone-number": "Ongeldig telefoonnummer",
     "auth/missing-code": "Code ontbreekt",
-    "auth/operation-not-allowed": "Bewerking niet toegestaan"
+    "auth/operation-not-allowed": "Bewerking niet toegestaan",
+    "auth/invalid-credential": "Bewerking niet toegestaan"
   }
 }

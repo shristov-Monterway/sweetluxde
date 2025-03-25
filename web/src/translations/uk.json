@@ -362,6 +362,9 @@
     "authModal": {
       "loginWith": "Увійти через:"
     },
+    "authModalToggle": {
+      "label": "Увійти"
+    },
     "cartOverview": {
       "totalPrice": "Загальна ціна:",
       "placeOrder": "Зробити замовлення"
@@ -455,6 +458,7 @@
     "auth/missing-password": "Невірний пароль",
     "auth/invalid-phone-number": "Невірний номер телефону",
     "auth/missing-code": "Відсутній код",
-    "auth/operation-not-allowed": "Операція не дозволена"
+    "auth/operation-not-allowed": "Операція не дозволена",
+    "auth/invalid-credential": "Операція не дозволена"
   }
 }

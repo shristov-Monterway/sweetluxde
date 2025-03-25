@@ -362,6 +362,9 @@
     "authModal": {
       "loginWith": "Войти с помощью:"
     },
+    "authModalToggle": {
+      "label": "Войти"
+    },
     "cartOverview": {
       "totalPrice": "Итоговая цена:",
       "placeOrder": "Оформить заказ"
@@ -455,6 +458,7 @@
     "auth/missing-password": "Неверный пароль",
     "auth/invalid-phone-number": "Неверный номер телефона",
     "auth/missing-code": "Отсутствует код",
-    "auth/operation-not-allowed": "Операция не разрешена"
+    "auth/operation-not-allowed": "Операция не разрешена",
+    "auth/invalid-credential": "Операция не разрешена"
   }
 }

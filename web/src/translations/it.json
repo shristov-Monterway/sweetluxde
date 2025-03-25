@@ -362,6 +362,9 @@
     "authModal": {
       "loginWith": "Accedi con:"
     },
+    "authModalToggle": {
+      "label": "Accedi"
+    },
     "cartOverview": {
       "totalPrice": "Prezzo totale:",
       "placeOrder": "Effettua ordine"
@@ -455,6 +458,7 @@
     "auth/missing-password": "Password non valida",
     "auth/invalid-phone-number": "Numero di telefono non valido",
     "auth/missing-code": "Codice mancante",
-    "auth/operation-not-allowed": "Operazione non consentita"
+    "auth/operation-not-allowed": "Operazione non consentita",
+    "auth/invalid-credential": "Operazione non consentita"
   }
 }
