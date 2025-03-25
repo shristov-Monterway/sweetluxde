@@ -89,14 +89,7 @@ const Header = (props: HeaderProps): React.JSX.Element => {
                 <Link href="/" passHref={true}>
                   <a className="header__nav-link">
                     <i className="fe fe-home" />
-                    <span>Home</span>
-                  </a>
-                </Link>
-              </li>
-              <li className="header__nav-item">
-                <Link href="/" passHref={true}>
-                  <a className="header__nav-link">
-                    <span>Categories</span>
+                    <span>{app.translator.t('pages./.title')}</span>
                   </a>
                 </Link>
               </li>

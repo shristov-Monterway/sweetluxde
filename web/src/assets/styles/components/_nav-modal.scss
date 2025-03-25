@@ -1,0 +1,53 @@
+.nav-modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &__nav {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__nav-actions {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    display: flex;
+    gap: 5px;
+  }
+
+  &__nav-actions-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__nav-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__nav-link {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    color: unset;
+    padding: 20px 10px;
+
+    @include media-breakpoint-up(lg) {
+      justify-content: center;
+    }
+
+    &:hover {
+      color: $primary;
+      cursor: pointer;
+    }
+  }
+}
