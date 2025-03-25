@@ -18,12 +18,10 @@ const Header = (props: HeaderProps): React.JSX.Element => {
   const container =
     typeof props.container !== 'undefined' ? props.container : 'container';
 
-  const getUserNav = (
-    user: UserType | null,
-    isMobile: boolean
-  ): React.JSX.Element[] => {
+  const getNavActions = (user: UserType | null): React.JSX.Element[] => {
     const userNav: React.JSX.Element[] = [];
-    const buttonClasses = `btn btn-primary ${!isMobile ? 'btn-sm' : ''}`;
+    const importantButtonClasses = `btn btn-primary`;
+    const buttonClasses = `btn btn-outline-primary`;
 
     if (user) {
       userNav.push(
@@ -54,10 +52,34 @@ const Header = (props: HeaderProps): React.JSX.Element => {
           </Link>
         </li>
       );
-    } else {
       userNav.push(
         <li className="header__nav-actions-item">
-          <AuthModalToggle className={buttonClasses} />
+          <Link href="/account" passHref={true}>
+            <a className={importantButtonClasses}>
+              <i className="fe fe-user" />
+            </a>
+          </Link>
+        </li>
+      );
+    } else {
+      userNav.push(
+        <li className="header__nav-actions-item header__nav-actions-item--desktop">
+          <ThemeToggle className={buttonClasses} />
+        </li>
+      );
+      userNav.push(
+        <li className="header__nav-actions-item header__nav-actions-item--desktop">
+          <LocaleModalToggle className={buttonClasses} />
+        </li>
+      );
+      userNav.push(
+        <li className="header__nav-actions-item header__nav-actions-item--desktop">
+          <CurrencyModalToggle className={buttonClasses} />
+        </li>
+      );
+      userNav.push(
+        <li className="header__nav-actions-item">
+          <AuthModalToggle className={importantButtonClasses} />
         </li>
       );
     }
@@ -78,7 +100,7 @@ const Header = (props: HeaderProps): React.JSX.Element => {
             <a className="header__brand">Navbar</a>
           </Link>
           <ul className="header__nav-actions header__nav-actions--mobile">
-            {getUserNav(app.user, true)}
+            {getNavActions(app.user)}
             <li className="header__nav-actions-item">
               <NavModalToggle className="btn btn-primary" />
             </li>
@@ -94,18 +116,7 @@ const Header = (props: HeaderProps): React.JSX.Element => {
                 </Link>
               </li>
             </ul>
-            <ul className="header__nav-actions">
-              <li className="header__nav-actions-item">
-                <ThemeToggle className="btn btn-primary btn-sm" />
-              </li>
-              <li className="header__nav-actions-item">
-                <LocaleModalToggle className="btn btn-primary btn-sm" />
-              </li>
-              <li className="header__nav-actions-item">
-                <CurrencyModalToggle className="btn btn-primary btn-sm" />
-              </li>
-              {getUserNav(app.user, false)}
-            </ul>
+            <ul className="header__nav-actions">{getNavActions(app.user)}</ul>
           </div>
         </div>
       </div>
