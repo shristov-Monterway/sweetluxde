@@ -3,7 +3,7 @@ import { ActiveModalContextType } from '../contexts/AppContext';
 
 const useInitActiveModal = (): ActiveModalContextType => {
   const [activeModal, setActiveModal] = React.useState<
-    'authModal' | 'localeModal' | null
+    'authModal' | 'localeModal' | 'currencyModal' | 'navModal' | null
   >(null);
 
   return {
