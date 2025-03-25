@@ -1,33 +1,7 @@
-.header {
-  margin-bottom: unset;
-
-  &__container {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  &__brand {
-    color: unset;
-    display: flex;
-    align-items: center;
-    font-size: 1.2rem;
-
-    &:hover {
-      color: $primary;
-      cursor: pointer;
-    }
-  }
-
-  &__main-nav {
-    display: none;
-
-    @include media-breakpoint-up(lg) {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      gap: 20px;
-    }
-  }
+.nav-modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   &__nav {
     padding: 0;
@@ -35,11 +9,6 @@
     list-style-type: none;
     display: flex;
     flex-direction: column;
-
-    @include media-breakpoint-up(lg) {
-      flex-direction: row;
-      gap: 15px;
-    }
   }
 
   &__nav-actions {
@@ -48,12 +17,6 @@
     list-style-type: none;
     display: flex;
     gap: 5px;
-
-    &--mobile {
-      @include media-breakpoint-up(lg) {
-        display: none;
-      }
-    }
   }
 
   &__nav-actions-item {
@@ -76,6 +39,7 @@
     justify-content: flex-start;
     gap: 10px;
     color: unset;
+    padding: 20px 10px;
 
     @include media-breakpoint-up(lg) {
       justify-content: center;

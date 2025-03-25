@@ -1,4 +1,4 @@
-import {AddressType} from "../../internal/AddressType";
+import { AddressType } from "../../internal/AddressType";
 
 export interface CheckoutNewRequestType {
   lineItems: {
